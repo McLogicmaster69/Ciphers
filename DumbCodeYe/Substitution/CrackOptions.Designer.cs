@@ -1,5 +1,5 @@
 ﻿
-namespace DumbCodeYe
+namespace DumbCodeYe.Substitution
 {
     partial class CrackOptions
     {

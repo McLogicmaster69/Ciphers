@@ -1,5 +1,6 @@
 ﻿using DumbCodeYe.Playfair;
 using DumbCodeYe.Polybius;
+using DumbCodeYe.Substitution;
 using DumbCodeYe.Transposition;
 using System;
 using System.Collections.Generic;

@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace DumbCodeYe
+{
+    public partial class FrequencyFrm : Form
+    {
+        public FrequencyFrm()
+        {
+            InitializeComponent();
+        }
+        public void UpdateFreqLabel(string text)
+        {
+            freqLbl.Text = text;
+        }
+
+        private void quit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}

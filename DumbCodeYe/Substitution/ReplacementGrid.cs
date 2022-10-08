@@ -8,11 +8,15 @@ namespace DumbCodeYe.Substitution
 {
     public class ReplacementGrid
     {
-        private const string Capitals = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        protected const string Capitals = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public readonly char[] Replacements;
         public ReplacementGrid()
         {
             Replacements = new char[26];
+            for (int i = 0; i < 26; i++)
+            {
+                Replacements[i] = '#';
+            }
         }
         public ReplacementGrid(char[] grid)
         {
@@ -22,7 +26,7 @@ namespace DumbCodeYe.Substitution
         {
             Replacements = grid.Replacements;
         }
-        public bool Contains(char c)
+        public virtual bool Contains(char c)
         {
             foreach(char r in Replacements)
             {
@@ -31,30 +35,30 @@ namespace DumbCodeYe.Substitution
             }
             return false;
         }
-        public void ChangeCharacter(int index, char c)
+        public virtual void ChangeCharacter(int index, char c)
         {
             if(!Contains(c))
                 Replacements[index] = c;
         }
-        public void ChangeCharacter(char character, char c)
+        public virtual void ChangeCharacter(char character, char c)
         {
             ChangeCharacter(GetIndexOfCapital(character), c);
         }
-        public void SwapCharacters(int c1, int c2)
+        public virtual void SwapCharacters(int c1, int c2)
         {
             char temp = Replacements[c1];
             Replacements[c1] = Replacements[c2];
             Replacements[c2] = temp;
         }
-        public char GetReplacement(int index)
+        public virtual char GetReplacement(int index)
         {
             return Replacements[index];
         }
-        public char GetReplacement(char character)
+        public virtual char GetReplacement(char character)
         {
             return GetReplacement(GetIndexOfCapital(character));
         }
-        public int GetIndexOfCapital(char character)
+        public virtual int GetIndexOfCapital(char character)
         {
             switch (character)
             {
@@ -113,7 +117,7 @@ namespace DumbCodeYe.Substitution
             }
             return -1;
         }
-        public string Decrypt(string input)
+        public virtual string Decrypt(string input)
         {
             string output = "";
             foreach (char c in input)

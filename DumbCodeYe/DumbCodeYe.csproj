@@ -82,6 +82,20 @@
       <DependentUpon>Brute.cs</DependentUpon>
     </Compile>
     <Compile Include="Substitution\ReplacementGrid.cs" />
+    <Compile Include="Substitution\SmartBrute.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Substitution\SmartBrute.Designer.cs">
+      <DependentUpon>SmartBrute.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Substitution\SmartReplacementGrid.cs" />
+    <Compile Include="Substitution\WordDictionaryTool.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Substitution\WordDictionaryTool.Designer.cs">
+      <DependentUpon>WordDictionaryTool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Substitution\WordFrequencyLibrary.cs" />
     <Compile Include="Transposition\ExpectedWords.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -204,6 +218,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Substitution\Brute.resx">
       <DependentUpon>Brute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Substitution\SmartBrute.resx">
+      <DependentUpon>SmartBrute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Substitution\WordDictionaryTool.resx">
+      <DependentUpon>WordDictionaryTool.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Transposition\ExpectedWords.resx">
       <DependentUpon>ExpectedWords.cs</DependentUpon>

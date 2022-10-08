@@ -489,5 +489,18 @@ namespace DumbCodeYe.Substitution
             brute.Show();
             brute.BeginGrind(OriginalText, 10000);
         }
+
+        private void smartBruteBtn_Click(object sender, EventArgs e)
+        {
+            SmartBrute brute = new SmartBrute();
+            brute.Show();
+            brute.BeginGrind(OriginalText, 10000);
+        }
+
+        private void wordDictionaryToolBtn_Click(object sender, EventArgs e)
+        {
+            WordDictionaryTool wdt = new WordDictionaryTool();
+            wdt.Show();
+        }
     }
 }

@@ -62,3 +62,5 @@ E:\Programming\Libaries\C#\Ciphers\DumbCodeYe\obj\Debug\DumbCodeYe.csproj.CoreCo
 E:\Programming\Libaries\C#\Ciphers\DumbCodeYe\obj\Debug\DumbCodeYe.csproj.CopyComplete
 E:\Programming\Libaries\C#\Ciphers\DumbCodeYe\obj\Debug\DumbCodeYe.exe
 E:\Programming\Libaries\C#\Ciphers\DumbCodeYe\obj\Debug\DumbCodeYe.pdb
+E:\Programming\Libaries\C#\Ciphers\DumbCodeYe\obj\Debug\DumbCodeYe.Substitution.SmartBrute.resources
+E:\Programming\Libaries\C#\Ciphers\DumbCodeYe\obj\Debug\DumbCodeYe.Substitution.WordDictionaryTool.resources

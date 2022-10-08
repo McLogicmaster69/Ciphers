@@ -34,6 +34,7 @@ namespace DumbCodeYe
             // 
             // textOut
             // 
+            this.textOut.AcceptsReturn = true;
             this.textOut.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textOut.Location = new System.Drawing.Point(12, 12);
             this.textOut.Multiline = true;
@@ -41,6 +42,7 @@ namespace DumbCodeYe
             this.textOut.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textOut.Size = new System.Drawing.Size(833, 426);
             this.textOut.TabIndex = 0;
+            this.textOut.WordWrap = false;
             // 
             // TextOutputFrm
             // 

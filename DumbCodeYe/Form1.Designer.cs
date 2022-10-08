@@ -158,7 +158,6 @@ namespace DumbCodeYe
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 723);
-            this.ControlBox = false;
             this.Controls.Add(this.lettersBtn);
             this.Controls.Add(this.playfairBtn);
             this.Controls.Add(this.binaryBtn);

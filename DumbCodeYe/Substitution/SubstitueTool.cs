@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DumbCodeYe
+namespace DumbCodeYe.Substitution
 {
     public partial class SubstitueTool : Form
     {
@@ -476,6 +476,31 @@ namespace DumbCodeYe
                     newText += mainTxt.Text[i];
             }
             mainTxt.Text = newText;
+        }
+
+        private void dictionaryBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bruteBtn_Click(object sender, EventArgs e)
+        {
+            Brute brute = new Brute();
+            brute.Show();
+            brute.BeginGrind(OriginalText, 10000);
+        }
+
+        private void smartBruteBtn_Click(object sender, EventArgs e)
+        {
+            SmartBrute brute = new SmartBrute();
+            brute.Show();
+            brute.BeginGrind(OriginalText, 10000);
+        }
+
+        private void wordDictionaryToolBtn_Click(object sender, EventArgs e)
+        {
+            WordDictionaryTool wdt = new WordDictionaryTool();
+            wdt.Show();
         }
     }
 }

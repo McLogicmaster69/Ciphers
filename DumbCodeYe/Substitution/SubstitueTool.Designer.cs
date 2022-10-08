@@ -1,5 +1,5 @@
 ﻿
-namespace DumbCodeYe
+namespace DumbCodeYe.Substitution
 {
     partial class SubstitueTool
     {
@@ -38,6 +38,9 @@ namespace DumbCodeYe
             this.crackOptionsBtn = new System.Windows.Forms.Button();
             this.patermBtn = new System.Windows.Forms.Button();
             this.removeSpacesBtn = new System.Windows.Forms.Button();
+            this.bruteBtn = new System.Windows.Forms.Button();
+            this.smartBruteBtn = new System.Windows.Forms.Button();
+            this.wordDictionaryToolBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainTxt
@@ -138,11 +141,47 @@ namespace DumbCodeYe
             this.removeSpacesBtn.UseVisualStyleBackColor = true;
             this.removeSpacesBtn.Click += new System.EventHandler(this.removeSpacesBtn_Click);
             // 
+            // bruteBtn
+            // 
+            this.bruteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bruteBtn.Location = new System.Drawing.Point(12, 362);
+            this.bruteBtn.Name = "bruteBtn";
+            this.bruteBtn.Size = new System.Drawing.Size(294, 40);
+            this.bruteBtn.TabIndex = 10;
+            this.bruteBtn.Text = "BRUTE CRACK";
+            this.bruteBtn.UseVisualStyleBackColor = true;
+            this.bruteBtn.Click += new System.EventHandler(this.bruteBtn_Click);
+            // 
+            // smartBruteBtn
+            // 
+            this.smartBruteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.smartBruteBtn.Location = new System.Drawing.Point(12, 316);
+            this.smartBruteBtn.Name = "smartBruteBtn";
+            this.smartBruteBtn.Size = new System.Drawing.Size(294, 40);
+            this.smartBruteBtn.TabIndex = 11;
+            this.smartBruteBtn.Text = "SMART BRUTE CRACK";
+            this.smartBruteBtn.UseVisualStyleBackColor = true;
+            this.smartBruteBtn.Click += new System.EventHandler(this.smartBruteBtn_Click);
+            // 
+            // wordDictionaryToolBtn
+            // 
+            this.wordDictionaryToolBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.wordDictionaryToolBtn.Location = new System.Drawing.Point(12, 270);
+            this.wordDictionaryToolBtn.Name = "wordDictionaryToolBtn";
+            this.wordDictionaryToolBtn.Size = new System.Drawing.Size(294, 40);
+            this.wordDictionaryToolBtn.TabIndex = 12;
+            this.wordDictionaryToolBtn.Text = "WORD DICTIONARY TOOL";
+            this.wordDictionaryToolBtn.UseVisualStyleBackColor = true;
+            this.wordDictionaryToolBtn.Click += new System.EventHandler(this.wordDictionaryToolBtn_Click);
+            // 
             // SubstitueTool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1042, 598);
+            this.Controls.Add(this.wordDictionaryToolBtn);
+            this.Controls.Add(this.smartBruteBtn);
+            this.Controls.Add(this.bruteBtn);
             this.Controls.Add(this.removeSpacesBtn);
             this.Controls.Add(this.patermBtn);
             this.Controls.Add(this.crackOptionsBtn);
@@ -172,5 +211,8 @@ namespace DumbCodeYe
         private System.Windows.Forms.Button crackOptionsBtn;
         private System.Windows.Forms.Button patermBtn;
         private System.Windows.Forms.Button removeSpacesBtn;
+        private System.Windows.Forms.Button bruteBtn;
+        private System.Windows.Forms.Button smartBruteBtn;
+        private System.Windows.Forms.Button wordDictionaryToolBtn;
     }
 }

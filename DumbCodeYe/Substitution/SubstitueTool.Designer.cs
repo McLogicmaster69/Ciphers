@@ -191,6 +191,7 @@ namespace DumbCodeYe.Substitution
             this.Controls.Add(this.freqBtn);
             this.Controls.Add(this.crackBtn);
             this.Controls.Add(this.mainTxt);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "SubstitueTool";
             this.Text = "Substitue Tool";

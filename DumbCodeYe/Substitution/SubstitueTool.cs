@@ -494,7 +494,7 @@ namespace DumbCodeYe.Substitution
         {
             SmartBrute brute = new SmartBrute();
             brute.Show();
-            brute.BeginGrind(OriginalText, 10000);
+            brute.BeginGrind(OriginalText, 2500);
         }
 
         private void wordDictionaryToolBtn_Click(object sender, EventArgs e)

@@ -19,8 +19,10 @@ namespace DumbCodeYe.Substitution
         private TextBox[] Values;
         private WordDictionary dict = new WordDictionary();
         private Spelling speller = new Spelling();
-        public SmartBrute()
+        private SubstitueTool ST;
+        public SmartBrute(SubstitueTool st)
         {
+            ST = st;
             InitializeComponent(); 
             rand = new Random();
             dict.Initialize();
@@ -55,7 +57,8 @@ namespace DumbCodeYe.Substitution
                     bestScore = testScore;
                     bestGrid = new SmartReplacementGrid(testGrid);
                     bestAnswetTxt.Text = testOutput;
-                    SetRaplacements(testGrid.Replacements);
+                    SetRaplacements(testGrid.Replacements); 
+                    ST.replacements = testGrid.Replacements;
                 }
                 currentIterationTxt.Text = gen.ToString();
                 bestScoreTxt.Text = bestScore.ToString();

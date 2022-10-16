@@ -39,10 +39,6 @@ namespace DumbCodeYe.Transposition
         {
             TryRowColumnTransposition();
         }
-        private void columnarBtn_Click(object sender, EventArgs e)
-        {
-
-        }
         private void rowColumnarBtn_Click(object sender, EventArgs e)
         {
             TryRowColumnarTransposition();

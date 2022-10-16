@@ -30,7 +30,6 @@ namespace DumbCodeYe.Transposition
         private void InitializeComponent()
         {
             this.rowColumnBtn = new System.Windows.Forms.Button();
-            this.columnarBtn = new System.Windows.Forms.Button();
             this.rowColumnarBtn = new System.Windows.Forms.Button();
             this.expectedBtn = new System.Windows.Forms.Button();
             this.maxColumns = new System.Windows.Forms.NumericUpDown();
@@ -47,19 +46,9 @@ namespace DumbCodeYe.Transposition
             this.rowColumnBtn.UseVisualStyleBackColor = true;
             this.rowColumnBtn.Click += new System.EventHandler(this.rowColumnBtn_Click);
             // 
-            // columnarBtn
-            // 
-            this.columnarBtn.Location = new System.Drawing.Point(12, 52);
-            this.columnarBtn.Name = "columnarBtn";
-            this.columnarBtn.Size = new System.Drawing.Size(229, 34);
-            this.columnarBtn.TabIndex = 1;
-            this.columnarBtn.Text = "COLUMNAR METHOD";
-            this.columnarBtn.UseVisualStyleBackColor = true;
-            this.columnarBtn.Click += new System.EventHandler(this.columnarBtn_Click);
-            // 
             // rowColumnarBtn
             // 
-            this.rowColumnarBtn.Location = new System.Drawing.Point(12, 118);
+            this.rowColumnarBtn.Location = new System.Drawing.Point(12, 78);
             this.rowColumnarBtn.Name = "rowColumnarBtn";
             this.rowColumnarBtn.Size = new System.Drawing.Size(229, 34);
             this.rowColumnarBtn.TabIndex = 2;
@@ -69,7 +58,7 @@ namespace DumbCodeYe.Transposition
             // 
             // expectedBtn
             // 
-            this.expectedBtn.Location = new System.Drawing.Point(12, 158);
+            this.expectedBtn.Location = new System.Drawing.Point(12, 118);
             this.expectedBtn.Name = "expectedBtn";
             this.expectedBtn.Size = new System.Drawing.Size(229, 34);
             this.expectedBtn.TabIndex = 3;
@@ -79,14 +68,14 @@ namespace DumbCodeYe.Transposition
             // 
             // maxColumns
             // 
-            this.maxColumns.Location = new System.Drawing.Point(12, 92);
+            this.maxColumns.Location = new System.Drawing.Point(12, 52);
             this.maxColumns.Maximum = new decimal(new int[] {
             30,
             0,
             0,
             0});
             this.maxColumns.Minimum = new decimal(new int[] {
-            10,
+            2,
             0,
             0,
             0});
@@ -103,11 +92,10 @@ namespace DumbCodeYe.Transposition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(253, 201);
+            this.ClientSize = new System.Drawing.Size(253, 163);
             this.Controls.Add(this.maxColumns);
             this.Controls.Add(this.expectedBtn);
             this.Controls.Add(this.rowColumnarBtn);
-            this.Controls.Add(this.columnarBtn);
             this.Controls.Add(this.rowColumnBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -121,7 +109,6 @@ namespace DumbCodeYe.Transposition
         #endregion
 
         private System.Windows.Forms.Button rowColumnBtn;
-        private System.Windows.Forms.Button columnarBtn;
         private System.Windows.Forms.Button rowColumnarBtn;
         private System.Windows.Forms.Button expectedBtn;
         private System.Windows.Forms.NumericUpDown maxColumns;

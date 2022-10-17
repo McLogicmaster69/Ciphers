@@ -19,8 +19,10 @@ namespace DumbCodeYe.Substitution
         private TextBox[] Values;
         private WordDictionary dict = new WordDictionary();
         private Spelling speller = new Spelling();
-        public SmartBrute()
+        private SubstitueTool ST;
+        public SmartBrute(SubstitueTool st)
         {
+            ST = st;
             InitializeComponent(); 
             rand = new Random();
             dict.Initialize();
@@ -55,11 +57,12 @@ namespace DumbCodeYe.Substitution
                     bestScore = testScore;
                     bestGrid = new SmartReplacementGrid(testGrid);
                     bestAnswetTxt.Text = testOutput;
+                    SetRaplacements(testGrid.Replacements); 
+                    ST.replacements = testGrid.Replacements;
                 }
                 currentIterationTxt.Text = gen.ToString();
                 bestScoreTxt.Text = bestScore.ToString();
                 outputTxt.Text = testOutput;
-                SetRaplacements(testGrid.Replacements);
                 Invalidate();
                 Refresh();
             }
@@ -328,6 +331,19 @@ namespace DumbCodeYe.Substitution
                 SearchPattern(lib, grid, "capac0ty", "capacity");
                 SearchPattern(lib, grid, "capaci0y", "capacity");
                 SearchPattern(lib, grid, "capacit0", "capacity");
+                #endregion
+                #region Jodie
+                SearchPattern(lib, grid, "#odie", "jodie");
+                SearchPattern(lib, grid, "j#die", "jodie");
+                SearchPattern(lib, grid, "jo#ie", "jodie");
+                SearchPattern(lib, grid, "jod#e", "jodie");
+                SearchPattern(lib, grid, "jodi#", "jodie");
+                #endregion
+                #region Harry
+                SearchPattern(lib, grid, "#arry", "harry");
+                SearchPattern(lib, grid, "h#rry", "harry");
+                SearchPattern(lib, grid, "ha##y", "harry");
+                SearchPattern(lib, grid, "harr#", "harry");
                 #endregion
             }
         }

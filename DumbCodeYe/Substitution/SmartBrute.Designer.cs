@@ -711,7 +711,7 @@ namespace DumbCodeYe.Substitution
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 515);
+            this.ClientSize = new System.Drawing.Size(986, 506);
             this.Controls.Add(this.currentIterationTxt);
             this.Controls.Add(this.maxIterationTxt);
             this.Controls.Add(this.bestAnswetTxt);

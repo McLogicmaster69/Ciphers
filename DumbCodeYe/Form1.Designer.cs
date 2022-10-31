@@ -40,6 +40,7 @@ namespace DumbCodeYe
             this.binaryBtn = new System.Windows.Forms.Button();
             this.playfairBtn = new System.Windows.Forms.Button();
             this.lettersBtn = new System.Windows.Forms.Button();
+            this.btnBacon = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textInput
@@ -153,11 +154,22 @@ namespace DumbCodeYe
             this.lettersBtn.UseVisualStyleBackColor = true;
             this.lettersBtn.Click += new System.EventHandler(this.lettersBtn_Click);
             // 
+            // btnBacon
+            // 
+            this.btnBacon.Location = new System.Drawing.Point(12, 722);
+            this.btnBacon.Name = "btnBacon";
+            this.btnBacon.Size = new System.Drawing.Size(860, 31);
+            this.btnBacon.TabIndex = 11;
+            this.btnBacon.Text = "bACON";
+            this.btnBacon.UseVisualStyleBackColor = true;
+            this.btnBacon.Click += new System.EventHandler(this.btnBacon_Click);
+            // 
             // mainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 723);
+            this.ClientSize = new System.Drawing.Size(884, 764);
+            this.Controls.Add(this.btnBacon);
             this.Controls.Add(this.lettersBtn);
             this.Controls.Add(this.playfairBtn);
             this.Controls.Add(this.binaryBtn);
@@ -191,6 +203,7 @@ namespace DumbCodeYe
         private System.Windows.Forms.Button binaryBtn;
         private System.Windows.Forms.Button playfairBtn;
         private System.Windows.Forms.Button lettersBtn;
+        private System.Windows.Forms.Button btnBacon;
     }
 }
 

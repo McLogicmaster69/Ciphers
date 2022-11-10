@@ -188,5 +188,146 @@ namespace DumbCodeYe.Transposition
             GO.Setup(highestGrid, highestRow, highestColumn);
             GO.Show();
         }
+
+        private void basicKeywordBtn_Click(object sender, EventArgs e)
+        {
+            int columns = (int)columnsNum.Value;
+            int rows = (int)Math.Ceiling((decimal)MainText.Length / columns);
+            char[,] grid = new char[rows, columns];
+            int index = 0;
+            for (int r = 0; r < rows; r++)
+            {
+                for (int c = 0; c < columns; c++)
+                {
+                    grid[r, c] = MainText[index];
+                    index++;
+                }
+            }
+
+            GridOutput GO = new GridOutput();
+            GO.Setup(grid, rows, columns);
+            GO.Show();
+        }
+
+        private void factorsBtn_Click(object sender, EventArgs e)
+        {
+            List<int> rows = new List<int>();
+            List<int> columns = new List<int>();
+            for (int i = 1; i <= MainText.Length; i++)
+            {
+                if (MainText.Length % i == 0)
+                {
+                    rows.Add(i);
+                    columns.Add(MainText.Length / i);
+                }
+            }
+
+            string factors = "";
+            for (int i = 0; i < rows.Count; i++)
+            {
+                factors += $"{rows[i]}, {columns[i]}\r\n";
+            }
+
+            TextOutputFrm tof = new TextOutputFrm();
+            tof.SetOutput(factors);
+            tof.Show();
+        }
+
+        private void railfenceBtn_Click(object sender, EventArgs e)
+        {
+            int rails = (int)Math.Floor(railsNum.Value);
+            char[,] grid = new char[rails, MainText.Length];
+            int index = 0;
+            int offset = 0;
+            bool increasingOffset = true;
+            int maxIncrease = (rails - 1) * 2;
+            for (int r = 0; r < rails; r++)
+            {
+                int remainSpace = maxIncrease;
+                for (int c = offset; c < MainText.Length;)
+                {
+                    grid[r, c] = MainText[index];
+                    index++;
+                    if (remainSpace < maxIncrease)
+                    {
+                        c += remainSpace;
+                        remainSpace = maxIncrease;
+                    }
+                    else
+                    {
+                        c += maxIncrease - offset * 2;
+                        remainSpace -= maxIncrease - offset * 2;
+                        if (remainSpace == maxIncrease)
+                            c += maxIncrease;
+                        if (remainSpace == 0)
+                            remainSpace = maxIncrease;
+                    }
+                }
+                if (increasingOffset)
+                {
+                    offset++;
+                    if (offset == rails - 1)
+                        increasingOffset = false;
+                }
+                else
+                {
+                    offset--;
+                    if (offset == 0)
+                        increasingOffset = true;
+                }
+            }
+            int rail = 0;
+            bool increasingRail = true;
+            string finalText = "";
+            for (int i = 0; i < MainText.Length; i++)
+            {
+                finalText += grid[rail, i];
+                if (increasingRail)
+                {
+                    rail++;
+                    if (rail == rails - 1)
+                        increasingRail = false;
+                }
+                else
+                {
+                    rail--;
+                    if (rail == 0)
+                        increasingRail = true;
+                }
+            }
+
+            TextOutputFrm tof = new TextOutputFrm();
+            tof.SetOutput(finalText);
+            tof.Show();
+        }
+
+        private void scytaleBtn_Click(object sender, EventArgs e)
+        {
+            int rails = (int)Math.Floor(railsNum.Value);
+            char[,] grid = new char[rails, MainText.Length];
+            int index = 0; 
+            for (int r = 0; r < rails; r++)
+            { 
+                for (int c = r; c < MainText.Length; c += rails)
+                {
+                    grid[r, c] = MainText[index];
+                    index++;
+                }
+            }
+
+            int rail = 0;
+            string finalText = "";
+            for (int i = 0; i < MainText.Length; i++)
+            {
+                finalText += grid[rail, i];
+                rail++;
+                if (rail == rails)
+                    rail = 0;
+            }
+
+            TextOutputFrm tof = new TextOutputFrm();
+            tof.SetOutput(finalText);
+            tof.Show();
+        }
     }
 }

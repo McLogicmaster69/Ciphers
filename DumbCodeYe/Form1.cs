@@ -424,9 +424,9 @@ namespace DumbCodeYe
             string plainText = "";
             string cipherText = textInput.Text;
             string chunk;
-            if (cipherText.Length > 5 && cipherText.Length % 5 == 0)
+            if (cipherText.Length >= 5 && cipherText.Length % 5 == 0)
             {
-                for (int index = 0; index <= (cipherText.Length); index += 5)
+                for (int index = 0; index < (cipherText.Length); index += 5)
                 {
                     chunk = cipherText.Substring(index, 5);
                     switch (chunk)
@@ -513,10 +513,6 @@ namespace DumbCodeYe
                             MessageBox.Show("It was jacob's fault");
                             break;
                     }
-
-
-
-
                 }
                 TextOutputFrm txtOut = new TextOutputFrm();
                 txtOut.SetOutput(plainText);

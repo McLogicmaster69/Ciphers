@@ -51,14 +51,15 @@ namespace DumbCodeYe
             this.textInput.Location = new System.Drawing.Point(12, 12);
             this.textInput.Multiline = true;
             this.textInput.Name = "textInput";
-            this.textInput.Size = new System.Drawing.Size(860, 371);
+            this.textInput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textInput.Size = new System.Drawing.Size(860, 242);
             this.textInput.TabIndex = 0;
             // 
             // ceaserBtn
             // 
-            this.ceaserBtn.Location = new System.Drawing.Point(12, 500);
+            this.ceaserBtn.Location = new System.Drawing.Point(12, 334);
             this.ceaserBtn.Name = "ceaserBtn";
-            this.ceaserBtn.Size = new System.Drawing.Size(860, 31);
+            this.ceaserBtn.Size = new System.Drawing.Size(421, 31);
             this.ceaserBtn.TabIndex = 1;
             this.ceaserBtn.Text = "CEASER";
             this.ceaserBtn.UseVisualStyleBackColor = true;
@@ -66,9 +67,9 @@ namespace DumbCodeYe
             // 
             // substituteBtn
             // 
-            this.substituteBtn.Location = new System.Drawing.Point(12, 574);
+            this.substituteBtn.Location = new System.Drawing.Point(12, 371);
             this.substituteBtn.Name = "substituteBtn";
-            this.substituteBtn.Size = new System.Drawing.Size(860, 31);
+            this.substituteBtn.Size = new System.Drawing.Size(421, 31);
             this.substituteBtn.TabIndex = 2;
             this.substituteBtn.Text = "SUBSTITUE";
             this.substituteBtn.UseVisualStyleBackColor = true;
@@ -76,9 +77,9 @@ namespace DumbCodeYe
             // 
             // vigenereBtn
             // 
-            this.vigenereBtn.Location = new System.Drawing.Point(12, 611);
+            this.vigenereBtn.Location = new System.Drawing.Point(451, 371);
             this.vigenereBtn.Name = "vigenereBtn";
-            this.vigenereBtn.Size = new System.Drawing.Size(860, 31);
+            this.vigenereBtn.Size = new System.Drawing.Size(421, 31);
             this.vigenereBtn.TabIndex = 3;
             this.vigenereBtn.Text = "VIGENERE";
             this.vigenereBtn.UseVisualStyleBackColor = true;
@@ -86,9 +87,9 @@ namespace DumbCodeYe
             // 
             // polybiusBtn
             // 
-            this.polybiusBtn.Location = new System.Drawing.Point(12, 648);
+            this.polybiusBtn.Location = new System.Drawing.Point(12, 408);
             this.polybiusBtn.Name = "polybiusBtn";
-            this.polybiusBtn.Size = new System.Drawing.Size(860, 31);
+            this.polybiusBtn.Size = new System.Drawing.Size(421, 31);
             this.polybiusBtn.TabIndex = 4;
             this.polybiusBtn.Text = "POLYBIUS";
             this.polybiusBtn.UseVisualStyleBackColor = true;
@@ -96,7 +97,7 @@ namespace DumbCodeYe
             // 
             // upperBtn
             // 
-            this.upperBtn.Location = new System.Drawing.Point(12, 389);
+            this.upperBtn.Location = new System.Drawing.Point(12, 260);
             this.upperBtn.Name = "upperBtn";
             this.upperBtn.Size = new System.Drawing.Size(421, 31);
             this.upperBtn.TabIndex = 5;
@@ -106,9 +107,9 @@ namespace DumbCodeYe
             // 
             // transpositionBtn
             // 
-            this.transpositionBtn.Location = new System.Drawing.Point(12, 537);
+            this.transpositionBtn.Location = new System.Drawing.Point(451, 334);
             this.transpositionBtn.Name = "transpositionBtn";
-            this.transpositionBtn.Size = new System.Drawing.Size(860, 31);
+            this.transpositionBtn.Size = new System.Drawing.Size(421, 31);
             this.transpositionBtn.TabIndex = 6;
             this.transpositionBtn.Text = "TRANSPOSITION";
             this.transpositionBtn.UseVisualStyleBackColor = true;
@@ -116,9 +117,9 @@ namespace DumbCodeYe
             // 
             // morseBtn
             // 
-            this.morseBtn.Location = new System.Drawing.Point(12, 426);
+            this.morseBtn.Location = new System.Drawing.Point(12, 297);
             this.morseBtn.Name = "morseBtn";
-            this.morseBtn.Size = new System.Drawing.Size(860, 31);
+            this.morseBtn.Size = new System.Drawing.Size(421, 31);
             this.morseBtn.TabIndex = 7;
             this.morseBtn.Text = "MORSE";
             this.morseBtn.UseVisualStyleBackColor = true;
@@ -126,9 +127,9 @@ namespace DumbCodeYe
             // 
             // binaryBtn
             // 
-            this.binaryBtn.Location = new System.Drawing.Point(12, 463);
+            this.binaryBtn.Location = new System.Drawing.Point(451, 297);
             this.binaryBtn.Name = "binaryBtn";
-            this.binaryBtn.Size = new System.Drawing.Size(860, 31);
+            this.binaryBtn.Size = new System.Drawing.Size(421, 31);
             this.binaryBtn.TabIndex = 8;
             this.binaryBtn.Text = "BINARY";
             this.binaryBtn.UseVisualStyleBackColor = true;
@@ -136,9 +137,9 @@ namespace DumbCodeYe
             // 
             // playfairBtn
             // 
-            this.playfairBtn.Location = new System.Drawing.Point(12, 685);
+            this.playfairBtn.Location = new System.Drawing.Point(451, 408);
             this.playfairBtn.Name = "playfairBtn";
-            this.playfairBtn.Size = new System.Drawing.Size(860, 31);
+            this.playfairBtn.Size = new System.Drawing.Size(421, 31);
             this.playfairBtn.TabIndex = 9;
             this.playfairBtn.Text = "PLAYFAIR";
             this.playfairBtn.UseVisualStyleBackColor = true;
@@ -146,7 +147,7 @@ namespace DumbCodeYe
             // 
             // lettersBtn
             // 
-            this.lettersBtn.Location = new System.Drawing.Point(451, 389);
+            this.lettersBtn.Location = new System.Drawing.Point(451, 260);
             this.lettersBtn.Name = "lettersBtn";
             this.lettersBtn.Size = new System.Drawing.Size(421, 31);
             this.lettersBtn.TabIndex = 10;
@@ -156,7 +157,7 @@ namespace DumbCodeYe
             // 
             // btnBacon
             // 
-            this.btnBacon.Location = new System.Drawing.Point(12, 722);
+            this.btnBacon.Location = new System.Drawing.Point(12, 445);
             this.btnBacon.Name = "btnBacon";
             this.btnBacon.Size = new System.Drawing.Size(860, 31);
             this.btnBacon.TabIndex = 11;
@@ -168,7 +169,7 @@ namespace DumbCodeYe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 764);
+            this.ClientSize = new System.Drawing.Size(884, 489);
             this.Controls.Add(this.btnBacon);
             this.Controls.Add(this.lettersBtn);
             this.Controls.Add(this.playfairBtn);

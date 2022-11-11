@@ -29,6 +29,7 @@ namespace DumbCodeYe
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.Button initQuadBtn;
             this.textInput = new System.Windows.Forms.TextBox();
             this.ceaserBtn = new System.Windows.Forms.Button();
             this.substituteBtn = new System.Windows.Forms.Button();
@@ -41,6 +42,7 @@ namespace DumbCodeYe
             this.playfairBtn = new System.Windows.Forms.Button();
             this.lettersBtn = new System.Windows.Forms.Button();
             this.btnBacon = new System.Windows.Forms.Button();
+            initQuadBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textInput
@@ -165,11 +167,22 @@ namespace DumbCodeYe
             this.btnBacon.UseVisualStyleBackColor = true;
             this.btnBacon.Click += new System.EventHandler(this.btnBacon_Click);
             // 
+            // initQuadBtn
+            // 
+            initQuadBtn.Location = new System.Drawing.Point(12, 482);
+            initQuadBtn.Name = "initQuadBtn";
+            initQuadBtn.Size = new System.Drawing.Size(860, 31);
+            initQuadBtn.TabIndex = 12;
+            initQuadBtn.Text = "INIT QUADGRAMS";
+            initQuadBtn.UseVisualStyleBackColor = true;
+            initQuadBtn.Click += new System.EventHandler(this.initQuadBtn_Click);
+            // 
             // mainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 489);
+            this.ClientSize = new System.Drawing.Size(884, 522);
+            this.Controls.Add(initQuadBtn);
             this.Controls.Add(this.btnBacon);
             this.Controls.Add(this.lettersBtn);
             this.Controls.Add(this.playfairBtn);
@@ -186,6 +199,7 @@ namespace DumbCodeYe
             this.MaximizeBox = false;
             this.Name = "mainFrm";
             this.Text = "Form lol";
+            this.Load += new System.EventHandler(this.mainFrm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

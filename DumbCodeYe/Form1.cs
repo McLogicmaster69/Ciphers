@@ -1,5 +1,6 @@
 ﻿using DumbCodeYe.Playfair;
 using DumbCodeYe.Polybius;
+using DumbCodeYe.Quadgrams;
 using DumbCodeYe.Substitution;
 using DumbCodeYe.Transposition;
 using System;
@@ -525,6 +526,16 @@ namespace DumbCodeYe
                 System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=DjelB-Z2QWo");
             }
 
+        }
+
+        private void mainFrm_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void initQuadBtn_Click(object sender, EventArgs e)
+        {
+            InitQuadgramsFrm iqf = new InitQuadgramsFrm();
+            iqf.Show();
         }
     }
 }

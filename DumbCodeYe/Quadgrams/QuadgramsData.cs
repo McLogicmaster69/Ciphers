@@ -14,6 +14,7 @@ namespace DumbCodeYe.Quadgrams
         public static readonly string DataFileName = "QuadgramsData.txt";
         public static readonly string InfoFileName = "english_quadgrams.txt";
         public static DataSet DataSet;
+        public static long TotalData;
 
         public static bool CheckDataExists()
         {
@@ -70,7 +71,17 @@ namespace DumbCodeYe.Quadgrams
                         backPointer = mid - 1;
                 }
             }
-            return -1;
+            return 0;
+        }
+        public static double GetLogProbability(string quadgram)
+        {
+            int total = GetFrequency(quadgram);
+            if (total == -1)
+                return 0;
+            if (total == 0)
+                return Math.Log10(0.0001d / TotalData);
+            else
+                return Math.Log10((double)total / TotalData);
         }
     }
 }

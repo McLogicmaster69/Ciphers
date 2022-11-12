@@ -193,6 +193,7 @@ namespace DumbCodeYe.Playfair
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "PlayfairSelection";
+            this.Load += new System.EventHandler(this.PlayfairSelection_Load);
             ((System.ComponentModel.ISupportInitialize)(this.iterationNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.keyLength)).EndInit();
             this.ResumeLayout(false);

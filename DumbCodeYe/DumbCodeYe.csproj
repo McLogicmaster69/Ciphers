@@ -56,6 +56,12 @@
     <Compile Include="Playfair\Playfair5Grid.Designer.cs">
       <DependentUpon>Playfair5Grid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Playfair\Playfair5GridV3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Playfair\Playfair5GridV3.Designer.cs">
+      <DependentUpon>Playfair5GridV3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Playfair\PlayfairGrid.cs" />
     <Compile Include="Playfair\PlayfairSelection.cs">
       <SubType>Form</SubType>
@@ -212,6 +218,9 @@
     <EmbeddedResource Include="Playfair\Playfair5Grid.resx">
       <DependentUpon>Playfair5Grid.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Playfair\Playfair5GridV3.resx">
+      <DependentUpon>Playfair5GridV3.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Playfair\PlayfairSelection.resx">
       <DependentUpon>PlayfairSelection.cs</DependentUpon>
     </EmbeddedResource>
@@ -307,8 +316,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Railfence\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

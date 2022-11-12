@@ -22,7 +22,7 @@ namespace DumbCodeYe.Playfair
 
         private void grid5Btn_Click(object sender, EventArgs e)
         {
-            Playfair5GridV2 P5G = new Playfair5GridV2();
+            Playfair5GridV3 P5G = new Playfair5GridV3();
             P5G.Show();
             MovementMode hori = MovementMode.HorizontalLeft;
             MovementMode vert = MovementMode.VerticalUp;
@@ -57,12 +57,21 @@ namespace DumbCodeYe.Playfair
                     vert = MovementMode.HorizontalLeft;
                     break;
             }
-            P5G.BeginGrind(Text, (int)iterationNum.Value, /*(int)keyLength.Value,*/ modeRule.SelectedIndex == 0, hori, vert);
+            P5G.BeginGrind(Text, (int)iterationNum.Value, modeRule.SelectedIndex == 0, hori, vert);
         }
 
         private void grid6Btn_Click(object sender, EventArgs e)
         {
             grid6Btn_Click(null, null);
+        }
+
+        private void PlayfairSelection_Load(object sender, EventArgs e)
+        {
+            if (Text.Length % 2 != 0)
+            {
+                MessageBox.Show("Invalid input text");
+                this.Close();
+            }
         }
     }
 }

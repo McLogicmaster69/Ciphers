@@ -205,5 +205,16 @@ namespace DumbCodeYe.Quadgrams
             tof.SetOutput(output);
             tof.Show();
         }
+
+        private void getTotalBtn_Click(object sender, EventArgs e)
+        {
+            long total = 0;
+            for (int i = 0; i < QuadgramsData.DataSet.Values.Length; i++)
+            {
+                total += QuadgramsData.DataSet.Values[i];
+            }
+            QuadgramsData.TotalData = total;
+            statusLbl.Text = $"Total: {total}";
+        }
     }
 }

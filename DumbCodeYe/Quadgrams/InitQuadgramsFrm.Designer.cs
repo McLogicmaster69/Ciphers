@@ -35,11 +35,12 @@ namespace DumbCodeYe.Quadgrams
             this.loadingBar = new System.Windows.Forms.ProgressBar();
             this.statusLbl = new System.Windows.Forms.Label();
             this.testBtn = new System.Windows.Forms.Button();
+            this.getTotalBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // closeBtn
             // 
-            this.closeBtn.Location = new System.Drawing.Point(12, 50);
+            this.closeBtn.Location = new System.Drawing.Point(12, 12);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(396, 32);
             this.closeBtn.TabIndex = 1;
@@ -49,11 +50,11 @@ namespace DumbCodeYe.Quadgrams
             // 
             // initBtn
             // 
-            this.initBtn.Location = new System.Drawing.Point(12, 12);
+            this.initBtn.Location = new System.Drawing.Point(15, 50);
             this.initBtn.Name = "initBtn";
             this.initBtn.Size = new System.Drawing.Size(396, 32);
             this.initBtn.TabIndex = 2;
-            this.initBtn.Text = "INIT";
+            this.initBtn.Text = "INITIALISE";
             this.initBtn.UseVisualStyleBackColor = true;
             this.initBtn.Click += new System.EventHandler(this.initBtn_Click);
             // 
@@ -66,14 +67,14 @@ namespace DumbCodeYe.Quadgrams
             // 
             // loadingBar
             // 
-            this.loadingBar.Location = new System.Drawing.Point(12, 126);
+            this.loadingBar.Location = new System.Drawing.Point(12, 164);
             this.loadingBar.Name = "loadingBar";
             this.loadingBar.Size = new System.Drawing.Size(396, 23);
             this.loadingBar.TabIndex = 3;
             // 
             // statusLbl
             // 
-            this.statusLbl.Location = new System.Drawing.Point(9, 152);
+            this.statusLbl.Location = new System.Drawing.Point(12, 190);
             this.statusLbl.Name = "statusLbl";
             this.statusLbl.Size = new System.Drawing.Size(396, 23);
             this.statusLbl.TabIndex = 4;
@@ -89,11 +90,22 @@ namespace DumbCodeYe.Quadgrams
             this.testBtn.UseVisualStyleBackColor = true;
             this.testBtn.Click += new System.EventHandler(this.testBtn_Click);
             // 
+            // getTotalBtn
+            // 
+            this.getTotalBtn.Location = new System.Drawing.Point(12, 126);
+            this.getTotalBtn.Name = "getTotalBtn";
+            this.getTotalBtn.Size = new System.Drawing.Size(396, 32);
+            this.getTotalBtn.TabIndex = 6;
+            this.getTotalBtn.Text = "GET TOTAL";
+            this.getTotalBtn.UseVisualStyleBackColor = true;
+            this.getTotalBtn.Click += new System.EventHandler(this.getTotalBtn_Click);
+            // 
             // InitQuadgramsFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 187);
+            this.ClientSize = new System.Drawing.Size(420, 234);
+            this.Controls.Add(this.getTotalBtn);
             this.Controls.Add(this.testBtn);
             this.Controls.Add(this.statusLbl);
             this.Controls.Add(this.loadingBar);
@@ -112,5 +124,6 @@ namespace DumbCodeYe.Quadgrams
         private System.Windows.Forms.ProgressBar loadingBar;
         private System.Windows.Forms.Label statusLbl;
         private System.Windows.Forms.Button testBtn;
+        private System.Windows.Forms.Button getTotalBtn;
     }
 }

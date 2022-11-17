@@ -21,7 +21,6 @@ namespace DumbCodeYe.Playfair
         private float[] PairFrequencyScore = new float[] { 11.6f, 10.0f, 8.7f, 7.7f, 6.9f, 6.0f, 5.7f, 5.6f, 5.4f, 5.0f, 4.8f, 4.6f, 4.6f, 4.5f, 4.3f, 4.2f, 4.2f, 4.2f};
         private string Characters = "abcdefghijklmnopqrstuvwxyz";
         private string Capitals = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private double startingTemp = 30;
         public Playfair5GridV3()
         {
             InitializeComponent();
@@ -37,75 +36,103 @@ namespace DumbCodeYe.Playfair
         }
         public void BeginGrind(string inputText, int max, bool resartLetters, MovementMode horizontalMode, MovementMode verticalMode)
         {
-            startingTemp = inputText.Length / 12d;
+            //startingTemp = inputText.Length / 12d;
             maxIterationTxt.Text = max.ToString();
             currentIterationTxt.Text = "1";
             char[][] bestKey = new char[5][] { new char[5], new char[5], new char[5], new char[5], new char[5] };
             double bestValue = double.MinValue;
-            for (int i = 0; i < max; i++)
+            for (double temperature = 30; temperature > 0; temperature -= 0.5d)
             {
-                currentIterationTxt.Text = (i + 1).ToString();
-                char[][] CurrentGeneration = new char[5][];
-                if (i == 0)
+                for (int i = 0; i < max; i++)
                 {
-                    CurrentGeneration = GetRandomGrid();
-                }
-                else
-                {
-                    switch (rand.Next(0, 5))
+                    currentIterationTxt.Text = (i + 1).ToString();
+                    char[][] CurrentGeneration = new char[5][];
+                    if (i == 0)
                     {
-                        case 0:
-                            CurrentGeneration = SwapColumns(bestKey, rand.Next(0, 5), rand.Next(0, 5));
-                            break;
-                        case 1:
-                            CurrentGeneration = SwapRows(bestKey, rand.Next(0, 5), rand.Next(0, 5));
-                            break;
-                        case 2:
-                            CurrentGeneration = MirrorColumns(bestKey);
-                            break;
-                        case 3:
-                            CurrentGeneration = MirrorRows(bestKey);
-                            break;
-                        case 4:
-                            CurrentGeneration = SwapPlaces(bestKey,
-                                new GridPosition(rand.Next(0, 5), rand.Next(0, 5)),
-                                new GridPosition(rand.Next(0, 5), rand.Next(0, 5)));
-                            break;
+                        CurrentGeneration = GetRandomGrid();
                     }
-                }
+                    else
+                    {
+                        switch (rand.Next(0, 11))
+                        {
+                            case 0:
+                                CurrentGeneration = SwapColumns(bestKey, rand.Next(0, 5), rand.Next(0, 5));
+                                break;
+                            case 1:
+                                CurrentGeneration = SwapColumns(bestKey, rand.Next(0, 5), rand.Next(0, 5));
+                                break;
+                            case 2:
+                                CurrentGeneration = SwapRows(bestKey, rand.Next(0, 5), rand.Next(0, 5));
+                                break;
+                            case 3:
+                                CurrentGeneration = SwapRows(bestKey, rand.Next(0, 5), rand.Next(0, 5));
+                                break;
+                            case 4:
+                                CurrentGeneration = MirrorColumns(bestKey);
+                                break;
+                            case 5:
+                                CurrentGeneration = MirrorRows(bestKey);
+                                break;
+                            case 6:
+                                CurrentGeneration = SwapPlaces(bestKey,
+                                    new GridPosition(rand.Next(0, 5), rand.Next(0, 5)),
+                                    new GridPosition(rand.Next(0, 5), rand.Next(0, 5)));
+                                break;
+                            case 7:
+                                CurrentGeneration = SwapPlaces(bestKey,
+                                    new GridPosition(rand.Next(0, 5), rand.Next(0, 5)),
+                                    new GridPosition(rand.Next(0, 5), rand.Next(0, 5)));
+                                break;
+                            case 8:
+                                CurrentGeneration = SwapPlaces(bestKey,
+                                    new GridPosition(rand.Next(0, 5), rand.Next(0, 5)),
+                                    new GridPosition(rand.Next(0, 5), rand.Next(0, 5)));
+                                break;
+                            case 9:
+                                CurrentGeneration = SwapPlaces(bestKey,
+                                    new GridPosition(rand.Next(0, 5), rand.Next(0, 5)),
+                                    new GridPosition(rand.Next(0, 5), rand.Next(0, 5)));
+                                break;
+                            case 10:
+                                CurrentGeneration = SwapPlaces(bestKey,
+                                    new GridPosition(rand.Next(0, 5), rand.Next(0, 5)),
+                                    new GridPosition(rand.Next(0, 5), rand.Next(0, 5)));
+                                break;
+                        }
+                    }
 
-                //CurrentGeneration = new char[5][] { new char[5] { 'P', 'A', 'S', 'W', 'O' }, new char[5] { 'R', 'D', 'B', 'C', 'E' }, new char[5] { 'F', 'G', 'H', 'I', 'K' }, new char[5] { 'L', 'M', 'N', 'Q', 'T' }, new char[5] { 'U', 'V', 'X', 'Y', 'Z' } };
-                PlayfairGrid pg = new PlayfairGrid(5, GetKeyFromGrid(CurrentGeneration), resartLetters, horizontalMode, verticalMode);
-                string outputText = "";
-                SetGrid(CurrentGeneration);
-                for (int k = 0; k < inputText.Length; k += 2)
-                {
-                    outputText += pg.Decrypt(inputText[k], inputText[k + 1]);
-                }
-                double score = ScoreText(outputText);
+                    //CurrentGeneration = new char[5][] { new char[5] { 'P', 'A', 'S', 'W', 'O' }, new char[5] { 'R', 'D', 'B', 'C', 'E' }, new char[5] { 'F', 'G', 'H', 'I', 'K' }, new char[5] { 'L', 'M', 'N', 'Q', 'T' }, new char[5] { 'U', 'V', 'X', 'Y', 'Z' } };
+                    PlayfairGrid pg = new PlayfairGrid(5, GetKeyFromGrid(CurrentGeneration), resartLetters, horizontalMode, verticalMode);
+                    string outputText = "";
+                    SetGrid(CurrentGeneration);
+                    for (int k = 0; k < inputText.Length; k += 2)
+                    {
+                        outputText += pg.Decrypt(inputText[k], inputText[k + 1]);
+                    }
+                    double score = ScoreText(outputText);
 
-                outputTxt.Text = outputText;
-                this.Invalidate();
-                this.Refresh();
+                    outputTxt.Text = outputText;
+                    this.Invalidate();
+                    this.Refresh();
 
-                if (score > bestValue) // IS THE BETTER SCORE
-                {
-                    bestAnswetTxt.Text = outputText;
-                    bestScoreTxt.Text = score.ToString();
-                    bestKey = CurrentGeneration;
-                    bestValue = score;
-                }
-                else // CALCULATE PROBABILITY OF CHANGING KEY
-                {
-                    double temperature = ((max - i) / (double)max) * startingTemp;
-                    double df = score - bestValue;
-                    double probability = Math.Pow(Math.E, df / temperature);
-                    if(rand.NextDouble() < probability)
+                    if (score > bestValue) // IS THE BETTER SCORE
                     {
                         bestAnswetTxt.Text = outputText;
                         bestScoreTxt.Text = score.ToString();
                         bestKey = CurrentGeneration;
                         bestValue = score;
+                    }
+                    else // CALCULATE PROBABILITY OF CHANGING KEY
+                    {
+                        double df = score - bestValue;
+                        double probability = Math.Pow(Math.E, df / temperature);
+                        if (rand.NextDouble() < probability)
+                        {
+                            bestAnswetTxt.Text = outputText;
+                            bestScoreTxt.Text = score.ToString();
+                            bestKey = CurrentGeneration;
+                            bestValue = score;
+                        }
                     }
                 }
             }

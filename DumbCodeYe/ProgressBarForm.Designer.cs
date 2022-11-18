@@ -42,11 +42,11 @@ namespace DumbCodeYe
             // 
             // status
             // 
-            this.status.AutoSize = true;
             this.status.Location = new System.Drawing.Point(12, 40);
             this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(0, 13);
+            this.status.Size = new System.Drawing.Size(527, 13);
             this.status.TabIndex = 1;
+            this.status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ProgressBarForm
             // 
@@ -60,7 +60,6 @@ namespace DumbCodeYe
             this.Name = "ProgressBarForm";
             this.Text = "Calculating";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

@@ -34,6 +34,7 @@ namespace DumbCodeYe.Transposition
             this.swap2 = new System.Windows.Forms.NumericUpDown();
             this.swapBtn = new System.Windows.Forms.Button();
             this.outputBtn = new System.Windows.Forms.Button();
+            this.bruteBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.swap1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.swap2)).BeginInit();
             this.SuspendLayout();
@@ -106,11 +107,23 @@ namespace DumbCodeYe.Transposition
             this.outputBtn.UseVisualStyleBackColor = true;
             this.outputBtn.Click += new System.EventHandler(this.outputBtn_Click);
             // 
+            // bruteBtn
+            // 
+            this.bruteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bruteBtn.Location = new System.Drawing.Point(794, 358);
+            this.bruteBtn.Name = "bruteBtn";
+            this.bruteBtn.Size = new System.Drawing.Size(159, 34);
+            this.bruteBtn.TabIndex = 5;
+            this.bruteBtn.Text = "BRUTE";
+            this.bruteBtn.UseVisualStyleBackColor = true;
+            this.bruteBtn.Click += new System.EventHandler(this.bruteBtn_Click);
+            // 
             // GridOutput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(965, 444);
+            this.Controls.Add(this.bruteBtn);
             this.Controls.Add(this.outputBtn);
             this.Controls.Add(this.swapBtn);
             this.Controls.Add(this.swap2);
@@ -133,5 +146,6 @@ namespace DumbCodeYe.Transposition
         private System.Windows.Forms.NumericUpDown swap2;
         private System.Windows.Forms.Button swapBtn;
         private System.Windows.Forms.Button outputBtn;
+        private System.Windows.Forms.Button bruteBtn;
     }
 }

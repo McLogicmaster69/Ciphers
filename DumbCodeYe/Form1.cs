@@ -1,4 +1,5 @@
-﻿using DumbCodeYe.Playfair;
+﻿using DumbCodeYe.Hill;
+using DumbCodeYe.Playfair;
 using DumbCodeYe.Polybius;
 using DumbCodeYe.Quadgrams;
 using DumbCodeYe.Substitution;
@@ -536,6 +537,12 @@ namespace DumbCodeYe
         {
             InitQuadgramsFrm iqf = new InitQuadgramsFrm();
             iqf.Show();
+        }
+
+        private void btnHill_Click(object sender, EventArgs e)
+        {
+            HillCipher hillCiper = new HillCipher();
+            hillCiper.Show();
         }
     }
 }

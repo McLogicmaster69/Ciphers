@@ -452,7 +452,7 @@ namespace DumbCodeYe.Hill
                     {
                         posSum += decipherMatrixInverse[index2, multiPos] * cipherText[index1, multiPos];
                     }
-                    plainText[index1, index2] = Convert.ToInt32(posSum) % 26;
+                    plainText[index1, index2] = (Convert.ToInt32(posSum) + 26*100) % 26;
                     posSum = 0;
                 }
             }

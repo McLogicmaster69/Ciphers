@@ -50,6 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GridPosition.cs" />
+    <Compile Include="hillcipher2\HillCipher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="hillcipher2\HillCipher.Designer.cs" />
     <Compile Include="Playfair\Playfair5Crack.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +226,7 @@
     <Compile Include="Substitution\WordFrequency.Designer.cs">
       <DependentUpon>WordFrequency.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="hillcipher2\HillCipher.resx" />
     <Compile Include="WordFreq\DataSet.cs" />
     <Compile Include="WordFreq\InitWordFreq.cs">
       <SubType>Form</SubType>

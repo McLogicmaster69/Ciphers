@@ -29,6 +29,9 @@ namespace DumbCodeYe
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.Button initQuadBtn;
+            System.Windows.Forms.Button addSpacesBtn;
+            System.Windows.Forms.Button initWordFreqBtn;
             this.textInput = new System.Windows.Forms.TextBox();
             this.ceaserBtn = new System.Windows.Forms.Button();
             this.substituteBtn = new System.Windows.Forms.Button();
@@ -41,7 +44,41 @@ namespace DumbCodeYe
             this.playfairBtn = new System.Windows.Forms.Button();
             this.lettersBtn = new System.Windows.Forms.Button();
             this.btnBacon = new System.Windows.Forms.Button();
+            this.btnHill = new System.Windows.Forms.Button();
+            initQuadBtn = new System.Windows.Forms.Button();
+            addSpacesBtn = new System.Windows.Forms.Button();
+            initWordFreqBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // initQuadBtn
+            // 
+            initQuadBtn.Location = new System.Drawing.Point(12, 482);
+            initQuadBtn.Name = "initQuadBtn";
+            initQuadBtn.Size = new System.Drawing.Size(421, 31);
+            initQuadBtn.TabIndex = 12;
+            initQuadBtn.Text = "INIT QUADGRAMS";
+            initQuadBtn.UseVisualStyleBackColor = true;
+            initQuadBtn.Click += new System.EventHandler(this.initQuadBtn_Click);
+            // 
+            // addSpacesBtn
+            // 
+            addSpacesBtn.Location = new System.Drawing.Point(12, 519);
+            addSpacesBtn.Name = "addSpacesBtn";
+            addSpacesBtn.Size = new System.Drawing.Size(860, 31);
+            addSpacesBtn.TabIndex = 13;
+            addSpacesBtn.Text = "ADD SPACES";
+            addSpacesBtn.UseVisualStyleBackColor = true;
+            addSpacesBtn.Click += new System.EventHandler(this.addSpacesBtn_Click);
+            // 
+            // initWordFreqBtn
+            // 
+            initWordFreqBtn.Location = new System.Drawing.Point(451, 482);
+            initWordFreqBtn.Name = "initWordFreqBtn";
+            initWordFreqBtn.Size = new System.Drawing.Size(421, 31);
+            initWordFreqBtn.TabIndex = 14;
+            initWordFreqBtn.Text = "INIT WORD FREQ";
+            initWordFreqBtn.UseVisualStyleBackColor = true;
+            initWordFreqBtn.Click += new System.EventHandler(this.initWordFreqBtn_Click);
             // 
             // textInput
             // 
@@ -157,19 +194,33 @@ namespace DumbCodeYe
             // 
             // btnBacon
             // 
-            this.btnBacon.Location = new System.Drawing.Point(12, 445);
+            this.btnBacon.Location = new System.Drawing.Point(451, 445);
             this.btnBacon.Name = "btnBacon";
-            this.btnBacon.Size = new System.Drawing.Size(860, 31);
+            this.btnBacon.Size = new System.Drawing.Size(421, 31);
             this.btnBacon.TabIndex = 11;
             this.btnBacon.Text = "bACON";
             this.btnBacon.UseVisualStyleBackColor = true;
             this.btnBacon.Click += new System.EventHandler(this.btnBacon_Click);
             // 
+            // btnHill
+            // 
+            this.btnHill.Location = new System.Drawing.Point(12, 445);
+            this.btnHill.Name = "btnHill";
+            this.btnHill.Size = new System.Drawing.Size(421, 31);
+            this.btnHill.TabIndex = 13;
+            this.btnHill.Text = "HILL";
+            this.btnHill.UseVisualStyleBackColor = true;
+            this.btnHill.Click += new System.EventHandler(this.btnHill_Click);
+            // 
             // mainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 489);
+            this.ClientSize = new System.Drawing.Size(884, 558);
+            this.Controls.Add(initWordFreqBtn);
+            this.Controls.Add(addSpacesBtn);
+            this.Controls.Add(this.btnHill);
+            this.Controls.Add(initQuadBtn);
             this.Controls.Add(this.btnBacon);
             this.Controls.Add(this.lettersBtn);
             this.Controls.Add(this.playfairBtn);
@@ -186,6 +237,7 @@ namespace DumbCodeYe
             this.MaximizeBox = false;
             this.Name = "mainFrm";
             this.Text = "Form lol";
+            this.Load += new System.EventHandler(this.mainFrm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -205,6 +257,7 @@ namespace DumbCodeYe
         private System.Windows.Forms.Button playfairBtn;
         private System.Windows.Forms.Button lettersBtn;
         private System.Windows.Forms.Button btnBacon;
+        private System.Windows.Forms.Button btnHill;
     }
 }
 

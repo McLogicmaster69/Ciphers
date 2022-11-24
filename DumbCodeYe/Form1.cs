@@ -1,7 +1,12 @@
-﻿using DumbCodeYe.Playfair;
+﻿using DumbCodeYe.Hill;
+using DumbCodeYe.Playfair;
 using DumbCodeYe.Polybius;
+using DumbCodeYe.Quadgrams;
 using DumbCodeYe.Substitution;
 using DumbCodeYe.Transposition;
+using DumbCodeYe.WordFreq;
+using NetSpell.SpellChecker;
+using NetSpell.SpellChecker.Dictionary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +24,11 @@ namespace DumbCodeYe
         private float[] CharacterFrequency = new float[] { 0.082f, 0.015f, 0.028f, 0.043f, 0.127f, 0.022f, 0.020f, 0.061f, 0.070f, 0.002f, 0.008f, 0.040f, 0.024f, 0.067f, 0.075f, 0.019f, 0.001f, 0.060f, 0.063f, 0.091f, 0.028f, 0.010f, 0.024f, 0.002f, 0.020f, 0.001f};
         private string Characters = "abcdefghijklmnopqrstuvwxyz";
         private string Capitals = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const int SpaceIterations = 400;
+
+        private WordDictionary dict = new WordDictionary();
+        private Spelling speller = new Spelling();
+
         public mainFrm()
         {
             InitializeComponent();
@@ -525,6 +535,109 @@ namespace DumbCodeYe
                 System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=DjelB-Z2QWo");
             }
 
+        }
+
+        private void mainFrm_Load(object sender, EventArgs e)
+        {
+            dict.Initialize();
+            speller.Dictionary = dict;
+        }
+
+        private void initQuadBtn_Click(object sender, EventArgs e)
+        {
+            InitQuadgramsFrm iqf = new InitQuadgramsFrm();
+            iqf.Show();
+        }
+
+        private void btnHill_Click(object sender, EventArgs e)
+        {
+            HillCipher hillCiper = new HillCipher();
+            hillCiper.SetText(textInput.Text);
+            hillCiper.Show();
+        }
+
+        private void addSpacesBtn_Click(object sender, EventArgs e)
+        {
+            TextOutputFrm TOF = new TextOutputFrm();
+            TOF.SetOutput(AddSpaces(textInput.Text.ToUpper()));
+            TOF.Show();
+        }
+
+        private string AddSpaces(string s)
+        {
+            ProgressBarForm pb = new ProgressBarForm();
+            pb.Show();
+            int letterIndex = 0;
+            for (int i = s.Length - 1; i >= 0; i--)
+            {
+                if (s[i] == ' ')
+                {
+                    letterIndex = i + 1;
+                    break;
+                }
+            }
+            SpaceSet[] Sets = new SpaceSet[SpaceIterations];
+            Sets[0] = new SpaceSet(s, 0);
+            while(letterIndex < s.Length)
+            {
+                List<SpaceSet> newSets = new List<SpaceSet>();
+                for (int i = 0; i < Sets.Length; i++)
+                {
+                    if (Sets[i] == null)
+                        break;
+                    SpaceSet currentSet = Sets[i];
+                    SpaceSet spaces = new SpaceSet(currentSet.Text.Substring(0, letterIndex + currentSet.Spaces) + " " + currentSet.Text.Substring(letterIndex + currentSet.Spaces), currentSet.Spaces + 1);
+                    SpaceSet nonSpaces = new SpaceSet(currentSet.Text, currentSet.Spaces);
+                    InsertIntoSets(newSets, nonSpaces);
+                    InsertIntoSets(newSets, spaces);
+                }
+                Sets = newSets.ToArray();
+                letterIndex++;
+                pb.loadingBar.Value = (int)Math.Floor((letterIndex * 100f) / s.Length);
+                pb.status.Text = $"{letterIndex} / {s.Length}";
+                pb.Invalidate();
+                pb.Refresh();
+            }
+            pb.Close();
+            return Sets[0].Text;
+        }
+
+        private void InsertIntoSets(List<SpaceSet> spaces, SpaceSet set)
+        {
+            if (spaces.Count < SpaceIterations)
+            {
+                for (int j = 0; j <= spaces.Count; j++)
+                {
+                    if (j == spaces.Count)
+                    {
+                        spaces.Add(set);
+                        break;
+                    }
+                    else if (set.Score() > spaces[j].Score())
+                    {
+                        spaces.Insert(j, set);
+                        break;
+                    }
+                }
+            }
+            else if(spaces[SpaceIterations - 1].Score() < set.Score())
+            {
+                for (int j = 0; j < spaces.Count; j++)
+                {
+                    if (set.Score() > spaces[j].Score())
+                    {
+                        spaces.Insert(j, set);
+                        break;
+                    }
+                }
+                spaces.RemoveAt(SpaceIterations);
+            }
+        }
+
+        private void initWordFreqBtn_Click(object sender, EventArgs e)
+        {
+            InitWordFreq iqf = new InitWordFreq();
+            iqf.Show();
         }
     }
 }

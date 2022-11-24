@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DumbCodeYe.Quadgrams;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,9 @@ namespace DumbCodeYe.Transposition
         private List<char[]> mainGrid = new List<char[]>();
         private int Rows;
         private int Columns;
+
+        private float totalCalc = 0;
+        private int toCalc = 0;
 
         public GridOutput()
         {
@@ -66,28 +70,113 @@ namespace DumbCodeYe.Transposition
 
         private void swapBtn_Click(object sender, EventArgs e)
         {
-            if (swap1.Value != swap2.Value)
-            {
-                char[] temp = mainGrid[(int)swap1.Value - 1];
-                mainGrid[(int)swap1.Value - 1] = mainGrid[(int)swap2.Value - 1];
-                mainGrid[(int)swap2.Value - 1] = temp;
-                PrintGrid();
-            }
+            Swap((int)swap1.Value, (int)swap2.Value);
         }
 
         private void outputBtn_Click(object sender, EventArgs e)
         {
-            string output = "";
+            string output = GetGridOutput(mainGrid);
+            TextOutputFrm TO = new TextOutputFrm();
+            TO.SetOutput(output);
+            TO.Show();
+        }
+
+        private void Swap(int c1, int c2)
+        {
+            if (c1 != c2)
+            {
+                char[] temp = mainGrid[c1 - 1];
+                mainGrid[c1 - 1] = mainGrid[c2 - 1];
+                mainGrid[c2 - 1] = temp;
+                PrintGrid();
+            }
+        }
+        private void Swap(int c1, int c2, ref List<char[]> grid)
+        {
+            if (c1 != c2)
+            {
+                char[] temp = grid[c1];
+                grid[c1] = grid[c2];
+                grid[c2] = temp;
+            }
+        }
+
+        private void bruteBtn_Click(object sender, EventArgs e)
+        {
+            ProgressBarForm PBF = new ProgressBarForm();
+            PBF.Show();
+            totalCalc = 0;
+            toCalc = Factorial(Columns);
+            SwapIteration(0, new List<char[]>(mainGrid), out List<char[]> Best, out double Score, PBF);
+            string output = GetGridOutput(Best);
+            TextOutputFrm TO = new TextOutputFrm();
+            TO.SetOutput(output);
+            TO.Show();
+            PBF.Close();
+        }
+
+        private void SwapIteration(int swapNumber, List<char[]> grid, out List<char[]> bestGrid, out double bestScore, ProgressBarForm PBF)
+        {
+            if (swapNumber == grid.Count - 1)
+            {
+                bestGrid = grid;
+                bestScore = ScoreGrid(grid);
+                totalCalc++;
+                PBF.status.Text = $"{totalCalc} / {toCalc}";
+                PBF.loadingBar.Value = (int)Math.Floor((totalCalc * 100f) / toCalc);
+                PBF.Invalidate();
+                PBF.Refresh();
+            }
+            else
+            {
+                List<char[]> BestGrid = grid;
+                double BestScore = double.MinValue;
+                for (int i = swapNumber; i < grid.Count; i++)
+                {
+                    List<char[]> swapList = new List<char[]>(grid);
+                    Swap(swapNumber, i, ref swapList);
+                    SwapIteration(swapNumber + 1, swapList, out List<char[]> best, out double score, PBF);
+                    if(score > BestScore)
+                    {
+                        BestGrid = best;
+                        BestScore = score;
+                    }
+                }
+                bestGrid = BestGrid;
+                bestScore = BestScore;
+            }
+        }
+        private string GetGridOutput(List<char[]> grid)
+        {
+            string text = "";
             for (int row = 0; row < Rows; row++)
             {
                 for (int column = 0; column < Columns; column++)
                 {
-                    output += mainGrid[column][row].ToString();
+                    text += grid[column][row].ToString();
                 }
             }
-            TextOutputFrm TO = new TextOutputFrm();
-            TO.SetOutput(output);
-            TO.Show();
+            return text;
+        }
+        private double ScoreGrid(List<char[]> grid)
+        {
+            string text = GetGridOutput(grid);
+            double score = 0;
+            for (int i = 0; i < text.Length - 4; i++)
+            {
+                if (i == 0)
+                    score = QuadgramsData.GetLogProbability(text.Substring(i, 4));
+                else
+                    score += QuadgramsData.GetLogProbability(text.Substring(i, 4));
+            }
+            return score;
+        }
+        private int Factorial(int n)
+        {
+            if (n == 1)
+                return 1;
+            else
+                return n * Factorial(n - 1);
         }
     }
 }

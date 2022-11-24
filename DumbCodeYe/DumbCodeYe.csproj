@@ -95,6 +95,7 @@
     <Compile Include="Quadgrams\InitQuadgramsFrm.Designer.cs">
       <DependentUpon>InitQuadgramsFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SpaceSet.cs" />
     <Compile Include="Substitution\Brute.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,6 +222,15 @@
     <Compile Include="Substitution\WordFrequency.Designer.cs">
       <DependentUpon>WordFrequency.cs</DependentUpon>
     </Compile>
+    <Compile Include="WordFreq\DataSet.cs" />
+    <Compile Include="WordFreq\InitWordFreq.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WordFreq\InitWordFreq.Designer.cs">
+      <DependentUpon>InitWordFreq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WordFreq\SpellCheckDictionary.cs" />
+    <Compile Include="WordFreq\WordFreqData.cs" />
     <EmbeddedResource Include="Playfair\Playfair5Grid.resx">
       <DependentUpon>Playfair5Grid.cs</DependentUpon>
     </EmbeddedResource>
@@ -307,6 +317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Substitution\WordFrequency.resx">
       <DependentUpon>WordFrequency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WordFreq\InitWordFreq.resx">
+      <DependentUpon>InitWordFreq.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

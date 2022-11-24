@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DumbCodeYe.Quadgrams
+namespace DumbCodeYe.WordFreq
 {
-    public partial class InitQuadgramsFrm : Form
+    public partial class InitWordFreq : Form
     {
         private int originalSize;
-        public InitQuadgramsFrm()
+        public InitWordFreq()
         {
             InitializeComponent();
         }
@@ -27,33 +26,74 @@ namespace DumbCodeYe.Quadgrams
             getTotalBtn.Enabled = false;
             Worker.RunWorkerAsync();
         }
+
         private void closeBtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        private void testBtn_Click(object sender, EventArgs e)
+        {
+            string output = "";
+            string[] toTest = new string[] { "the", "of", "sticky", "wto", "golgw" };
+            long[] expectedValue = new long[] { 23135851162, 13151942776, 5698936, 5692621, 12711 };
+            for (int i = 0; i < toTest.Length; i++)
+            {
+                output += $"{toTest[i]}: {WordFreqData.GetFrequency(toTest[i])} Expected: {expectedValue[i]}\r\n";
+            }
+            TextOutputFrm tof = new TextOutputFrm();
+            tof.SetOutput(output);
+            tof.Show();
+        }
+
+        private void getTotalBtn_Click(object sender, EventArgs e)
+        {
+            long total = 0;
+            for (int i = 0; i < WordFreqData.DataSet.Values.Length; i++)
+            {
+                total += WordFreqData.DataSet.Values[i];
+            }
+            WordFreqData.TotalData = total;
+            statusLbl.Text = $"Total: {total}";
+        }
+
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             string[] keys;
-            int[] vals;
-            if (QuadgramsData.CheckDataExists())
+            long[] vals;
+            if (WordFreqData.CheckDataExists())
                 OpenDataSet(out keys, out vals);
             else
                 SortDataSet(out keys, out vals);
-            QuadgramsData.CompileDataSet(keys, vals);
+            WordFreqData.CompileDataSet(keys, vals);
         }
-        public void OpenDataSet(out string[] keys, out int[] vals)
+
+        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            string[] data = QuadgramsData.OpenDataFile();
+            loadingBar.Value = (int)Math.Floor(e.ProgressPercentage / 1000d);
+            statusLbl.Text = (e.ProgressPercentage / 1000d).ToString() + "%";
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            statusLbl.Text = "Data has been loaded";
+            initBtn.Enabled = true;
+            closeBtn.Enabled = true;
+            testBtn.Enabled = true;
+            getTotalBtn.Enabled = true;
+        }
+        public void OpenDataSet(out string[] keys, out long[] vals)
+        {
+            string[] data = WordFreqData.OpenDataFile();
             List<string> identifiers = new List<string>();
-            List<int> values = new List<int>();
+            List<long> values = new List<long>();
 
             decimal index = 0;
             foreach (string d in data)
             {
                 string[] splitString = d.Split(' ');
                 identifiers.Add(splitString[0]);
-                values.Add(int.Parse(splitString[1]));
+                values.Add(long.Parse(splitString[1]));
                 index++;
                 Worker.ReportProgress((int)Math.Floor(index / data.Length));
             }
@@ -61,38 +101,43 @@ namespace DumbCodeYe.Quadgrams
             keys = identifiers.ToArray();
             vals = values.ToArray();
         }
-        public void SortDataSet(out string[] keys, out int[] vals)
+        public void SortDataSet(out string[] keys, out long[] vals)
         {
-            string[] data = QuadgramsData.OpenInfoFile();
+            Console.WriteLine("Data");
+            string[] data = WordFreqData.OpenInfoFile();
             List<string> identifiers = new List<string>();
-            List<int> values = new List<int>();
+            List<long> values = new List<long>();
 
             foreach (string d in data)
             {
                 string[] splitString = d.Split(' ');
-                identifiers.Add(splitString[0]);
-                values.Add(int.Parse(splitString[1]));
+                identifiers.Add(splitString[0].ToUpper());
+                values.Add(long.Parse(splitString[1]));
             }
 
             originalSize = identifiers.Count;
-            string[] sortedIdentifiers = Sort(identifiers, values, out int[] sortedValues);
+            string[] sortedIdentifiers = Sort(identifiers, values, out long[] sortedValues);
             string dataFileText = "";
             for (int i = 0; i < sortedIdentifiers.Length; i++)
             {
+                Worker.ReportProgress((int) Math.Floor((i * 100000d) / sortedIdentifiers.Length));
                 if (i == sortedIdentifiers.Length - 1)
                     dataFileText += $"{sortedIdentifiers[i]} {sortedValues[i]}";
                 else
                     dataFileText += $"{sortedIdentifiers[i]} {sortedValues[i]}\n";
             }
-            QuadgramsData.SaveDataFile(dataFileText);
+            Worker.ReportProgress(100000);
+            Console.WriteLine("Data");
+            Console.WriteLine(dataFileText);
+            WordFreqData.SaveDataFile(dataFileText);
             keys = sortedIdentifiers;
             vals = sortedValues;
         }
-        private string[] Sort(List<string> data, List<int> vals, out int[] newValues)
+        private string[] Sort(List<string> data, List<long> vals, out long[] newValues)
         {
             //Declare lists
             List<List<string>> lists = new List<List<string>>();
-            List<List<int>> Values = new List<List<int>>();
+            List<List<long>> Values = new List<List<long>>();
             lists.Add(data);
             Values.Add(vals);
             originalSize = data.Count;
@@ -114,8 +159,8 @@ namespace DumbCodeYe.Quadgrams
                         complete = false;
                         lists.Insert(i, new List<string>());
                         lists.Insert(i, new List<string>());
-                        Values.Insert(i, new List<int>());
-                        Values.Insert(i, new List<int>());
+                        Values.Insert(i, new List<long>());
+                        Values.Insert(i, new List<long>());
                         i++;
                         lists[i].Add(lists[i + 1][0]);
                         Values[i].Add(Values[i + 1][0]);
@@ -127,9 +172,22 @@ namespace DumbCodeYe.Quadgrams
                         while (j < lists[i + 1].Count)
                         {
                             Worker.ReportProgress((int)Math.Floor((lists.Count / originalSize) * 100000d + ((double)j / lists[i + 1].Count) * (100000d / originalSize)));
-                            for (int k = 0; k < 4; k++)
+                            for (int k = 0; k < lists[i + 1][j].Length || k < lists[i][0].Length; k++)
                             {
-                                if (lists[i + 1][j][k] < lists[i][0][k])
+                                if(k == lists[i + 1][j].Length)
+                                {
+                                    lists[i - 1].Add(lists[i + 1][j]);
+                                    Values[i - 1].Add(Values[i + 1][j]);
+                                    lists[i + 1].RemoveAt(j);
+                                    Values[i + 1].RemoveAt(j);
+                                    break;
+                                }
+                                else if(k == lists[i][0].Length)
+                                {
+                                    j++;
+                                    break;
+                                }
+                                else if (lists[i + 1][j][k] < lists[i][0][k])
                                 {
                                     lists[i - 1].Add(lists[i + 1][j]);
                                     Values[i - 1].Add(Values[i + 1][j]);
@@ -170,7 +228,7 @@ namespace DumbCodeYe.Quadgrams
 
             //Compile down
             List<string> final = new List<string>();
-            List<int> finalValues = new List<int>();
+            List<long> finalValues = new List<long>();
             for (int i = 0; i < lists.Count; i++)
             {
                 if (lists[i].Count == 1)
@@ -182,45 +240,6 @@ namespace DumbCodeYe.Quadgrams
 
             newValues = finalValues.ToArray();
             return final.ToArray();
-        }
-
-        private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            loadingBar.Value = (int)Math.Floor(e.ProgressPercentage / 1000d);
-            statusLbl.Text = (e.ProgressPercentage / 1000d).ToString() + "%";
-        }
-        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            statusLbl.Text = "Data has been loaded";
-            initBtn.Enabled = true;
-            closeBtn.Enabled = true;
-            testBtn.Enabled = true;
-            getTotalBtn.Enabled = true;
-        }
-
-        private void testBtn_Click(object sender, EventArgs e)
-        {
-            string output = "";
-            string[] toTest = new string[] { "TION", "AAAA", "ZZZZ", "BWDD", "FROM"};
-            int[] expectedValue = new int[] { 13168375, 6705, 699, 1, 4361347 };
-            for (int i = 0; i < toTest.Length; i++)
-            {
-                output += $"{toTest[i]}: {QuadgramsData.GetFrequency(toTest[i])} Expected: {expectedValue[i]}\r\n";
-            }
-            TextOutputFrm tof = new TextOutputFrm();
-            tof.SetOutput(output);
-            tof.Show();
-        }
-
-        private void getTotalBtn_Click(object sender, EventArgs e)
-        {
-            long total = 0;
-            for (int i = 0; i < QuadgramsData.DataSet.Values.Length; i++)
-            {
-                total += QuadgramsData.DataSet.Values[i];
-            }
-            QuadgramsData.TotalData = total;
-            statusLbl.Text = $"Total: {total}";
         }
     }
 }

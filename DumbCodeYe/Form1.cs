@@ -552,6 +552,7 @@ namespace DumbCodeYe
         private void btnHill_Click(object sender, EventArgs e)
         {
             HillCipher hillCiper = new HillCipher();
+            hillCiper.SetText(textInput.Text);
             hillCiper.Show();
         }
 

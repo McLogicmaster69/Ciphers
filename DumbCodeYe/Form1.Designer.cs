@@ -54,11 +54,31 @@ namespace DumbCodeYe
             // 
             initQuadBtn.Location = new System.Drawing.Point(12, 482);
             initQuadBtn.Name = "initQuadBtn";
-            initQuadBtn.Size = new System.Drawing.Size(860, 31);
+            initQuadBtn.Size = new System.Drawing.Size(421, 31);
             initQuadBtn.TabIndex = 12;
             initQuadBtn.Text = "INIT QUADGRAMS";
             initQuadBtn.UseVisualStyleBackColor = true;
             initQuadBtn.Click += new System.EventHandler(this.initQuadBtn_Click);
+            // 
+            // addSpacesBtn
+            // 
+            addSpacesBtn.Location = new System.Drawing.Point(12, 519);
+            addSpacesBtn.Name = "addSpacesBtn";
+            addSpacesBtn.Size = new System.Drawing.Size(860, 31);
+            addSpacesBtn.TabIndex = 13;
+            addSpacesBtn.Text = "ADD SPACES";
+            addSpacesBtn.UseVisualStyleBackColor = true;
+            addSpacesBtn.Click += new System.EventHandler(this.addSpacesBtn_Click);
+            // 
+            // initWordFreqBtn
+            // 
+            initWordFreqBtn.Location = new System.Drawing.Point(451, 482);
+            initWordFreqBtn.Name = "initWordFreqBtn";
+            initWordFreqBtn.Size = new System.Drawing.Size(421, 31);
+            initWordFreqBtn.TabIndex = 14;
+            initWordFreqBtn.Text = "INIT WORD FREQ";
+            initWordFreqBtn.UseVisualStyleBackColor = true;
+            initWordFreqBtn.Click += new System.EventHandler(this.initWordFreqBtn_Click);
             // 
             // textInput
             // 
@@ -182,26 +202,6 @@ namespace DumbCodeYe
             this.btnBacon.UseVisualStyleBackColor = true;
             this.btnBacon.Click += new System.EventHandler(this.btnBacon_Click);
             // 
-            // addSpacesBtn
-            // 
-            addSpacesBtn.Location = new System.Drawing.Point(12, 519);
-            addSpacesBtn.Name = "addSpacesBtn";
-            addSpacesBtn.Size = new System.Drawing.Size(860, 31);
-            addSpacesBtn.TabIndex = 13;
-            addSpacesBtn.Text = "ADD SPACES";
-            addSpacesBtn.UseVisualStyleBackColor = true;
-            addSpacesBtn.Click += new System.EventHandler(this.addSpacesBtn_Click);
-            // 
-            // initWordFreqBtn
-            //
-            initWordFreqBtn.Location = new System.Drawing.Point(451, 482);
-            initWordFreqBtn.Name = "initWordFreqBtn";
-            initWordFreqBtn.Size = new System.Drawing.Size(421, 31);
-            initWordFreqBtn.TabIndex = 14;
-            initWordFreqBtn.Text = "INIT WORD FREQ";
-            initWordFreqBtn.UseVisualStyleBackColor = true;
-            initWordFreqBtn.Click += new System.EventHandler(this.initWordFreqBtn_Click);
-            //
             // btnHill
             // 
             this.btnHill.Location = new System.Drawing.Point(12, 445);

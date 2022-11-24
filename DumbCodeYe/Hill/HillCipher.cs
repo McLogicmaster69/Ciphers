@@ -12,13 +12,12 @@ namespace DumbCodeYe.Hill
 {
     public partial class HillCipher : Form
     {
-
         public string CipherText = "";
         public string PlainText = "";
         public int KeySize = 0;
         public string KnownText = "";
         public string KnownTextC = "";
-        public List<int[,]> MatrixKeys = new List<int[,]>();
+        public List<double[,]> MatrixKeys = new List<double[,]>();
         public int MatrixKeysIndex = 0;
         public HillCipher()
         {
@@ -29,7 +28,7 @@ namespace DumbCodeYe.Hill
             txtOutputt.Text = inputText;
         }
 
-        public static double GetDet(int[,] matrix, int minorX = 0, int minorY = 0)
+        public static double GetDet(double[,] matrix, int minorX = 0, int minorY = 0)
         {
             double[,] minorMatrix = { { 0, 0 }, { 0, 0 } };   //holds matrix from minors
             int detMatrixInputPos = 0;
@@ -69,7 +68,7 @@ namespace DumbCodeYe.Hill
             }
             else
             {
-                for ( int i = 0;  i < 2; i++ )
+                for (int i = 0; i < 2; i++)
                 {
                     for (int j = 0; j < 2; j++)
                     {
@@ -321,59 +320,63 @@ namespace DumbCodeYe.Hill
 
         private void btnInsertMatrix_Click(object sender, EventArgs e)
         {
-            int[,] insertMatrix = new int[3, 3];
-            if (txtBR.Text == "")
+            double[,] insertMatrix = new double[3, 3];
+            if (txtBR.Text == "")                                   //converts intputted matrix values to a 3x3 matrix
             {
-                insertMatrix[0, 0] = Convert.ToInt32(txtTL.Text);
-                insertMatrix[0, 1] = Convert.ToInt32(txtTM.Text);
-                insertMatrix[1, 0] = Convert.ToInt32(txtML.Text);
-                insertMatrix[1, 1] = Convert.ToInt32(txtMM.Text);
+                insertMatrix[0, 0] = Convert.ToDouble(txtTL.Text);
+                insertMatrix[0, 1] = Convert.ToDouble(txtTM.Text);
+                insertMatrix[1, 0] = Convert.ToDouble(txtML.Text);
+                insertMatrix[1, 1] = Convert.ToDouble(txtMM.Text);
 
             }
             else
             {
-                insertMatrix[0, 0] = Convert.ToInt32(txtTL.Text);
-                insertMatrix[0, 1] = Convert.ToInt32(txtTM.Text);
-                insertMatrix[0, 2] = Convert.ToInt32(txtTR.Text);
-                insertMatrix[1, 0] = Convert.ToInt32(txtML.Text);
-                insertMatrix[1, 1] = Convert.ToInt32(txtMM.Text);
-                insertMatrix[1, 2] = Convert.ToInt32(txtMR.Text);
-                insertMatrix[2, 0] = Convert.ToInt32(txtBL.Text);
-                insertMatrix[2, 1] = Convert.ToInt32(txtBM.Text);
-                insertMatrix[2, 2] = Convert.ToInt32(txtBR.Text);
+                insertMatrix[0, 0] = Convert.ToDouble(txtTL.Text);
+                insertMatrix[0, 1] = Convert.ToDouble(txtTM.Text);
+                insertMatrix[0, 2] = Convert.ToDouble(txtTR.Text);
+                insertMatrix[1, 0] = Convert.ToDouble(txtML.Text);
+                insertMatrix[1, 1] = Convert.ToDouble(txtMM.Text);
+                insertMatrix[1, 2] = Convert.ToDouble(txtMR.Text);
+                insertMatrix[2, 0] = Convert.ToDouble(txtBL.Text);
+                insertMatrix[2, 1] = Convert.ToDouble(txtBM.Text);
+                insertMatrix[2, 2] = Convert.ToDouble(txtBR.Text);
             }
 
-            int[,] insertMatrix2 = new int[insertMatrix.GetLength(0), insertMatrix.GetLength(0)];
+            int matrixSize = 3;
+            if (insertMatrix[0, 2] == 0 && insertMatrix[1, 2] == 0 && insertMatrix[2, 0] == 0 && insertMatrix[2, 1] == 0 && insertMatrix[2, 2] == 0)
+                matrixSize = 2;
 
-            for (int ii = 0; ii < Math.Sqrt(insertMatrix.Length); ii++)
+            double[,] insertMatrix2 = new double[matrixSize, matrixSize];
+
+            for (int ii = 0; ii < Math.Sqrt(insertMatrix2.Length); ii++)                 //inserts new matrix to one of the correct size
             {
-                for (int jj = 0; jj < Math.Sqrt(insertMatrix.Length); jj++)
+                for (int jj = 0; jj < Math.Sqrt(insertMatrix2.Length); jj++)
                 {
-                    insertMatrix2[ii,jj] = insertMatrix[ii, jj];
+                    insertMatrix2[ii, jj] = insertMatrix[ii, jj];
                 }
             }
-            MatrixKeys.Add(insertMatrix2);
+            MatrixKeys.Add(insertMatrix2);                                              //adds matrix to the list of matrix keys
         }
 
-        public void DisplayMatrix()
+        public void DisplayMatrix()                                                     //displays matrix in the grid
         {
             int currentMatrix = Convert.ToInt32(numCurrentMatrix.Value);
 
-            txtTL.Text = Convert.ToString(MatrixKeys[currentMatrix][0,0]);
-            txtTM.Text = Convert.ToString(MatrixKeys[currentMatrix][0,1]);
-            txtML.Text = Convert.ToString(MatrixKeys[currentMatrix][1,0]);
-            txtMM.Text = Convert.ToString(MatrixKeys[currentMatrix][1,1]);
+            txtTL.Text = Convert.ToString(MatrixKeys[currentMatrix][0, 0]);
+            txtTM.Text = Convert.ToString(MatrixKeys[currentMatrix][0, 1]);
+            txtML.Text = Convert.ToString(MatrixKeys[currentMatrix][1, 0]);
+            txtMM.Text = Convert.ToString(MatrixKeys[currentMatrix][1, 1]);
             if (MatrixKeys[currentMatrix].GetLength(1) == 3)
             {
-                txtTR.Text = Convert.ToString(MatrixKeys[currentMatrix][0,2]);
-                txtMR.Text = Convert.ToString(MatrixKeys[currentMatrix][1,2]);
-                txtBL.Text = Convert.ToString(MatrixKeys[currentMatrix][2,0]);
-                txtBM.Text = Convert.ToString(MatrixKeys[currentMatrix][2,1]);
-                txtBR.Text = Convert.ToString(MatrixKeys[currentMatrix][2,2]);
+                txtTR.Text = Convert.ToString(MatrixKeys[currentMatrix][0, 2]);
+                txtMR.Text = Convert.ToString(MatrixKeys[currentMatrix][1, 2]);
+                txtBL.Text = Convert.ToString(MatrixKeys[currentMatrix][2, 0]);
+                txtBM.Text = Convert.ToString(MatrixKeys[currentMatrix][2, 1]);
+                txtBR.Text = Convert.ToString(MatrixKeys[currentMatrix][2, 2]);
             }
         }
 
-        private void numCurrentMatrix_ValueChanged(object sender, EventArgs e)
+        private void numCurrentMatrix_ValueChanged(object sender, EventArgs e)          //checks matrix trying to be displayed is within the number of matrixes
         {
             if (MatrixKeys.Count > numCurrentMatrix.Value)
                 DisplayMatrix();
@@ -383,13 +386,16 @@ namespace DumbCodeYe.Hill
         {
             DisplayMatrix();
             PlainText = "";
-            int[,] decipherMatrix = new int[MatrixKeys[Convert.ToInt32(numCurrentMatrix.Value)].GetLength(0), MatrixKeys[Convert.ToInt32(numCurrentMatrix.Value)].GetLength(0)];
-            double[,] decipherMatrixInverse;
+            CipherText = txtOutputt.Text;
+            double[,] decipherMatrix = new double[MatrixKeys[Convert.ToInt32(numCurrentMatrix.Value)].GetLength(0), MatrixKeys[Convert.ToInt32(numCurrentMatrix.Value)].GetLength(0)];
+            double[,] decipherMatrixInverse = new double[MatrixKeys[Convert.ToInt32(numCurrentMatrix.Value)].GetLength(0), MatrixKeys[Convert.ToInt32(numCurrentMatrix.Value)].GetLength(0)];
             int[,] cipherText = new int[CipherText.Length / decipherMatrix.GetLength(0), MatrixKeys[Convert.ToInt32(numCurrentMatrix.Value)].GetLength(0)];
             int[,] plainText = new int[CipherText.Length / decipherMatrix.GetLength(0), MatrixKeys[Convert.ToInt32(numCurrentMatrix.Value)].GetLength(0)];
             int pos = 0;
-            int posSum = 0;
+            double posSum = 0;
             decipherMatrix = MatrixKeys[Convert.ToInt32(numCurrentMatrix.Value)];
+
+
             if (Math.Sqrt(decipherMatrix.Length) == 2)
             {
                 decipherMatrixInverse = GetInverse2(decipherMatrix);
@@ -402,35 +408,50 @@ namespace DumbCodeYe.Hill
             //assigns ciphertext to a matrix
             if (chkInvertMatrix.Checked)    //inverts matrix if necessary
             {
-                for (int ii = 0; ii < CipherText.Length / decipherMatrix.GetLength(0); ii++)
+                for (int ii = 0; ii < CipherText.Length / decipherMatrixInverse.GetLength(0); ii++)
                 {
-                    for (int jj = 0; jj < decipherMatrix.GetLength(0); jj++)
+                    for (int jj = 0; jj < decipherMatrixInverse.GetLength(0); jj++)
                     {
-                        cipherText[ii, jj] = ConvertToNumber(CipherText.Substring(pos++));
+                        cipherText[ii, jj] = ConvertToNumber(CipherText.Substring(pos++, 1));
                     }
                 }
             }
             else
             {
-                for (int ii = 0; ii < decipherMatrix.GetLength(0); ii++)
+                for (int ii = 0; ii < decipherMatrixInverse.GetLength(0); ii++)
                 {
-                    for (int jj = 0; jj < CipherText.Length / decipherMatrix.GetLength(0); jj++)
+                    for (int jj = 0; jj < CipherText.Length / decipherMatrixInverse.GetLength(0); jj++)
                     {
-                        cipherText[ii, jj] = ConvertToNumber(CipherText.Substring(pos++));
+                        cipherText[jj, ii] = ConvertToNumber(CipherText.Substring(pos++, 1));
                     }
                 }
             }
 
             //matrix multiplication
+            /*
             for (int index1 = 0; index1 < cipherText.GetLength(0); index1++)
             {
                 for (int index2 = 0; index2 < cipherText.GetLength(1); index2++)
                 {                                                                       //for every char in cipherText
                     for (int multiPos = 0; multiPos < decipherMatrix.GetLength(0); multiPos++)
                     {
-                        posSum += decipherMatrix[index1, multiPos] * cipherText[multiPos, index2];
+                        posSum += decipherMatrix[index2, multiPos] * cipherText[multiPos, index2];
                     }
-                    plainText[index1, index2] = posSum;
+                    plainText[index1, index2] = posSum % 26;
+                    posSum = 0;
+                }
+            }
+            */
+
+            for (int index1 = 0; index1 < cipherText.GetLength(0); index1++)        //for every column in cipherText
+            {
+                for (int index2 = 0; index2 < cipherText.GetLength(1); index2++)        //for every row in cipherText
+                {
+                    for (int multiPos = 0; multiPos < decipherMatrixInverse.GetLength(0); multiPos++)
+                    {
+                        posSum += decipherMatrixInverse[index2, multiPos] * cipherText[index1, multiPos];
+                    }
+                    plainText[index1, index2] = (Convert.ToInt32(posSum) + 26 * 100) % 26;
                     posSum = 0;
                 }
             }
@@ -441,7 +462,7 @@ namespace DumbCodeYe.Hill
                 {
                     for (int jj = 0; jj < decipherMatrix.GetLength(0); jj++)
                     {
-                        PlainText += ConvertToAlphabet(cipherText[ii, jj]);
+                        PlainText += ConvertToAlphabet(plainText[ii, jj]);
                     }
                 }
             }
@@ -451,14 +472,14 @@ namespace DumbCodeYe.Hill
                 {
                     for (int jj = 0; jj < CipherText.Length / decipherMatrix.GetLength(0); jj++)
                     {
-                        PlainText += ConvertToAlphabet(cipherText[ii,jj]);
+                        PlainText += ConvertToAlphabet(plainText[jj, ii]);
                     }
                 }
             }
             txtOutputt.Text = PlainText;
         }
 
-        public double[,] GetInverse3(int[,] matrixN)
+        public double[,] GetInverse3(double[,] matrixN)
         {
 
             double[,] matrixN1 = { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
@@ -510,13 +531,16 @@ namespace DumbCodeYe.Hill
             return matrixN1;
         }
 
-        public double[,] GetInverse2(int[,] matrixM)
+        public double[,] GetInverse2(double[,] matrixM)
         {
             double[,] MatrixM1 = { { 0, 0 }, { 0, 0 } };
             double detM = GetDet(matrixM);    //finds the determinate of MartixM
 
-            MatrixM1[0, 0] = matrixM[1, 1] / detM;          //sets matrixM1 as inverse of matrixM      
 
+            MatrixM1[0, 0] = matrixM[1, 1] / detM;          //sets matrixM1 as inverse of matrixM      
+            MatrixM1[1, 1] = matrixM[0, 0] / detM;
+            MatrixM1[1, 0] = (matrixM[1, 0] * -1) / detM;
+            MatrixM1[0, 1] = (matrixM[0, 1] * -1) / detM;
             return MatrixM1;
         }
 
@@ -524,5 +548,6 @@ namespace DumbCodeYe.Hill
         {
 
         }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using DumbCodeYe.WordFreq;
+﻿using DumbCodeYe.BasicWordLib;
+using DumbCodeYe.WordFreq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +32,7 @@ namespace DumbCodeYe
                 return 0;
             foreach (string word in words)
             {
-                if (word.Length > 1)
+                if (word.Length > 1 && BasicWordData.IsWord(word))
                     score += (int)Math.Floor((WordFreqData.GetFrequency(word) * Math.Pow(word.Length - 1.5f, 3)) / (Math.Log10(Spaces * 0.25f + 1.1f) * 1000)); 
                 else if (word == "I" || word == "A")
                     score += WordFreqData.GetFrequency(word) / 1000;

@@ -1,4 +1,5 @@
-﻿using DumbCodeYe.Hill;
+﻿using DumbCodeYe.BasicWordLib;
+using DumbCodeYe.Hill;
 using DumbCodeYe.Playfair;
 using DumbCodeYe.Polybius;
 using DumbCodeYe.Quadgrams;
@@ -638,6 +639,12 @@ namespace DumbCodeYe
         {
             InitWordFreq iqf = new InitWordFreq();
             iqf.Show();
+        }
+
+        private void initDictionaryBtn_Click(object sender, EventArgs e)
+        {
+            InitBasicWord ibw = new InitBasicWord();
+            ibw.Show();
         }
     }
 }

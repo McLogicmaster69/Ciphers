@@ -32,6 +32,7 @@ namespace DumbCodeYe
             System.Windows.Forms.Button initQuadBtn;
             System.Windows.Forms.Button addSpacesBtn;
             System.Windows.Forms.Button initWordFreqBtn;
+            System.Windows.Forms.Button initDictionaryBtn;
             this.textInput = new System.Windows.Forms.TextBox();
             this.ceaserBtn = new System.Windows.Forms.Button();
             this.substituteBtn = new System.Windows.Forms.Button();
@@ -48,13 +49,14 @@ namespace DumbCodeYe
             initQuadBtn = new System.Windows.Forms.Button();
             addSpacesBtn = new System.Windows.Forms.Button();
             initWordFreqBtn = new System.Windows.Forms.Button();
+            initDictionaryBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // initQuadBtn
             // 
             initQuadBtn.Location = new System.Drawing.Point(12, 482);
             initQuadBtn.Name = "initQuadBtn";
-            initQuadBtn.Size = new System.Drawing.Size(421, 31);
+            initQuadBtn.Size = new System.Drawing.Size(281, 31);
             initQuadBtn.TabIndex = 12;
             initQuadBtn.Text = "INIT QUADGRAMS";
             initQuadBtn.UseVisualStyleBackColor = true;
@@ -72,9 +74,9 @@ namespace DumbCodeYe
             // 
             // initWordFreqBtn
             // 
-            initWordFreqBtn.Location = new System.Drawing.Point(451, 482);
+            initWordFreqBtn.Location = new System.Drawing.Point(591, 482);
             initWordFreqBtn.Name = "initWordFreqBtn";
-            initWordFreqBtn.Size = new System.Drawing.Size(421, 31);
+            initWordFreqBtn.Size = new System.Drawing.Size(281, 31);
             initWordFreqBtn.TabIndex = 14;
             initWordFreqBtn.Text = "INIT WORD FREQ";
             initWordFreqBtn.UseVisualStyleBackColor = true;
@@ -212,11 +214,22 @@ namespace DumbCodeYe
             this.btnHill.UseVisualStyleBackColor = true;
             this.btnHill.Click += new System.EventHandler(this.btnHill_Click);
             // 
+            // initDictionaryBtn
+            // 
+            initDictionaryBtn.Location = new System.Drawing.Point(302, 482);
+            initDictionaryBtn.Name = "initDictionaryBtn";
+            initDictionaryBtn.Size = new System.Drawing.Size(281, 31);
+            initDictionaryBtn.TabIndex = 15;
+            initDictionaryBtn.Text = "INIT DICTIONARY";
+            initDictionaryBtn.UseVisualStyleBackColor = true;
+            initDictionaryBtn.Click += new System.EventHandler(this.initDictionaryBtn_Click);
+            // 
             // mainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 558);
+            this.Controls.Add(initDictionaryBtn);
             this.Controls.Add(initWordFreqBtn);
             this.Controls.Add(addSpacesBtn);
             this.Controls.Add(this.btnHill);

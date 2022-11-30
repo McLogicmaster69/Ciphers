@@ -17,8 +17,10 @@ namespace DumbCodeYe.Hill
         public int KeySize = 0;
         public string KnownText = "";
         public string KnownTextC = "";
-        public List<double[,]> MatrixKeys = new List<double[,]>();
+        public List<double[,]> MatrixKeys = new List<double[,]>();  //[row, column]
         public int MatrixKeysIndex = 0;
+        public List<int[]> valuesAB = new List<int[]>();
+        public List<int[]> valuesCD = new List<int[]>();
         public HillCipher()
         {
             InitializeComponent();
@@ -98,11 +100,11 @@ namespace DumbCodeYe.Hill
             {
                 if (KeySize == 2)
                 {
-                    txtOutputt.Text = TwoMatrix();
+                    TwoMatrix();
                 }
                 else
                 {
-                    MessageBox.Show("not done 3 yet");
+                    MessageBox.Show("not done 3");
                 }
 
             }
@@ -110,20 +112,22 @@ namespace DumbCodeYe.Hill
             {
                 MessageBox.Show("Enter text in all fields");
             }
-
-
-
         }
 
-        public void TwoSimult(int x1, int y1, int n1, int x2, int y2, int n2/*, out double xOut, out double yOut*/)
+        public List<int[]> TwoSimultaneousEquationSlover(int x1, int y1, int n1, int x2, int y2, int n2/*, out double xOut, out double yOut*/)
         {
-            int[,] matrixXY = { };
+            List<int> matrixX = new List<int>();    //stores x values
+            List<List<int>> matrixXY = new List<List<int>>();   //stores x and y values
+            List<int> matrixY = new List<int>();                    //stores y values
             int[,] matrixM = { { x1, x2 }, { y1, y2 }, { n1, n2 } };
             int[,] matrixMOriginal = { { x1, x2 }, { y1, y2 }, { n1, n2 } };
-            int[] matrixSingle = { 0, 0, 0 };   //0 represents x coefficient, 1 represents n, 2 represents the modulo size
-            int hcf;
+            int[] matrixSingle = { 0, 0, 0 };   //0 represents x/y coefficient, 1 represents n, 2 represents the modulo size
+            int hcf;    //stroes highest ommon factor
             int[] x1x = { 0, 0 };    //0 represents num after mod,   1 represents modulo
             int arrIndex = 0;
+
+            List<int[]> matrixXYValid = new List<int[]>();   //stores valid x and y values that work for both congruences
+            int[] validXYPairs = new int[2];                  //stores valid x and y values that work for both congruences before they are added to the list
 
             //creates like congruences
             for (int ii = 0; ii < 3; ii++)
@@ -135,61 +139,105 @@ namespace DumbCodeYe.Hill
                 matrixM[ii, 1] = (matrixM[ii, 1] * y1) % 26;
             }
             //subtract one congruence by the other
-            if (matrixM[0, 0] > matrixM[0, 1])
-            {
+            //if (matrixM[0, 0] > matrixM[0, 1])
+            //{
                 matrixSingle[0] = matrixM[0, 0] - matrixM[0, 1];
-                matrixSingle[1] = matrixM[2, 0] - matrixM[2, 1];
-                matrixSingle[2] = matrixSingle[1] % 26;
-            }
+                matrixSingle[1] = (matrixM[2, 0] - matrixM[2, 1] + 260) % 26;
+                matrixSingle[2] = 26;
+            /*}
             else
             {
                 matrixSingle[0] = matrixM[0, 1] - matrixM[0, 0];
                 matrixSingle[1] = matrixM[2, 1] - matrixM[2, 0];
                 matrixSingle[1] = matrixSingle[1] % 26;
                 matrixSingle[2] = 26;
-            }
+            }*/
+
             //remove the common factor between matrixSingle variables
             hcf = HCF3(matrixSingle[0], matrixSingle[1], matrixSingle[2]);
             foreach (int index in matrixSingle)
             {
                 matrixSingle[index] /= hcf;
             }
-            //removes coefficient of x1 (sets matrixSingle to 1)]
-            x1x[0] = (FindMultiplicativeInverse(matrixSingle[0], matrixSingle[2]) * matrixSingle[1]) % matrixSingle[2];
-            x1x[1] = matrixSingle[2];
+            //removes coefficient of x1 (sets matrixSingle[0] to 1)]
+            matrixSingle[1] = (FindMultiplicativeInverse(matrixSingle[0], matrixSingle[2]) * matrixSingle[1]) % matrixSingle[2];
+            matrixSingle[0] = 1;
 
             //get x values
-            for (int index = 0; index < 26; index++)
+            for (int letter = 0; letter < 26; letter++)
             {
-                if (index % matrixSingle[1] == matrixSingle[0])
+                if (letter % matrixSingle[2] == matrixSingle[1])
                 {
-                    matrixXY[arrIndex, 0] = index;
+                    matrixX.Add(arrIndex);
                     arrIndex++;
                 }
             }
 
-
-            arrIndex = 1;
             //get y values
-            for (int index = 0; index < matrixXY.GetLength(0); index++)
+            for (int Xindex = 0; Xindex < matrixX.Count; Xindex++) //for every x value
             {
+                matrixSingle[0] = matrixMOriginal[1, 1];    //sets y value
+                matrixSingle[1] = ((matrixMOriginal[2, 1] - matrixMOriginal[0, 1] * matrixX[Xindex] ) + 2600) % 26;  //sets n value to n2 - solved x value * its coefficient
+                matrixSingle[2] = 26;       //sets modulo to 26
 
+                //checks and divides by the highest common factor
+                hcf = HCF3(matrixSingle[0], matrixSingle[1], matrixSingle[2]);  
+                foreach (int index in matrixSingle)
+                {
+                    matrixSingle[index] /= hcf;
+                }
+
+                //removes coefficient of y (sets matrixSingle[0] to 1)]
+                matrixSingle[1] = (FindMultiplicativeInverse(matrixSingle[0], matrixSingle[2]) * matrixSingle[1]) % matrixSingle[2];
+                matrixSingle[0] = 1;
+
+                arrIndex = 0;
+
+                matrixY.Add(matrixX[Xindex]);
+                //get y values
+                for (int letter = 0; letter < 26; letter++)
+                {
+                    if (letter % matrixSingle[2] == matrixSingle[1])
+                    {
+                        matrixY.Add(letter);
+                        arrIndex++;
+                    }
+                }
+
+                //stores them
+                matrixXY.Add(matrixY);
+                matrixY.Clear();
             }
 
+            //checks which x and y values are valid pairs and adds them to a list
+            for (int currentXvalue = 0; currentXvalue < matrixXY.Count; currentXvalue++)
+            {
+                for (int currentYvalue = 1; currentYvalue < matrixXY[currentXvalue].Count; currentYvalue++)
+                { 
+                    if (((matrixXY[currentXvalue][0] * matrixMOriginal[0, 0] + matrixXY[currentYvalue][0] * matrixMOriginal[1, 0] + 2600) % 26 == matrixMOriginal[2, 0]) && ((matrixXY[currentXvalue][0] * matrixMOriginal[0, 1] + matrixXY[currentYvalue][0] * matrixMOriginal[1, 1] + 2600) % 26 == matrixMOriginal[2, 1]))   //if x and y valeus work for both congruences
+                    {                                                       //adds the valid X and Y pair to a list
+                        validXYPairs[0] = matrixXY[currentXvalue][0];
+                        validXYPairs[1] = matrixXY[currentXvalue][currentYvalue];
+                        matrixXYValid.Add(validXYPairs);
+                    }
+                }
+            }
 
+            //returns the valid pairs
+            return matrixXYValid;
         }
 
-        public int FindMultiplicativeInverse(int coefficient, int modulo)
+        public int FindMultiplicativeInverse(int coefficient, int modulo)   //finds the number the coefficent must be multiplied with so that it equals 1 after % by modulo
         {
-            int multiplicativeInverse = 1;
-            while ((coefficient * multiplicativeInverse) % modulo != 0)
+            int multiplicativeInverse = 1;  //coefficient
+            while ((coefficient * multiplicativeInverse) % modulo != 1)
             {
                 multiplicativeInverse++;
             }
             return multiplicativeInverse;
         }
 
-        public int HCF3(int num1, int num2, int num3)   //finds HCF of 3 numbers
+        public int HCF3(int num1, int num2, int num3)   //finds HCF of 3 numbers    - look man, i know this could be done much easier using modulo but im too far deep in this rabbit hole and its 9pm
         {
             int hcf = 1;
             int[] num1PF = getPrimeFactors(num1);
@@ -272,11 +320,12 @@ namespace DumbCodeYe.Hill
             return true;
         }
 
-        string TwoMatrix()
+        public void TwoMatrix()
         {
             int[,] SysCongruence1 = { { 0, 0 }, { 0, 0 } };
             int[,] SysCongruence2 = { { 0, 0 }, { 0, 0 } };
-
+            double[,] keyMatrix = new double[2,2];
+            int keyDeterminant;
 
             string chunkOfCipher;
             string chunkOfKnown;
@@ -303,19 +352,26 @@ namespace DumbCodeYe.Hill
             {
                 SysCongruence2[1, ii] = ConvertToNumber(chunkOfCipher.Substring(ii, 1));
             }
-
-            TwoSimult(SysCongruence1[0, 0], SysCongruence1[0, 1], SysCongruence1[1, 0], SysCongruence2[0, 0], SysCongruence2[0, 1], SysCongruence2[1, 0]);
-
-
-
-
-
-
-
-
-
-            return "";
-
+            //gets the values for each of the possible matrixes
+            valuesAB = TwoSimultaneousEquationSlover(SysCongruence1[0, 0], SysCongruence1[0, 1], SysCongruence1[1, 0], SysCongruence2[0, 0], SysCongruence2[0, 1], SysCongruence2[1, 0]);
+            valuesCD = TwoSimultaneousEquationSlover(SysCongruence1[0, 0], SysCongruence1[0, 1], SysCongruence1[1, 1], SysCongruence2[0, 0], SysCongruence2[0, 1], SysCongruence2[1, 1]);
+            
+            //puts possible matrixes in keys
+            foreach (int[] AB in valuesAB)
+            {
+                foreach (int[] CD in valuesCD)
+                {
+                    keyDeterminant = (AB[0] * CD[1] - AB[1] * CD[0] + 26000) % 26;
+                    if (keyDeterminant % 2 == 1 && keyDeterminant != 13)
+                    {
+                        keyMatrix[0, 0] = AB[0];
+                        keyMatrix[0, 1] = AB[1];
+                        keyMatrix[1, 0] = CD[0];
+                        keyMatrix[1, 1] = CD[1];
+                        MatrixKeys.Add(keyMatrix);
+                    }
+                }
+            }
         }
 
         private void btnInsertMatrix_Click(object sender, EventArgs e)

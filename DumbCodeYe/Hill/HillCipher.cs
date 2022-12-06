@@ -90,7 +90,6 @@ namespace DumbCodeYe.Hill
         }
         public int ConvertToNumber(string character)
         {
-
             return (Convert.ToInt32(Convert.ToChar(character)) - 64) % 26;
         }
 
@@ -110,7 +109,6 @@ namespace DumbCodeYe.Hill
                 {
                     MessageBox.Show("not done 3");
                 }
-
             }
             else
             {
@@ -262,7 +260,7 @@ namespace DumbCodeYe.Hill
                 {
                     num1Index = NextPrimeIndex(num1PF, num1PF[num1Index]);  //move the prime factor to the next index
                     num2Index = NextPrimeIndex(num2PF, num2PF[num2Index]);  //move the prime factor to the next index
-                    num2Index = NextPrimeIndex(num3PF, num3PF[num3Index]);  //move the prime factor to the next index
+                    num3Index = NextPrimeIndex(num3PF, num3PF[num3Index]);  //move the prime factor to the next index
                 }
 
             } while (num1PF.Length < num1Index && num2PF.Length < num2Index && num3PF.Length < num3Index);
@@ -307,8 +305,6 @@ namespace DumbCodeYe.Hill
             for (int i = 0; i < primeFactors.Count(); i++)
                 output[i] = primeFactors[i];
             return output;
-
-
         }
 
         public bool CheckPrime(int number)

@@ -94,15 +94,15 @@ namespace DumbCodeYe.Hill
             return (Convert.ToInt32(Convert.ToChar(character)) - 64) % 26;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)  //decipher button
         {
             CipherText = txtOutputt.Text;
             KeySize = Convert.ToInt32(numMatrixSize.Value);
             KnownText = txtKnownText.Text;
             KnownTextC = txtKnownC.Text;
-            if (!(CipherText == "" && KnownText == ""))
+            if (!(CipherText == "" && KnownText == "")) //checks if fields are empty
             {
-                if (KeySize == 2)
+                if (KeySize == 2)   //checks if key size is valid
                 {
                     TwoMatrix();
                 }
@@ -166,9 +166,9 @@ namespace DumbCodeYe.Hill
             matrixSingle[0] = 1;
 
             //get x values
-            for (int letter = 0; letter < 26; letter++)
+            for (int letter = 0; letter < 26; letter++)     //cycles through every letter
             {
-                if (letter % matrixSingle[2] == matrixSingle[1])
+                if (letter % matrixSingle[2] == matrixSingle[1])    //adds it if it is valid
                 {
                     matrixX.Add(letter);
                     arrIndex++;
@@ -195,12 +195,11 @@ namespace DumbCodeYe.Hill
                 matrixSingle[0] = 1;
 
                 arrIndex = 0;
-
                 matrixY.Add(matrixX[Xindex]);
                 //get y values
-                for (int letter = 0; letter < 26; letter++)
+                for (int letter = 0; letter < 26; letter++) //cycles through every letter
                 {
-                    if (letter % matrixSingle[2] == matrixSingle[1])
+                    if (letter % matrixSingle[2] == matrixSingle[1])    //adds it if it is valid
                     {
                         matrixY.Add(letter);
                         arrIndex++;
@@ -231,9 +230,9 @@ namespace DumbCodeYe.Hill
             return matrixXYValid;
         }
 
-        public int FindMultiplicativeInverse(int coefficient, int modulo)   //finds the number the coefficent must be multiplied with so that it equals 1 after % by modulo
+        public int FindMultiplicativeInverse(int coefficient, int modulo)   //finds the number the coefficent must be multiplied with so that it equals 1 after modulo, e.g. the MI of 7 mod 26 would be 15 - 7*15 = 105, 105 mod 26 = 1
         {
-            int multiplicativeInverse = 1;  //coefficient
+            int multiplicativeInverse = 1;  //coefficient start value
             while ((coefficient * multiplicativeInverse) % modulo != 1)
             {
                 multiplicativeInverse++;
@@ -244,15 +243,15 @@ namespace DumbCodeYe.Hill
         public int HCF3(int num1, int num2, int num3)   //finds HCF of 3 numbers    - look man, i know this could be done much easier using modulo but im too far deep in this rabbit hole and its 9pm
         {
             int hcf = 1;
-            int[] num1PF = getPrimeFactors(num1);
-            int[] num2PF = getPrimeFactors(num2);
-            int[] num3PF = getPrimeFactors(num3);
+            int[] num1PF = getPrimeFactors(num1);   //stores prime factors
+            int[] num2PF = getPrimeFactors(num2);   //stores prime factors
+            int[] num3PF = getPrimeFactors(num3);   //stores prime factors
             int num1Index = 0;
             int num2Index = 0;
             int num3Index = 0;
             do
             {
-                if (num1PF[num1Index] == num2PF[num2Index] && num2PF[num2Index] == num3PF[num3Index])
+                if (num1PF[num1Index] == num2PF[num2Index] && num2PF[num2Index] == num3PF[num3Index])   //if the current prime factor is the same between the numbers
                 {
                     hcf *= num1PF[num1Index];
                     num1Index++;
@@ -261,16 +260,16 @@ namespace DumbCodeYe.Hill
                 }
                 else
                 {
-                    num1Index = NextPrimeIndex(num1PF, num1PF[num1Index]);
-                    num2Index = NextPrimeIndex(num2PF, num2PF[num2Index]);
-                    num2Index = NextPrimeIndex(num3PF, num3PF[num3Index]);
+                    num1Index = NextPrimeIndex(num1PF, num1PF[num1Index]);  //move the prime factor to the next index
+                    num2Index = NextPrimeIndex(num2PF, num2PF[num2Index]);  //move the prime factor to the next index
+                    num2Index = NextPrimeIndex(num3PF, num3PF[num3Index]);  //move the prime factor to the next index
                 }
 
             } while (num1PF.Length < num1Index && num2PF.Length < num2Index && num3PF.Length < num3Index);
             return hcf;
         }
 
-        public int NextPrimeIndex(int[] arr, int currentPrime)
+        public int NextPrimeIndex(int[] arr, int currentPrime)  //for HCF3, sets index to the one of the next unique prime factor
         {
             for (int index = currentPrime; index < arr.Length; index++)
             {
@@ -282,7 +281,7 @@ namespace DumbCodeYe.Hill
             return arr.Length;
         }
 
-        public int[] getPrimeFactors(int num)
+        public int[] getPrimeFactors(int num)   //gets the prime factors
         {
             List<int> primeFactors = new List<int>();
             int largestPrime = 2;
@@ -302,7 +301,7 @@ namespace DumbCodeYe.Hill
 
                 }
             }
-
+            //places output into array format
             int[] output = new int[primeFactors.Count()];
 
             for (int i = 0; i < primeFactors.Count(); i++)
@@ -318,12 +317,10 @@ namespace DumbCodeYe.Hill
             if (number == 2) return true;
             if (number % 2 == 0) return false;
 
-            var boundary = (int)Math.Floor(Math.Sqrt(number));
+            int boundary = (int)Math.Floor(Math.Sqrt(number));
 
             for (int i = 3; i <= boundary; i += 2)
-                if (number % i == 0)
-                    return false;
-
+                if (number % i == 0) return false;
             return true;
         }
 
@@ -384,7 +381,7 @@ namespace DumbCodeYe.Hill
         private void btnInsertMatrix_Click(object sender, EventArgs e)
         {
             double[,] insertMatrix = new double[3, 3];
-            if (txtBR.Text == "")                                   //converts intputted matrix values to a 3x3 matrix
+            if (txtBR.Text == "")                                   //converts intputted matrix values to a matrix - checks a corner to decide if matrix is a 2x2 or 3x3
             {
                 insertMatrix[0, 0] = Convert.ToDouble(txtTL.Text);
                 insertMatrix[0, 1] = Convert.ToDouble(txtTM.Text);
@@ -656,7 +653,6 @@ namespace DumbCodeYe.Hill
         }
     }
 }
-
 /*
 THEPLAINTEXTWORDSAREWRITTENINSMALLLETTERSY
 XPUVLACBRAHNUKJNGCLSAZOFRAHWBUOEHDTUVXYFCS

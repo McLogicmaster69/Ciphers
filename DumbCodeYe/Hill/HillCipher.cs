@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace DumbCodeYe.Hill
 {
@@ -83,11 +84,14 @@ namespace DumbCodeYe.Hill
 
         public string ConvertToAlphabet(int number)
         {
+            if (number == 0)    //checks for the letter z
+                number += 26;
             return Convert.ToString(Convert.ToChar(number + 64));
         }
         public int ConvertToNumber(string character)
         {
-            return Convert.ToInt32(Convert.ToChar(character)) - 64;
+
+            return (Convert.ToInt32(Convert.ToChar(character)) - 64) % 26;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -118,7 +122,6 @@ namespace DumbCodeYe.Hill
         {
             List<int> matrixX = new List<int>();    //stores x values
             List<List<int>> matrixXY = new List<List<int>>();   //stores x and y values
-            List<int> matrixY = new List<int>();                    //stores y values
             int[,] matrixM = { { x1, x2 }, { y1, y2 }, { n1, n2 } };
             int[,] matrixMOriginal = { { x1, x2 }, { y1, y2 }, { n1, n2 } };
             int[] matrixSingle = { 0, 0, 0 };   //0 represents x/y coefficient, 1 represents n, 2 represents the modulo size
@@ -127,7 +130,6 @@ namespace DumbCodeYe.Hill
             int arrIndex = 0;
 
             List<int[]> matrixXYValid = new List<int[]>();   //stores valid x and y values that work for both congruences
-            int[] validXYPairs = new int[2];                  //stores valid x and y values that work for both congruences before they are added to the list
 
             //creates like congruences
             for (int ii = 0; ii < 3; ii++)
@@ -141,7 +143,7 @@ namespace DumbCodeYe.Hill
             //subtract one congruence by the other
             //if (matrixM[0, 0] > matrixM[0, 1])
             //{
-                matrixSingle[0] = matrixM[0, 0] - matrixM[0, 1];
+                matrixSingle[0] = (matrixM[0, 0] - matrixM[0, 1] + 260) % 26;
                 matrixSingle[1] = (matrixM[2, 0] - matrixM[2, 1] + 260) % 26;
                 matrixSingle[2] = 26;
             /*}
@@ -155,7 +157,7 @@ namespace DumbCodeYe.Hill
 
             //remove the common factor between matrixSingle variables
             hcf = HCF3(matrixSingle[0], matrixSingle[1], matrixSingle[2]);
-            foreach (int index in matrixSingle)
+            for (int index = 0; index < matrixSingle.Length; index++)
             {
                 matrixSingle[index] /= hcf;
             }
@@ -168,7 +170,7 @@ namespace DumbCodeYe.Hill
             {
                 if (letter % matrixSingle[2] == matrixSingle[1])
                 {
-                    matrixX.Add(arrIndex);
+                    matrixX.Add(letter);
                     arrIndex++;
                 }
             }
@@ -176,13 +178,14 @@ namespace DumbCodeYe.Hill
             //get y values
             for (int Xindex = 0; Xindex < matrixX.Count; Xindex++) //for every x value
             {
+                List<int> matrixY = new List<int>();                    //stores y values
                 matrixSingle[0] = matrixMOriginal[1, 1];    //sets y value
                 matrixSingle[1] = ((matrixMOriginal[2, 1] - matrixMOriginal[0, 1] * matrixX[Xindex] ) + 2600) % 26;  //sets n value to n2 - solved x value * its coefficient
                 matrixSingle[2] = 26;       //sets modulo to 26
 
                 //checks and divides by the highest common factor
-                hcf = HCF3(matrixSingle[0], matrixSingle[1], matrixSingle[2]);  
-                foreach (int index in matrixSingle)
+                hcf = HCF3(matrixSingle[0], matrixSingle[1], matrixSingle[2]);
+                for (int index = 0; index < matrixSingle.Length; index++)
                 {
                     matrixSingle[index] /= hcf;
                 }
@@ -206,7 +209,7 @@ namespace DumbCodeYe.Hill
 
                 //stores them
                 matrixXY.Add(matrixY);
-                matrixY.Clear();
+                //matrixY.Clear();
             }
 
             //checks which x and y values are valid pairs and adds them to a list
@@ -214,8 +217,9 @@ namespace DumbCodeYe.Hill
             {
                 for (int currentYvalue = 1; currentYvalue < matrixXY[currentXvalue].Count; currentYvalue++)
                 { 
-                    if (((matrixXY[currentXvalue][0] * matrixMOriginal[0, 0] + matrixXY[currentYvalue][0] * matrixMOriginal[1, 0] + 2600) % 26 == matrixMOriginal[2, 0]) && ((matrixXY[currentXvalue][0] * matrixMOriginal[0, 1] + matrixXY[currentYvalue][0] * matrixMOriginal[1, 1] + 2600) % 26 == matrixMOriginal[2, 1]))   //if x and y valeus work for both congruences
+                    if (((matrixXY[currentXvalue][0] * matrixMOriginal[0, 0] + matrixXY[currentXvalue][currentYvalue] * matrixMOriginal[1, 0] + 2600) % 26 == matrixMOriginal[2, 0]) && ((matrixXY[currentXvalue][0] * matrixMOriginal[0, 1] + matrixXY[currentXvalue][currentYvalue] * matrixMOriginal[1, 1] + 2600) % 26 == matrixMOriginal[2, 1]))   //if x and y valeus work for both congruences
                     {                                                       //adds the valid X and Y pair to a list
+                        int[] validXYPairs = new int[2];                  //stores valid x and y values that work for both congruences before they are added to the list
                         validXYPairs[0] = matrixXY[currentXvalue][0];
                         validXYPairs[1] = matrixXY[currentXvalue][currentYvalue];
                         matrixXYValid.Add(validXYPairs);
@@ -280,16 +284,14 @@ namespace DumbCodeYe.Hill
 
         public int[] getPrimeFactors(int num)
         {
-            int[] primeFactors = { };
+            List<int> primeFactors = new List<int>();
             int largestPrime = 2;
-            int index = 0;
-            while (largestPrime < num)
+            while (largestPrime <= num)
             {
                 if (num % largestPrime == 0)
                 {
                     num /= largestPrime;
-                    primeFactors[index] = largestPrime;
-                    index++;
+                    primeFactors.Add(largestPrime);
                 }
                 else
                 {
@@ -300,7 +302,12 @@ namespace DumbCodeYe.Hill
 
                 }
             }
-            return primeFactors;
+
+            int[] output = new int[primeFactors.Count()];
+
+            for (int i = 0; i < primeFactors.Count(); i++)
+                output[i] = primeFactors[i];
+            return output;
 
 
         }
@@ -324,7 +331,6 @@ namespace DumbCodeYe.Hill
         {
             int[,] SysCongruence1 = { { 0, 0 }, { 0, 0 } };
             int[,] SysCongruence2 = { { 0, 0 }, { 0, 0 } };
-            double[,] keyMatrix = new double[2,2];
             int keyDeterminant;
 
             string chunkOfCipher;
@@ -364,6 +370,7 @@ namespace DumbCodeYe.Hill
                     keyDeterminant = (AB[0] * CD[1] - AB[1] * CD[0] + 26000) % 26;
                     if (keyDeterminant % 2 == 1 && keyDeterminant != 13)
                     {
+                        double[,] keyMatrix = new double[2, 2];
                         keyMatrix[0, 0] = AB[0];
                         keyMatrix[0, 1] = AB[1];
                         keyMatrix[1, 0] = CD[0];
@@ -451,6 +458,7 @@ namespace DumbCodeYe.Hill
             double posSum = 0;
             decipherMatrix = MatrixKeys[Convert.ToInt32(numCurrentMatrix.Value)];
 
+            int indexAtZero = chkIndexAt0.Checked == true ? 1 : 0;
 
             if (Math.Sqrt(decipherMatrix.Length) == 2)
             {
@@ -462,16 +470,16 @@ namespace DumbCodeYe.Hill
             }
 
             //assigns ciphertext to a matrix
-            if (chkInvertMatrix.Checked)    //inverts matrix if necessary
-            {
+            //if (chkInvertMatrix.Checked)    //inverts matrix if necessary
+            //{
                 for (int ii = 0; ii < CipherText.Length / decipherMatrixInverse.GetLength(0); ii++)
                 {
                     for (int jj = 0; jj < decipherMatrixInverse.GetLength(0); jj++)
                     {
-                        cipherText[ii, jj] = ConvertToNumber(CipherText.Substring(pos++, 1));
+                        cipherText[ii, jj] = ConvertToNumber(CipherText.Substring(pos++, 1)) - indexAtZero;
                     }
                 }
-            }
+            /*}
             else
             {
                 for (int ii = 0; ii < decipherMatrixInverse.GetLength(0); ii++)
@@ -481,9 +489,10 @@ namespace DumbCodeYe.Hill
                         cipherText[jj, ii] = ConvertToNumber(CipherText.Substring(pos++, 1));
                     }
                 }
-            }
+            }*/
 
             //matrix multiplication
+
             /*
             for (int index1 = 0; index1 < cipherText.GetLength(0); index1++)
             {
@@ -512,16 +521,16 @@ namespace DumbCodeYe.Hill
                 }
             }
 
-            if (chkInvertMatrix.Checked)    //inverts matrix if necessary
-            {
+            /*if (chkInvertMatrix.Checked)    //inverts matrix if necessary
+            {*/
                 for (int ii = 0; ii < CipherText.Length / decipherMatrix.GetLength(0); ii++)
                 {
                     for (int jj = 0; jj < decipherMatrix.GetLength(0); jj++)
                     {
-                        PlainText += ConvertToAlphabet(plainText[ii, jj]);
+                        PlainText += ConvertToAlphabet(plainText[ii, jj] + indexAtZero);
                     }
                 }
-            }
+            /*}
             else
             {
                 for (int ii = 0; ii < decipherMatrix.GetLength(0); ii++)
@@ -531,7 +540,7 @@ namespace DumbCodeYe.Hill
                         PlainText += ConvertToAlphabet(plainText[jj, ii]);
                     }
                 }
-            }
+            }*/
             txtOutputt.Text = PlainText;
         }
 
@@ -589,21 +598,69 @@ namespace DumbCodeYe.Hill
 
         public double[,] GetInverse2(double[,] matrixM)
         {
-            double[,] MatrixM1 = { { 0, 0 }, { 0, 0 } };
+            double[,] matrixM1 = { { 0, 0 }, { 0, 0 } };
+            double[,] MatrixM2 = { { 0, 0 }, { 0, 0 } };
             double detM = GetDet(matrixM);    //finds the determinate of MartixM
+            double[,] identity = { { 1, 0 }, { 0, 1 } };
+            if (detM == 0)
+            {
+                MessageBox.Show("Invalid key - singular matrix");
+                return identity;
+            }
+            /*
+            double temp;
+
+            temp = matrixM[0, 0];
+            matrixM[0, 0] = matrixM[1, 1];
+            matrixM[1, 1] = temp;
+
+            MatrixM1[0, 0] = (matrixM[0, 0] / detM;          //sets matrixM1 as inverse of matrixM      
+            MatrixM1[1, 1] = (matrixM[1, 1] / detM;
+            MatrixM1[1, 0] = ((matrixM[1, 0] * -1) / detM;        // * 1 is there for the -1 part of the matrix multipleication
+            MatrixM1[0, 1] = ((matrixM[0, 1] * -1) / detM;
+
+            for (int row = 0; row < 2; row++)
+            {
+                for (int column = 0; column < 2; column++)
+                {
+                    if (column != row)
+                        matrixM[row, column] *= -1;
+                    if (MatrixM1[row,column] != (int)MatrixM1[row, column])
+                    {
+                        MatrixM1[row, column] = Convert.ToInt32((matrixM[row,column] * FindMultiplicativeInverse(Convert.ToInt32(detM), 26)) + 2600) % 26;
+                    }
+                }
+
+            }
+            */
+            matrixM1[0, 0] = matrixM[1, 1];          //sets matrixM1 as inverse of matrixM      
+            matrixM1[1, 1] = matrixM[0, 0];
+            matrixM1[1, 0] = matrixM[1, 0] * -1;
+            matrixM1[0, 1] = matrixM[0, 1] * -1;
+
+            MatrixM2[0, 0] = matrixM1[0, 0] / detM;        //sets M2 values  
+            MatrixM2[1, 1] = matrixM1[1, 1] / detM;
+            MatrixM2[1, 0] = matrixM1[1, 0] / detM;
+            MatrixM2[0, 1] = matrixM1[0, 1] / detM;
 
 
-            MatrixM1[0, 0] = matrixM[1, 1] / detM;          //sets matrixM1 as inverse of matrixM      
-            MatrixM1[1, 1] = matrixM[0, 0] / detM;
-            MatrixM1[1, 0] = (matrixM[1, 0] * -1) / detM;
-            MatrixM1[0, 1] = (matrixM[0, 1] * -1) / detM;
-            return MatrixM1;
+            for (int row = 0; row < 2; row++)
+            {
+                for (int column = 0; column < 2; column++)
+                {
+                    if (MatrixM2[row, column] != (int)MatrixM2[row, column])
+                        MatrixM2[row, column] = Convert.ToInt32((matrixM1[row, column] * FindMultiplicativeInverse(Convert.ToInt32(detM), 26)) + 2600) % 26;
+                }
+            }
+                return MatrixM2;
         }
-
-        private void chkInvertMatrix_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }
+
+/*
+THEPLAINTEXTWORDSAREWRITTENINSMALLLETTERSY
+XPUVLACBRAHNUKJNGCLSAZOFRAHWBUOEHDTUVXYFCS
+
+UKJN
+WORD 
+*/

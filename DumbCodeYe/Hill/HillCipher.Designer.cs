@@ -50,7 +50,7 @@ namespace DumbCodeYe.Hill
             this.txtBL = new System.Windows.Forms.TextBox();
             this.txtBM = new System.Windows.Forms.TextBox();
             this.txtBR = new System.Windows.Forms.TextBox();
-            this.chkInvertMatrix = new System.Windows.Forms.CheckBox();
+            this.chkIndexAt0 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numMatrixSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCurrentMatrix)).BeginInit();
             this.SuspendLayout();
@@ -252,23 +252,22 @@ namespace DumbCodeYe.Hill
             this.txtBR.Size = new System.Drawing.Size(43, 20);
             this.txtBR.TabIndex = 20;
             // 
-            // chkInvertMatrix
+            // chkIndexAt0
             // 
-            this.chkInvertMatrix.AutoSize = true;
-            this.chkInvertMatrix.Location = new System.Drawing.Point(680, 414);
-            this.chkInvertMatrix.Name = "chkInvertMatrix";
-            this.chkInvertMatrix.Size = new System.Drawing.Size(103, 17);
-            this.chkInvertMatrix.TabIndex = 21;
-            this.chkInvertMatrix.Text = "Invert text matrix";
-            this.chkInvertMatrix.UseVisualStyleBackColor = true;
-            this.chkInvertMatrix.CheckedChanged += new System.EventHandler(this.chkInvertMatrix_CheckedChanged);
+            this.chkIndexAt0.AutoSize = true;
+            this.chkIndexAt0.Location = new System.Drawing.Point(663, 414);
+            this.chkIndexAt0.Name = "chkIndexAt0";
+            this.chkIndexAt0.Size = new System.Drawing.Size(73, 17);
+            this.chkIndexAt0.TabIndex = 21;
+            this.chkIndexAt0.Text = "Index at 0";
+            this.chkIndexAt0.UseVisualStyleBackColor = true;
             // 
             // HillCipher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(815, 439);
-            this.Controls.Add(this.chkInvertMatrix);
+            this.ClientSize = new System.Drawing.Size(815, 461);
+            this.Controls.Add(this.chkIndexAt0);
             this.Controls.Add(this.txtBR);
             this.Controls.Add(this.txtBM);
             this.Controls.Add(this.txtBL);
@@ -322,6 +321,6 @@ namespace DumbCodeYe.Hill
         private System.Windows.Forms.TextBox txtBL;
         private System.Windows.Forms.TextBox txtBM;
         private System.Windows.Forms.TextBox txtBR;
-        private System.Windows.Forms.CheckBox chkInvertMatrix;
+        private System.Windows.Forms.CheckBox chkIndexAt0;
     }
 }

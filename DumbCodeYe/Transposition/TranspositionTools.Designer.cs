@@ -43,6 +43,7 @@ namespace DumbCodeYe.Transposition
             this.factorsBtn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.scytaleBtn = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.maxColumns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.railsNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.columnsNum)).BeginInit();
@@ -220,11 +221,21 @@ namespace DumbCodeYe.Transposition
             this.scytaleBtn.UseVisualStyleBackColor = true;
             this.scytaleBtn.Click += new System.EventHandler(this.scytaleBtn_Click);
             // 
+            // label5
+            // 
+            this.label5.Location = new System.Drawing.Point(9, 419);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(229, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "---------------------------------------------------------------------------";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // TranspositionTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(253, 425);
+            this.ClientSize = new System.Drawing.Size(253, 481);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.scytaleBtn);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.factorsBtn);
@@ -266,5 +277,6 @@ namespace DumbCodeYe.Transposition
         private System.Windows.Forms.Button factorsBtn;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button scytaleBtn;
+        private System.Windows.Forms.Label label5;
     }
 }

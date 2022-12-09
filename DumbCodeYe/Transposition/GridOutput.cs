@@ -16,6 +16,7 @@ namespace DumbCodeYe.Transposition
         private List<char[]> mainGrid = new List<char[]>();
         private int Rows;
         private int Columns;
+        private bool ReadColumns;
 
         private float totalCalc = 0;
         private int toCalc = 0;
@@ -25,7 +26,7 @@ namespace DumbCodeYe.Transposition
             InitializeComponent();
         }
 
-        public void Setup(char[,] grid, int rows, int columns)
+        public void Setup(char[,] grid, int rows, int columns, bool readColumns = false)
         {
             for (int column = 0; column < columns; column++)
             {
@@ -40,6 +41,7 @@ namespace DumbCodeYe.Transposition
             swap2.Maximum = columns;
             Rows = rows;
             Columns = columns;
+            ReadColumns = readColumns;
             PrintGrid();
         }
 
@@ -80,6 +82,10 @@ namespace DumbCodeYe.Transposition
             TO.SetOutput(output);
             TO.Show();
         }
+        public string GetOutput()
+        {
+            return GetGridOutput(mainGrid);
+        }
 
         private void Swap(int c1, int c2)
         {
@@ -113,6 +119,29 @@ namespace DumbCodeYe.Transposition
             TO.SetOutput(output);
             TO.Show();
             PBF.Close();
+        }
+
+        public List<string> GetAllPermutations()
+        {
+            List<string> permutations = new List<string>();
+            PermutateList(ref permutations, 0, mainGrid);
+            return permutations;
+        }
+        private void PermutateList(ref List<string> perms, int swapNumber, List<char[]> grid)
+        {
+            if(swapNumber == grid.Count - 1)
+            {
+                perms.Add(GetGridOutput(grid));
+            }
+            else
+            {
+                for(int i = swapNumber; i < grid.Count; i++)
+                {
+                    List<char[]> swapList = new List<char[]>(grid);
+                    Swap(swapNumber, i, ref swapList);
+                    PermutateList(ref perms, swapNumber + 1, swapList);
+                }
+            }
         }
 
         private void SwapIteration(int swapNumber, List<char[]> grid, out List<char[]> bestGrid, out double bestScore, ProgressBarForm PBF)
@@ -149,11 +178,24 @@ namespace DumbCodeYe.Transposition
         private string GetGridOutput(List<char[]> grid)
         {
             string text = "";
-            for (int row = 0; row < Rows; row++)
+            if (ReadColumns)
             {
                 for (int column = 0; column < Columns; column++)
                 {
-                    text += grid[column][row].ToString();
+                    for (int row = 0; row < Rows; row++)
+                    {
+                        text += grid[column][row].ToString();
+                    }
+                }
+            }
+            else
+            {
+                for (int row = 0; row < Rows; row++)
+                {
+                    for (int column = 0; column < Columns; column++)
+                    {
+                        text += grid[column][row].ToString();
+                    }
                 }
             }
             return text;
@@ -171,7 +213,7 @@ namespace DumbCodeYe.Transposition
             }
             return score;
         }
-        private int Factorial(int n)
+        public int Factorial(int n)
         {
             if (n == 1)
                 return 1;

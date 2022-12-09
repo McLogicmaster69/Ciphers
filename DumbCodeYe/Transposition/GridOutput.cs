@@ -143,6 +143,16 @@ namespace DumbCodeYe.Transposition
                 }
             }
         }
+        public string BruteIterations()
+        {
+            ProgressBarForm PBF = new ProgressBarForm();
+            PBF.Show();
+            totalCalc = 0;
+            toCalc = Factorial(Columns);
+            SwapIteration(0, new List<char[]>(mainGrid), out List<char[]> Best, out double Score, PBF);
+            return GetGridOutput(Best);
+        }
+
 
         private void SwapIteration(int swapNumber, List<char[]> grid, out List<char[]> bestGrid, out double bestScore, ProgressBarForm PBF)
         {

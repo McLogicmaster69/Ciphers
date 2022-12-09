@@ -52,6 +52,7 @@ namespace DumbCodeYe.Transposition
             this.reverseBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.columnarBtn = new System.Windows.Forms.Button();
+
             ((System.ComponentModel.ISupportInitialize)(this.maxColumns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.railsNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.columnsNum)).BeginInit();

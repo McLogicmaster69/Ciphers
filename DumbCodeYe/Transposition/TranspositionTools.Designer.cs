@@ -33,7 +33,6 @@ namespace DumbCodeYe.Transposition
             this.rowColumnarBtn = new System.Windows.Forms.Button();
             this.expectedBtn = new System.Windows.Forms.Button();
             this.maxColumns = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
             this.railsNum = new System.Windows.Forms.NumericUpDown();
             this.railfenceBtn = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,9 +43,22 @@ namespace DumbCodeYe.Transposition
             this.label4 = new System.Windows.Forms.Label();
             this.scytaleBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.substringLengthNum = new System.Windows.Forms.NumericUpDown();
+            this.getSubstringBtn = new System.Windows.Forms.Button();
+            this.substringIndexNum = new System.Windows.Forms.NumericUpDown();
+            this.applyTranspositionBtn = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.doubleBtn = new System.Windows.Forms.Button();
+            this.reverseBtn = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.columnarBtn = new System.Windows.Forms.Button();
+
             ((System.ComponentModel.ISupportInitialize)(this.maxColumns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.railsNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.columnsNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.substringLengthNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.substringIndexNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // rowColumnBtn
@@ -101,18 +113,9 @@ namespace DumbCodeYe.Transposition
             0,
             0});
             // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(9, 300);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(229, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "---------------------------------------------------------------------------";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // railsNum
             // 
-            this.railsNum.Location = new System.Drawing.Point(9, 316);
+            this.railsNum.Location = new System.Drawing.Point(255, 12);
             this.railsNum.Maximum = new decimal(new int[] {
             30,
             0,
@@ -134,7 +137,7 @@ namespace DumbCodeYe.Transposition
             // 
             // railfenceBtn
             // 
-            this.railfenceBtn.Location = new System.Drawing.Point(9, 342);
+            this.railfenceBtn.Location = new System.Drawing.Point(255, 38);
             this.railfenceBtn.Name = "railfenceBtn";
             this.railfenceBtn.Size = new System.Drawing.Size(229, 34);
             this.railfenceBtn.TabIndex = 8;
@@ -174,7 +177,7 @@ namespace DumbCodeYe.Transposition
             // 
             this.columnsNum.Location = new System.Drawing.Point(12, 65);
             this.columnsNum.Maximum = new decimal(new int[] {
-            30,
+            50,
             0,
             0,
             0});
@@ -213,7 +216,7 @@ namespace DumbCodeYe.Transposition
             // 
             // scytaleBtn
             // 
-            this.scytaleBtn.Location = new System.Drawing.Point(9, 382);
+            this.scytaleBtn.Location = new System.Drawing.Point(255, 78);
             this.scytaleBtn.Name = "scytaleBtn";
             this.scytaleBtn.Size = new System.Drawing.Size(229, 34);
             this.scytaleBtn.TabIndex = 15;
@@ -223,18 +226,129 @@ namespace DumbCodeYe.Transposition
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(9, 419);
+            this.label5.Location = new System.Drawing.Point(255, 115);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(229, 13);
             this.label5.TabIndex = 16;
             this.label5.Text = "---------------------------------------------------------------------------";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // substringLengthNum
+            // 
+            this.substringLengthNum.Location = new System.Drawing.Point(255, 157);
+            this.substringLengthNum.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.substringLengthNum.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.substringLengthNum.Name = "substringLengthNum";
+            this.substringLengthNum.Size = new System.Drawing.Size(229, 20);
+            this.substringLengthNum.TabIndex = 18;
+            this.substringLengthNum.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // getSubstringBtn
+            // 
+            this.getSubstringBtn.Location = new System.Drawing.Point(255, 183);
+            this.getSubstringBtn.Name = "getSubstringBtn";
+            this.getSubstringBtn.Size = new System.Drawing.Size(229, 34);
+            this.getSubstringBtn.TabIndex = 17;
+            this.getSubstringBtn.Text = "GET SUBSTRING";
+            this.getSubstringBtn.UseVisualStyleBackColor = true;
+            this.getSubstringBtn.Click += new System.EventHandler(this.getSubstringBtn_Click);
+            // 
+            // substringIndexNum
+            // 
+            this.substringIndexNum.Location = new System.Drawing.Point(255, 131);
+            this.substringIndexNum.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.substringIndexNum.Name = "substringIndexNum";
+            this.substringIndexNum.Size = new System.Drawing.Size(229, 20);
+            this.substringIndexNum.TabIndex = 19;
+            // 
+            // applyTranspositionBtn
+            // 
+            this.applyTranspositionBtn.Location = new System.Drawing.Point(255, 223);
+            this.applyTranspositionBtn.Name = "applyTranspositionBtn";
+            this.applyTranspositionBtn.Size = new System.Drawing.Size(229, 34);
+            this.applyTranspositionBtn.TabIndex = 20;
+            this.applyTranspositionBtn.Text = "APPLY TRANSPOSITIONS";
+            this.applyTranspositionBtn.UseVisualStyleBackColor = true;
+            this.applyTranspositionBtn.Click += new System.EventHandler(this.applyTranspositionBtn_Click);
+            // 
+            // label6
+            // 
+            this.label6.Location = new System.Drawing.Point(255, 260);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(229, 13);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "---------------------------------------------------------------------------";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // doubleBtn
+            // 
+            this.doubleBtn.Location = new System.Drawing.Point(255, 276);
+            this.doubleBtn.Name = "doubleBtn";
+            this.doubleBtn.Size = new System.Drawing.Size(229, 34);
+            this.doubleBtn.TabIndex = 22;
+            this.doubleBtn.Text = "CRACK DOUBLE";
+            this.doubleBtn.UseVisualStyleBackColor = true;
+            this.doubleBtn.Click += new System.EventHandler(this.doubleBtn_Click);
+            // 
+            // reverseBtn
+            // 
+            this.reverseBtn.Location = new System.Drawing.Point(255, 316);
+            this.reverseBtn.Name = "reverseBtn";
+            this.reverseBtn.Size = new System.Drawing.Size(229, 34);
+            this.reverseBtn.TabIndex = 24;
+            this.reverseBtn.Text = "REVERSE";
+            this.reverseBtn.UseVisualStyleBackColor = true;
+            this.reverseBtn.Click += new System.EventHandler(this.reverseBtn_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Black;
+            this.pictureBox1.Location = new System.Drawing.Point(246, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(2, 335);
+            this.pictureBox1.TabIndex = 25;
+            this.pictureBox1.TabStop = false;
+            // 
+            // columnarBtn
+            // 
+            this.columnarBtn.Location = new System.Drawing.Point(9, 303);
+            this.columnarBtn.Name = "columnarBtn";
+            this.columnarBtn.Size = new System.Drawing.Size(229, 34);
+            this.columnarBtn.TabIndex = 26;
+            this.columnarBtn.Text = "COLUMNAR METHOD";
+            this.columnarBtn.UseVisualStyleBackColor = true;
+            this.columnarBtn.Click += new System.EventHandler(this.columnarBtn_Click);
+            // 
             // TranspositionTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(253, 481);
+            this.ClientSize = new System.Drawing.Size(502, 372);
+            this.Controls.Add(this.columnarBtn);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.reverseBtn);
+            this.Controls.Add(this.doubleBtn);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.applyTranspositionBtn);
+            this.Controls.Add(this.substringIndexNum);
+            this.Controls.Add(this.substringLengthNum);
+            this.Controls.Add(this.getSubstringBtn);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.scytaleBtn);
             this.Controls.Add(this.label4);
@@ -245,7 +359,6 @@ namespace DumbCodeYe.Transposition
             this.Controls.Add(this.label2);
             this.Controls.Add(this.railfenceBtn);
             this.Controls.Add(this.railsNum);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.maxColumns);
             this.Controls.Add(this.expectedBtn);
             this.Controls.Add(this.rowColumnarBtn);
@@ -257,6 +370,9 @@ namespace DumbCodeYe.Transposition
             ((System.ComponentModel.ISupportInitialize)(this.maxColumns)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.railsNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.columnsNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.substringLengthNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.substringIndexNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -267,7 +383,6 @@ namespace DumbCodeYe.Transposition
         private System.Windows.Forms.Button rowColumnarBtn;
         private System.Windows.Forms.Button expectedBtn;
         private System.Windows.Forms.NumericUpDown maxColumns;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown railsNum;
         private System.Windows.Forms.Button railfenceBtn;
         private System.Windows.Forms.Label label2;
@@ -278,5 +393,14 @@ namespace DumbCodeYe.Transposition
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button scytaleBtn;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown substringLengthNum;
+        private System.Windows.Forms.Button getSubstringBtn;
+        private System.Windows.Forms.NumericUpDown substringIndexNum;
+        private System.Windows.Forms.Button applyTranspositionBtn;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button doubleBtn;
+        private System.Windows.Forms.Button reverseBtn;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button columnarBtn;
     }
 }

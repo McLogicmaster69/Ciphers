@@ -83,6 +83,7 @@
     <Compile Include="Hill\HillCipher.Designer.cs">
       <DependentUpon>HillCipher.cs</DependentUpon>
     </Compile>
+    <Compile Include="Incrementor.cs" />
     <Compile Include="Playfair\Playfair5Crack.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -46,13 +46,13 @@ namespace DumbCodeYe.Transposition
             this.gridList.ItemHeight = 32;
             this.gridList.Location = new System.Drawing.Point(12, 12);
             this.gridList.Name = "gridList";
-            this.gridList.Size = new System.Drawing.Size(776, 420);
+            this.gridList.Size = new System.Drawing.Size(1270, 420);
             this.gridList.TabIndex = 0;
             // 
             // swap1
             // 
             this.swap1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.swap1.Location = new System.Drawing.Point(794, 12);
+            this.swap1.Location = new System.Drawing.Point(1288, 12);
             this.swap1.Minimum = new decimal(new int[] {
             1,
             0,
@@ -70,7 +70,7 @@ namespace DumbCodeYe.Transposition
             // swap2
             // 
             this.swap2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.swap2.Location = new System.Drawing.Point(794, 44);
+            this.swap2.Location = new System.Drawing.Point(1288, 44);
             this.swap2.Minimum = new decimal(new int[] {
             1,
             0,
@@ -88,7 +88,7 @@ namespace DumbCodeYe.Transposition
             // swapBtn
             // 
             this.swapBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.swapBtn.Location = new System.Drawing.Point(794, 76);
+            this.swapBtn.Location = new System.Drawing.Point(1288, 76);
             this.swapBtn.Name = "swapBtn";
             this.swapBtn.Size = new System.Drawing.Size(159, 34);
             this.swapBtn.TabIndex = 3;
@@ -99,7 +99,7 @@ namespace DumbCodeYe.Transposition
             // outputBtn
             // 
             this.outputBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.outputBtn.Location = new System.Drawing.Point(794, 398);
+            this.outputBtn.Location = new System.Drawing.Point(1288, 398);
             this.outputBtn.Name = "outputBtn";
             this.outputBtn.Size = new System.Drawing.Size(159, 34);
             this.outputBtn.TabIndex = 4;
@@ -110,7 +110,7 @@ namespace DumbCodeYe.Transposition
             // bruteBtn
             // 
             this.bruteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bruteBtn.Location = new System.Drawing.Point(794, 358);
+            this.bruteBtn.Location = new System.Drawing.Point(1288, 358);
             this.bruteBtn.Name = "bruteBtn";
             this.bruteBtn.Size = new System.Drawing.Size(159, 34);
             this.bruteBtn.TabIndex = 5;
@@ -122,7 +122,7 @@ namespace DumbCodeYe.Transposition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(965, 444);
+            this.ClientSize = new System.Drawing.Size(1459, 444);
             this.Controls.Add(this.bruteBtn);
             this.Controls.Add(this.outputBtn);
             this.Controls.Add(this.swapBtn);

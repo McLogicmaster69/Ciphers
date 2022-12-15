@@ -992,5 +992,488 @@ namespace DumbCodeYe.Transposition
             GO.Setup(grid, MainText.Length / (int)maxColumns.Value, (int)maxColumns.Value, true);
             GO.Show();
         }
+
+        private void routeBtn_Click(object sender, EventArgs e)
+        {
+            TopLeftRoute();
+            TopRightRoute();
+            BottomRightRoute();
+            BottomLeftRoute();
+            TopLeftRouteReversed();
+            TopRightRouteReversed();
+            BottomRightRouteReversed();
+            BottomLeftRouteReversed();
+        }
+        private void TopLeftRoute()
+        {
+            int columns = (int)maxColumns.Value;
+            string reversed = Reverse(MainText);
+            char[,] grid = new char[MainText.Length / columns, columns];
+            int upperBound = 0;
+            int lowerBound = MainText.Length / columns - 1;
+            int leftBound = 0;
+            int rightBound = columns - 1;
+            int letterIndex = 0;
+            while (letterIndex < MainText.Length)
+            {
+                for (int i = leftBound; i <= rightBound; i++)
+                {
+                    grid[upperBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                upperBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = upperBound; i <= lowerBound; i++)
+                {
+                    grid[i, rightBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                rightBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = rightBound; i >= leftBound; i--)
+                {
+                    grid[lowerBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                lowerBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = lowerBound; i >= upperBound; i--)
+                {
+                    grid[i, leftBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                leftBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+            }
+            GridOutput GO = new GridOutput();
+            GO.Setup(grid, MainText.Length / columns, columns, true);
+            GO.Show();
+        }
+        private void TopRightRoute()
+        {
+            int columns = (int)maxColumns.Value;
+            string reversed = Reverse(MainText);
+            char[,] grid = new char[MainText.Length / columns, columns];
+            int upperBound = 0;
+            int lowerBound = MainText.Length / columns - 1;
+            int leftBound = 0;
+            int rightBound = columns - 1;
+            int letterIndex = 0;
+            while (letterIndex < MainText.Length)
+            {
+                for (int i = upperBound; i <= lowerBound; i++)
+                {
+                    grid[i, rightBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                rightBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = rightBound; i >= leftBound; i--)
+                {
+                    grid[lowerBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                lowerBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = lowerBound; i >= upperBound; i--)
+                {
+                    grid[i, leftBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                leftBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = leftBound; i <= rightBound; i++)
+                {
+                    grid[upperBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                upperBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+            }
+            GridOutput GO = new GridOutput();
+            GO.Setup(grid, MainText.Length / columns, columns, true);
+            GO.Show();
+        }
+        private void BottomRightRoute()
+        {
+            int columns = (int)maxColumns.Value;
+            string reversed = Reverse(MainText);
+            char[,] grid = new char[MainText.Length / columns, columns];
+            int upperBound = 0;
+            int lowerBound = MainText.Length / columns - 1;
+            int leftBound = 0;
+            int rightBound = columns - 1;
+            int letterIndex = 0;
+            while (letterIndex < MainText.Length)
+            {
+                for (int i = rightBound; i >= leftBound; i--)
+                {
+                    grid[lowerBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                lowerBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = lowerBound; i >= upperBound; i--)
+                {
+                    grid[i, leftBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                leftBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = leftBound; i <= rightBound; i++)
+                {
+                    grid[upperBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                upperBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = upperBound; i <= lowerBound; i++)
+                {
+                    grid[i, rightBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                rightBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+            }
+            GridOutput GO = new GridOutput();
+            GO.Setup(grid, MainText.Length / columns, columns, true);
+            GO.Show();
+        }
+        private void BottomLeftRoute()
+        {
+            int columns = (int)maxColumns.Value;
+            string reversed = Reverse(MainText);
+            char[,] grid = new char[MainText.Length / columns, columns];
+            int upperBound = 0;
+            int lowerBound = MainText.Length / columns - 1;
+            int leftBound = 0;
+            int rightBound = columns - 1;
+            int letterIndex = 0;
+            while (letterIndex < MainText.Length)
+            {
+                for (int i = lowerBound; i >= upperBound; i--)
+                {
+                    grid[i, leftBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                leftBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = leftBound; i <= rightBound; i++)
+                {
+                    grid[upperBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                upperBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = upperBound; i <= lowerBound; i++)
+                {
+                    grid[i, rightBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                rightBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = rightBound; i >= leftBound; i--)
+                {
+                    grid[lowerBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                lowerBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+            }
+            GridOutput GO = new GridOutput();
+            GO.Setup(grid, MainText.Length / columns, columns, true);
+            GO.Show();
+        }
+        private void TopLeftRouteReversed()
+        {
+            int columns = (int)maxColumns.Value;
+            string reversed = Reverse(MainText);
+            char[,] grid = new char[MainText.Length / columns, columns];
+            int upperBound = 0;
+            int lowerBound = MainText.Length / columns - 1;
+            int leftBound = 0;
+            int rightBound = columns - 1;
+            int letterIndex = 0;
+            while (letterIndex < MainText.Length)
+            {
+                for (int i = upperBound; i <= lowerBound; i++)
+                {
+                    grid[i, leftBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                leftBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = leftBound; i <= rightBound; i++)
+                {
+                    grid[lowerBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                lowerBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = lowerBound; i >= upperBound; i--)
+                {
+                    grid[i, rightBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                rightBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = rightBound; i >= leftBound; i--)
+                {
+                    grid[upperBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                upperBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+            }
+            GridOutput GO = new GridOutput();
+            GO.Setup(grid, MainText.Length / columns, columns, true);
+            GO.Show();
+        }
+        private void TopRightRouteReversed()
+        {
+            int columns = (int)maxColumns.Value;
+            string reversed = Reverse(MainText);
+            char[,] grid = new char[MainText.Length / columns, columns];
+            int upperBound = 0;
+            int lowerBound = MainText.Length / columns - 1;
+            int leftBound = 0;
+            int rightBound = columns - 1;
+            int letterIndex = 0;
+            while (letterIndex < MainText.Length)
+            {
+                for (int i = rightBound; i >= leftBound; i--)
+                {
+                    grid[upperBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                upperBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = upperBound; i <= lowerBound; i++)
+                {
+                    grid[i, leftBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                leftBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = leftBound; i <= rightBound; i++)
+                {
+                    grid[lowerBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                lowerBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = lowerBound; i >= upperBound; i--)
+                {
+                    grid[i, rightBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                rightBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+            }
+            GridOutput GO = new GridOutput();
+            GO.Setup(grid, MainText.Length / columns, columns, true);
+            GO.Show();
+        }
+        private void BottomRightRouteReversed()
+        {
+            int columns = (int)maxColumns.Value;
+            string reversed = Reverse(MainText);
+            char[,] grid = new char[MainText.Length / columns, columns];
+            int upperBound = 0;
+            int lowerBound = MainText.Length / columns - 1;
+            int leftBound = 0;
+            int rightBound = columns - 1;
+            int letterIndex = 0;
+            while (letterIndex < MainText.Length)
+            {
+                for (int i = lowerBound; i >= upperBound; i--)
+                {
+                    grid[i, rightBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                rightBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = rightBound; i >= leftBound; i--)
+                {
+                    grid[upperBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                upperBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = upperBound; i <= lowerBound; i++)
+                {
+                    grid[i, leftBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                leftBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = leftBound; i <= rightBound; i++)
+                {
+                    grid[lowerBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                lowerBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+            }
+            GridOutput GO = new GridOutput();
+            GO.Setup(grid, MainText.Length / columns, columns, true);
+            GO.Show();
+        }
+        private void BottomLeftRouteReversed()
+        {
+            int columns = (int)maxColumns.Value;
+            string reversed = Reverse(MainText);
+            char[,] grid = new char[MainText.Length / columns, columns];
+            int upperBound = 0;
+            int lowerBound = MainText.Length / columns - 1;
+            int leftBound = 0;
+            int rightBound = columns - 1;
+            int letterIndex = 0;
+            while (letterIndex < MainText.Length)
+            {
+                for (int i = leftBound; i <= rightBound; i++)
+                {
+                    grid[lowerBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                lowerBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = lowerBound; i >= upperBound; i--)
+                {
+                    grid[i, rightBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                rightBound--;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = rightBound; i >= leftBound; i--)
+                {
+                    grid[upperBound, i] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                upperBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = upperBound; i <= lowerBound; i++)
+                {
+                    grid[i, leftBound] = MainText[letterIndex];
+                    letterIndex++;
+                    if (letterIndex >= MainText.Length)
+                        break;
+                }
+                leftBound++;
+                if (letterIndex >= MainText.Length)
+                    break;
+            }
+            GridOutput GO = new GridOutput();
+            GO.Setup(grid, MainText.Length / columns, columns, true);
+            GO.Show();
+        }
+
+        private void xBtn_Click(object sender, EventArgs e)
+        {
+            int x = (int)substringIndexNum.Value;
+            int y = (int)substringLengthNum.Value;
+            string output = "";
+            while (x < MainText.Length) 
+            {
+                output += MainText[x];
+                x += y;
+            }
+            TextOutputFrm TOF = new TextOutputFrm();
+            TOF.SetOutput(output);
+            TOF.Show();
+        }
     }
 }

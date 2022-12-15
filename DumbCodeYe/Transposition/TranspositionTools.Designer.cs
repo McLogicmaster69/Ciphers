@@ -52,7 +52,8 @@ namespace DumbCodeYe.Transposition
             this.reverseBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.columnarBtn = new System.Windows.Forms.Button();
-
+            this.routeBtn = new System.Windows.Forms.Button();
+            this.xBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.maxColumns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.railsNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.columnsNum)).BeginInit();
@@ -95,7 +96,7 @@ namespace DumbCodeYe.Transposition
             // 
             this.maxColumns.Location = new System.Drawing.Point(9, 197);
             this.maxColumns.Maximum = new decimal(new int[] {
-            30,
+            3000,
             0,
             0,
             0});
@@ -289,7 +290,7 @@ namespace DumbCodeYe.Transposition
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(255, 260);
+            this.label6.Location = new System.Drawing.Point(252, 300);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(229, 13);
             this.label6.TabIndex = 21;
@@ -298,7 +299,7 @@ namespace DumbCodeYe.Transposition
             // 
             // doubleBtn
             // 
-            this.doubleBtn.Location = new System.Drawing.Point(255, 276);
+            this.doubleBtn.Location = new System.Drawing.Point(255, 316);
             this.doubleBtn.Name = "doubleBtn";
             this.doubleBtn.Size = new System.Drawing.Size(229, 34);
             this.doubleBtn.TabIndex = 22;
@@ -308,7 +309,7 @@ namespace DumbCodeYe.Transposition
             // 
             // reverseBtn
             // 
-            this.reverseBtn.Location = new System.Drawing.Point(255, 316);
+            this.reverseBtn.Location = new System.Drawing.Point(255, 353);
             this.reverseBtn.Name = "reverseBtn";
             this.reverseBtn.Size = new System.Drawing.Size(229, 34);
             this.reverseBtn.TabIndex = 24;
@@ -335,11 +336,33 @@ namespace DumbCodeYe.Transposition
             this.columnarBtn.UseVisualStyleBackColor = true;
             this.columnarBtn.Click += new System.EventHandler(this.columnarBtn_Click);
             // 
+            // routeBtn
+            // 
+            this.routeBtn.Location = new System.Drawing.Point(9, 343);
+            this.routeBtn.Name = "routeBtn";
+            this.routeBtn.Size = new System.Drawing.Size(229, 34);
+            this.routeBtn.TabIndex = 27;
+            this.routeBtn.Text = "ROUTE METHOD";
+            this.routeBtn.UseVisualStyleBackColor = true;
+            this.routeBtn.Click += new System.EventHandler(this.routeBtn_Click);
+            // 
+            // xBtn
+            // 
+            this.xBtn.Location = new System.Drawing.Point(255, 263);
+            this.xBtn.Name = "xBtn";
+            this.xBtn.Size = new System.Drawing.Size(229, 34);
+            this.xBtn.TabIndex = 28;
+            this.xBtn.Text = "EVERY X";
+            this.xBtn.UseVisualStyleBackColor = true;
+            this.xBtn.Click += new System.EventHandler(this.xBtn_Click);
+            // 
             // TranspositionTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 372);
+            this.ClientSize = new System.Drawing.Size(502, 399);
+            this.Controls.Add(this.xBtn);
+            this.Controls.Add(this.routeBtn);
             this.Controls.Add(this.columnarBtn);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.reverseBtn);
@@ -402,5 +425,7 @@ namespace DumbCodeYe.Transposition
         private System.Windows.Forms.Button reverseBtn;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button columnarBtn;
+        private System.Windows.Forms.Button routeBtn;
+        private System.Windows.Forms.Button xBtn;
     }
 }

@@ -1,4 +1,5 @@
-﻿using DumbCodeYe.Quadgrams;
+﻿using DumbCodeYe.Bigrams;
+using DumbCodeYe.Quadgrams;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,10 @@ namespace DumbCodeYe.Transposition
         private int Columns;
         private bool ReadColumns;
 
+        private TextOutputFrm LikelyPairsOutput = new TextOutputFrm();
+        private int[] BestPair;
+        private int LowestIndex;
+
         private float totalCalc = 0;
         private int toCalc = 0;
 
@@ -25,7 +30,6 @@ namespace DumbCodeYe.Transposition
         {
             InitializeComponent();
         }
-
         public void Setup(char[,] grid, int rows, int columns, bool readColumns = false)
         {
             for (int column = 0; column < columns; column++)
@@ -43,6 +47,7 @@ namespace DumbCodeYe.Transposition
             Columns = columns;
             ReadColumns = readColumns;
             PrintGrid();
+            CalculateBestPairs();
         }
 
         private void PrintGrid()
@@ -69,12 +74,38 @@ namespace DumbCodeYe.Transposition
                 gridList.Items.Add(output);
             }
         }
+        public string GetOutput()
+        {
+            return GetGridOutput(mainGrid);
+        }
 
         private void swapBtn_Click(object sender, EventArgs e)
         {
             Swap((int)swap1.Value, (int)swap2.Value);
         }
-
+        private void insertBtn_Click(object sender, EventArgs e)
+        {
+            if (swap1.Value == swap2.Value)
+                return;
+            int startValue = (int)swap1.Value;
+            int endValue = (int)swap2.Value;
+            if (startValue < endValue)
+            {
+                for (int i = startValue; i < endValue; i++)
+                {
+                    Swap(i, i + 1, false);
+                }
+            }
+            else
+            {
+                for (int i = startValue; i > endValue; i--)
+                {
+                    Swap(i, i - 1, false);
+                }
+            }
+            PrintGrid();
+            GenerateBestPairOutput();
+        }
         private void outputBtn_Click(object sender, EventArgs e)
         {
             string output = GetGridOutput(mainGrid);
@@ -82,31 +113,6 @@ namespace DumbCodeYe.Transposition
             TO.SetOutput(output);
             TO.Show();
         }
-        public string GetOutput()
-        {
-            return GetGridOutput(mainGrid);
-        }
-
-        private void Swap(int c1, int c2)
-        {
-            if (c1 != c2)
-            {
-                char[] temp = mainGrid[c1 - 1];
-                mainGrid[c1 - 1] = mainGrid[c2 - 1];
-                mainGrid[c2 - 1] = temp;
-                PrintGrid();
-            }
-        }
-        private void Swap(int c1, int c2, ref List<char[]> grid)
-        {
-            if (c1 != c2)
-            {
-                char[] temp = grid[c1];
-                grid[c1] = grid[c2];
-                grid[c2] = temp;
-            }
-        }
-
         private void bruteBtn_Click(object sender, EventArgs e)
         {
             ProgressBarForm PBF = new ProgressBarForm();
@@ -119,6 +125,102 @@ namespace DumbCodeYe.Transposition
             TO.SetOutput(output);
             TO.Show();
             PBF.Close();
+        }
+        private void bestPairsBtn_Click(object sender, EventArgs e)
+        {
+            CalculateBestPairs();
+        }
+        private void CalculateBestPairs()
+        {
+            int[] bestPair = new int[Columns];
+            long lowestScore = long.MaxValue;
+            int lowestIndex = 0;
+            for (int currentColumn = 0; currentColumn < Columns; currentColumn++)
+            {
+                long[] columnScores = new long[Columns];
+                for (int currentRow = 0; currentRow < Rows; currentRow++)
+                {
+                    for (int testColumn = 0; testColumn < Columns; testColumn++)
+                    {
+                        if (testColumn == currentColumn)
+                            continue;
+                        string bigram = mainGrid[currentColumn][currentRow].ToString() + mainGrid[testColumn][currentRow].ToString();
+                        columnScores[testColumn] += BigramsData.GetFrequency(bigram);
+                    }
+                }
+                int highestIndex = 0;
+                for (int i = 1; i < Columns; i++)
+                {
+                    if (columnScores[i] > columnScores[highestIndex])
+                        highestIndex = i;
+                }
+                bestPair[currentColumn] = highestIndex;
+                if (columnScores[highestIndex] < lowestScore)
+                {
+                    lowestScore = columnScores[highestIndex];
+                    lowestIndex = currentColumn;
+                }
+            }
+
+            BestPair = bestPair;
+            LowestIndex = lowestIndex;
+
+            GenerateBestPairOutput();
+        }
+        private void RecalculateBestPairs(int s1, int s2)
+        {
+            if (LowestIndex == s1)
+                LowestIndex = s2;
+            else if (LowestIndex == s2)
+                LowestIndex = s1;
+
+            int temp = BestPair[s1];
+            BestPair[s1] = BestPair[s2];
+            BestPair[s2] = temp;
+
+            for (int col = 0; col < Columns; col++)
+            {
+                if (BestPair[col] == s1)
+                    BestPair[col] = s2;
+                else if (BestPair[col] == s2)
+                    BestPair[col] = s1;
+            }
+        }
+        private void GenerateBestPairOutput()
+        {
+            string output = "";
+            for (int i = 0; i < Columns; i++)
+            {
+                output += $"Column {i + 1} has best match of column {BestPair[i] + 1}\r\n";
+            }
+            output += $"Most likly to be last column: {LowestIndex + 1}";
+            LikelyPairsOutput.SetOutput(output);
+            LikelyPairsOutput.Show();
+        }
+
+        private void Swap(int c1, int c2, bool print = true)
+        {
+            if (c1 != c2)
+            {
+                char[] temp = mainGrid[c1 - 1];
+                mainGrid[c1 - 1] = mainGrid[c2 - 1];
+                mainGrid[c2 - 1] = temp;
+                RecalculateBestPairs(c1 - 1, c2 - 1);
+                if (print)
+                {
+                    PrintGrid();
+                    GenerateBestPairOutput();
+                }
+            }
+        }
+        private void Swap(int c1, int c2, ref List<char[]> grid)
+        {
+            if (c1 != c2)
+            {
+                char[] temp = grid[c1];
+                grid[c1] = grid[c2];
+                grid[c2] = temp;
+            }
         }
 
         public List<string> GetAllPermutations()
@@ -152,7 +254,6 @@ namespace DumbCodeYe.Transposition
             SwapIteration(0, new List<char[]>(mainGrid), out List<char[]> Best, out double Score, PBF);
             return GetGridOutput(Best);
         }
-
 
         private void SwapIteration(int swapNumber, List<char[]> grid, out List<char[]> bestGrid, out double bestScore, ProgressBarForm PBF)
         {

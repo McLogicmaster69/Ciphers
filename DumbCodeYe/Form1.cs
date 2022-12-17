@@ -1,10 +1,12 @@
 ﻿using DumbCodeYe.BasicWordLib;
+using DumbCodeYe.Bigrams;
 using DumbCodeYe.Hill;
 using DumbCodeYe.Playfair;
 using DumbCodeYe.Polybius;
 using DumbCodeYe.Quadgrams;
 using DumbCodeYe.Substitution;
 using DumbCodeYe.Transposition;
+using DumbCodeYe.TwoSquare;
 using DumbCodeYe.WordFreq;
 using NetSpell.SpellChecker;
 using NetSpell.SpellChecker.Dictionary;
@@ -644,6 +646,19 @@ namespace DumbCodeYe
         private void initDictionaryBtn_Click(object sender, EventArgs e)
         {
             InitBasicWord ibw = new InitBasicWord();
+            ibw.Show();
+        }
+
+        private void twoSquareBtn_Click(object sender, EventArgs e)
+        {
+            TwoSquareTools TST = new TwoSquareTools();
+            TST.Setup(textInput.Text);
+            TST.Show();
+        }
+
+        private void initBigramsBtn_Click(object sender, EventArgs e)
+        {
+            InitBigramsFrm ibw = new InitBigramsFrm();
             ibw.Show();
         }
     }

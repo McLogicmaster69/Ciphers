@@ -289,6 +289,8 @@ namespace DumbCodeYe.Hill
             this.Controls.Add(this.txtKnownText);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtOutputt);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "HillCipher";
             this.Text = "Hill";
             ((System.ComponentModel.ISupportInitialize)(this.numMatrixSize)).EndInit();

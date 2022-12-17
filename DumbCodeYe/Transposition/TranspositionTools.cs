@@ -23,8 +23,8 @@ namespace DumbCodeYe.Transposition
         private string[] CommonWords = { "be", "to", "of", "in", "it", "on", "he", "as", "do", "at", "by", "we", "or", "an", "no", "the", "and", "for", "not", "you", "but", "his", "say", "her", "she", "one", "all", "yes", "one", "two", "six", "ten", "sad", "can", "that", "have", "with", "this", "from", "they", "will", "word", "what", "were", "when", "which", "would", "could", "these" };
         private ExpectedWords EW;
 
-        int[] primaryFactors = { 3, 7 };
-        int[] secondaryFactors = { 3, 7, 21 };
+        int[] primaryFactors = { 2, 5, 10, 13 };
+        int[] secondaryFactors = { 2, 5, 10, 13 };
         public TranspositionTools()
         {
             InitializeComponent();
@@ -487,12 +487,22 @@ namespace DumbCodeYe.Transposition
             // TRANSPOSE WITH SECOND CIPHER
             // CHECK IF POSSIBLE
 
+            List<int> factors = new List<int>();
+            foreach(string s in TestFactors.Text.Split(' '))
+            {
+                factors.Add(int.Parse(s));
+            }
+
+            primaryFactors = factors.ToArray();
+            secondaryFactors = factors.ToArray();
+
             Thread[] CipherThreads = new Thread[]
             {
                 new Thread(() => BasicKeywordPermutations()),
                 new Thread(() => RowColumnarPermutations()),
-                new Thread(() => RailFencePermutations()),
-                new Thread(() => ScylatePermutations())
+                new Thread(() => ColumnarPermutations()),
+                //new Thread(() => RailFencePermutations()),
+                //new Thread(() => ScylatePermutations())
             };
             foreach(Thread t in CipherThreads)
             {
@@ -533,66 +543,20 @@ namespace DumbCodeYe.Transposition
                         char[,] sgrid = CreateBasicKeyword(permutations[i], secondaryFactors[sf]);
                         GridOutput sGO = new GridOutput();
                         sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                        string output = sGO.GetOutput();
-                        int charactersRead = 0;
-                        while (charactersRead <= 15)
-                        {
-                            charactersRead += secondaryFactors[sf];
-                        }
-                        string testString = output.Substring(output.Length - charactersRead - 1);
-                        //string testString = output.Substring(0, charactersRead);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
-                        {
-                            GridOutput GO = new GridOutput();
-                            GO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                            GO.Show();
-                        }
+                        GridContainsText(sGO, sgrid, permutations, sf, i);
                     }
                     for (int sf = 0; sf < secondaryFactors.Length; sf++)
                     {
                         char[,] sgrid = CreateRowColumnar(permutations[i], secondaryFactors[sf]);
                         GridOutput sGO = new GridOutput();
                         sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                        string output = sGO.GetOutput();
-                        int charactersRead = 0;
-                        while (charactersRead <= 15)
-                        {
-                            charactersRead += secondaryFactors[sf];
-                        }
-                        string testString = output.Substring(output.Length - charactersRead - 1);
-                        //string testString = output.Substring(0, charactersRead);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
-                        {
-                            GridOutput GO = new GridOutput();
-                            GO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                            GO.Show();
-                        }
+                        GridContainsText(sGO, sgrid, permutations, sf, i);
                     }
 
                     for (int srail = 2; srail <= 12; srail++)
                     {
                         string output = CreateRailfence(permutations[i], srail);
-                        string testString = output.Substring(output.Length - 16);
-                        //string testString = output.Substring(0, 15);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
+                        if (RailContainsText(output))
                         {
                             TextOutputFrm TOF = new TextOutputFrm();
                             TOF.SetOutput(output);
@@ -602,15 +566,7 @@ namespace DumbCodeYe.Transposition
                     for (int srail = 2; srail <= 12; srail++)
                     {
                         string output = CreateScylate(permutations[i], srail);
-                        string testString = output.Substring(output.Length - 16);
-                        //string testString = output.Substring(0, 15);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
+                        if (RailContainsText(output))
                         {
                             TextOutputFrm TOF = new TextOutputFrm();
                             TOF.SetOutput(output);
@@ -650,66 +606,20 @@ namespace DumbCodeYe.Transposition
                         char[,] sgrid = CreateBasicKeyword(permutations[i], secondaryFactors[sf]);
                         GridOutput sGO = new GridOutput();
                         sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                        string output = sGO.GetOutput();
-                        int charactersRead = 0;
-                        while (charactersRead <= 15)
-                        {
-                            charactersRead += secondaryFactors[sf];
-                        }
-                        string testString = output.Substring(output.Length - charactersRead - 1);
-                        //string testString = output.Substring(0, charactersRead);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
-                        {
-                            GridOutput GO = new GridOutput();
-                            GO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                            GO.Show();
-                        }
+                        GridContainsText(sGO, sgrid, permutations, sf, i);
                     }
                     for (int sf = 0; sf < secondaryFactors.Length; sf++)
                     {
                         char[,] sgrid = CreateRowColumnar(permutations[i], secondaryFactors[sf]);
                         GridOutput sGO = new GridOutput();
                         sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                        string output = sGO.GetOutput();
-                        int charactersRead = 0;
-                        while (charactersRead <= 15)
-                        {
-                            charactersRead += secondaryFactors[sf];
-                        }
-                        string testString = output.Substring(output.Length - charactersRead - 1);
-                        //string testString = output.Substring(0, charactersRead);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
-                        {
-                            GridOutput GO = new GridOutput();
-                            GO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                            GO.Show();
-                        }
+                        GridContainsText(sGO, sgrid, permutations, sf, i);
                     }
 
                     for (int srail = 2; srail <= 12; srail++)
                     {
                         string output = CreateRailfence(permutations[i], srail);
-                        string testString = output.Substring(output.Length - 16);
-                        //string testString = output.Substring(0, 15);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
+                        if (RailContainsText(output))
                         {
                             TextOutputFrm TOF = new TextOutputFrm();
                             TOF.SetOutput(output);
@@ -719,15 +629,70 @@ namespace DumbCodeYe.Transposition
                     for (int srail = 2; srail <= 12; srail++)
                     {
                         string output = CreateScylate(permutations[i], srail);
-                        string testString = output.Substring(output.Length - 16);
-                        //string testString = output.Substring(0, 15);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
+                        if (RailContainsText(output))
                         {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
+                            TextOutputFrm TOF = new TextOutputFrm();
+                            TOF.SetOutput(output);
+                            TOF.Show();
                         }
-                        if (remainingChars.Count == 0)
+                    }
+                }
+            }
+        }
+        private void ColumnarPermutations()
+        {
+            int currentTask = 0;
+            int totalTasks = 0;
+            ProgressBarForm PBF = new ProgressBarForm();
+            PBF.Show();
+            for (int i = 0; i < primaryFactors.Length; i++)
+            {
+                totalTasks += Factorial(primaryFactors[i]);
+            }
+            for (int pf = 0; pf < primaryFactors.Length; pf++)
+            {
+                char[,] pgrid = CreateRowColumnar(MainText, primaryFactors[pf]);
+                GridOutput pGO = new GridOutput();
+                pGO.Setup(pgrid, MainText.Length / primaryFactors[pf], primaryFactors[pf]);
+                List<string> permutations = pGO.GetAllPermutations();
+
+                for (int i = 0; i < permutations.Count; i++)
+                {
+                    PBF.loadingBar.Value = (int)Math.Floor((float)currentTask * 100 / totalTasks);
+                    PBF.status.Text = $"{currentTask} / {totalTasks}";
+                    PBF.Invalidate();
+                    PBF.Refresh();
+                    currentTask++;
+
+                    for (int sf = 0; sf < secondaryFactors.Length; sf++)
+                    {
+                        char[,] sgrid = CreateBasicKeyword(permutations[i], secondaryFactors[sf]);
+                        GridOutput sGO = new GridOutput();
+                        sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
+                        GridContainsText(sGO, sgrid, permutations, sf, i);
+                    }
+                    for (int sf = 0; sf < secondaryFactors.Length; sf++)
+                    {
+                        char[,] sgrid = CreateRowColumnar(permutations[i], secondaryFactors[sf]);
+                        GridOutput sGO = new GridOutput();
+                        sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
+                        GridContainsText(sGO, sgrid, permutations, sf, i);
+                    }
+
+                    for (int srail = 2; srail <= 12; srail++)
+                    {
+                        string output = CreateRailfence(permutations[i], srail);
+                        if (RailContainsText(output))
+                        {
+                            TextOutputFrm TOF = new TextOutputFrm();
+                            TOF.SetOutput(output);
+                            TOF.Show();
+                        }
+                    }
+                    for (int srail = 2; srail <= 12; srail++)
+                    {
+                        string output = CreateScylate(permutations[i], srail);
+                        if (RailContainsText(output))
                         {
                             TextOutputFrm TOF = new TextOutputFrm();
                             TOF.SetOutput(output);
@@ -759,66 +724,20 @@ namespace DumbCodeYe.Transposition
                         char[,] sgrid = CreateBasicKeyword(permutations[i], secondaryFactors[sf]);
                         GridOutput sGO = new GridOutput();
                         sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                        string output = sGO.GetOutput();
-                        int charactersRead = 0;
-                        while (charactersRead <= 15)
-                        {
-                            charactersRead += secondaryFactors[sf];
-                        }
-                        string testString = output.Substring(output.Length - charactersRead - 1);
-                        //string testString = output.Substring(0, charactersRead);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
-                        {
-                            GridOutput GO = new GridOutput();
-                            GO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                            GO.Show();
-                        }
+                        GridContainsText(sGO, sgrid, permutations, sf, i);
                     }
                     for (int sf = 0; sf < secondaryFactors.Length; sf++)
                     {
                         char[,] sgrid = CreateRowColumnar(permutations[i], secondaryFactors[sf]);
                         GridOutput sGO = new GridOutput();
                         sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                        string output = sGO.GetOutput();
-                        int charactersRead = 0;
-                        while (charactersRead <= 15)
-                        {
-                            charactersRead += secondaryFactors[sf];
-                        }
-                        string testString = output.Substring(output.Length - charactersRead - 1);
-                        //string testString = output.Substring(0, charactersRead);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
-                        {
-                            GridOutput GO = new GridOutput();
-                            GO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                            GO.Show();
-                        }
+                        GridContainsText(sGO, sgrid, permutations, sf, i);
                     }
 
                     for (int srail = 2; srail <= 12; srail++)
                     {
                         string output = CreateRailfence(permutations[i], srail);
-                        string testString = output.Substring(output.Length - 16);
-                        //string testString = output.Substring(0, 15);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
+                        if (RailContainsText(output))
                         {
                             TextOutputFrm TOF = new TextOutputFrm();
                             TOF.SetOutput(output);
@@ -828,15 +747,7 @@ namespace DumbCodeYe.Transposition
                     for (int srail = 2; srail <= 12; srail++)
                     {
                         string output = CreateScylate(permutations[i], srail);
-                        string testString = output.Substring(output.Length - 16);
-                        //string testString = output.Substring(0, 15);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
+                        if (RailContainsText(output))
                         {
                             TextOutputFrm TOF = new TextOutputFrm();
                             TOF.SetOutput(output);
@@ -868,66 +779,20 @@ namespace DumbCodeYe.Transposition
                         char[,] sgrid = CreateBasicKeyword(permutations[i], secondaryFactors[sf]);
                         GridOutput sGO = new GridOutput();
                         sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                        string output = sGO.GetOutput();
-                        int charactersRead = 0;
-                        while (charactersRead <= 15)
-                        {
-                            charactersRead += secondaryFactors[sf];
-                        }
-                        string testString = output.Substring(output.Length - charactersRead - 1);
-                        //string testString = output.Substring(0, charactersRead);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
-                        {
-                            GridOutput GO = new GridOutput();
-                            GO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                            GO.Show();
-                        }
+                        GridContainsText(sGO, sgrid, permutations, sf, i);
                     }
                     for (int sf = 0; sf < secondaryFactors.Length; sf++)
                     {
                         char[,] sgrid = CreateRowColumnar(permutations[i], secondaryFactors[sf]);
                         GridOutput sGO = new GridOutput();
                         sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                        string output = sGO.GetOutput();
-                        int charactersRead = 0;
-                        while (charactersRead <= 15)
-                        {
-                            charactersRead += secondaryFactors[sf];
-                        }
-                        string testString = output.Substring(output.Length - charactersRead - 1);
-                        //string testString = output.Substring(0, charactersRead);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
-                        {
-                            GridOutput GO = new GridOutput();
-                            GO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                            GO.Show();
-                        }
+                        GridContainsText(sGO, sgrid, permutations, sf, i);
                     }
 
                     for (int srail = 2; srail <= 12; srail++)
                     {
                         string output = CreateRailfence(permutations[i], srail);
-                        string testString = output.Substring(output.Length - 16);
-                        //string testString = output.Substring(0, 15);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
+                        if (RailContainsText(output))
                         {
                             TextOutputFrm TOF = new TextOutputFrm();
                             TOF.SetOutput(output);
@@ -937,15 +802,7 @@ namespace DumbCodeYe.Transposition
                     for (int srail = 2; srail <= 12; srail++)
                     {
                         string output = CreateScylate(permutations[i], srail);
-                        string testString = output.Substring(output.Length - 16);
-                        //string testString = output.Substring(0, 15);
-                        List<char> remainingChars = new List<char>("ABRAHAMWOODHULL");
-                        for (int j = 0; j < testString.Length; j++)
-                        {
-                            if (remainingChars.Contains(testString[j]))
-                                remainingChars.Remove(testString[j]);
-                        }
-                        if (remainingChars.Count == 0)
+                        if (RailContainsText(output))
                         {
                             TextOutputFrm TOF = new TextOutputFrm();
                             TOF.SetOutput(output);
@@ -954,6 +811,36 @@ namespace DumbCodeYe.Transposition
                     }
                 }
             }
+        }
+
+        private void GridContainsText(GridOutput sGO, char[,] sgrid, List<string> permutations, int sf, int i)
+        {
+            string output = sGO.GetOutput();
+            int charactersRead = 0;
+            while (charactersRead <= 15)
+            {
+                charactersRead += secondaryFactors[sf];
+            }
+            //string testString = output.Substring(output.Length - charactersRead - 1);
+            string testString = output.Substring(0, charactersRead);
+            List<char> remainingChars = new List<char>(KnownText.Text);
+            for (int j = 0; j < testString.Length; j++)
+            {
+                if (remainingChars.Contains(testString[j]))
+                    remainingChars.Remove(testString[j]);
+            }
+            if (remainingChars.Count == 0)
+            {
+                GridOutput GO = new GridOutput();
+                GO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
+                GO.Show();
+            }
+        }
+        private bool RailContainsText(string text)
+        {
+            //string testString = text.Substring(text.Length - 16);
+            string testString = text.Substring(0, 15);
+            return testString == KnownText.Text;
         }
 
         public int Factorial(int n)
@@ -991,6 +878,11 @@ namespace DumbCodeYe.Transposition
             GridOutput GO = new GridOutput();
             GO.Setup(grid, MainText.Length / (int)maxColumns.Value, (int)maxColumns.Value, true);
             GO.Show();
+        }
+        private char[,] CreateColumnar(string input, int columns)
+        {
+            char[,] grid = CreateRowColumnar(MainText, (int)maxColumns.Value);
+            return grid;
         }
 
         private void routeBtn_Click(object sender, EventArgs e)
@@ -1474,6 +1366,197 @@ namespace DumbCodeYe.Transposition
             TextOutputFrm TOF = new TextOutputFrm();
             TOF.SetOutput(output);
             TOF.Show();
+        }
+        private void groupBtn_Click(object sender, EventArgs e)
+        {
+            int letterIndex = 0;
+            int length = (int)substringIndexNum.Value;
+            string output1 = "";
+            string output2 = "";
+            
+            while(letterIndex < MainText.Length)
+            {
+                for (int i = 0; i < length; i++)
+                {
+                    output1 += MainText[letterIndex];
+                    letterIndex++;
+                }
+                if (letterIndex >= MainText.Length)
+                    break;
+                for (int i = 0; i < length; i++)
+                {
+                    output2 += MainText[letterIndex];
+                    letterIndex++;
+                }
+            }
+
+            TextOutputFrm TOF1 = new TextOutputFrm();
+            TOF1.SetOutput(output1);
+            TOF1.Show();
+            TextOutputFrm TOF2 = new TextOutputFrm();
+            TOF2.SetOutput(output2);
+            TOF2.Show();
+        }
+        private void changeOtherBtn_Click(object sender, EventArgs e)
+        {
+            ChangeOtherBackwards();
+            ChangeOtherFowards();
+        }
+        private void ChangeOtherBackwards()
+        {
+            string output = "";
+            for (int i = 0; i < MainText.Length; i += 2)
+            {
+                int first = CharToInt(MainText[i]);
+                int second = CharToInt(MainText[MainText.Length - 2 - i]);
+                int difference = second - first;
+                if (difference <= 0)
+                    difference += 26;
+                output += MainText[i].ToString() + IntToChar(difference).ToString();
+            }
+            TextOutputFrm TOF = new TextOutputFrm();
+            TOF.SetOutput(output);
+            TOF.Show();
+        }
+        private void ChangeOtherFowards()
+        {
+            string output = "";
+            for (int i = 0; i < MainText.Length; i += 2)
+            {
+                int first = CharToInt(MainText[i]);
+                int second = CharToInt(MainText[MainText.Length - 2 - i]);
+                int difference = second + first;
+                if (difference >= 26)
+                    difference -= 26;
+                output += MainText[i].ToString() + IntToChar(difference).ToString();
+            }
+            TextOutputFrm TOF = new TextOutputFrm();
+            TOF.SetOutput(output);
+            TOF.Show();
+        }
+        public int CharToInt(char c)
+        {
+            switch (c)
+            {
+                case 'A':
+                    return 1;
+                case 'B':
+                    return 2;
+                case 'C':
+                    return 3;
+                case 'D':
+                    return 4;
+                case 'E':
+                    return 5;
+                case 'F':
+                    return 6;
+                case 'G':
+                    return 7;
+                case 'H':
+                    return 8;
+                case 'I':
+                    return 9;
+                case 'J':
+                    return 10;
+                case 'K':
+                    return 11;
+                case 'L':
+                    return 12;
+                case 'M':
+                    return 13;
+                case 'N':
+                    return 14;
+                case 'O':
+                    return 15;
+                case 'P':
+                    return 16;
+                case 'Q':
+                    return 17;
+                case 'R':
+                    return 18;
+                case 'S':
+                    return 19;
+                case 'T':
+                    return 20;
+                case 'U':
+                    return 21;
+                case 'V':
+                    return 22;
+                case 'W':
+                    return 23;
+                case 'X':
+                    return 24;
+                case 'Y':
+                    return 25;
+                case 'Z':
+                    return 26;
+            }
+            return 0;
+        }
+        public char IntToChar(int num)
+        {
+            switch (num)
+            {
+                case 1:
+                    return 'A';
+                case 2:
+                    return 'B';
+                case 3:
+                    return 'C';
+                case 4:
+                    return 'D';
+                case 5:
+                    return 'E';
+                case 6:
+                    return 'F';
+                case 7:
+                    return 'G';
+                case 8:
+                    return 'H';
+                case 9:
+                    return 'I';
+                case 10:
+                    return 'J';
+                case 11:
+                    return 'K';
+                case 12:
+                    return 'L';
+                case 13:
+                    return 'M';
+                case 14:
+                    return 'N';
+                case 15:
+                    return 'O';
+                case 16:
+                    return 'P';
+                case 17:
+                    return 'Q';
+                case 18:
+                    return 'R';
+                case 19:
+                    return 'S';
+                case 20:
+                    return 'T';
+                case 21:
+                    return 'U';
+                case 22:
+                    return 'V';
+                case 23:
+                    return 'W';
+                case 24:
+                    return 'X';
+                case 25:
+                    return 'Y';
+                case 26:
+                    return 'Z';
+            }
+            return '.';
+        }
+        private void crackDoubleToolsBtn_Click(object sender, EventArgs e)
+        {
+            CrackDoubleTools CDT = new CrackDoubleTools();
+            CDT.Setup(MainText);
+            CDT.Show();
         }
     }
 }

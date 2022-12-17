@@ -35,6 +35,8 @@ namespace DumbCodeYe.Transposition
             this.swapBtn = new System.Windows.Forms.Button();
             this.outputBtn = new System.Windows.Forms.Button();
             this.bruteBtn = new System.Windows.Forms.Button();
+            this.bestPairsBtn = new System.Windows.Forms.Button();
+            this.insertBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.swap1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.swap2)).BeginInit();
             this.SuspendLayout();
@@ -43,16 +45,17 @@ namespace DumbCodeYe.Transposition
             // 
             this.gridList.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gridList.FormattingEnabled = true;
+            this.gridList.HorizontalScrollbar = true;
             this.gridList.ItemHeight = 32;
             this.gridList.Location = new System.Drawing.Point(12, 12);
             this.gridList.Name = "gridList";
-            this.gridList.Size = new System.Drawing.Size(1270, 420);
+            this.gridList.Size = new System.Drawing.Size(740, 420);
             this.gridList.TabIndex = 0;
             // 
             // swap1
             // 
             this.swap1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.swap1.Location = new System.Drawing.Point(1288, 12);
+            this.swap1.Location = new System.Drawing.Point(758, 12);
             this.swap1.Minimum = new decimal(new int[] {
             1,
             0,
@@ -70,7 +73,7 @@ namespace DumbCodeYe.Transposition
             // swap2
             // 
             this.swap2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.swap2.Location = new System.Drawing.Point(1288, 44);
+            this.swap2.Location = new System.Drawing.Point(758, 44);
             this.swap2.Minimum = new decimal(new int[] {
             1,
             0,
@@ -88,7 +91,7 @@ namespace DumbCodeYe.Transposition
             // swapBtn
             // 
             this.swapBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.swapBtn.Location = new System.Drawing.Point(1288, 76);
+            this.swapBtn.Location = new System.Drawing.Point(758, 76);
             this.swapBtn.Name = "swapBtn";
             this.swapBtn.Size = new System.Drawing.Size(159, 34);
             this.swapBtn.TabIndex = 3;
@@ -99,7 +102,7 @@ namespace DumbCodeYe.Transposition
             // outputBtn
             // 
             this.outputBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.outputBtn.Location = new System.Drawing.Point(1288, 398);
+            this.outputBtn.Location = new System.Drawing.Point(758, 398);
             this.outputBtn.Name = "outputBtn";
             this.outputBtn.Size = new System.Drawing.Size(159, 34);
             this.outputBtn.TabIndex = 4;
@@ -110,7 +113,7 @@ namespace DumbCodeYe.Transposition
             // bruteBtn
             // 
             this.bruteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bruteBtn.Location = new System.Drawing.Point(1288, 358);
+            this.bruteBtn.Location = new System.Drawing.Point(758, 358);
             this.bruteBtn.Name = "bruteBtn";
             this.bruteBtn.Size = new System.Drawing.Size(159, 34);
             this.bruteBtn.TabIndex = 5;
@@ -118,11 +121,35 @@ namespace DumbCodeYe.Transposition
             this.bruteBtn.UseVisualStyleBackColor = true;
             this.bruteBtn.Click += new System.EventHandler(this.bruteBtn_Click);
             // 
+            // bestPairsBtn
+            // 
+            this.bestPairsBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bestPairsBtn.Location = new System.Drawing.Point(758, 318);
+            this.bestPairsBtn.Name = "bestPairsBtn";
+            this.bestPairsBtn.Size = new System.Drawing.Size(159, 34);
+            this.bestPairsBtn.TabIndex = 6;
+            this.bestPairsBtn.Text = "BEST PAIRS";
+            this.bestPairsBtn.UseVisualStyleBackColor = true;
+            this.bestPairsBtn.Click += new System.EventHandler(this.bestPairsBtn_Click);
+            // 
+            // insertBtn
+            // 
+            this.insertBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.insertBtn.Location = new System.Drawing.Point(758, 116);
+            this.insertBtn.Name = "insertBtn";
+            this.insertBtn.Size = new System.Drawing.Size(159, 34);
+            this.insertBtn.TabIndex = 7;
+            this.insertBtn.Text = "INSERT";
+            this.insertBtn.UseVisualStyleBackColor = true;
+            this.insertBtn.Click += new System.EventHandler(this.insertBtn_Click);
+            // 
             // GridOutput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1459, 444);
+            this.ClientSize = new System.Drawing.Size(922, 444);
+            this.Controls.Add(this.insertBtn);
+            this.Controls.Add(this.bestPairsBtn);
             this.Controls.Add(this.bruteBtn);
             this.Controls.Add(this.outputBtn);
             this.Controls.Add(this.swapBtn);
@@ -147,5 +174,7 @@ namespace DumbCodeYe.Transposition
         private System.Windows.Forms.Button swapBtn;
         private System.Windows.Forms.Button outputBtn;
         private System.Windows.Forms.Button bruteBtn;
+        private System.Windows.Forms.Button bestPairsBtn;
+        private System.Windows.Forms.Button insertBtn;
     }
 }

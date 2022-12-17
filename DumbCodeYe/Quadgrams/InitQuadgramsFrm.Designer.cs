@@ -111,6 +111,8 @@ namespace DumbCodeYe.Quadgrams
             this.Controls.Add(this.loadingBar);
             this.Controls.Add(this.initBtn);
             this.Controls.Add(this.closeBtn);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "InitQuadgramsFrm";
             this.Text = "InitQuadgramsFrm";
             this.ResumeLayout(false);

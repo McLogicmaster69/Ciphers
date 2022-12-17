@@ -33,6 +33,8 @@ namespace DumbCodeYe
             System.Windows.Forms.Button addSpacesBtn;
             System.Windows.Forms.Button initWordFreqBtn;
             System.Windows.Forms.Button initDictionaryBtn;
+            System.Windows.Forms.Button twoSquareBtn;
+            System.Windows.Forms.Button initBigramsBtn;
             this.textInput = new System.Windows.Forms.TextBox();
             this.ceaserBtn = new System.Windows.Forms.Button();
             this.substituteBtn = new System.Windows.Forms.Button();
@@ -50,13 +52,15 @@ namespace DumbCodeYe
             addSpacesBtn = new System.Windows.Forms.Button();
             initWordFreqBtn = new System.Windows.Forms.Button();
             initDictionaryBtn = new System.Windows.Forms.Button();
+            twoSquareBtn = new System.Windows.Forms.Button();
+            initBigramsBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // initQuadBtn
             // 
-            initQuadBtn.Location = new System.Drawing.Point(12, 482);
+            initQuadBtn.Location = new System.Drawing.Point(228, 482);
             initQuadBtn.Name = "initQuadBtn";
-            initQuadBtn.Size = new System.Drawing.Size(281, 31);
+            initQuadBtn.Size = new System.Drawing.Size(210, 31);
             initQuadBtn.TabIndex = 12;
             initQuadBtn.Text = "INIT QUADGRAMS";
             initQuadBtn.UseVisualStyleBackColor = true;
@@ -74,13 +78,33 @@ namespace DumbCodeYe
             // 
             // initWordFreqBtn
             // 
-            initWordFreqBtn.Location = new System.Drawing.Point(591, 482);
+            initWordFreqBtn.Location = new System.Drawing.Point(662, 482);
             initWordFreqBtn.Name = "initWordFreqBtn";
-            initWordFreqBtn.Size = new System.Drawing.Size(281, 31);
+            initWordFreqBtn.Size = new System.Drawing.Size(210, 31);
             initWordFreqBtn.TabIndex = 14;
             initWordFreqBtn.Text = "INIT WORD FREQ";
             initWordFreqBtn.UseVisualStyleBackColor = true;
             initWordFreqBtn.Click += new System.EventHandler(this.initWordFreqBtn_Click);
+            // 
+            // initDictionaryBtn
+            // 
+            initDictionaryBtn.Location = new System.Drawing.Point(446, 482);
+            initDictionaryBtn.Name = "initDictionaryBtn";
+            initDictionaryBtn.Size = new System.Drawing.Size(210, 31);
+            initDictionaryBtn.TabIndex = 15;
+            initDictionaryBtn.Text = "INIT DICTIONARY";
+            initDictionaryBtn.UseVisualStyleBackColor = true;
+            initDictionaryBtn.Click += new System.EventHandler(this.initDictionaryBtn_Click);
+            // 
+            // twoSquareBtn
+            // 
+            twoSquareBtn.Location = new System.Drawing.Point(12, 556);
+            twoSquareBtn.Name = "twoSquareBtn";
+            twoSquareBtn.Size = new System.Drawing.Size(860, 31);
+            twoSquareBtn.TabIndex = 16;
+            twoSquareBtn.Text = "TWO SQUARE";
+            twoSquareBtn.UseVisualStyleBackColor = true;
+            twoSquareBtn.Click += new System.EventHandler(this.twoSquareBtn_Click);
             // 
             // textInput
             // 
@@ -214,21 +238,23 @@ namespace DumbCodeYe
             this.btnHill.UseVisualStyleBackColor = true;
             this.btnHill.Click += new System.EventHandler(this.btnHill_Click);
             // 
-            // initDictionaryBtn
+            // initBigramsBtn
             // 
-            initDictionaryBtn.Location = new System.Drawing.Point(302, 482);
-            initDictionaryBtn.Name = "initDictionaryBtn";
-            initDictionaryBtn.Size = new System.Drawing.Size(281, 31);
-            initDictionaryBtn.TabIndex = 15;
-            initDictionaryBtn.Text = "INIT DICTIONARY";
-            initDictionaryBtn.UseVisualStyleBackColor = true;
-            initDictionaryBtn.Click += new System.EventHandler(this.initDictionaryBtn_Click);
+            initBigramsBtn.Location = new System.Drawing.Point(12, 482);
+            initBigramsBtn.Name = "initBigramsBtn";
+            initBigramsBtn.Size = new System.Drawing.Size(210, 31);
+            initBigramsBtn.TabIndex = 17;
+            initBigramsBtn.Text = "INIT BIGRAMS";
+            initBigramsBtn.UseVisualStyleBackColor = true;
+            initBigramsBtn.Click += new System.EventHandler(this.initBigramsBtn_Click);
             // 
             // mainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 558);
+            this.ClientSize = new System.Drawing.Size(884, 596);
+            this.Controls.Add(initBigramsBtn);
+            this.Controls.Add(twoSquareBtn);
             this.Controls.Add(initDictionaryBtn);
             this.Controls.Add(initWordFreqBtn);
             this.Controls.Add(addSpacesBtn);

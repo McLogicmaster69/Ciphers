@@ -50,16 +50,22 @@ namespace DumbCodeYe.Transposition
             this.label6 = new System.Windows.Forms.Label();
             this.doubleBtn = new System.Windows.Forms.Button();
             this.reverseBtn = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.border = new System.Windows.Forms.PictureBox();
             this.columnarBtn = new System.Windows.Forms.Button();
             this.routeBtn = new System.Windows.Forms.Button();
             this.xBtn = new System.Windows.Forms.Button();
+            this.groupBtn = new System.Windows.Forms.Button();
+            this.changeOtherBtn = new System.Windows.Forms.Button();
+            this.KnownText = new System.Windows.Forms.TextBox();
+            this.TestFactors = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.crackDoubleToolsBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.maxColumns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.railsNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.columnsNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.substringLengthNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.substringIndexNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.border)).BeginInit();
             this.SuspendLayout();
             // 
             // rowColumnBtn
@@ -290,7 +296,7 @@ namespace DumbCodeYe.Transposition
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(252, 300);
+            this.label6.Location = new System.Drawing.Point(251, 383);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(229, 13);
             this.label6.TabIndex = 21;
@@ -299,7 +305,7 @@ namespace DumbCodeYe.Transposition
             // 
             // doubleBtn
             // 
-            this.doubleBtn.Location = new System.Drawing.Point(255, 316);
+            this.doubleBtn.Location = new System.Drawing.Point(255, 451);
             this.doubleBtn.Name = "doubleBtn";
             this.doubleBtn.Size = new System.Drawing.Size(229, 34);
             this.doubleBtn.TabIndex = 22;
@@ -309,7 +315,7 @@ namespace DumbCodeYe.Transposition
             // 
             // reverseBtn
             // 
-            this.reverseBtn.Location = new System.Drawing.Point(255, 353);
+            this.reverseBtn.Location = new System.Drawing.Point(9, 396);
             this.reverseBtn.Name = "reverseBtn";
             this.reverseBtn.Size = new System.Drawing.Size(229, 34);
             this.reverseBtn.TabIndex = 24;
@@ -317,14 +323,14 @@ namespace DumbCodeYe.Transposition
             this.reverseBtn.UseVisualStyleBackColor = true;
             this.reverseBtn.Click += new System.EventHandler(this.reverseBtn_Click);
             // 
-            // pictureBox1
+            // border
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Black;
-            this.pictureBox1.Location = new System.Drawing.Point(246, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(2, 335);
-            this.pictureBox1.TabIndex = 25;
-            this.pictureBox1.TabStop = false;
+            this.border.BackColor = System.Drawing.Color.Black;
+            this.border.Location = new System.Drawing.Point(246, 12);
+            this.border.Name = "border";
+            this.border.Size = new System.Drawing.Size(2, 450);
+            this.border.TabIndex = 25;
+            this.border.TabStop = false;
             // 
             // columnarBtn
             // 
@@ -356,15 +362,74 @@ namespace DumbCodeYe.Transposition
             this.xBtn.UseVisualStyleBackColor = true;
             this.xBtn.Click += new System.EventHandler(this.xBtn_Click);
             // 
+            // groupBtn
+            // 
+            this.groupBtn.Location = new System.Drawing.Point(255, 303);
+            this.groupBtn.Name = "groupBtn";
+            this.groupBtn.Size = new System.Drawing.Size(229, 34);
+            this.groupBtn.TabIndex = 29;
+            this.groupBtn.Text = "GROUP";
+            this.groupBtn.UseVisualStyleBackColor = true;
+            this.groupBtn.Click += new System.EventHandler(this.groupBtn_Click);
+            // 
+            // changeOtherBtn
+            // 
+            this.changeOtherBtn.Location = new System.Drawing.Point(255, 343);
+            this.changeOtherBtn.Name = "changeOtherBtn";
+            this.changeOtherBtn.Size = new System.Drawing.Size(229, 34);
+            this.changeOtherBtn.TabIndex = 30;
+            this.changeOtherBtn.Text = "CHANGE EVERY OTHER";
+            this.changeOtherBtn.UseVisualStyleBackColor = true;
+            this.changeOtherBtn.Click += new System.EventHandler(this.changeOtherBtn_Click);
+            // 
+            // KnownText
+            // 
+            this.KnownText.Location = new System.Drawing.Point(255, 399);
+            this.KnownText.Name = "KnownText";
+            this.KnownText.Size = new System.Drawing.Size(229, 20);
+            this.KnownText.TabIndex = 31;
+            // 
+            // TestFactors
+            // 
+            this.TestFactors.Location = new System.Drawing.Point(255, 425);
+            this.TestFactors.Name = "TestFactors";
+            this.TestFactors.Size = new System.Drawing.Size(229, 20);
+            this.TestFactors.TabIndex = 32;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(9, 380);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(229, 13);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "---------------------------------------------------------------------------";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // crackDoubleToolsBtn
+            // 
+            this.crackDoubleToolsBtn.Location = new System.Drawing.Point(9, 436);
+            this.crackDoubleToolsBtn.Name = "crackDoubleToolsBtn";
+            this.crackDoubleToolsBtn.Size = new System.Drawing.Size(229, 34);
+            this.crackDoubleToolsBtn.TabIndex = 34;
+            this.crackDoubleToolsBtn.Text = "CRACK DOUBLE TOOLS";
+            this.crackDoubleToolsBtn.UseVisualStyleBackColor = true;
+            this.crackDoubleToolsBtn.Click += new System.EventHandler(this.crackDoubleToolsBtn_Click);
+            // 
             // TranspositionTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 399);
+            this.ClientSize = new System.Drawing.Size(502, 492);
+            this.Controls.Add(this.crackDoubleToolsBtn);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.TestFactors);
+            this.Controls.Add(this.KnownText);
+            this.Controls.Add(this.changeOtherBtn);
+            this.Controls.Add(this.groupBtn);
             this.Controls.Add(this.xBtn);
             this.Controls.Add(this.routeBtn);
             this.Controls.Add(this.columnarBtn);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.border);
             this.Controls.Add(this.reverseBtn);
             this.Controls.Add(this.doubleBtn);
             this.Controls.Add(this.label6);
@@ -395,8 +460,9 @@ namespace DumbCodeYe.Transposition
             ((System.ComponentModel.ISupportInitialize)(this.columnsNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.substringLengthNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.substringIndexNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.border)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -423,9 +489,15 @@ namespace DumbCodeYe.Transposition
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button doubleBtn;
         private System.Windows.Forms.Button reverseBtn;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button columnarBtn;
         private System.Windows.Forms.Button routeBtn;
         private System.Windows.Forms.Button xBtn;
+        private System.Windows.Forms.Button groupBtn;
+        private System.Windows.Forms.Button changeOtherBtn;
+        private System.Windows.Forms.PictureBox border;
+        private System.Windows.Forms.TextBox KnownText;
+        private System.Windows.Forms.TextBox TestFactors;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button crackDoubleToolsBtn;
     }
 }

@@ -47,7 +47,7 @@ namespace DumbCodeYe.Transposition
             Columns = columns;
             ReadColumns = readColumns;
             PrintGrid();
-            CalculateBestPairs();
+            CalculateBestPairs(false);
         }
 
         private void PrintGrid()
@@ -130,7 +130,8 @@ namespace DumbCodeYe.Transposition
         {
             CalculateBestPairs();
         }
-        private void CalculateBestPairs()
+
+        private void CalculateBestPairs(bool generate = true)
         {
             int[] bestPair = new int[Columns];
             long lowestScore = long.MaxValue;
@@ -165,7 +166,8 @@ namespace DumbCodeYe.Transposition
             BestPair = bestPair;
             LowestIndex = lowestIndex;
 
-            GenerateBestPairOutput();
+            if(generate)
+                GenerateBestPairOutput();
         }
         private void RecalculateBestPairs(int s1, int s2)
         {
@@ -196,6 +198,30 @@ namespace DumbCodeYe.Transposition
             output += $"Most likly to be last column: {LowestIndex + 1}";
             LikelyPairsOutput.SetOutput(output);
             LikelyPairsOutput.Show();
+        }
+        public float GetAveragePointer()
+        {
+            int[] pointingTo = new int[Columns];
+            for (int i = 0; i < Columns; i++)
+            {
+                if(i != LowestIndex)
+                {
+                    pointingTo[BestPair[i]]++;
+                }
+            }
+
+            float totalValue = 0;
+            int totalColumns = 0;
+            for (int i = 0; i < Columns; i++)
+            {
+                if(pointingTo[i] != 0)
+                {
+                    totalValue += pointingTo[i];
+                    totalColumns++;
+                }
+            }
+
+            return totalValue / totalColumns; // BEST VALUE IS 1
         }
 
         private void Swap(int c1, int c2, bool print = true)

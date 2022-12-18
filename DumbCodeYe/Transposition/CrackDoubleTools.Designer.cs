@@ -49,10 +49,11 @@ namespace DumbCodeYe.Transposition
             "ROW COLUMNAR",
             "ROUTE",
             "RAILFENCE",
-            "SCYLATE"});
+            "SCYLATE",
+            "REVERSE"});
             this.firstPassList.Location = new System.Drawing.Point(12, 41);
             this.firstPassList.Name = "firstPassList";
-            this.firstPassList.Size = new System.Drawing.Size(129, 94);
+            this.firstPassList.Size = new System.Drawing.Size(129, 109);
             this.firstPassList.TabIndex = 1;
             // 
             // firstPassLbl
@@ -82,10 +83,11 @@ namespace DumbCodeYe.Transposition
             "ROW COLUMNAR",
             "ROUTE",
             "RAILFENCE",
-            "SCYLATE"});
+            "SCYLATE",
+            "REVERSE"});
             this.secondPassList.Location = new System.Drawing.Point(147, 41);
             this.secondPassList.Name = "secondPassList";
-            this.secondPassList.Size = new System.Drawing.Size(129, 94);
+            this.secondPassList.Size = new System.Drawing.Size(129, 109);
             this.secondPassList.TabIndex = 3;
             // 
             // calculationLbl
@@ -101,31 +103,31 @@ namespace DumbCodeYe.Transposition
             // 
             this.calculationList.FormattingEnabled = true;
             this.calculationList.Items.AddRange(new object[] {
-            "FULL QUAD",
+            "VALID BIGRAMS",
             "KNOWN START",
             "KNOWN END"});
             this.calculationList.Location = new System.Drawing.Point(282, 41);
             this.calculationList.Name = "calculationList";
-            this.calculationList.Size = new System.Drawing.Size(129, 94);
+            this.calculationList.Size = new System.Drawing.Size(129, 109);
             this.calculationList.TabIndex = 5;
             // 
             // TestFactors
             // 
-            this.TestFactors.Location = new System.Drawing.Point(417, 54);
+            this.TestFactors.Location = new System.Drawing.Point(417, 67);
             this.TestFactors.Name = "TestFactors";
             this.TestFactors.Size = new System.Drawing.Size(229, 20);
             this.TestFactors.TabIndex = 35;
             // 
             // KnownText
             // 
-            this.KnownText.Location = new System.Drawing.Point(417, 28);
+            this.KnownText.Location = new System.Drawing.Point(417, 41);
             this.KnownText.Name = "KnownText";
             this.KnownText.Size = new System.Drawing.Size(229, 20);
             this.KnownText.TabIndex = 34;
             // 
             // doubleBtn
             // 
-            this.doubleBtn.Location = new System.Drawing.Point(417, 80);
+            this.doubleBtn.Location = new System.Drawing.Point(417, 93);
             this.doubleBtn.Name = "doubleBtn";
             this.doubleBtn.Size = new System.Drawing.Size(229, 34);
             this.doubleBtn.TabIndex = 33;
@@ -137,7 +139,7 @@ namespace DumbCodeYe.Transposition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(654, 150);
+            this.ClientSize = new System.Drawing.Size(654, 158);
             this.Controls.Add(this.TestFactors);
             this.Controls.Add(this.KnownText);
             this.Controls.Add(this.doubleBtn);
@@ -147,6 +149,8 @@ namespace DumbCodeYe.Transposition
             this.Controls.Add(this.secondPassList);
             this.Controls.Add(this.firstPassLbl);
             this.Controls.Add(this.firstPassList);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "CrackDoubleTools";
             this.Text = "CrackDoubleTools";
             this.ResumeLayout(false);

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DumbCodeYe.Bigrams;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -13,10 +15,12 @@ namespace DumbCodeYe.Transposition
 {
     public partial class CrackDoubleTools : Form
     {
-        private string MainText = ""; 
-        int[] primaryFactors = {  };
-        int[] secondaryFactors = {  };
-        List<string> CiphersToTest;
+        private string MainText = "";
+        private string Mode = "FULL QUAD";
+        private int[] primaryFactors = {  };
+        private int[] secondaryFactors = {  };
+        private List<string> CiphersToTest;
+        private const long ExpectedBigramValue = 1700000000;
         public CrackDoubleTools()
         {
             InitializeComponent();
@@ -31,8 +35,21 @@ namespace DumbCodeYe.Transposition
             List<int> factors = new List<int>();
             foreach (string s in TestFactors.Text.Split(' '))
             {
-                factors.Add(int.Parse(s));
+                try
+                {
+                    factors.Add(int.Parse(s));
+                }
+                catch
+                {
+                    return;
+                }
             }
+            if (factors.Count == 0)
+                return;
+
+            if (calculationList.CheckedItems.Count == 0)
+                return;
+            Mode = calculationList.CheckedItems[0].ToString();
 
             primaryFactors = factors.ToArray();
             secondaryFactors = factors.ToArray();
@@ -60,10 +77,13 @@ namespace DumbCodeYe.Transposition
                     case "SCYLATE":
                         CipherThreads.Add(new Thread(() => ScylatePermutations()));
                         break;
+                    case "REVERSE":
+                        CipherThreads.Add(new Thread(() => ReversePermutations()));
+                        break;
                 }
             }
             CiphersToTest = new List<string>();
-            foreach (var s in firstPassList.CheckedItems)
+            foreach (var s in secondPassList.CheckedItems)
             {
                 CiphersToTest.Add(s.ToString());
             }
@@ -83,6 +103,12 @@ namespace DumbCodeYe.Transposition
                 return 1;
             else
                 return n * Factorial(n - 1);
+        }
+        private void CreateOutput(string primary, string secondary)
+        {
+            string output = $"{primary}\n->\n{secondary}";
+            File.Create($"output/{DateTime.Now.Day}-{DateTime.Now.Hour}-{DateTime.Now.Minute}-{DateTime.Now.Second}-{DateTime.Now.Millisecond}.txt").Close();
+            File.WriteAllText($"output/{DateTime.Now.Day}-{DateTime.Now.Hour}-{DateTime.Now.Minute}-{DateTime.Now.Second}-{DateTime.Now.Millisecond}.txt", output);
         }
 
         //
@@ -821,7 +847,7 @@ namespace DumbCodeYe.Transposition
         // Permutations
         //
 
-        private void SecondaryPermutations(List<string> permutations, ProgressBarForm PBF, int currentTask, int totalTasks)
+        private void SecondaryPermutations(List<string> permutations, ProgressBarForm PBF, int currentTask, int totalTasks, string outputMsg)
         {
             for (int i = 0; i < permutations.Count; i++)
             {
@@ -838,17 +864,36 @@ namespace DumbCodeYe.Transposition
                         char[,] sgrid = CreateBasicKeyword(permutations[i], secondaryFactors[sf]);
                         GridOutput sGO = new GridOutput();
                         sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                        GridContainsText(sGO, sgrid, permutations, sf, i);
+                        if(Mode == "KNOWN START" || Mode == "KNOWN END")
+                            GridContainsText(sGO, sgrid, permutations, sf, i, outputMsg, $"BASIC KEYWORD WITH COLUMNS {secondaryFactors[sf]}");
+                        else if(Mode == "VALID BIGRAMS")
+                        {
+                            if(sGO.GetAveragePointer() <= 1.05f)
+                            {
+                                CreateOutput($"{outputMsg} OUTPUT: {permutations[i]}", $"BASIC KEYWORD WITH COLUMNS {secondaryFactors[sf]}");
+                                //GridOutput GO = new GridOutput();
+                                //GO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
+                                //GO.Show();
+                            }
+                        }
                     }
                 }
-                if (CiphersToTest.Contains("ROW COLUMNAR"))
+                if (CiphersToTest.Contains("COLUMNAR"))
                 {
                     for (int sf = 0; sf < secondaryFactors.Length; sf++)
                     {
                         char[,] sgrid = CreateColumnar(permutations[i], secondaryFactors[sf]);
                         GridOutput sGO = new GridOutput();
                         sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                        GridContainsText(sGO, sgrid, permutations, sf, i);
+                        if (Mode == "KNOWN START" || Mode == "KNOWN END")
+                            GridContainsText(sGO, sgrid, permutations, sf, i, $"{outputMsg} OUTPUT: {permutations[i]}", $"COLUMNAR WITH COLUMNS {secondaryFactors[sf]}");
+                        else if (Mode == "VALID BIGRAMS")
+                        {
+                            if (sGO.GetAveragePointer() <= 1.05f)
+                            {
+                                CreateOutput($"{outputMsg} OUTPUT: {permutations[i]}", $"COLUMNAR WITH COLUMNS {secondaryFactors[sf]}");
+                            }
+                        }
                     }
                 }
                 if (CiphersToTest.Contains("ROW COLUMNAR"))
@@ -858,7 +903,15 @@ namespace DumbCodeYe.Transposition
                         char[,] sgrid = CreateRowColumnar(permutations[i], secondaryFactors[sf]);
                         GridOutput sGO = new GridOutput();
                         sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                        GridContainsText(sGO, sgrid, permutations, sf, i);
+                        if (Mode == "KNOWN START" || Mode == "KNOWN END")
+                            GridContainsText(sGO, sgrid, permutations, sf, i, $"{outputMsg} OUTPUT: {permutations[i]}", $"BASIC KEYWORD WITH COLUMNS {secondaryFactors[sf]}");
+                        else if (Mode == "VALID BIGRAMS")
+                        {
+                            if (sGO.GetAveragePointer() <= 1.05f)
+                            {
+                                CreateOutput($"{outputMsg} OUTPUT: {permutations[i]}", $"BASIC KEYWORD WITH COLUMNS {secondaryFactors[sf]}");
+                            }
+                        }
                     }
                 }
 
@@ -869,11 +922,19 @@ namespace DumbCodeYe.Transposition
                         List<string> routes = CreateRoute(permutations[i], secondaryFactors[sf]);
                         foreach(string s in routes)
                         {
-                            if (RailContainsText(s))
+                            if (Mode == "KNOWN START" || Mode == "KNOWN END")
                             {
-                                TextOutputFrm TOF = new TextOutputFrm();
-                                TOF.SetOutput(s);
-                                TOF.Show();
+                                if (RailContainsText(s))
+                                {
+                                    CreateOutput($"{outputMsg} OUTPUT: {permutations[i]}", $"ROUTE WITH COLUMNS {secondaryFactors[sf]}");
+                                }
+                            }
+                            else if(Mode == "VALID BIGRAMS")
+                            {
+                                if(BigramsData.GetAverageValue(s) >= ExpectedBigramValue)
+                                {
+                                    CreateOutput($"{outputMsg} OUTPUT: {permutations[i]}", $"ROUTE WITH COLUMNS {secondaryFactors[sf]}");
+                                }
                             }
                         }
                     }
@@ -884,11 +945,19 @@ namespace DumbCodeYe.Transposition
                     for (int srail = 2; srail <= 12; srail++)
                     {
                         string output = CreateRailfence(permutations[i], srail);
-                        if (RailContainsText(output))
+                        if (Mode == "KNOWN START" || Mode == "KNOWN END")
                         {
-                            TextOutputFrm TOF = new TextOutputFrm();
-                            TOF.SetOutput(output);
-                            TOF.Show();
+                            if (RailContainsText(output))
+                            {
+                                CreateOutput($"{outputMsg} OUTPUT: {permutations[i]}", $"RAILFENCE WITH RAILS {srail}");
+                            }
+                            else if (Mode == "VALID BIGRAMS")
+                            {
+                                if (BigramsData.GetAverageValue(output) >= ExpectedBigramValue)
+                                {
+                                    CreateOutput($"{outputMsg} OUTPUT: {permutations[i]}", $"RAILFENCE WITH RAILS {srail}");
+                                }
+                            }
                         }
                     }
                 }
@@ -897,11 +966,37 @@ namespace DumbCodeYe.Transposition
                     for (int srail = 2; srail <= 12; srail++)
                     {
                         string output = CreateScylate(permutations[i], srail);
+                        if (Mode == "KNOWN START" || Mode == "KNOWN END")
+                        {
+                            if (RailContainsText(output))
+                            {
+                                CreateOutput($"{outputMsg} OUTPUT: {permutations[i]}", $"SCYLATE WITH RAILS {srail}");
+                            }
+                        }
+                        else if (Mode == "VALID BIGRAMS")
+                        {
+                            if (BigramsData.GetAverageValue(output) >= ExpectedBigramValue)
+                            {
+                                CreateOutput($"{outputMsg} OUTPUT: {permutations[i]}", $"SCYLATE WITH RAILS {srail}");
+                            }
+                        }
+                    }
+                }
+                if (CiphersToTest.Contains("REVERSE"))
+                {
+                    string output = Reverse(permutations[i]); 
+                    if (Mode == "KNOWN START" || Mode == "KNOWN END")
+                    {
                         if (RailContainsText(output))
                         {
-                            TextOutputFrm TOF = new TextOutputFrm();
-                            TOF.SetOutput(output);
-                            TOF.Show();
+                            CreateOutput($"{outputMsg} OUTPUT: {permutations[i]}", $"REVERSE");
+                        }
+                    }
+                    else if (Mode == "VALID BIGRAMS")
+                    {
+                        if (BigramsData.GetAverageValue(output) >= ExpectedBigramValue)
+                        {
+                            CreateOutput($"{outputMsg} OUTPUT: {permutations[i]}", $"REVERSE");
                         }
                     }
                 }
@@ -923,7 +1018,7 @@ namespace DumbCodeYe.Transposition
                 GridOutput pGO = new GridOutput();
                 pGO.Setup(pgrid, MainText.Length / primaryFactors[pf], primaryFactors[pf]);
                 List<string> permutations = pGO.GetAllPermutations();
-                SecondaryPermutations(permutations, PBF, currentTask, totalTasks);
+                SecondaryPermutations(permutations, PBF, currentTask, totalTasks, $"BASIC KEYWORD WITH COLUMNS {primaryFactors[pf]}");
             }
         }
         private void RowColumnarPermutations()
@@ -942,7 +1037,7 @@ namespace DumbCodeYe.Transposition
                 GridOutput pGO = new GridOutput();
                 pGO.Setup(pgrid, MainText.Length / primaryFactors[pf], primaryFactors[pf]);
                 List<string> permutations = pGO.GetAllPermutations();
-                SecondaryPermutations(permutations, PBF, currentTask, totalTasks);
+                SecondaryPermutations(permutations, PBF, currentTask, totalTasks, $"COLUMNAR WITH COLUMNS {primaryFactors[pf]}");
             }
         }
         private void ColumnarPermutations()
@@ -961,7 +1056,7 @@ namespace DumbCodeYe.Transposition
                 GridOutput pGO = new GridOutput();
                 pGO.Setup(pgrid, MainText.Length / primaryFactors[pf], primaryFactors[pf]);
                 List<string> permutations = pGO.GetAllPermutations();
-                SecondaryPermutations(permutations, PBF, currentTask, totalTasks);
+                SecondaryPermutations(permutations, PBF, currentTask, totalTasks, $"ROW COLUMNAR WITH COLUMNS {primaryFactors[pf]}");
             }
         }
         private void RailFencePermutations()
@@ -973,7 +1068,7 @@ namespace DumbCodeYe.Transposition
             for (int rail = 2; rail <= 12; rail++)
             {
                 List<string> permutations = new List<string>() { CreateRailfence(MainText, rail) };
-                SecondaryPermutations(permutations, PBF, currentTask, totalTasks);
+                SecondaryPermutations(permutations, PBF, currentTask, totalTasks, $"RAILFENCE WITH RAILS {rail}");
             }
         }
         private void ScylatePermutations()
@@ -985,7 +1080,7 @@ namespace DumbCodeYe.Transposition
             for (int rail = 2; rail <= 12; rail++)
             {
                 List<string> permutations = new List<string>() { CreateScylate(MainText, rail) };
-                SecondaryPermutations(permutations, PBF, currentTask, totalTasks);
+                SecondaryPermutations(permutations, PBF, currentTask, totalTasks, $"SCYLATE WITH RAILS {rail}");
             }
         }
         private void RoutePermutations()
@@ -1001,8 +1096,17 @@ namespace DumbCodeYe.Transposition
             for (int pf = 0; pf < primaryFactors.Length; pf++)
             {
                 List<string> permutations = CreateRoute(MainText, primaryFactors[pf]);
-                SecondaryPermutations(permutations, PBF, currentTask, totalTasks);
+                SecondaryPermutations(permutations, PBF, currentTask, totalTasks, $"ROUTE WITH COLUMNS {primaryFactors[pf]}");
             }
+        }
+        private void ReversePermutations()
+        {
+            int currentTask = 0;
+            int totalTasks = 1;
+            ProgressBarForm PBF = new ProgressBarForm();
+            PBF.Show();
+            List<string> permutations = new List<string>() { Reverse(MainText) };
+            SecondaryPermutations(permutations, PBF, currentTask, totalTasks, $"REVERSE");
         }
 
         //
@@ -1010,7 +1114,7 @@ namespace DumbCodeYe.Transposition
         //
 
 
-        private void GridContainsText(GridOutput sGO, char[,] sgrid, List<string> permutations, int sf, int i)
+        private void GridContainsText(GridOutput sGO, char[,] sgrid, List<string> permutations, int sf, int i, string outputMsgPrimary, string outputMsgSecondary)
         {
             string output = sGO.GetOutput();
             int charactersRead = 0;
@@ -1018,8 +1122,11 @@ namespace DumbCodeYe.Transposition
             {
                 charactersRead += secondaryFactors[sf];
             }
-            //string testString = output.Substring(output.Length - charactersRead - 1);
-            string testString = output.Substring(0, charactersRead);
+            string testString = "";
+            if(Mode == "KNOWN START")
+                testString = output.Substring(0, charactersRead);
+            else if(Mode == "KNOWN END")
+                testString = output.Substring(output.Length - charactersRead - 1);
             List<char> remainingChars = new List<char>(KnownText.Text);
             for (int j = 0; j < testString.Length; j++)
             {
@@ -1028,15 +1135,16 @@ namespace DumbCodeYe.Transposition
             }
             if (remainingChars.Count == 0)
             {
-                GridOutput GO = new GridOutput();
-                GO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
-                GO.Show();
+                CreateOutput(outputMsgPrimary, outputMsgSecondary);
             }
         }
         private bool RailContainsText(string text)
         {
-            //string testString = text.Substring(text.Length - 16);
-            string testString = text.Substring(0, 15);
+            string testString = "";
+            if (Mode == "KNOWN START")
+                testString = text.Substring(0, 15);
+            else if(Mode == "KNOWN END") 
+                testString = text.Substring(text.Length - 16);
             return testString == KnownText.Text;
         }
     }

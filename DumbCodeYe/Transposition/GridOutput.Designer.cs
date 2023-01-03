@@ -37,8 +37,13 @@ namespace DumbCodeYe.Transposition
             this.bruteBtn = new System.Windows.Forms.Button();
             this.bestPairsBtn = new System.Windows.Forms.Button();
             this.insertBtn = new System.Windows.Forms.Button();
+            this.selectedColumnNum = new System.Windows.Forms.NumericUpDown();
+            this.shiftValueNum = new System.Windows.Forms.NumericUpDown();
+            this.shiftBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.swap1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.swap2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedColumnNum)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shiftValueNum)).BeginInit();
             this.SuspendLayout();
             // 
             // gridList
@@ -143,11 +148,61 @@ namespace DumbCodeYe.Transposition
             this.insertBtn.UseVisualStyleBackColor = true;
             this.insertBtn.Click += new System.EventHandler(this.insertBtn_Click);
             // 
+            // selectedColumnNum
+            // 
+            this.selectedColumnNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectedColumnNum.Location = new System.Drawing.Point(758, 156);
+            this.selectedColumnNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.selectedColumnNum.Name = "selectedColumnNum";
+            this.selectedColumnNum.Size = new System.Drawing.Size(159, 26);
+            this.selectedColumnNum.TabIndex = 8;
+            this.selectedColumnNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // shiftValueNum
+            // 
+            this.shiftValueNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shiftValueNum.Location = new System.Drawing.Point(758, 188);
+            this.shiftValueNum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.shiftValueNum.Name = "shiftValueNum";
+            this.shiftValueNum.Size = new System.Drawing.Size(159, 26);
+            this.shiftValueNum.TabIndex = 9;
+            this.shiftValueNum.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // shiftBtn
+            // 
+            this.shiftBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shiftBtn.Location = new System.Drawing.Point(758, 220);
+            this.shiftBtn.Name = "shiftBtn";
+            this.shiftBtn.Size = new System.Drawing.Size(159, 34);
+            this.shiftBtn.TabIndex = 10;
+            this.shiftBtn.Text = "SHIFT";
+            this.shiftBtn.UseVisualStyleBackColor = true;
+            this.shiftBtn.Click += new System.EventHandler(this.shiftBtn_Click);
+            // 
             // GridOutput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 444);
+            this.Controls.Add(this.shiftBtn);
+            this.Controls.Add(this.shiftValueNum);
+            this.Controls.Add(this.selectedColumnNum);
             this.Controls.Add(this.insertBtn);
             this.Controls.Add(this.bestPairsBtn);
             this.Controls.Add(this.bruteBtn);
@@ -162,6 +217,8 @@ namespace DumbCodeYe.Transposition
             this.Text = "GridOutput";
             ((System.ComponentModel.ISupportInitialize)(this.swap1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.swap2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.selectedColumnNum)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shiftValueNum)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -176,5 +233,8 @@ namespace DumbCodeYe.Transposition
         private System.Windows.Forms.Button bruteBtn;
         private System.Windows.Forms.Button bestPairsBtn;
         private System.Windows.Forms.Button insertBtn;
+        private System.Windows.Forms.NumericUpDown selectedColumnNum;
+        private System.Windows.Forms.NumericUpDown shiftValueNum;
+        private System.Windows.Forms.Button shiftBtn;
     }
 }

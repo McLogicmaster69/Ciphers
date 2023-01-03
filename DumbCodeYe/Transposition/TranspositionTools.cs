@@ -1558,5 +1558,13 @@ namespace DumbCodeYe.Transposition
             CDT.Setup(MainText);
             CDT.Show();
         }
+
+        private void cadneusBtn_Click(object sender, EventArgs e)
+        {
+            char[,] grid = CreateBasicKeyword(MainText, (int)maxColumns.Value);
+            GridOutput GO = new GridOutput();
+            GO.Setup(grid, MainText.Length / (int)maxColumns.Value, (int)maxColumns.Value, false, true);
+            GO.Show();
+        }
     }
 }

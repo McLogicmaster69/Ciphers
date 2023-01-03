@@ -60,6 +60,7 @@ namespace DumbCodeYe.Transposition
             this.TestFactors = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.crackDoubleToolsBtn = new System.Windows.Forms.Button();
+            this.cadneusBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.maxColumns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.railsNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.columnsNum)).BeginInit();
@@ -244,7 +245,7 @@ namespace DumbCodeYe.Transposition
             // 
             this.substringLengthNum.Location = new System.Drawing.Point(255, 157);
             this.substringLengthNum.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});
@@ -296,7 +297,7 @@ namespace DumbCodeYe.Transposition
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(251, 383);
+            this.label6.Location = new System.Drawing.Point(255, 420);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(229, 13);
             this.label6.TabIndex = 21;
@@ -305,7 +306,7 @@ namespace DumbCodeYe.Transposition
             // 
             // doubleBtn
             // 
-            this.doubleBtn.Location = new System.Drawing.Point(255, 451);
+            this.doubleBtn.Location = new System.Drawing.Point(259, 488);
             this.doubleBtn.Name = "doubleBtn";
             this.doubleBtn.Size = new System.Drawing.Size(229, 34);
             this.doubleBtn.TabIndex = 22;
@@ -315,7 +316,7 @@ namespace DumbCodeYe.Transposition
             // 
             // reverseBtn
             // 
-            this.reverseBtn.Location = new System.Drawing.Point(9, 396);
+            this.reverseBtn.Location = new System.Drawing.Point(9, 436);
             this.reverseBtn.Name = "reverseBtn";
             this.reverseBtn.Size = new System.Drawing.Size(229, 34);
             this.reverseBtn.TabIndex = 24;
@@ -384,21 +385,21 @@ namespace DumbCodeYe.Transposition
             // 
             // KnownText
             // 
-            this.KnownText.Location = new System.Drawing.Point(255, 399);
+            this.KnownText.Location = new System.Drawing.Point(259, 436);
             this.KnownText.Name = "KnownText";
             this.KnownText.Size = new System.Drawing.Size(229, 20);
             this.KnownText.TabIndex = 31;
             // 
             // TestFactors
             // 
-            this.TestFactors.Location = new System.Drawing.Point(255, 425);
+            this.TestFactors.Location = new System.Drawing.Point(259, 462);
             this.TestFactors.Name = "TestFactors";
             this.TestFactors.Size = new System.Drawing.Size(229, 20);
             this.TestFactors.TabIndex = 32;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(9, 380);
+            this.label1.Location = new System.Drawing.Point(11, 420);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(229, 13);
             this.label1.TabIndex = 33;
@@ -407,7 +408,7 @@ namespace DumbCodeYe.Transposition
             // 
             // crackDoubleToolsBtn
             // 
-            this.crackDoubleToolsBtn.Location = new System.Drawing.Point(9, 436);
+            this.crackDoubleToolsBtn.Location = new System.Drawing.Point(9, 476);
             this.crackDoubleToolsBtn.Name = "crackDoubleToolsBtn";
             this.crackDoubleToolsBtn.Size = new System.Drawing.Size(229, 34);
             this.crackDoubleToolsBtn.TabIndex = 34;
@@ -415,11 +416,22 @@ namespace DumbCodeYe.Transposition
             this.crackDoubleToolsBtn.UseVisualStyleBackColor = true;
             this.crackDoubleToolsBtn.Click += new System.EventHandler(this.crackDoubleToolsBtn_Click);
             // 
+            // cadneusBtn
+            // 
+            this.cadneusBtn.Location = new System.Drawing.Point(9, 383);
+            this.cadneusBtn.Name = "cadneusBtn";
+            this.cadneusBtn.Size = new System.Drawing.Size(229, 34);
+            this.cadneusBtn.TabIndex = 35;
+            this.cadneusBtn.Text = "CADNEUS";
+            this.cadneusBtn.UseVisualStyleBackColor = true;
+            this.cadneusBtn.Click += new System.EventHandler(this.cadneusBtn_Click);
+            // 
             // TranspositionTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 492);
+            this.ClientSize = new System.Drawing.Size(502, 530);
+            this.Controls.Add(this.cadneusBtn);
             this.Controls.Add(this.crackDoubleToolsBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TestFactors);
@@ -499,5 +511,6 @@ namespace DumbCodeYe.Transposition
         private System.Windows.Forms.TextBox TestFactors;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button crackDoubleToolsBtn;
+        private System.Windows.Forms.Button cadneusBtn;
     }
 }

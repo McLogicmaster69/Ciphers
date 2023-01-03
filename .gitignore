@@ -1,4 +1,6 @@
 /.vs
 /DumbCodeYe/obj
-/DumbCodeYe/bin/Debug/*
-!/DumbCodeYe/bin/Debug/en-GB.dic
+/DumbCodeYe/bin/Debug/DumbCodeYe.exe
+/DumbCodeYe/bin/Debug/DumbCodeYe.exe.config
+/DumbCodeYe/bin/Debug/DumbCodeYe.pdb
+/DumbCodeYe/bin/Debug/output/*

@@ -32,13 +32,32 @@ namespace DumbCodeYe
         private WordDictionary dict = new WordDictionary();
         private Spelling speller = new Spelling();
 
+        ///
+        /// START METHODS
+        ///
+
         public mainFrm()
         {
             InitializeComponent();
         }
+        private void mainFrm_Load(object sender, EventArgs e)
+        {
+            InitDropouts();
+            dict.Initialize();
+            speller.Dictionary = dict;
+        }
+
+        ///
+        /// BUTTON METHODS
+        ///
+
+        private void closeBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
         private void upperBtn_Click(object sender, EventArgs e)
         {
-            textInput.Text = textInput.Text.ToUpper();
+            ToUpper();
         }
         private void ceaserBtn_Click(object sender, EventArgs e)
         {
@@ -74,55 +93,118 @@ namespace DumbCodeYe
         }
         private void lettersBtn_Click(object sender, EventArgs e)
         {
+            JustLetters();
+        }
+        private void btnBacon_Click(object sender, EventArgs e)
+        {
+            BaconCipher();
+        }
+        private void btnHill_Click(object sender, EventArgs e)
+        {
+            HillCipher();
+        }
+        private void twoSquareBtn_Click(object sender, EventArgs e)
+        {
+            TwoSquareCipher();
+        }
+        private void addSpacesBtn_Click(object sender, EventArgs e)
+        {
+            Spaces();
+        }
+        private void initBigramsBtn_Click(object sender, EventArgs e)
+        {
+            InitBigramsFrm ibw = new InitBigramsFrm();
+            ibw.Show();
+        }
+        private void initWordFreqBtn_Click(object sender, EventArgs e)
+        {
+            InitWordFreq iqf = new InitWordFreq();
+            iqf.Show();
+        }
+        private void initDictionaryBtn_Click(object sender, EventArgs e)
+        {
+            InitBasicWord ibw = new InitBasicWord();
+            ibw.Show();
+        }
+        private void initQuadBtn_Click(object sender, EventArgs e)
+        {
+            InitQuadgramsFrm iqf = new InitQuadgramsFrm();
+            iqf.Show();
+        }
+
+        /// 
+        /// ACTION METHODS
+        /// 
+
+        private void JustLetters()
+        {
+            // Check each character if it is either upper or lowercase of the english alphabet
             string outputText = "";
             foreach (char c in textInput.Text)
             {
-                if (Capitals.Contains(c))
+                if (Capitals.Contains(c.ToString().ToUpper()))
                     outputText += c;
             }
             textInput.Text = outputText;
         }
+        private void ToUpper()
+        {
+            textInput.Text = textInput.Text.ToUpper();
+        }
 
-        // CEASER
+        ///
+        /// CEASER
+        ///
 
         private void TryCeaser()
         {
+            // Check frequency analysis for patterns
             float[] scores = new float[26];
             float[] freq = GetFrequencyProfile(textInput.Text);
             string freqText = "";
             for (int i = 0; i < 26; i++)
             {
+                // Calculate frequency score for letter offset and output results
                 scores[i] = CalculateScore(freq, i);
                 freqText += $"offset {i} gives score {scores[i]}\n";
+                // If score if low enough, apply ceaser to given offset
                 if (scores[i] < 400)
                 {
                     Ceaser(textInput.Text, i);
                 }
             }
+            // Give output
             FrequencyFrm frequency = new FrequencyFrm();
             frequency.UpdateFreqLabel(freqText);
             frequency.Show();
         }
         private void Ceaser(string input, int offset)
         {
+            // Apply ceaser with offset
             string output = "";
             for (int i = 0; i < input.Length; i++)
             {
+                // Check if valid character
                 if (Characters.Contains(input[i].ToString().ToLower()))
                 {
+                    // Offset the character
                     output += Characters[(Characters.IndexOf(input[i].ToString().ToLower()) - offset + 26) % 26];
                 }
                 else
                 {
+                    // Include the unknown character
                     output += input[i];
                 }
             }
+            // Output
             TextOutputFrm txtOut = new TextOutputFrm();
             txtOut.SetOutput(output);
             txtOut.Show();
         }
 
-        // TRANSPOSITION
+        ///
+        /// TRANSPOSITION
+        ///
 
         private void OpenTransposition()
         {
@@ -131,7 +213,9 @@ namespace DumbCodeYe
             TT.Show();
         }
 
-        // SUBSTITUTE
+        ///
+        /// SUBSTITUTE
+        ///
 
         private void OpenSubstituteTool()
         {
@@ -140,7 +224,9 @@ namespace DumbCodeYe
             st.Show();
         }
 
-        // VIGENERE
+        ///
+        /// VIGENERE
+        ///
 
         private void OpenVigenereTool()
         {
@@ -149,7 +235,9 @@ namespace DumbCodeYe
             vt.Show();
         }
 
-        // POLYBIUS
+        ///
+        /// POLYBIUS
+        ///
 
         private void OpenPolybiusTool()
         {
@@ -158,21 +246,27 @@ namespace DumbCodeYe
             pt.Show();
         }
 
-        // MORSE
+        ///
+        /// MORSE
+        ///
 
         private void GetMorseCode()
         {
             string finalText = "";
+            // Split code into characters
             foreach (string code in textInput.Text.Split(' '))
             {
+                // Get character for each morse character
                 finalText += GetMorseCharacter(code);
             }
+            // Output
             TextOutputFrm txtOut = new TextOutputFrm();
             txtOut.SetOutput(finalText);
             txtOut.Show();
         }
         private string GetMorseCharacter(string morse) // A = DOT , D = DASH
         {
+            // Check according to A as . and D as -
             switch (morse)
             {
                 case "AD":
@@ -231,7 +325,9 @@ namespace DumbCodeYe
             return "";
         }
 
-        // BINARY
+        ///
+        /// BINARY
+        ///
 
         private void GetBinary()
         {
@@ -304,7 +400,9 @@ namespace DumbCodeYe
             return "";
         }
 
-        // PLAYFAIR
+        ///
+        /// PLAYFAIR
+        ///
 
         private void OpenPlayfairTools()
         {
@@ -312,7 +410,9 @@ namespace DumbCodeYe
             PS.Show();
         }
 
-        // OTHER
+        ///
+        /// SCORE
+        ///
 
         private float CalculateScore(float[] freq)
         {
@@ -432,7 +532,11 @@ namespace DumbCodeYe
             return freq;
         }
 
-        private void btnBacon_Click(object sender, EventArgs e)
+        /// 
+        /// BACON
+        /// 
+
+        private void BaconCipher()
         {
             string plainText = "";
             string cipherText = textInput.Text;
@@ -537,29 +641,24 @@ namespace DumbCodeYe
                 MessageBox.Show("Not Bacon Cipher");
                 System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=DjelB-Z2QWo");
             }
-
         }
 
-        private void mainFrm_Load(object sender, EventArgs e)
-        {
-            dict.Initialize();
-            speller.Dictionary = dict;
-        }
+        ///
+        /// HILL
+        ///
 
-        private void initQuadBtn_Click(object sender, EventArgs e)
-        {
-            InitQuadgramsFrm iqf = new InitQuadgramsFrm();
-            iqf.Show();
-        }
-
-        private void btnHill_Click(object sender, EventArgs e)
+        private void HillCipher()
         {
             HillCipher hillCiper = new HillCipher();
             hillCiper.SetText(textInput.Text);
             hillCiper.Show();
         }
 
-        private void addSpacesBtn_Click(object sender, EventArgs e)
+        /// 
+        /// SPACES
+        /// 
+
+        private void Spaces()
         {
             TextOutputFrm TOF = new TextOutputFrm();
             TOF.SetOutput(AddSpaces(textInput.Text.ToUpper()));
@@ -637,29 +736,118 @@ namespace DumbCodeYe
             }
         }
 
-        private void initWordFreqBtn_Click(object sender, EventArgs e)
-        {
-            InitWordFreq iqf = new InitWordFreq();
-            iqf.Show();
-        }
+        /// 
+        /// TWO SQUARE
+        /// 
 
-        private void initDictionaryBtn_Click(object sender, EventArgs e)
-        {
-            InitBasicWord ibw = new InitBasicWord();
-            ibw.Show();
-        }
-
-        private void twoSquareBtn_Click(object sender, EventArgs e)
+        private void TwoSquareCipher()
         {
             TwoSquareTools TST = new TwoSquareTools();
             TST.Setup(textInput.Text);
             TST.Show();
         }
 
-        private void initBigramsBtn_Click(object sender, EventArgs e)
+
+        /// 
+        /// CUSTOM MOVEABLE TAB
+        /// 
+
+        private bool mouseDown = false;
+        private Point offset;
+
+        private void dragPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            InitBigramsFrm ibw = new InitBigramsFrm();
-            ibw.Show();
+            offset.X = e.X;
+            offset.Y = e.Y;
+            mouseDown = true;
+        }
+
+        private void dragPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(mouseDown == true)
+            {
+                Point currentScreenPos = PointToScreen(e.Location);
+                Location = new Point(currentScreenPos.X - offset.X, currentScreenPos.Y - offset.Y);
+            }
+        }
+
+        private void dragPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
+        /// 
+        /// DROPOUT CONTROL
+        ///
+
+        private Control[] Dropouts;
+
+        // Main methods
+
+        private void InitDropouts()
+        {
+            // Set Dropouts to all dropouts
+            Dropouts = new Control[]
+            {
+                textOperationsDropout,
+                basicCiphersDropout,
+                monoAlphabeticDropout,
+                polyAlphabeticDropout,
+                transpositionDropout
+            };
+        }
+        private void ChangeDropout(Control dropout)
+        {
+            // Hide dropout if already visible
+            if (dropout.Visible)
+                dropout.Visible = false;
+
+            // Else hide all other dropouts and show the selected one
+            else
+            {
+                HideAllDropouts();
+                dropout.Visible = true;
+            }
+        }
+        private void HideAllDropouts()
+        {
+            // Iterate through each dropout and hide
+            foreach(Control drop in Dropouts)
+            {
+                drop.Visible = false;
+            }
+        }
+
+        // Button methods
+
+        private void textOperationsBtn_Click(object sender, EventArgs e)
+        {
+            ChangeDropout(textOperationsDropout);
+        }
+
+        private void basicCipherBtn_Click(object sender, EventArgs e)
+        {
+            ChangeDropout(basicCiphersDropout);
+        }
+
+        private void monoAlphabeticBtn_Click(object sender, EventArgs e)
+        {
+            ChangeDropout(monoAlphabeticDropout);
+        }
+
+        private void polyAlphabeticBtn_Click(object sender, EventArgs e)
+        {
+            ChangeDropout(polyAlphabeticDropout);
+        }
+
+        private void transpositionBtn_Click_1(object sender, EventArgs e)
+        {
+            ChangeDropout(transpositionDropout);
+        }
+
+        private void textInput_Enter(object sender, EventArgs e)
+        {
+            HideAllDropouts();
         }
     }
 }

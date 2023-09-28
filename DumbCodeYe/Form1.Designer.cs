@@ -37,6 +37,7 @@ namespace DumbCodeYe
             this.textInput = new System.Windows.Forms.TextBox();
             this.btnHill = new System.Windows.Forms.Button();
             this.dragPanel = new System.Windows.Forms.Panel();
+            this.closeBtn = new System.Windows.Forms.Button();
             this.textOperationsBtn = new System.Windows.Forms.Button();
             this.textOperationsDropout = new System.Windows.Forms.Panel();
             this.justLettersBtn = new System.Windows.Forms.Button();
@@ -44,6 +45,7 @@ namespace DumbCodeYe
             this.basicCiphersDropout = new System.Windows.Forms.Panel();
             this.binaryBtn = new System.Windows.Forms.Button();
             this.morseBtn = new System.Windows.Forms.Button();
+            this.baconBtn = new System.Windows.Forms.Button();
             this.ceaserBtn = new System.Windows.Forms.Button();
             this.monoAlphabeticDropout = new System.Windows.Forms.Panel();
             this.substituteBtn = new System.Windows.Forms.Button();
@@ -57,8 +59,10 @@ namespace DumbCodeYe
             this.monoAlphabeticBtn = new System.Windows.Forms.Button();
             this.polyAlphabeticBtn = new System.Windows.Forms.Button();
             this.transpositionBtn = new System.Windows.Forms.Button();
-            this.closeBtn = new System.Windows.Forms.Button();
-            this.baconBtn = new System.Windows.Forms.Button();
+            this.factorsBtn = new System.Windows.Forms.Button();
+            this.gridBtn = new System.Windows.Forms.Button();
+            this.transpositionOtherBtn = new System.Windows.Forms.Button();
+            this.groupingBtn = new System.Windows.Forms.Button();
             initQuadBtn = new System.Windows.Forms.Button();
             addSpacesBtn = new System.Windows.Forms.Button();
             initWordFreqBtn = new System.Windows.Forms.Button();
@@ -69,6 +73,7 @@ namespace DumbCodeYe
             this.basicCiphersDropout.SuspendLayout();
             this.monoAlphabeticDropout.SuspendLayout();
             this.polyAlphabeticDropout.SuspendLayout();
+            this.transpositionDropout.SuspendLayout();
             this.SuspendLayout();
             // 
             // initQuadBtn
@@ -156,6 +161,20 @@ namespace DumbCodeYe
             this.dragPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dragPanel_MouseDown);
             this.dragPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dragPanel_MouseMove);
             this.dragPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dragPanel_MouseUp);
+            // 
+            // closeBtn
+            // 
+            this.closeBtn.BackColor = System.Drawing.Color.Red;
+            this.closeBtn.FlatAppearance.BorderSize = 2;
+            this.closeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closeBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.closeBtn.Location = new System.Drawing.Point(1370, 2);
+            this.closeBtn.Name = "closeBtn";
+            this.closeBtn.Size = new System.Drawing.Size(26, 26);
+            this.closeBtn.TabIndex = 27;
+            this.closeBtn.Text = "X";
+            this.closeBtn.UseVisualStyleBackColor = false;
+            this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
             // 
             // textOperationsBtn
             // 
@@ -252,6 +271,21 @@ namespace DumbCodeYe
             this.morseBtn.Text = "MORSE";
             this.morseBtn.UseVisualStyleBackColor = false;
             this.morseBtn.Click += new System.EventHandler(this.morseBtn_Click);
+            // 
+            // baconBtn
+            // 
+            this.baconBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(153)))), ((int)(((byte)(174)))));
+            this.baconBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.baconBtn.FlatAppearance.BorderSize = 2;
+            this.baconBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.baconBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.baconBtn.Location = new System.Drawing.Point(0, 80);
+            this.baconBtn.Name = "baconBtn";
+            this.baconBtn.Size = new System.Drawing.Size(300, 40);
+            this.baconBtn.TabIndex = 26;
+            this.baconBtn.Text = "BACON";
+            this.baconBtn.UseVisualStyleBackColor = false;
+            this.baconBtn.Click += new System.EventHandler(this.btnBacon_Click);
             // 
             // ceaserBtn
             // 
@@ -367,11 +401,71 @@ namespace DumbCodeYe
             // 
             // transpositionDropout
             // 
+            this.transpositionDropout.Controls.Add(this.factorsBtn);
+            this.transpositionDropout.Controls.Add(this.gridBtn);
+            this.transpositionDropout.Controls.Add(this.transpositionOtherBtn);
+            this.transpositionDropout.Controls.Add(this.groupingBtn);
             this.transpositionDropout.Location = new System.Drawing.Point(300, 190);
             this.transpositionDropout.Name = "transpositionDropout";
             this.transpositionDropout.Size = new System.Drawing.Size(300, 160);
             this.transpositionDropout.TabIndex = 22;
             this.transpositionDropout.Visible = false;
+            // 
+            // factorsBtn
+            // 
+            this.factorsBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(153)))), ((int)(((byte)(174)))));
+            this.factorsBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.factorsBtn.FlatAppearance.BorderSize = 2;
+            this.factorsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.factorsBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.factorsBtn.Location = new System.Drawing.Point(0, 0);
+            this.factorsBtn.Name = "factorsBtn";
+            this.factorsBtn.Size = new System.Drawing.Size(300, 40);
+            this.factorsBtn.TabIndex = 23;
+            this.factorsBtn.Text = "FACTORS";
+            this.factorsBtn.UseVisualStyleBackColor = false;
+            // 
+            // gridBtn
+            // 
+            this.gridBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(153)))), ((int)(((byte)(174)))));
+            this.gridBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.gridBtn.FlatAppearance.BorderSize = 2;
+            this.gridBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.gridBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.gridBtn.Location = new System.Drawing.Point(0, 40);
+            this.gridBtn.Name = "gridBtn";
+            this.gridBtn.Size = new System.Drawing.Size(300, 40);
+            this.gridBtn.TabIndex = 23;
+            this.gridBtn.Text = "GRIDS";
+            this.gridBtn.UseVisualStyleBackColor = false;
+            // 
+            // transpositionOtherBtn
+            // 
+            this.transpositionOtherBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(153)))), ((int)(((byte)(174)))));
+            this.transpositionOtherBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.transpositionOtherBtn.FlatAppearance.BorderSize = 2;
+            this.transpositionOtherBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.transpositionOtherBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.transpositionOtherBtn.Location = new System.Drawing.Point(0, 80);
+            this.transpositionOtherBtn.Name = "transpositionOtherBtn";
+            this.transpositionOtherBtn.Size = new System.Drawing.Size(300, 40);
+            this.transpositionOtherBtn.TabIndex = 23;
+            this.transpositionOtherBtn.Text = "OTHER";
+            this.transpositionOtherBtn.UseVisualStyleBackColor = false;
+            // 
+            // groupingBtn
+            // 
+            this.groupingBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(153)))), ((int)(((byte)(174)))));
+            this.groupingBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.groupingBtn.FlatAppearance.BorderSize = 2;
+            this.groupingBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupingBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.groupingBtn.Location = new System.Drawing.Point(0, 120);
+            this.groupingBtn.Name = "groupingBtn";
+            this.groupingBtn.Size = new System.Drawing.Size(300, 40);
+            this.groupingBtn.TabIndex = 23;
+            this.groupingBtn.Text = "GROUPINGS";
+            this.groupingBtn.UseVisualStyleBackColor = false;
             // 
             // basicCipherBtn
             // 
@@ -432,35 +526,6 @@ namespace DumbCodeYe
             this.transpositionBtn.Text = "TRNASPOSITION";
             this.transpositionBtn.UseVisualStyleBackColor = false;
             this.transpositionBtn.Click += new System.EventHandler(this.transpositionBtn_Click_1);
-            // 
-            // closeBtn
-            // 
-            this.closeBtn.BackColor = System.Drawing.Color.Red;
-            this.closeBtn.FlatAppearance.BorderSize = 2;
-            this.closeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.closeBtn.Location = new System.Drawing.Point(1370, 2);
-            this.closeBtn.Name = "closeBtn";
-            this.closeBtn.Size = new System.Drawing.Size(26, 26);
-            this.closeBtn.TabIndex = 27;
-            this.closeBtn.Text = "X";
-            this.closeBtn.UseVisualStyleBackColor = false;
-            this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
-            // 
-            // baconBtn
-            // 
-            this.baconBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(153)))), ((int)(((byte)(174)))));
-            this.baconBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
-            this.baconBtn.FlatAppearance.BorderSize = 2;
-            this.baconBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.baconBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
-            this.baconBtn.Location = new System.Drawing.Point(0, 80);
-            this.baconBtn.Name = "baconBtn";
-            this.baconBtn.Size = new System.Drawing.Size(300, 40);
-            this.baconBtn.TabIndex = 26;
-            this.baconBtn.Text = "BACON";
-            this.baconBtn.UseVisualStyleBackColor = false;
-            this.baconBtn.Click += new System.EventHandler(this.btnBacon_Click);
             // 
             // mainFrm
             // 
@@ -528,6 +593,10 @@ namespace DumbCodeYe
         private System.Windows.Forms.Button twoSquareBtn;
         private System.Windows.Forms.Button closeBtn;
         private System.Windows.Forms.Button baconBtn;
+        private System.Windows.Forms.Button factorsBtn;
+        private System.Windows.Forms.Button gridBtn;
+        private System.Windows.Forms.Button groupingBtn;
+        private System.Windows.Forms.Button transpositionOtherBtn;
     }
 }
 

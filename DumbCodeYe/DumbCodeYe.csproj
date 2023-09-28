@@ -137,6 +137,7 @@
     <Compile Include="Quadgrams\InitQuadgramsFrm.Designer.cs">
       <DependentUpon>InitQuadgramsFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="RollingTheRick.cs" />
     <Compile Include="SpaceSet.cs" />
     <Compile Include="Substitution\Brute.cs">
       <SubType>Form</SubType>

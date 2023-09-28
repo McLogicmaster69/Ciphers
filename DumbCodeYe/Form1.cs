@@ -58,37 +58,47 @@ namespace DumbCodeYe
         private void upperBtn_Click(object sender, EventArgs e)
         {
             ToUpper();
+            RollingTheRick.Roll();
+            textInput.Text = textInput.Text.ToUpper();
         }
         private void ceaserBtn_Click(object sender, EventArgs e)
         {
+            RollingTheRick.Roll();
             TryCeaser();
         }
         private void substituteBtn_Click(object sender, EventArgs e)
         {
+            RollingTheRick.Roll();
             OpenSubstituteTool();
         }
         private void vigenereBtn_Click(object sender, EventArgs e)
         {
+            RollingTheRick.Roll();
             OpenVigenereTool();
         }
         private void polybiusBtn_Click(object sender, EventArgs e)
         {
+            RollingTheRick.Roll();
             OpenPolybiusTool();
         }
         private void transpositionBtn_Click(object sender, EventArgs e)
         {
+            RollingTheRick.Roll();
             OpenTransposition();
         }
         private void morseBtn_Click(object sender, EventArgs e)
         {
+            RollingTheRick.Roll();
             GetMorseCode();
         }
         private void binaryBtn_Click(object sender, EventArgs e)
         {
+            RollingTheRick.Roll();
             GetBinary();
         }
         private void playfairBtn_Click(object sender, EventArgs e)
         {
+            RollingTheRick.Roll();
             OpenPlayfairTools();
         }
         private void lettersBtn_Click(object sender, EventArgs e)
@@ -139,6 +149,7 @@ namespace DumbCodeYe
         private void JustLetters()
         {
             // Check each character if it is either upper or lowercase of the english alphabet
+            RollingTheRick.Roll();
             string outputText = "";
             foreach (char c in textInput.Text)
             {
@@ -538,6 +549,7 @@ namespace DumbCodeYe
 
         private void BaconCipher()
         {
+            RollingTheRick.Roll();
             string plainText = "";
             string cipherText = textInput.Text;
             string chunk;
@@ -643,12 +655,23 @@ namespace DumbCodeYe
             }
         }
 
-        ///
-        /// HILL
-        ///
-
-        private void HillCipher()
+        private void mainFrm_Load(object sender, EventArgs e)
         {
+            RollingTheRick.Roll();
+            dict.Initialize();
+            speller.Dictionary = dict;
+        }
+
+        private void initQuadBtn_Click(object sender, EventArgs e)
+        {
+            RollingTheRick.Roll();
+            InitQuadgramsFrm iqf = new InitQuadgramsFrm();
+            iqf.Show();
+        }
+
+        private void btnHill_Click(object sender, EventArgs e)
+        {
+            RollingTheRick.Roll();
             HillCipher hillCiper = new HillCipher();
             hillCiper.SetText(textInput.Text);
             hillCiper.Show();
@@ -660,6 +683,7 @@ namespace DumbCodeYe
 
         private void Spaces()
         {
+            RollingTheRick.Roll();
             TextOutputFrm TOF = new TextOutputFrm();
             TOF.SetOutput(AddSpaces(textInput.Text.ToUpper()));
             TOF.Show();

@@ -42,6 +42,7 @@ namespace DumbCodeYe
         }
         private void mainFrm_Load(object sender, EventArgs e)
         {
+            RollingTheRick.Roll();
             InitDropouts();
             dict.Initialize();
             speller.Dictionary = dict;
@@ -138,6 +139,7 @@ namespace DumbCodeYe
         }
         private void initQuadBtn_Click(object sender, EventArgs e)
         {
+            RollingTheRick.Roll();
             InitQuadgramsFrm iqf = new InitQuadgramsFrm();
             iqf.Show();
         }
@@ -655,21 +657,7 @@ namespace DumbCodeYe
             }
         }
 
-        private void mainFrm_Load(object sender, EventArgs e)
-        {
-            RollingTheRick.Roll();
-            dict.Initialize();
-            speller.Dictionary = dict;
-        }
-
-        private void initQuadBtn_Click(object sender, EventArgs e)
-        {
-            RollingTheRick.Roll();
-            InitQuadgramsFrm iqf = new InitQuadgramsFrm();
-            iqf.Show();
-        }
-
-        private void btnHill_Click(object sender, EventArgs e)
+        private void HillCipher()
         {
             RollingTheRick.Roll();
             HillCipher hillCiper = new HillCipher();

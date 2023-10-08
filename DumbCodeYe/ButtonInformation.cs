@@ -9,9 +9,9 @@ namespace DumbCodeYe
     public struct ButtonInformation
     {
         public string Text;
-        public EventHandler OnClick;
+        public CipherMethod OnClick;
 
-        public ButtonInformation(string text, EventHandler onClick)
+        public ButtonInformation(string text, CipherMethod onClick)
         {
             Text = text;
             OnClick = onClick;

@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaconCipher.cs" />
     <Compile Include="BasicWordLib\BasicWordData.cs" />
     <Compile Include="BasicWordLib\InitBasicWord.cs">
       <SubType>Form</SubType>
@@ -85,7 +86,9 @@
       <DependentUpon>InitBigramsFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="ButtonInformation.cs" />
+    <Compile Include="CeaserCipher.cs" />
     <Compile Include="DropdownMenuBuilder.cs" />
+    <Compile Include="GeneralConstants.cs" />
     <Compile Include="GridPosition.cs" />
     <Compile Include="Hill\HillCipher.cs">
       <SubType>Form</SubType>
@@ -94,6 +97,8 @@
       <DependentUpon>HillCipher.cs</DependentUpon>
     </Compile>
     <Compile Include="Incrementor.cs" />
+    <Compile Include="MorseCode.cs" />
+    <Compile Include="OtherStructs.cs" />
     <Compile Include="Playfair\Playfair5Crack.cs">
       <SubType>Form</SubType>
     </Compile>

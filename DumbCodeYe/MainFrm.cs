@@ -24,10 +24,8 @@ namespace DumbCodeYe
 {
     public partial class mainFrm : Form
     {
-        private float[] _characterFrequency = new float[] { 0.082f, 0.015f, 0.028f, 0.043f, 0.127f, 0.022f, 0.020f, 0.061f, 0.070f, 0.002f, 0.008f, 0.040f, 0.024f, 0.067f, 0.075f, 0.019f, 0.001f, 0.060f, 0.063f, 0.091f, 0.028f, 0.010f, 0.024f, 0.002f, 0.020f, 0.001f};
-        private string _characters = "abcdefghijklmnopqrstuvwxyz";
-        private string _capitals = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const int SPACE_ITERATIONS = 400;
+        private const int TEXT_INPUT_WIDTH_BUFFER = 616;
 
         private DropdownMenuBuilder _menuBuilder;
 
@@ -51,123 +49,7 @@ namespace DumbCodeYe
             speller.Dictionary = dict;
         }
 
-        ///
-        /// BUTTON METHODS
-        ///
-
         #region Operations
-
-        private void upperBtn_Click(object sender, EventArgs e)
-        {
-            ToUpper();
-        }
-        private void lettersBtn_Click(object sender, EventArgs e)
-        {
-            JustLetters();
-        }
-
-        #endregion
-
-        #region Basic
-
-        private void ceaserBtn_Click(object sender, EventArgs e)
-        {
-            RollingTheRick.Roll();
-            TryCeaser();
-        }
-        private void morseBtn_Click(object sender, EventArgs e)
-        {
-            RollingTheRick.Roll();
-            GetMorseCode();
-        }
-
-        #endregion
-
-        #region Monoalphabetic
-
-        private void substituteBtn_Click(object sender, EventArgs e)
-        {
-            RollingTheRick.Roll();
-            OpenSubstituteTool();
-        }
-        private void btnBacon_Click(object sender, EventArgs e)
-        {
-            BaconCipher();
-        }
-
-        #endregion
-
-        #region Polyalphabetic
-
-        private void vigenereBtn_Click(object sender, EventArgs e)
-        {
-            RollingTheRick.Roll();
-            OpenVigenereTool();
-        }
-        private void polybiusBtn_Click(object sender, EventArgs e)
-        {
-            RollingTheRick.Roll();
-            OpenPolybiusTool();
-        }
-
-        #endregion
-
-        private void closeBtn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        private void transpositionBtn_Click(object sender, EventArgs e)
-        {
-            RollingTheRick.Roll();
-            OpenTransposition();
-        }
-        private void binaryBtn_Click(object sender, EventArgs e)
-        {
-            RollingTheRick.Roll();
-            GetBinary();
-        }
-        private void playfairBtn_Click(object sender, EventArgs e)
-        {
-            RollingTheRick.Roll();
-            OpenPlayfairTools();
-        }
-        private void btnHill_Click(object sender, EventArgs e)
-        {
-            HillCipher();
-        }
-        private void twoSquareBtn_Click(object sender, EventArgs e)
-        {
-            TwoSquareCipher();
-        }
-        private void addSpacesBtn_Click(object sender, EventArgs e)
-        {
-            Spaces();
-        }
-        private void initBigramsBtn_Click(object sender, EventArgs e)
-        {
-            InitBigramsFrm ibw = new InitBigramsFrm();
-            ibw.Show();
-        }
-        private void initWordFreqBtn_Click(object sender, EventArgs e)
-        {
-            InitWordFreq iqf = new InitWordFreq();
-            iqf.Show();
-        }
-        private void initDictionaryBtn_Click(object sender, EventArgs e)
-        {
-            InitBasicWord ibw = new InitBasicWord();
-            ibw.Show();
-        }
-        private void initQuadBtn_Click(object sender, EventArgs e)
-        {
-            RollingTheRick.Roll();
-            InitQuadgramsFrm iqf = new InitQuadgramsFrm();
-            iqf.Show();
-        }
-
-        /// 
-        /// ACTION METHODS
-        /// 
 
         private void JustLetters()
         {
@@ -176,7 +58,7 @@ namespace DumbCodeYe
             string outputText = "";
             foreach (char c in textInput.Text)
             {
-                if (_capitals.Contains(c.ToString().ToUpper()))
+                if (GeneralConstants.CAPITALS.Contains(c.ToString().ToUpper()))
                     outputText += c;
             }
             textInput.Text = outputText;
@@ -186,59 +68,43 @@ namespace DumbCodeYe
             textInput.Text = textInput.Text.ToUpper();
         }
 
-        ///
-        /// CEASER
-        ///
+        #endregion
 
-        private void TryCeaser()
+        #region Basic
+
+        private void Ceaser()
         {
-            // Check frequency analysis for patterns
-            float[] scores = new float[26];
-            float[] freq = GetFrequencyProfile(textInput.Text);
-            string freqText = "";
-            for (int i = 0; i < 26; i++)
-            {
-                // Calculate frequency score for letter offset and output results
-                scores[i] = CalculateScore(freq, i);
-                freqText += $"offset {i} gives score {scores[i]}\n";
-                // If score if low enough, apply ceaser to given offset
-                if (scores[i] < 400)
-                {
-                    Ceaser(textInput.Text, i);
-                }
-            }
-            // Give output
-            FrequencyFrm frequency = new FrequencyFrm();
-            frequency.UpdateFreqLabel(freqText);
-            frequency.Show();
+            CeaserCipher.TryCeaser(textInput.Text);
         }
-        private void Ceaser(string input, int offset)
+        private void Morse()
         {
-            // Apply ceaser with offset
-            string output = "";
-            for (int i = 0; i < input.Length; i++)
-            {
-                // Check if valid character
-                if (_characters.Contains(input[i].ToString().ToLower()))
-                {
-                    // Offset the character
-                    output += _characters[(_characters.IndexOf(input[i].ToString().ToLower()) - offset + 26) % 26];
-                }
-                else
-                {
-                    // Include the unknown character
-                    output += input[i];
-                }
-            }
-            // Output
-            TextOutputFrm txtOut = new TextOutputFrm();
-            txtOut.SetOutput(output);
-            txtOut.Show();
+            MorseCode.GetMorseCode(textInput.Text);
         }
 
-        ///
-        /// TRANSPOSITION
-        ///
+        #endregion
+
+        #region Monoalphabetic
+
+        private void OpenSubstituteTool()
+        {
+            SubstitueTool st = new SubstitueTool();
+            st.SetupText(textInput.Text);
+            st.Show();
+        }
+        private void Bacon()
+        {
+            BaconCipher.Bacon(textInput.Text);
+        }
+
+        #endregion
+
+        #region Polyalphabetic
+
+
+
+        #endregion
+
+        #region Transposition
 
         private void OpenTransposition()
         {
@@ -247,15 +113,36 @@ namespace DumbCodeYe
             TT.Show();
         }
 
-        ///
-        /// SUBSTITUTE
-        ///
+        #endregion
 
-        private void OpenSubstituteTool()
+        #region Inistialise
+
+        private void InitBigrams(object sender, EventArgs e)
         {
-            SubstitueTool st = new SubstitueTool();
-            st.SetupText(textInput.Text);
-            st.Show();
+            InitBigramsFrm ibw = new InitBigramsFrm();
+            ibw.Show();
+        }
+        private void InitWordFreq(object sender, EventArgs e)
+        {
+            InitWordFreq iqf = new InitWordFreq();
+            iqf.Show();
+        }
+        private void InitDictionary(object sender, EventArgs e)
+        {
+            InitBasicWord ibw = new InitBasicWord();
+            ibw.Show();
+        }
+        private void InitQuadgrams(object sender, EventArgs e)
+        {
+            InitQuadgramsFrm iqf = new InitQuadgramsFrm();
+            iqf.Show();
+        }
+
+        #endregion
+
+        private void closeBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         ///
@@ -278,85 +165,6 @@ namespace DumbCodeYe
             PolybiusTools pt = new PolybiusTools();
             pt.SetupText(textInput.Text);
             pt.Show();
-        }
-
-        ///
-        /// MORSE
-        ///
-
-        private void GetMorseCode()
-        {
-            string finalText = "";
-            // Split code into characters
-            foreach (string code in textInput.Text.Split(' '))
-            {
-                // Get character for each morse character
-                finalText += GetMorseCharacter(code);
-            }
-            // Output
-            TextOutputFrm txtOut = new TextOutputFrm();
-            txtOut.SetOutput(finalText);
-            txtOut.Show();
-        }
-        private string GetMorseCharacter(string morse) // A = DOT , D = DASH
-        {
-            // Check according to A as . and D as -
-            switch (morse)
-            {
-                case "AD":
-                    return "a";
-                case "DAAA":
-                    return "b";
-                case "DADA":
-                    return "c";
-                case "DAA":
-                    return "d";
-                case "A":
-                    return "e";
-                case "AADA":
-                    return "f";
-                case "DDA":
-                    return "g";
-                case "AAAA":
-                    return "h";
-                case "AA":
-                    return "i";
-                case "ADDD":
-                    return "j";
-                case "DAD":
-                    return "k";
-                case "ADAA":
-                    return "l";
-                case "DD":
-                    return "m";
-                case "DA":
-                    return "n";
-                case "DDD":
-                    return "o";
-                case "ADDA":
-                    return "p";
-                case "DDAD":
-                    return "q";
-                case "ADA":
-                    return "r";
-                case "AAA":
-                    return "s";
-                case "D":
-                    return "t";
-                case "AAD":
-                    return "u";
-                case "AAAD":
-                    return "v";
-                case "ADD":
-                    return "w";
-                case "DAAD":
-                    return "x";
-                case "DADD":
-                    return "y";
-                case "DDAA":
-                    return "z";
-            }
-            return "";
         }
 
         ///
@@ -442,240 +250,6 @@ namespace DumbCodeYe
         {
             PlayfairSelection PS = new PlayfairSelection(textInput.Text);
             PS.Show();
-        }
-
-        ///
-        /// SCORE
-        ///
-
-        private float CalculateScore(float[] freq)
-        {
-            float totalScore = 0;
-            for (int i = 0; i < 26; i++)
-            {
-                totalScore += Math.Abs(_characterFrequency[i] - freq[i]);
-            }
-            return (float)Math.Floor(totalScore * 1000);
-        }
-        private float CalculateScore(float[] freq, int offset)
-        {
-            float[] inp = new float[26];
-            for (int i = offset, j = 0; i < offset + 26; i++, j++)
-            {
-                inp[j] = freq[i % 26];
-            }
-            return CalculateScore(inp);
-        }
-        private float[] GetFrequencyProfile(string text)
-        {
-            float[] freq = new float[26];
-            int[] freqChars = new int[26];
-            float totalChars = 0f;
-            for (int i = 0; i < text.Length; i++)
-            {
-                if (_characters.Contains(text[i].ToString().ToLower()))
-                {
-                    totalChars++;
-                    switch (text[i].ToString().ToLower())
-                    {
-                        case "a":
-                            freqChars[0]++;
-                            break;
-                        case "b":
-                            freqChars[1]++;
-                            break;
-                        case "c":
-                            freqChars[2]++;
-                            break;
-                        case "d":
-                            freqChars[3]++;
-                            break;
-                        case "e":
-                            freqChars[4]++;
-                            break;
-                        case "f":
-                            freqChars[5]++;
-                            break;
-                        case "g":
-                            freqChars[6]++;
-                            break;
-                        case "h":
-                            freqChars[7]++;
-                            break;
-                        case "i":
-                            freqChars[8]++;
-                            break;
-                        case "j":
-                            freqChars[9]++;
-                            break;
-                        case "k":
-                            freqChars[10]++;
-                            break;
-                        case "l":
-                            freqChars[11]++;
-                            break;
-                        case "m":
-                            freqChars[12]++;
-                            break;
-                        case "n":
-                            freqChars[13]++;
-                            break;
-                        case "o":
-                            freqChars[14]++;
-                            break;
-                        case "p":
-                            freqChars[15]++;
-                            break;
-                        case "q":
-                            freqChars[16]++;
-                            break;
-                        case "r":
-                            freqChars[17]++;
-                            break;
-                        case "s":
-                            freqChars[18]++;
-                            break;
-                        case "t":
-                            freqChars[19]++;
-                            break;
-                        case "u":
-                            freqChars[20]++;
-                            break;
-                        case "v":
-                            freqChars[21]++;
-                            break;
-                        case "w":
-                            freqChars[22]++;
-                            break;
-                        case "x":
-                            freqChars[23]++;
-                            break;
-                        case "y":
-                            freqChars[24]++;
-                            break;
-                        case "z":
-                            freqChars[25]++;
-                            break;
-                    }
-                }
-            }
-            for (int i = 0; i < 26; i++)
-            {
-                freq[i] = freqChars[i] / totalChars;
-            }
-            return freq;
-        }
-
-        /// 
-        /// BACON
-        /// 
-
-        private void BaconCipher()
-        {
-            RollingTheRick.Roll();
-            string plainText = "";
-            string cipherText = textInput.Text;
-            string chunk;
-            if (cipherText.Length >= 5 && cipherText.Length % 5 == 0)
-            {
-                for (int index = 0; index < (cipherText.Length); index += 5)
-                {
-                    chunk = cipherText.Substring(index, 5);
-                    switch (chunk)
-                    {
-                        case "AAAAA":
-                            plainText = plainText + "A";
-                            break;
-                        case "AAAAB":
-                            plainText = plainText + "B";
-                            break;
-                        case "AAABA":
-                            plainText = plainText + "C";
-                            break;
-                        case "AAABB":
-                            plainText = plainText + "D";
-                            break;
-                        case "AABAA":
-                            plainText = plainText + "E";
-                            break;
-                        case "AABAB":
-                            plainText = plainText + "F";
-                            break;
-                        case "AABBA":
-                            plainText = plainText + "G";
-                            break;
-                        case "AABBB":
-                            plainText = plainText + "H";
-                            break;
-                        case "ABAAA":
-                            plainText = plainText + "I";
-                            break;
-                        case "ABAAB":
-                            plainText = plainText + "J";
-                            break;
-                        case "ABABA":
-                            plainText = plainText + "K";
-                            break;
-                        case "ABABB":
-                            plainText = plainText + "L";
-                            break;
-                        case "ABBAA":
-                            plainText = plainText + "M";
-                            break;
-                        case "ABBAB":
-                            plainText = plainText + "N";
-                            break;
-                        case "ABBBA":
-                            plainText = plainText + "O";
-                            break;
-                        case "ABBBB":
-                            plainText = plainText + "P";
-                            break;
-                        case "BAAAA":
-                            plainText = plainText + "Q";
-                            break;
-                        case "BAAAB":
-                            plainText = plainText + "R";
-                            break;
-                        case "BAABA":
-                            plainText = plainText + "S";
-                            break;
-                        case "BAABB":
-                            plainText = plainText + "T";
-                            break;
-                        case "BABAA":
-                            plainText = plainText + "U";
-                            break;
-                        case "BABAB":
-                            plainText = plainText + "V";
-                            break;
-                        case "BABBA":
-                            plainText = plainText + "W";
-                            break;
-                        case "BABBB":
-                            plainText = plainText + "X";
-                            break;
-                        case "BBAAA":
-                            plainText = plainText + "Y";
-                            break;
-                        case "BBAAB":
-                            plainText = plainText + "Z";
-                            break;
-                        default:
-                            MessageBox.Show("It was jacob's fault");
-                            break;
-                    }
-                }
-                TextOutputFrm txtOut = new TextOutputFrm();
-                txtOut.SetOutput(plainText);
-                txtOut.Show();
-                System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=DjelB-Z2QWo");
-            }
-            else
-            {
-                MessageBox.Show("Not Bacon Cipher");
-                System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=DjelB-Z2QWo");
-            }
         }
 
         private void HillCipher()
@@ -780,35 +354,6 @@ namespace DumbCodeYe
             TST.Show();
         }
 
-
-        /// 
-        /// CUSTOM MOVEABLE TAB
-        /// 
-
-        private bool mouseDown = false;
-        private Point offset;
-
-        private void dragPanel_MouseDown(object sender, MouseEventArgs e)
-        {
-            offset.X = e.X;
-            offset.Y = e.Y;
-            mouseDown = true;
-        }
-
-        private void dragPanel_MouseMove(object sender, MouseEventArgs e)
-        {
-            if(mouseDown == true)
-            {
-                Point currentScreenPos = PointToScreen(e.Location);
-                Location = new Point(currentScreenPos.X - offset.X, currentScreenPos.Y - offset.Y);
-            }
-        }
-
-        private void dragPanel_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouseDown = false;
-        }
-
         /// 
         /// DROPOUT CONTROL
         ///
@@ -820,45 +365,51 @@ namespace DumbCodeYe
         {
             _menuBuilder.OpenDropdown(new ButtonInformation[]
             {
-                new ButtonInformation("TO UPPER", new EventHandler(upperBtn_Click)),
-                new ButtonInformation("TO LETTERS", new EventHandler(lettersBtn_Click))
-            }, new Point(300, 30));
+                new ButtonInformation("TO UPPER", ToUpper),
+                new ButtonInformation("TO LETTERS", JustLetters)
+            }, new Point(300, 0));
         }
 
         private void basicCipherBtn_Click(object sender, EventArgs e)
         {
             _menuBuilder.OpenDropdown(new ButtonInformation[]
             {
-                new ButtonInformation("CEASER", new EventHandler(ceaserBtn_Click)),
-                new ButtonInformation("MORSE", new EventHandler(morseBtn_Click))
-            }, new Point(300, 70));
+                new ButtonInformation("CEASER", Ceaser),
+                new ButtonInformation("MORSE", Morse)
+            }, new Point(300, 40));
         }
 
         private void monoAlphabeticBtn_Click(object sender, EventArgs e)
         {
             _menuBuilder.OpenDropdown(new ButtonInformation[]
             {
-                new ButtonInformation("SUBSTITUTION", new EventHandler(substituteBtn_Click)),
-                new ButtonInformation("BACON", new EventHandler(btnBacon_Click))
-            }, new Point(300, 70));
+                new ButtonInformation("SUBSTITUTION", OpenSubstituteTool),
+                new ButtonInformation("BACON", Bacon)
+            }, new Point(300, 80));
         }
 
         private void polyAlphabeticBtn_Click(object sender, EventArgs e)
         {
             _menuBuilder.OpenDropdown(new ButtonInformation[]
             {
-                new ButtonInformation("VIGENERE", new EventHandler(vigenereBtn_Click)),
-                new ButtonInformation("POLYBIUS", new EventHandler(polybiusBtn_Click))
-            }, new Point(300, 70));
+                new ButtonInformation("VIGENERE", OpenVigenereTool),
+                new ButtonInformation("POLYBIUS", OpenPolybiusTool)
+            }, new Point(300, 120));
         }
 
-        private void transpositionBtn_Click_1(object sender, EventArgs e)
+        private void transpositionBtn_Click(object sender, EventArgs e)
         {
+            OpenTransposition();
         }
 
         private void textInput_Enter(object sender, EventArgs e)
         {
             _menuBuilder.CloseDropdown();
+        }
+
+        private void mainFrm_Resize(object sender, EventArgs e)
+        {
+            textInput.Width = this.Width - TEXT_INPUT_WIDTH_BUFFER;
         }
     }
 }

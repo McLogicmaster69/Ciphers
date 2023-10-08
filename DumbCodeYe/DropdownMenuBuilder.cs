@@ -61,7 +61,7 @@ namespace DumbCodeYe
             button.TabIndex = index + 20;
             button.Text = information.Text;
             button.UseVisualStyleBackColor = false;
-            button.Click += information.OnClick;
+            button.Click += (object o, EventArgs e) => information.OnClick();
 
             return button;
         }

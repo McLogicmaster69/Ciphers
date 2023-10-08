@@ -24,10 +24,12 @@ namespace DumbCodeYe
 {
     public partial class mainFrm : Form
     {
-        private float[] CharacterFrequency = new float[] { 0.082f, 0.015f, 0.028f, 0.043f, 0.127f, 0.022f, 0.020f, 0.061f, 0.070f, 0.002f, 0.008f, 0.040f, 0.024f, 0.067f, 0.075f, 0.019f, 0.001f, 0.060f, 0.063f, 0.091f, 0.028f, 0.010f, 0.024f, 0.002f, 0.020f, 0.001f};
-        private string Characters = "abcdefghijklmnopqrstuvwxyz";
-        private string Capitals = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private const int SpaceIterations = 400;
+        private float[] _characterFrequency = new float[] { 0.082f, 0.015f, 0.028f, 0.043f, 0.127f, 0.022f, 0.020f, 0.061f, 0.070f, 0.002f, 0.008f, 0.040f, 0.024f, 0.067f, 0.075f, 0.019f, 0.001f, 0.060f, 0.063f, 0.091f, 0.028f, 0.010f, 0.024f, 0.002f, 0.020f, 0.001f};
+        private string _characters = "abcdefghijklmnopqrstuvwxyz";
+        private string _capitals = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const int SPACE_ITERATIONS = 400;
+
+        private DropdownMenuBuilder _menuBuilder;
 
         private WordDictionary dict = new WordDictionary();
         private Spelling speller = new Spelling();
@@ -39,11 +41,12 @@ namespace DumbCodeYe
         public mainFrm()
         {
             InitializeComponent();
+
+            _menuBuilder = new DropdownMenuBuilder(this);
         }
         private void mainFrm_Load(object sender, EventArgs e)
         {
             RollingTheRick.Roll();
-            InitDropouts();
             dict.Initialize();
             speller.Dictionary = dict;
         }
@@ -52,26 +55,50 @@ namespace DumbCodeYe
         /// BUTTON METHODS
         ///
 
-        private void closeBtn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        #region Operations
+
         private void upperBtn_Click(object sender, EventArgs e)
         {
             ToUpper();
-            RollingTheRick.Roll();
-            textInput.Text = textInput.Text.ToUpper();
         }
+        private void lettersBtn_Click(object sender, EventArgs e)
+        {
+            JustLetters();
+        }
+
+        #endregion
+
+        #region Basic
+
         private void ceaserBtn_Click(object sender, EventArgs e)
         {
             RollingTheRick.Roll();
             TryCeaser();
         }
+        private void morseBtn_Click(object sender, EventArgs e)
+        {
+            RollingTheRick.Roll();
+            GetMorseCode();
+        }
+
+        #endregion
+
+        #region Monoalphabetic
+
         private void substituteBtn_Click(object sender, EventArgs e)
         {
             RollingTheRick.Roll();
             OpenSubstituteTool();
         }
+        private void btnBacon_Click(object sender, EventArgs e)
+        {
+            BaconCipher();
+        }
+
+        #endregion
+
+        #region Polyalphabetic
+
         private void vigenereBtn_Click(object sender, EventArgs e)
         {
             RollingTheRick.Roll();
@@ -82,15 +109,17 @@ namespace DumbCodeYe
             RollingTheRick.Roll();
             OpenPolybiusTool();
         }
+
+        #endregion
+
+        private void closeBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
         private void transpositionBtn_Click(object sender, EventArgs e)
         {
             RollingTheRick.Roll();
             OpenTransposition();
-        }
-        private void morseBtn_Click(object sender, EventArgs e)
-        {
-            RollingTheRick.Roll();
-            GetMorseCode();
         }
         private void binaryBtn_Click(object sender, EventArgs e)
         {
@@ -101,14 +130,6 @@ namespace DumbCodeYe
         {
             RollingTheRick.Roll();
             OpenPlayfairTools();
-        }
-        private void lettersBtn_Click(object sender, EventArgs e)
-        {
-            JustLetters();
-        }
-        private void btnBacon_Click(object sender, EventArgs e)
-        {
-            BaconCipher();
         }
         private void btnHill_Click(object sender, EventArgs e)
         {
@@ -155,7 +176,7 @@ namespace DumbCodeYe
             string outputText = "";
             foreach (char c in textInput.Text)
             {
-                if (Capitals.Contains(c.ToString().ToUpper()))
+                if (_capitals.Contains(c.ToString().ToUpper()))
                     outputText += c;
             }
             textInput.Text = outputText;
@@ -198,10 +219,10 @@ namespace DumbCodeYe
             for (int i = 0; i < input.Length; i++)
             {
                 // Check if valid character
-                if (Characters.Contains(input[i].ToString().ToLower()))
+                if (_characters.Contains(input[i].ToString().ToLower()))
                 {
                     // Offset the character
-                    output += Characters[(Characters.IndexOf(input[i].ToString().ToLower()) - offset + 26) % 26];
+                    output += _characters[(_characters.IndexOf(input[i].ToString().ToLower()) - offset + 26) % 26];
                 }
                 else
                 {
@@ -432,7 +453,7 @@ namespace DumbCodeYe
             float totalScore = 0;
             for (int i = 0; i < 26; i++)
             {
-                totalScore += Math.Abs(CharacterFrequency[i] - freq[i]);
+                totalScore += Math.Abs(_characterFrequency[i] - freq[i]);
             }
             return (float)Math.Floor(totalScore * 1000);
         }
@@ -452,7 +473,7 @@ namespace DumbCodeYe
             float totalChars = 0f;
             for (int i = 0; i < text.Length; i++)
             {
-                if (Characters.Contains(text[i].ToString().ToLower()))
+                if (_characters.Contains(text[i].ToString().ToLower()))
                 {
                     totalChars++;
                     switch (text[i].ToString().ToLower())
@@ -690,7 +711,7 @@ namespace DumbCodeYe
                     break;
                 }
             }
-            SpaceSet[] Sets = new SpaceSet[SpaceIterations];
+            SpaceSet[] Sets = new SpaceSet[SPACE_ITERATIONS];
             Sets[0] = new SpaceSet(s, 0);
             while(letterIndex < s.Length)
             {
@@ -718,7 +739,7 @@ namespace DumbCodeYe
 
         private void InsertIntoSets(List<SpaceSet> spaces, SpaceSet set)
         {
-            if (spaces.Count < SpaceIterations)
+            if (spaces.Count < SPACE_ITERATIONS)
             {
                 for (int j = 0; j <= spaces.Count; j++)
                 {
@@ -734,7 +755,7 @@ namespace DumbCodeYe
                     }
                 }
             }
-            else if(spaces[SpaceIterations - 1].Score() < set.Score())
+            else if(spaces[SPACE_ITERATIONS - 1].Score() < set.Score())
             {
                 for (int j = 0; j < spaces.Count; j++)
                 {
@@ -744,7 +765,7 @@ namespace DumbCodeYe
                         break;
                     }
                 }
-                spaces.RemoveAt(SpaceIterations);
+                spaces.RemoveAt(SPACE_ITERATIONS);
             }
         }
 
@@ -792,74 +813,52 @@ namespace DumbCodeYe
         /// DROPOUT CONTROL
         ///
 
-        private Control[] Dropouts;
-
-        // Main methods
-
-        private void InitDropouts()
-        {
-            // Set Dropouts to all dropouts
-            Dropouts = new Control[]
-            {
-                textOperationsDropout,
-                basicCiphersDropout,
-                monoAlphabeticDropout,
-                polyAlphabeticDropout,
-                transpositionDropout
-            };
-        }
-        private void ChangeDropout(Control dropout)
-        {
-            // Hide dropout if already visible
-            if (dropout.Visible)
-                dropout.Visible = false;
-
-            // Else hide all other dropouts and show the selected one
-            else
-            {
-                HideAllDropouts();
-                dropout.Visible = true;
-            }
-        }
-        private void HideAllDropouts()
-        {
-            // Iterate through each dropout and hide
-            foreach(Control drop in Dropouts)
-            {
-                drop.Visible = false;
-            }
-        }
 
         // Button methods
 
         private void textOperationsBtn_Click(object sender, EventArgs e)
         {
-            ChangeDropout(textOperationsDropout);
+            _menuBuilder.OpenDropdown(new ButtonInformation[]
+            {
+                new ButtonInformation("TO UPPER", new EventHandler(upperBtn_Click)),
+                new ButtonInformation("TO LETTERS", new EventHandler(lettersBtn_Click))
+            }, new Point(300, 30));
         }
 
         private void basicCipherBtn_Click(object sender, EventArgs e)
         {
-            ChangeDropout(basicCiphersDropout);
+            _menuBuilder.OpenDropdown(new ButtonInformation[]
+            {
+                new ButtonInformation("CEASER", new EventHandler(ceaserBtn_Click)),
+                new ButtonInformation("MORSE", new EventHandler(morseBtn_Click))
+            }, new Point(300, 70));
         }
 
         private void monoAlphabeticBtn_Click(object sender, EventArgs e)
         {
-            ChangeDropout(monoAlphabeticDropout);
+            _menuBuilder.OpenDropdown(new ButtonInformation[]
+            {
+                new ButtonInformation("SUBSTITUTION", new EventHandler(substituteBtn_Click)),
+                new ButtonInformation("BACON", new EventHandler(btnBacon_Click))
+            }, new Point(300, 70));
         }
 
         private void polyAlphabeticBtn_Click(object sender, EventArgs e)
         {
-            ChangeDropout(polyAlphabeticDropout);
+            _menuBuilder.OpenDropdown(new ButtonInformation[]
+            {
+                new ButtonInformation("VIGENERE", new EventHandler(vigenereBtn_Click)),
+                new ButtonInformation("POLYBIUS", new EventHandler(polybiusBtn_Click))
+            }, new Point(300, 70));
         }
 
         private void transpositionBtn_Click_1(object sender, EventArgs e)
         {
-            ChangeDropout(transpositionDropout);
         }
 
         private void textInput_Enter(object sender, EventArgs e)
         {
-            HideAllDropouts();
+            _menuBuilder.CloseDropdown();
         }
     }
 }

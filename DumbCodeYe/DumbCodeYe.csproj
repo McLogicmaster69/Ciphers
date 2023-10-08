@@ -84,6 +84,8 @@
     <Compile Include="Bigrams\InitBigramsFrm.Designer.cs">
       <DependentUpon>InitBigramsFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ButtonInformation.cs" />
+    <Compile Include="DropdownMenuBuilder.cs" />
     <Compile Include="GridPosition.cs" />
     <Compile Include="Hill\HillCipher.cs">
       <SubType>Form</SubType>
@@ -208,11 +210,11 @@
     <Compile Include="Substitution\CrackOptions.Designer.cs">
       <DependentUpon>CrackOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="MainFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainFrm.Designer.cs">
+      <DependentUpon>MainFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Frequency.cs">
       <SubType>Form</SubType>
@@ -355,8 +357,8 @@
     <EmbeddedResource Include="Substitution\CrackOptions.resx">
       <DependentUpon>CrackOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="MainFrm.resx">
+      <DependentUpon>MainFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frequency.resx">
       <DependentUpon>Frequency.cs</DependentUpon>

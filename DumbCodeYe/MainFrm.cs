@@ -393,7 +393,8 @@ namespace DumbCodeYe
             _menuBuilder.OpenDropdown(new ButtonInformation[]
             {
                 new ButtonInformation("VIGENERE", OpenVigenereTool),
-                new ButtonInformation("POLYBIUS", OpenPolybiusTool)
+                new ButtonInformation("POLYBIUS", OpenPolybiusTool),
+                new ButtonInformation("HILL", HillCipher)
             }, new Point(300, 120));
         }
 

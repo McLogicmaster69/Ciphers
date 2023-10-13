@@ -1,13 +1,10 @@
-﻿using DumbCodeYe.BasicWordLib;
-using DumbCodeYe.Bigrams;
-using DumbCodeYe.Hill;
-using DumbCodeYe.Playfair;
-using DumbCodeYe.Polybius;
-using DumbCodeYe.Quadgrams;
-using DumbCodeYe.Substitution;
-using DumbCodeYe.Transposition;
-using DumbCodeYe.TwoSquare;
-using DumbCodeYe.WordFreq;
+﻿using DumbCodeYe.Ciphers;
+using DumbCodeYe.Ciphers.Substitution;
+using DumbCodeYe.Ciphers.Hill;
+using DumbCodeYe.Ciphers.Playfair;
+using DumbCodeYe.Ciphers.Polybius;
+using DumbCodeYe.Ciphers.Transposition;
+using DumbCodeYe.Ciphers.TwoSquare;
 using NetSpell.SpellChecker;
 using NetSpell.SpellChecker.Dictionary;
 using System;
@@ -19,6 +16,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DumbCodeYe.LetterPatterns.Bigrams;
+using DumbCodeYe.LetterPatterns.WordFreq;
+using DumbCodeYe.LetterPatterns.BasicWordLib;
+using DumbCodeYe.LetterPatterns.Quadgrams;
+using DumbCodeYe.Ciphers.Vigenere;
 
 namespace DumbCodeYe
 {

@@ -1,5 +1,5 @@
-﻿using DumbCodeYe.BasicWordLib;
-using DumbCodeYe.WordFreq;
+﻿using DumbCodeYe.LetterPatterns.BasicWordLib;
+using DumbCodeYe.LetterPatterns.WordFreq;
 using System;
 using System.Collections.Generic;
 using System.Linq;

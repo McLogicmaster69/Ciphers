@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AffineCipher.cs" />
     <Compile Include="BaconCipher.cs" />
     <Compile Include="BasicWordLib\BasicWordData.cs" />
     <Compile Include="BasicWordLib\InitBasicWord.cs">
@@ -85,8 +86,10 @@
     <Compile Include="Bigrams\InitBigramsFrm.Designer.cs">
       <DependentUpon>InitBigramsFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="BinaryCipher.cs" />
     <Compile Include="ButtonInformation.cs" />
     <Compile Include="CeaserCipher.cs" />
+    <Compile Include="CipherEvaluation.cs" />
     <Compile Include="DropdownMenuBuilder.cs" />
     <Compile Include="GeneralConstants.cs" />
     <Compile Include="GridPosition.cs" />

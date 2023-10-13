@@ -302,6 +302,15 @@
     </Compile>
     <Compile Include="LetterPatterns\WordFreq\SpellCheckDictionary.cs" />
     <Compile Include="LetterPatterns\WordFreq\WordFreqData.cs" />
+    <Compile Include="TextPlayground\EditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextPlayground\EditorForm.Designer.cs">
+      <DependentUpon>EditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextPlayground\Executer.cs" />
+    <Compile Include="TextPlayground\Parser.cs" />
+    <Compile Include="TextPlayground\Tokens\Token.cs" />
     <EmbeddedResource Include="LetterPatterns\BasicWordLib\InitBasicWord.resx">
       <DependentUpon>InitBasicWord.cs</DependentUpon>
     </EmbeddedResource>
@@ -409,6 +418,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LetterPatterns\WordFreq\InitWordFreq.resx">
       <DependentUpon>InitWordFreq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextPlayground\EditorForm.resx">
+      <DependentUpon>EditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

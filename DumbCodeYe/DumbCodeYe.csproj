@@ -308,9 +308,18 @@
     <Compile Include="TextPlayground\EditorForm.Designer.cs">
       <DependentUpon>EditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TextPlayground\Errors\Error.cs" />
     <Compile Include="TextPlayground\Executer.cs" />
+    <Compile Include="TextPlayground\ExecutionOutput.cs" />
+    <Compile Include="TextPlayground\ParseOutput.cs" />
     <Compile Include="TextPlayground\Parser.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\CipherTokens\CeaserCipherToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\CipherTokens\CipherToken.cs" />
+    <Compile Include="TextPlayground\Tokens\OutputToken.cs" />
     <Compile Include="TextPlayground\Tokens\Token.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\PlainStringToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\StringToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\ValueToken.cs" />
     <EmbeddedResource Include="LetterPatterns\BasicWordLib\InitBasicWord.resx">
       <DependentUpon>InitBasicWord.cs</DependentUpon>
     </EmbeddedResource>

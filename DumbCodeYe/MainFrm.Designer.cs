@@ -36,6 +36,7 @@ namespace DumbCodeYe
             this.polyAlphabeticBtn = new System.Windows.Forms.Button();
             this.transpositionBtn = new System.Windows.Forms.Button();
             this.initButtons = new System.Windows.Forms.Button();
+            this.textEditorBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textInput
@@ -144,12 +145,29 @@ namespace DumbCodeYe
             this.initButtons.Text = "INITIALISE";
             this.initButtons.UseVisualStyleBackColor = false;
             // 
+            // textEditorBtn
+            // 
+            this.textEditorBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textEditorBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(153)))), ((int)(((byte)(174)))));
+            this.textEditorBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.textEditorBtn.FlatAppearance.BorderSize = 2;
+            this.textEditorBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.textEditorBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(45)))), ((int)(((byte)(66)))));
+            this.textEditorBtn.Location = new System.Drawing.Point(0, 520);
+            this.textEditorBtn.Name = "textEditorBtn";
+            this.textEditorBtn.Size = new System.Drawing.Size(300, 40);
+            this.textEditorBtn.TabIndex = 28;
+            this.textEditorBtn.Text = "TEXT EDITOR";
+            this.textEditorBtn.UseVisualStyleBackColor = false;
+            this.textEditorBtn.Click += new System.EventHandler(this.textEditorBtn_Click);
+            // 
             // mainFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(242)))), ((int)(((byte)(244)))));
             this.ClientSize = new System.Drawing.Size(1300, 600);
+            this.Controls.Add(this.textEditorBtn);
             this.Controls.Add(this.initButtons);
             this.Controls.Add(this.transpositionBtn);
             this.Controls.Add(this.polyAlphabeticBtn);
@@ -176,6 +194,7 @@ namespace DumbCodeYe
         private System.Windows.Forms.Button polyAlphabeticBtn;
         private System.Windows.Forms.Button transpositionBtn;
         private System.Windows.Forms.Button initButtons;
+        private System.Windows.Forms.Button textEditorBtn;
     }
 }
 

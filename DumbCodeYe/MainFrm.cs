@@ -21,6 +21,7 @@ using DumbCodeYe.LetterPatterns.WordFreq;
 using DumbCodeYe.LetterPatterns.BasicWordLib;
 using DumbCodeYe.LetterPatterns.Quadgrams;
 using DumbCodeYe.Ciphers.Vigenere;
+using DumbCodeYe.TextPlayground;
 
 namespace DumbCodeYe
 {
@@ -324,6 +325,12 @@ namespace DumbCodeYe
         private void mainFrm_Resize(object sender, EventArgs e)
         {
             textInput.Width = this.Width - TEXT_INPUT_WIDTH_BUFFER;
+        }
+
+        private void textEditorBtn_Click(object sender, EventArgs e)
+        {
+            EditorForm frm = new EditorForm(textInput.Text);
+            frm.Show();
         }
     }
 }

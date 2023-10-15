@@ -43,6 +43,7 @@ namespace DumbCodeYe.TextPlayground
             this.RunBtn.TabIndex = 0;
             this.RunBtn.Text = "Run";
             this.RunBtn.UseVisualStyleBackColor = true;
+            this.RunBtn.Click += new System.EventHandler(this.RunBtn_Click);
             // 
             // textInput
             // 

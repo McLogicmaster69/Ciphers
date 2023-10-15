@@ -9,6 +9,7 @@ namespace DumbCodeYe.TextPlayground.Tokens
     public enum TokenType
     {
         ValueToken,
+        Input,
         Output
     }
 

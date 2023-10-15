@@ -9,13 +9,13 @@ namespace DumbCodeYe.TextPlayground.Tokens.ValueTokens.StringTokens.CipherTokens
 {
     public class CeaserCipherToken : CipherToken
     {
-        private readonly string Input;
+        private readonly StringToken Input;
 
-        public CeaserCipherToken(string input) : base(CipherType.Ceaser)
+        public CeaserCipherToken(StringToken input) : base(CipherType.Ceaser)
         {
             Input = input;
         }
 
-        public override string GetCipherOutput() => CeaserCipher.TryCeaserValue(Input);
+        public override string GetCipherOutput() => CeaserCipher.TryCeaserValue(Input.GetString());
     }
 }

@@ -16,7 +16,7 @@ namespace DumbCodeYe.TextPlayground.Tokens
             Value = value;
         }
 
-        public override void Run()
+        public override void Run(ExecutionMemory memory)
         {
             TextOutputFrm.CreateOutput(Value.GetString());
         }

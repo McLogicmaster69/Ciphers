@@ -11,10 +11,11 @@ namespace DumbCodeYe.TextPlayground
     {
         public static ExecutionOutput Execute(List<Token> tokens)
         {
+            ExecutionMemory memory = new ExecutionMemory();
             int tokenIndex = 0;
             while(tokenIndex < tokens.Count)
             {
-                tokens[tokenIndex].Run();
+                tokens[tokenIndex].Run(memory);
                 tokenIndex++;
             }
             return new ExecutionOutput();

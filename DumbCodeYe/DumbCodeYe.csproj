@@ -310,6 +310,7 @@
     </Compile>
     <Compile Include="TextPlayground\Errors\Error.cs" />
     <Compile Include="TextPlayground\Executer.cs" />
+    <Compile Include="TextPlayground\ExecutionMemory.cs" />
     <Compile Include="TextPlayground\ExecutionOutput.cs" />
     <Compile Include="TextPlayground\ParseOutput.cs" />
     <Compile Include="TextPlayground\Parser.cs" />

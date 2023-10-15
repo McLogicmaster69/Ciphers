@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DumbCodeYe.TextPlayground.Errors;
+using DumbCodeYe.TextPlayground.Tokens;
+using DumbCodeYe.TextPlayground.Tokens.ValueTokens.StringTokens.CipherTokens;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +14,9 @@ namespace DumbCodeYe.TextPlayground
         public static ParseOutput Parse(string text)
         {
             List<string> textTokens = GetTextTokens(text);
-            ParseOutput output = new ParseOutput(null, null);
+            Error[] errors;
+            Token[] tokens = ParseText(textTokens.ToArray(), out errors);
+            ParseOutput output = new ParseOutput(tokens, errors);
             return output;
         }
 
@@ -41,6 +46,23 @@ namespace DumbCodeYe.TextPlayground
                 currentWord = "";
             }
             return textTokens;
+        }
+
+        private static Token[] ParseText(string[] stringTokens, out Error[] errors)
+        {
+            List<Token> tokens = new List<Token>();
+            List<Error> errorList = new List<Error>();
+            errors = errorList.ToArray();
+            return tokens.ToArray();
+        }
+
+        private static Token ParseStringToken(string stringToken)
+        {
+            switch (stringToken)
+            {
+                case "CEASERCIPHER":
+                    return new CeaserCipherToken();
+            }
         }
     }
 }

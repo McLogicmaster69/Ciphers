@@ -21,7 +21,7 @@ namespace DumbCodeYe.TextPlayground.Tokens
             Type = type;
         }
 
-        public virtual void Run()
+        public virtual void Run(ExecutionMemory memory)
         {
         }
     }

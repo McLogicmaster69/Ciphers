@@ -79,8 +79,11 @@ namespace DumbCodeYe.TextPlayground
                     return INPUT(stringTokens, ref index, out error);
                 case "OUTPUT":
                     return OUTPUT(stringTokens, ref index, out error);
+
                 case "CEASER":
                     return CEASER(stringTokens, ref index, out error);
+                case "AFFINE":
+                    return AFFINE(stringTokens, ref index, out error);
             }
 
             error = new Error(ErrorType.UnknownToken, str.Line);
@@ -162,6 +165,20 @@ namespace DumbCodeYe.TextPlayground
 
             error = null;
             return new CeaserCipherToken(stringToken);
+        }
+
+        private static AffineCipherToken AFFINE(StringToParse[] stringTokens, ref int index, out Error error)
+        {
+            StringToken stringToken = GetNextStringToken(stringTokens, ref index, out Error err);
+            
+            if(err != null)
+            {
+                error = err;
+                return null;
+            }
+
+            error = null;
+            return new AffineCipherToken(stringToken);
         }
 
         #endregion

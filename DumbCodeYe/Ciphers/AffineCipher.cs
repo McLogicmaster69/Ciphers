@@ -50,5 +50,19 @@ namespace DumbCodeYe.Ciphers
         }
 
         public static int ShiftCharacter(int value, int A, int B) => (value * A + B) % 26;
+
+        public static string TryAffineCipherValue(string text)
+        {
+            foreach (int A in AValues)
+            {
+                foreach (int B in BValues)
+                {
+                    string output = AffineShift(text, A, B);
+                    if (CipherEvaluation.CalculateScore(output) < 400)
+                        return output;
+                }
+            }
+            return text;
+        }
     }
 }

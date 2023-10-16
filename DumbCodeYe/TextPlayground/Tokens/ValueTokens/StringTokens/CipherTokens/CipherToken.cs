@@ -8,10 +8,11 @@ namespace DumbCodeYe.TextPlayground.Tokens.ValueTokens.StringTokens.CipherTokens
 {
     public enum CipherType
     {
-        Ceaser
+        Ceaser,
+        Affine
     }
 
-    public class CipherToken : StringToken
+    public abstract class CipherToken : StringToken
     {
         public readonly CipherType Cipher;
 
@@ -20,7 +21,7 @@ namespace DumbCodeYe.TextPlayground.Tokens.ValueTokens.StringTokens.CipherTokens
             Cipher = cipher;
         }
 
-        public virtual string GetCipherOutput() => string.Empty;
+        public abstract string GetCipherOutput();
 
         public override string GetString() => GetCipherOutput();
     }

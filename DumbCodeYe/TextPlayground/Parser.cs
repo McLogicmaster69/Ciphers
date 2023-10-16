@@ -15,37 +15,65 @@ namespace DumbCodeYe.TextPlayground
     {
         public static ParseOutput Parse(string text)
         {
-            List<StringToParse> textTokens = GetTextTokens(text);
+            List<StringToParse> textTokens = GetTextTokens(text, out Error err);
+            if(err != null)
+            {
+                return new ParseOutput(null, new Error[] { err });
+            }
             Token[] tokens = ParseText(textTokens.ToArray(), out Error[] errors);
             ParseOutput output = new ParseOutput(tokens, errors);
             return output;
         }
 
-        private static List<StringToParse> GetTextTokens(string text)
+        private static List<StringToParse> GetTextTokens(string text, out Error err)
         {
             string input = text.ToUpper();
             List<StringToParse> textTokens = new List<StringToParse>();
             string currentWord = "";
             int currentLine = 0;
+            bool isString = false;
             foreach (char c in input)
             {
-                if (c != ' ' && c != '\n' && c != '\r')
+                if (isString)
                 {
-                    currentWord += c.ToString();
+                    if(c == '\"')
+                    {
+                        isString = false;
+                        textTokens.Add(new StringToParse(currentWord, currentLine, StringType.String));
+                        currentWord = "";
+                    }
+                    else
+                    {
+                        if (c == '\n')
+                            currentLine++;
+                        currentWord += c.ToString();
+                    }
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(currentWord))
+                    if (c != ' ' && c != '\n' && c != '\r')
                     {
-                        textTokens.Add(new StringToParse(currentWord, currentLine));
-                        currentWord = "";
+                        currentWord += c.ToString();
                     }
-                    if (c == '\n')
-                        currentLine++;
+                    else if (c == '\"')
+                    {
+                        isString = true;
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(currentWord))
+                        {
+                            textTokens.Add(new StringToParse(currentWord, currentLine, StringType.Normal));
+                            currentWord = "";
+                        }
+                        if (c == '\n')
+                            currentLine++;
+                    }
                 }
             }
             if (!string.IsNullOrEmpty(currentWord))
-                textTokens.Add(new StringToParse(currentWord, currentLine));
+                textTokens.Add(new StringToParse(currentWord, currentLine, StringType.Normal));
+            err = null;
             return textTokens;
         }
 

@@ -13,7 +13,8 @@ namespace DumbCodeYe.TextPlayground.Tokens
         Input,
         Output,
         Declearion,
-        Undefined
+        Undefined,
+        Assignment
     }
 
     public class Token

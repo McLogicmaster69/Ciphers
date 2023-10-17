@@ -55,7 +55,7 @@ namespace DumbCodeYe.TextPlayground
                     {
                         isString = true;
                     }
-                    else if (c != ' ' && c != '\n' && c != '\r')
+                    else if (c != ' ' && c != '\n' && c != '\r' && c != '\t')
                     {
                         currentWord += c.ToString().ToUpper();
                     }
@@ -91,6 +91,14 @@ namespace DumbCodeYe.TextPlayground
             while(index < stringTokens.Length)
             {
                 Token token = ParseStringToken(stringTokens, ref index, out Error err);
+                if(token.Type == TokenType.Undefined)
+                {
+                    if(GetNextTokenType(stringTokens, ref index, out Error assignmentError) == TokenType.Assignment)
+                    {
+
+                    }
+                }
+
                 if (err != null)
                     errorList.Add(err);
                 else
@@ -126,16 +134,72 @@ namespace DumbCodeYe.TextPlayground
                     return CEASER(stringTokens, ref index, out error);
                 case "AFFINE":
                     return AFFINE(stringTokens, ref index, out error);
-            }
 
-            //error = new Error(ErrorType.UnknownToken, str.Line);
-            //return null;
+                case "=":
+                    error = null;
+                    return null;
+            }
 
             error = null;
             return new UndefinedToken(str.Value, str.Line);
         }
 
         #region Value
+
+        private static TokenType GetNextTokenType(StringToParse[] stringTokens, ref int index, out Error error)
+        {
+            if (index + 1 >= stringTokens.Length)
+            {
+                error = new Error(ErrorType.MissingToken, stringTokens[index].Line);
+                return TokenType.Undefined;
+            }
+
+            StringToParse str = stringTokens[index + 1];
+            error = null;
+            switch (str.Value)
+            {
+                case "INPUT":
+                    return TokenType.Input;
+                case "OUTPUT":
+                    return TokenType.Output;
+
+                case "STRING":
+                    return TokenType.ValueToken;
+
+                case "CEASER":
+                    return TokenType.ValueToken;
+                case "AFFINE":
+                    return TokenType.ValueToken;
+
+                case "=":
+                    return TokenType.Assignment;
+            }
+
+            return TokenType.Undefined;
+        }
+
+        private static Token GetNextToken(StringToParse[] stringTokens, ref int index, out Error error)
+        {
+            StringToParse str = stringTokens[index];
+            index++;
+            if (index >= stringTokens.Length)
+            {
+                error = new Error(ErrorType.MissingToken, str.Line);
+                return null;
+            }
+            StringToParse newStr = stringTokens[index];
+
+            Token nextToken = ParseStringToken(stringTokens, ref index, out Error err);
+
+            if (err != null)
+            {
+                error = err;
+                return null;
+            }
+
+            error = null;
+            return nextToken;
+        }
 
         private static StringToken GetNextStringToken(StringToParse[] stringTokens, ref int index, out Error error)
         {
@@ -278,8 +342,25 @@ namespace DumbCodeYe.TextPlayground
                 return null;
             }
 
-            error = null;
-            return new DeclerationToken(Tokens.ValueTokens.ValueType.String, undefined, str.Line);
+            if(GetNextTokenType(stringTokens, ref index, out Error typeErr) == TokenType.Assignment)
+            {
+                GetNextToken(stringTokens, ref index, out Error _);
+                StringToken strToken = GetNextStringToken(stringTokens, ref index, out Error assignmentErr);
+
+                if(assignmentErr != null)
+                {
+                    error = assignmentErr;
+                    return null;
+                }
+
+                error = null;
+                return new DeclerationToken(Tokens.ValueTokens.ValueType.String, undefined, strToken, str.Line);
+            }
+            else
+            {
+                error = null;
+                return new DeclerationToken(Tokens.ValueTokens.ValueType.String, undefined, str.Line);
+            }
         }
 
         #endregion

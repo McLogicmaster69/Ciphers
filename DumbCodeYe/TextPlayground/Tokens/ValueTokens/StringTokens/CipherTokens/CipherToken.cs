@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DumbCodeYe.TextPlayground.Errors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,13 @@ namespace DumbCodeYe.TextPlayground.Tokens.ValueTokens.StringTokens.CipherTokens
     {
         public readonly CipherType Cipher;
 
-        public CipherToken(CipherType cipher)
+        public CipherToken(CipherType cipher, int line) : base(line)
         {
             Cipher = cipher;
         }
 
-        public abstract string GetCipherOutput();
+        public abstract string GetCipherOutput(ExecutionMemory memory, out Error error);
 
-        public override string GetString() => GetCipherOutput();
+        public override string GetString(ExecutionMemory memory, out Error error) => GetCipherOutput(memory, out error);
     }
 }

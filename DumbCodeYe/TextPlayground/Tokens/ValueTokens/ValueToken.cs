@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DumbCodeYe.TextPlayground.Errors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,18 +14,15 @@ namespace DumbCodeYe.TextPlayground.Tokens.ValueTokens
         Bool
     }
 
-    public class ValueToken : Token
+    public abstract class ValueToken : Token
     {
         public readonly ValueType ValueType;
 
-        public ValueToken(ValueType type) : base(TokenType.ValueToken)
+        public ValueToken(ValueType type, int line) : base(TokenType.ValueToken, line)
         {
             ValueType = type;
         }
 
-        public virtual object GetValue()
-        {
-            return null;
-        }
+        public abstract object GetValue(ExecutionMemory memory, out Error error);
     }
 }

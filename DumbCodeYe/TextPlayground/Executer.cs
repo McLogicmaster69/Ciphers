@@ -9,13 +9,9 @@ namespace DumbCodeYe.TextPlayground
 {
     public static class Executer
     {
-        public static string Input { get; private set; }
-
         public static ExecutionOutput Execute(Token[] tokens, string input)
         {
-            Input = input;
-
-            ExecutionMemory memory = new ExecutionMemory();
+            ExecutionMemory memory = new ExecutionMemory(input);
             int tokenIndex = 0;
             while(tokenIndex < tokens.Length)
             {
@@ -24,7 +20,5 @@ namespace DumbCodeYe.TextPlayground
             }
             return new ExecutionOutput();
         }
-
-        public static string GetInput() => Input;
     }
 }

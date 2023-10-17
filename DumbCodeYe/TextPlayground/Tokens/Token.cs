@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DumbCodeYe.TextPlayground.Errors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,20 +11,25 @@ namespace DumbCodeYe.TextPlayground.Tokens
     {
         ValueToken,
         Input,
-        Output
+        Output,
+        Declearion,
+        Undefined
     }
 
     public class Token
     {
         public readonly TokenType Type;
+        public readonly int Line;
 
-        public Token(TokenType type)
+        public Token(TokenType type, int line)
         {
             Type = type;
+            Line = line;
         }
 
-        public virtual void Run(ExecutionMemory memory)
+        public virtual Error Run(ExecutionMemory memory)
         {
+            return new Error(ErrorType.UnimplementedToken, Line);
         }
     }
 }

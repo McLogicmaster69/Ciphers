@@ -8,9 +8,15 @@ namespace DumbCodeYe.TextPlayground.Errors
 {
     public enum ErrorType
     {
+        UnimplementedToken,
+
         UnknownToken,
         MissingToken,
-        UnexpectedToken
+        UnexpectedToken,
+        IncompleteString,
+
+        DuplicatedVariable,
+        UnknownVariable
     }
 
     public class Error

@@ -27,7 +27,7 @@ namespace DumbCodeYe.TextPlayground
             ParseOutput parseOutput = Parser.Parse(textInput.Text);
             if(parseOutput.Errors.Length != 0)
             {
-                MessageBox.Show("ERROR WHILE PARSING");
+                MessageBox.Show($"ERROR WHILE PARSING. ERROR ON LINE {parseOutput.Errors[0].Line} OF TYPE {parseOutput.Errors[0].Type}");
                 return;
             }
             Executer.Execute(parseOutput.Tokens, Input);

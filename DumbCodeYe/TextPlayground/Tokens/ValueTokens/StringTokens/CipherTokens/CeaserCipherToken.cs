@@ -1,4 +1,5 @@
 ﻿using DumbCodeYe.Ciphers;
+using DumbCodeYe.TextPlayground.Errors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,22 @@ namespace DumbCodeYe.TextPlayground.Tokens.ValueTokens.StringTokens.CipherTokens
     {
         private readonly StringToken Input;
 
-        public CeaserCipherToken(StringToken input) : base(CipherType.Ceaser)
+        public CeaserCipherToken(StringToken input, int line) : base(CipherType.Ceaser, line)
         {
             Input = input;
         }
 
-        public override string GetCipherOutput() => CeaserCipher.TryCeaserValue(Input.GetString());
+        public override string GetCipherOutput(ExecutionMemory memory, out Error error)
+        {
+            string str = Input.GetString(memory, out Error err);
+            if (err != null)
+            {
+                error = err;
+                return string.Empty;
+            }
+
+            error = null;
+            return CeaserCipher.TryCeaserValue(str);
+        }
     }
 }

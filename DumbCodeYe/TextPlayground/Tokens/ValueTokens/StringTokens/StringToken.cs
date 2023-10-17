@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DumbCodeYe.TextPlayground.Errors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace DumbCodeYe.TextPlayground.Tokens.ValueTokens
 {
-    public class StringToken : ValueToken
+    public abstract class StringToken : ValueToken
     {
-        public StringToken() : base(ValueType.String)
+        public StringToken(int line) : base(ValueType.String, line)
         {
         }
 
-        public virtual string GetString() => string.Empty;
+        public abstract string GetString(ExecutionMemory memory, out Error error);
 
-        public override object GetValue() => GetString();
+        public override object GetValue(ExecutionMemory memory, out Error error) => GetString(memory, out error);
     }
 }

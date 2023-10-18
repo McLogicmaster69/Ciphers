@@ -91,18 +91,23 @@ namespace DumbCodeYe.TextPlayground
             while(index < stringTokens.Length)
             {
                 Token token = ParseStringToken(stringTokens, ref index, out Error err);
-                if(token.Type == TokenType.Undefined)
-                {
-                    if(GetNextTokenType(stringTokens, ref index, out Error assignmentError) == TokenType.Assignment)
-                    {
-
-                    }
-                }
 
                 if (err != null)
                     errorList.Add(err);
+                else if(token.Type == TokenType.Undefined)
+                {
+                    if(GetNextTokenType(stringTokens, ref index, out Error assignmentError) == TokenType.Assignment)
+                    {
+                        ParseStringToken(stringTokens, ref index, out Error _);
+                        Token valueToken = ParseStringToken(stringTokens, ref index, out Error valueError);
+                    }
+                    errorList.Add(new Error(ErrorType.UnknownToken, token.Line));
+                }
                 else
+                {
                     tokens.Add(token);
+                }
+
                 index++;
             }
 
@@ -112,6 +117,12 @@ namespace DumbCodeYe.TextPlayground
 
         private static Token ParseStringToken(StringToParse[] stringTokens, ref int index, out Error error)
         {
+            if(index >= stringTokens.Length)
+            {
+                error = new Error(ErrorType.MissingToken, -1);
+                return null;
+            }
+
             StringToParse str = stringTokens[index];
 
             if (str.Type == StringType.String)

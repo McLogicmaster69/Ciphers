@@ -13,11 +13,43 @@ namespace DumbCodeYe.Ciphers.Substitution
     public partial class Replacements : Form
     {
         private SubstitueTool ST;
-        private string Characters = "abcdefghijklmnopqrstuvwxyz";
+
+        private readonly TextBox[] textBoxes;
+
         public Replacements(SubstitueTool st)
         {
             InitializeComponent();
             ST = st;
+
+            textBoxes = new TextBox[]
+            {
+                    AValue,
+                    BValue,
+                    CValue,
+                    DValue,
+                    EValue,
+                    FValue,
+                    GValue,
+                    HValue,
+                    IValue,
+                    JValue,
+                    KValue,
+                    LValue,
+                    MValue,
+                    NValue,
+                    OValue,
+                    PValue,
+                    QValue,
+                    RValue,
+                    SValue,
+                    TValue,
+                    UValue,
+                    VValue,
+                    WValue,
+                    XValue,
+                    YValue,
+                    ZValue
+            };
         }
 
         public void SetValues(char[] values)
@@ -105,12 +137,12 @@ namespace DumbCodeYe.Ciphers.Substitution
             bool[] replaced = new bool[26];
             for (int i = 0; i < 26; i++)
             {
-                int charIndex = Characters.IndexOf(replacements[i]);
+                int charIndex = GeneralConstants.CHARACTERS.IndexOf(replacements[i]);
                 if(charIndex == -1)
                 {
                     if(replacements[i] != '#')
                     {
-                        errorTxt.Text = $"letter {Characters[i].ToString().ToUpper()} has no valid value";
+                        errorTxt.Text = $"letter {GeneralConstants.CHARACTERS[i].ToString().ToUpper()} has no valid value";
                         return;
                     }
                 }
@@ -127,7 +159,7 @@ namespace DumbCodeYe.Ciphers.Substitution
                                 break;
                             }
                         }
-                        errorTxt.Text = $"letter {Characters[i].ToString().ToUpper()} and letter {Characters[errorIndex].ToString().ToUpper()} have the same value of {replacements[i]}";
+                        errorTxt.Text = $"letter {GeneralConstants.CHARACTERS[i].ToString().ToUpper()} and letter {GeneralConstants.CHARACTERS[errorIndex].ToString().ToUpper()} have the same value of {replacements[i]}";
                         return;
                     }
                     replaced[charIndex] = true;
@@ -135,6 +167,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             }
             ST.replacements = replacements;
             errorTxt.Text = "";
+            GetRemainingReplacements();
         }
 
         private void resetBtn_Click(object sender, EventArgs e)
@@ -150,6 +183,68 @@ namespace DumbCodeYe.Ciphers.Substitution
         private void reloadBtn_Click(object sender, EventArgs e)
         {
             SetValues(ST.replacements);
+        }
+
+        private void swapBtn_Click(object sender, EventArgs e)
+        {
+            string a = swapATxt.Text;
+            string b = swapBTxt.Text;
+
+            if(GeneralConstants.CHARACTERS.Contains(a) == false || GeneralConstants.CHARACTERS.Contains(b) == false)
+            {
+                errorTxt.Text = "UNKNOWN CHARACTERS";
+                return;
+            }
+
+            int aPos = -1;
+            int bPos = -1;
+            char[] chars = GetValues();
+
+            for (int i = 0; i < 26; i++)
+            {
+                if(a == chars[i].ToString())
+                {
+                    aPos = i;
+                }
+                if (b == chars[i].ToString())
+                {
+                    bPos = i;
+                }
+            }
+
+            if(aPos == -1 || bPos == -1)
+            {
+                errorTxt.Text = "CHARACTERS ARE NOT ON GRID";
+                return;
+            }
+
+            string s = textBoxes[aPos].Text;
+            textBoxes[aPos].Text = textBoxes[bPos].Text;
+            textBoxes[bPos].Text = s;
+            errorTxt.Text = "";
+        }
+
+        private void GetRemainingReplacements()
+        {
+            List<int> remaining = new List<int>();
+            for (int i = 0; i < 26; i++)
+            {
+                remaining.Add(i);
+            }
+
+            foreach(char c in GetValues())
+            {
+                if(c != '#')
+                {
+                    remaining.Remove(GeneralConstants.CHARACTERS.IndexOf(c));
+                }
+            }
+
+            remainingCharsList.Items.Clear();
+            for (int i = 0; i < remaining.Count; i++)
+            {
+                remainingCharsList.Items.Add(GeneralConstants.CHARACTERS[remaining[i]]);
+            }
         }
     }
 }

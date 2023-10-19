@@ -40,22 +40,33 @@ namespace DumbCodeYe.Ciphers.Substitution
             // RANDOM IMMPROVEMENT
 
             SmartReplacementGrid bestGrid = new SmartReplacementGrid(startingGrid);
+            bestGrid.InitIndexes();
             bestGrid.FillRest();
             float bestScore = float.MinValue;
             maxIterationTxt.Text = generations.ToString();
+
             for (int gen = 0; gen < generations; gen++)
             {
                 SmartReplacementGrid testGrid = new SmartReplacementGrid(bestGrid);
+                testGrid.InitWithIndexes(bestGrid._indexA, bestGrid._indexB, bestGrid._availableIndexes);
+                bestGrid.IncrementNext();
+                bool couldSwap = true;
+
                 for (int i = 0; i < rand.Next(1, 3); i++)
                 {
-                    testGrid.SmartSwap();
+                    couldSwap = testGrid.NextSmartSwap();
                 }
+
+                if (!couldSwap)
+                    break;
+
                 string testOutput = testGrid.Decrypt(input);
                 float testScore = ScoreText(testOutput);
                 if (testScore > bestScore)
                 {
                     bestScore = testScore;
                     bestGrid = new SmartReplacementGrid(testGrid);
+                    bestGrid.InitIndexes();
                     bestAnswetTxt.Text = testOutput;
                     SetRaplacements(testGrid.Replacements); 
                     ST.replacements = testGrid.Replacements;

@@ -302,6 +302,36 @@
     </Compile>
     <Compile Include="LetterPatterns\WordFreq\SpellCheckDictionary.cs" />
     <Compile Include="LetterPatterns\WordFreq\WordFreqData.cs" />
+    <Compile Include="TextPlayground\EditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextPlayground\EditorForm.Designer.cs">
+      <DependentUpon>EditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextPlayground\Errors\Error.cs" />
+    <Compile Include="TextPlayground\Executer.cs" />
+    <Compile Include="TextPlayground\ExecutionMemory.cs" />
+    <Compile Include="TextPlayground\ExecutionOutput.cs" />
+    <Compile Include="TextPlayground\ParseOutput.cs" />
+    <Compile Include="TextPlayground\Parser.cs" />
+    <Compile Include="TextPlayground\StringToParse.cs" />
+    <Compile Include="TextPlayground\Tokens\UndefinedToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\BoolTokens\BoolToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\BoolTokens\PlainBoolToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\IntTokens\IntToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\IntTokens\PlainIntToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\CipherTokens\AffineCipherToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\CipherTokens\CeaserCipherToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\CipherTokens\CipherToken.cs" />
+    <Compile Include="TextPlayground\Tokens\OutputToken.cs" />
+    <Compile Include="TextPlayground\Tokens\Token.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\InputToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\PlainStringToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\StringToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\StringVariableToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\ValueToken.cs" />
+    <Compile Include="TextPlayground\Tokens\VariableTokens\DeclerationToken.cs" />
+    <Compile Include="TextPlayground\Variables\StringVariable.cs" />
     <EmbeddedResource Include="LetterPatterns\BasicWordLib\InitBasicWord.resx">
       <DependentUpon>InitBasicWord.cs</DependentUpon>
     </EmbeddedResource>
@@ -409,6 +439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LetterPatterns\WordFreq\InitWordFreq.resx">
       <DependentUpon>InitWordFreq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextPlayground\EditorForm.resx">
+      <DependentUpon>EditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

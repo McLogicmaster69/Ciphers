@@ -63,5 +63,52 @@ namespace DumbCodeYe.Ciphers
             }
             return CipherEvaluation.CalculateScore(inp);
         }
+
+        /// <summary>
+        /// Attemps a ceaser cipher on a piece of text. If successful, returns the decrypted message. If not, will return the cipher text.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static string TryCeaserValue(string text)
+        {
+            float[] scores = new float[26];
+            float[] freq = CipherEvaluation.GetFrequencyProfile(text);
+            for (int i = 0; i < 26; i++)
+            {
+                scores[i] = CalculateScore(freq, i);
+                if (scores[i] < 400)
+                {
+                    return CeaserValue(text, i);
+                }
+            }
+            return text;
+        }
+
+        /// <summary>
+        /// Decrypts a message using a ceaser cipher. Returns the decrpted message.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        public static string CeaserValue(string input, int offset)
+        {
+            // Apply ceaser with offset
+            string output = "";
+            for (int i = 0; i < input.Length; i++)
+            {
+                // Check if valid character
+                if (CipherEvaluation.IsCharacter(input[i]))
+                {
+                    // Offset the character
+                    output += GeneralConstants.CHARACTERS[(CipherEvaluation.GetCharacterValue(input[i]) - offset + 26) % 26];
+                }
+                else
+                {
+                    // Include the unknown character
+                    output += input[i];
+                }
+            }
+            return output;
+        }
     }
 }

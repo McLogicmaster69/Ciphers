@@ -86,6 +86,10 @@ namespace DumbCodeYe.Ciphers.Substitution
             this.errorTxt = new System.Windows.Forms.Label();
             this.resetBtn = new System.Windows.Forms.Button();
             this.reloadBtn = new System.Windows.Forms.Button();
+            this.swapATxt = new System.Windows.Forms.TextBox();
+            this.swapBTxt = new System.Windows.Forms.TextBox();
+            this.swapBtn = new System.Windows.Forms.Button();
+            this.remainingCharsList = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // AKey
@@ -662,7 +666,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             // 
             // applyBtn
             // 
-            this.applyBtn.Location = new System.Drawing.Point(12, 387);
+            this.applyBtn.Location = new System.Drawing.Point(12, 452);
             this.applyBtn.Name = "applyBtn";
             this.applyBtn.Size = new System.Drawing.Size(174, 23);
             this.applyBtn.TabIndex = 52;
@@ -672,7 +676,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             // 
             // closeBtn
             // 
-            this.closeBtn.Location = new System.Drawing.Point(12, 416);
+            this.closeBtn.Location = new System.Drawing.Point(12, 481);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(174, 23);
             this.closeBtn.TabIndex = 53;
@@ -691,7 +695,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             // 
             // resetBtn
             // 
-            this.resetBtn.Location = new System.Drawing.Point(12, 474);
+            this.resetBtn.Location = new System.Drawing.Point(12, 539);
             this.resetBtn.Name = "resetBtn";
             this.resetBtn.Size = new System.Drawing.Size(174, 23);
             this.resetBtn.TabIndex = 55;
@@ -701,7 +705,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             // 
             // reloadBtn
             // 
-            this.reloadBtn.Location = new System.Drawing.Point(12, 445);
+            this.reloadBtn.Location = new System.Drawing.Point(12, 510);
             this.reloadBtn.Name = "reloadBtn";
             this.reloadBtn.Size = new System.Drawing.Size(174, 23);
             this.reloadBtn.TabIndex = 56;
@@ -709,12 +713,57 @@ namespace DumbCodeYe.Ciphers.Substitution
             this.reloadBtn.UseVisualStyleBackColor = true;
             this.reloadBtn.Click += new System.EventHandler(this.reloadBtn_Click);
             // 
+            // swapATxt
+            // 
+            this.swapATxt.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
+            this.swapATxt.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.swapATxt.Location = new System.Drawing.Point(64, 387);
+            this.swapATxt.MaxLength = 1;
+            this.swapATxt.Name = "swapATxt";
+            this.swapATxt.Size = new System.Drawing.Size(20, 20);
+            this.swapATxt.TabIndex = 57;
+            this.swapATxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // swapBTxt
+            // 
+            this.swapBTxt.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
+            this.swapBTxt.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.swapBTxt.Location = new System.Drawing.Point(104, 387);
+            this.swapBTxt.MaxLength = 1;
+            this.swapBTxt.Name = "swapBTxt";
+            this.swapBTxt.Size = new System.Drawing.Size(20, 20);
+            this.swapBTxt.TabIndex = 58;
+            this.swapBTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // swapBtn
+            // 
+            this.swapBtn.Location = new System.Drawing.Point(12, 413);
+            this.swapBtn.Name = "swapBtn";
+            this.swapBtn.Size = new System.Drawing.Size(174, 23);
+            this.swapBtn.TabIndex = 59;
+            this.swapBtn.Text = "SWAP";
+            this.swapBtn.UseVisualStyleBackColor = true;
+            this.swapBtn.Click += new System.EventHandler(this.swapBtn_Click);
+            // 
+            // remainingCharsList
+            // 
+            this.remainingCharsList.FormattingEnabled = true;
+            this.remainingCharsList.IntegralHeight = false;
+            this.remainingCharsList.Location = new System.Drawing.Point(192, 12);
+            this.remainingCharsList.Name = "remainingCharsList";
+            this.remainingCharsList.Size = new System.Drawing.Size(61, 550);
+            this.remainingCharsList.TabIndex = 60;
+            // 
             // Replacements
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(198, 502);
+            this.ClientSize = new System.Drawing.Size(264, 574);
             this.ControlBox = false;
+            this.Controls.Add(this.remainingCharsList);
+            this.Controls.Add(this.swapBtn);
+            this.Controls.Add(this.swapBTxt);
+            this.Controls.Add(this.swapATxt);
             this.Controls.Add(this.reloadBtn);
             this.Controls.Add(this.resetBtn);
             this.Controls.Add(this.errorTxt);
@@ -840,5 +889,9 @@ namespace DumbCodeYe.Ciphers.Substitution
         private System.Windows.Forms.Label errorTxt;
         private System.Windows.Forms.Button resetBtn;
         private System.Windows.Forms.Button reloadBtn;
+        private System.Windows.Forms.TextBox swapATxt;
+        private System.Windows.Forms.TextBox swapBTxt;
+        private System.Windows.Forms.Button swapBtn;
+        private System.Windows.Forms.ListBox remainingCharsList;
     }
 }

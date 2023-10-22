@@ -71,6 +71,12 @@
   <ItemGroup>
     <Compile Include="Ciphers\AffineCipher.cs" />
     <Compile Include="Ciphers\BaconCipher.cs" />
+    <Compile Include="Ciphers\Substitution\BruteWithoutSpaces.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciphers\Substitution\BruteWithoutSpaces.Designer.cs">
+      <DependentUpon>BruteWithoutSpaces.cs</DependentUpon>
+    </Compile>
     <Compile Include="LetterPatterns\BasicWordLib\BasicWordData.cs" />
     <Compile Include="LetterPatterns\BasicWordLib\InitBasicWord.cs">
       <SubType>Form</SubType>
@@ -332,6 +338,9 @@
     <Compile Include="TextPlayground\Tokens\ValueTokens\ValueToken.cs" />
     <Compile Include="TextPlayground\Tokens\VariableTokens\DeclerationToken.cs" />
     <Compile Include="TextPlayground\Variables\StringVariable.cs" />
+    <EmbeddedResource Include="Ciphers\Substitution\BruteWithoutSpaces.resx">
+      <DependentUpon>BruteWithoutSpaces.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LetterPatterns\BasicWordLib\InitBasicWord.resx">
       <DependentUpon>InitBasicWord.cs</DependentUpon>
     </EmbeddedResource>

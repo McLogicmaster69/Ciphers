@@ -14,7 +14,6 @@ namespace DumbCodeYe.Ciphers.Substitution
 {
     public partial class SmartBrute : Form
     {
-        private const string Capitals = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private Random rand;
         private TextBox[] Values;
         private WordDictionary dict = new WordDictionary();
@@ -81,7 +80,7 @@ namespace DumbCodeYe.Ciphers.Substitution
         private SmartReplacementGrid GetRandomGrid()
         {
             string grid = "";
-            List<char> tempCap = new List<char>(Capitals);
+            List<char> tempCap = new List<char>(GeneralConstants.CAPITALS);
             for (int i = 0; i < 26; i++)
             {
                 int randIndex = rand.Next(0, tempCap.Count);
@@ -105,7 +104,7 @@ namespace DumbCodeYe.Ciphers.Substitution
                 string testWord = "";
                 foreach (char c in word)
                 {
-                    if (Capitals.Contains(c.ToString().ToUpper()))
+                    if (GeneralConstants.CAPITALS.Contains(c.ToString().ToUpper()))
                         testWord += c.ToString();
                 }
                 if (speller.TestWord(testWord))
@@ -118,7 +117,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             string filterInput = "";
             for (int i = 0; i < input.Length; i++)
             {
-                if (Capitals.Contains(input[i].ToString()) || input[i] == ' ')
+                if (GeneralConstants.CAPITALS.Contains(input[i].ToString()) || input[i] == ' ')
                 {
                     filterInput += input[i];
                 }

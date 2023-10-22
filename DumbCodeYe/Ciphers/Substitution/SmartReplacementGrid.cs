@@ -71,7 +71,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             {
                 _indexA++;
                 _indexB = _indexA + 1;
-                if (_indexB == _availableIndexes.Count)
+                if (_indexB >= _availableIndexes.Count)
                     return false;
             }
             return true;

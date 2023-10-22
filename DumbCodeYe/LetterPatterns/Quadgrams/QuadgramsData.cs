@@ -83,5 +83,15 @@ namespace DumbCodeYe.LetterPatterns.Quadgrams
             else
                 return Math.Log10((double)total / TotalData);
         }
+        public static long GetAverageValue(string text)
+        {
+            long totalScore = 0;
+            for (int i = 0; i < text.Length - 1; i++)
+            {
+                string bigram = text[i].ToString() + text[i + 1].ToString();
+                totalScore += GetFrequency(bigram);
+            }
+            return totalScore / (text.Length - 1);
+        }
     }
 }

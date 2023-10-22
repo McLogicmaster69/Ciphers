@@ -45,6 +45,9 @@ namespace DumbCodeYe.Ciphers.Substitution
             // 
             // mainTxt
             // 
+            this.mainTxt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.mainTxt.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mainTxt.Location = new System.Drawing.Point(312, 12);
             this.mainTxt.Multiline = true;
@@ -55,6 +58,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             // 
             // crackBtn
             // 
+            this.crackBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.crackBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.crackBtn.Location = new System.Drawing.Point(12, 546);
             this.crackBtn.Name = "crackBtn";
@@ -88,6 +92,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             // 
             // applyReplacementBtn
             // 
+            this.applyReplacementBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.applyReplacementBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.applyReplacementBtn.Location = new System.Drawing.Point(12, 454);
             this.applyReplacementBtn.Name = "applyReplacementBtn";
@@ -99,6 +104,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             // 
             // resetBtn
             // 
+            this.resetBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.resetBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resetBtn.Location = new System.Drawing.Point(12, 408);
             this.resetBtn.Name = "resetBtn";
@@ -110,6 +116,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             // 
             // crackOptionsBtn
             // 
+            this.crackOptionsBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.crackOptionsBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.crackOptionsBtn.Location = new System.Drawing.Point(12, 500);
             this.crackOptionsBtn.Name = "crackOptionsBtn";
@@ -143,6 +150,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             // 
             // bruteBtn
             // 
+            this.bruteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bruteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bruteBtn.Location = new System.Drawing.Point(12, 362);
             this.bruteBtn.Name = "bruteBtn";
@@ -154,6 +162,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             // 
             // smartBruteBtn
             // 
+            this.smartBruteBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.smartBruteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.smartBruteBtn.Location = new System.Drawing.Point(12, 316);
             this.smartBruteBtn.Name = "smartBruteBtn";
@@ -165,6 +174,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             // 
             // wordDictionaryToolBtn
             // 
+            this.wordDictionaryToolBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.wordDictionaryToolBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.wordDictionaryToolBtn.Location = new System.Drawing.Point(12, 270);
             this.wordDictionaryToolBtn.Name = "wordDictionaryToolBtn";
@@ -191,8 +201,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             this.Controls.Add(this.freqBtn);
             this.Controls.Add(this.crackBtn);
             this.Controls.Add(this.mainTxt);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1058, 637);
             this.Name = "SubstitueTool";
             this.Text = "Substitue Tool";
             this.Load += new System.EventHandler(this.SubstitueTool_Load);

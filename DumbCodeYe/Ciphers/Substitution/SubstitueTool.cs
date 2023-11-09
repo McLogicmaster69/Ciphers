@@ -428,7 +428,7 @@ namespace DumbCodeYe.Ciphers.Substitution
 
         private void applyReplacementBtn_Click(object sender, EventArgs e)
         {
-            string newText = mainTxt.Text;
+            string newText = OriginalText;
             for (int i = 0; i < 26; i++)
             {
                 if (replacements[i] != '#')

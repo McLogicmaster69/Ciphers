@@ -16,7 +16,6 @@ namespace DumbCodeYe.Ciphers.Substitution
     {
         private WordDictionary dict = new WordDictionary();
         private Spelling speller = new Spelling();
-        private const string Characters = "abcdefghijklmnopqrstuvwxyz";
         public WordDictionaryTool()
         {
             InitializeComponent(); 
@@ -40,20 +39,20 @@ namespace DumbCodeYe.Ciphers.Substitution
                         {
                             if (i == k)
                             {
-                                if (Characters[j] == word[k])
+                                if (GeneralConstants.CHARACTERS[j] == word[k])
                                 {
                                     test = "";
                                     break;
                                 }
                                 else
                                 {
-                                    test += Characters[j];
+                                    test += GeneralConstants.CHARACTERS[j];
                                 }
                             }
                             else
                             {
                                 if (word[k] == word[i])
-                                    test += Characters[j];
+                                    test += GeneralConstants.CHARACTERS[j];
                                 else
                                     test += word[k];
                             }

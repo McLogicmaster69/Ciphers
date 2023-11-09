@@ -21,5 +21,13 @@ namespace DumbCodeYe
         {
             textOut.Text = output;
         }
+
+        public static TextOutputFrm CreateOutput(string output)
+        {
+            TextOutputFrm txtOut = new TextOutputFrm();
+            txtOut.SetOutput(output);
+            txtOut.Show();
+            return txtOut;
+        }
     }
 }

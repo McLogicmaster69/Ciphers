@@ -69,150 +69,166 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicWordLib\BasicWordData.cs" />
-    <Compile Include="BasicWordLib\InitBasicWord.cs">
+    <Compile Include="Ciphers\AffineCipher.cs" />
+    <Compile Include="Ciphers\BaconCipher.cs" />
+    <Compile Include="Ciphers\Substitution\BruteWithoutSpaces.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BasicWordLib\InitBasicWord.Designer.cs">
+    <Compile Include="Ciphers\Substitution\BruteWithoutSpaces.Designer.cs">
+      <DependentUpon>BruteWithoutSpaces.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LetterPatterns\BasicWordLib\BasicWordData.cs" />
+    <Compile Include="LetterPatterns\BasicWordLib\InitBasicWord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LetterPatterns\BasicWordLib\InitBasicWord.Designer.cs">
       <DependentUpon>InitBasicWord.cs</DependentUpon>
     </Compile>
-    <Compile Include="Bigrams\BigramsData.cs" />
-    <Compile Include="Bigrams\DataSet.cs" />
-    <Compile Include="Bigrams\InitBigramsFrm.cs">
+    <Compile Include="LetterPatterns\Bigrams\BigramsData.cs" />
+    <Compile Include="LetterPatterns\Bigrams\DataSet.cs" />
+    <Compile Include="LetterPatterns\Bigrams\InitBigramsFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Bigrams\InitBigramsFrm.Designer.cs">
+    <Compile Include="LetterPatterns\Bigrams\InitBigramsFrm.Designer.cs">
       <DependentUpon>InitBigramsFrm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ciphers\BinaryCipher.cs" />
+    <Compile Include="ButtonInformation.cs" />
+    <Compile Include="Ciphers\CeaserCipher.cs" />
+    <Compile Include="CipherEvaluation.cs" />
+    <Compile Include="DropdownMenuBuilder.cs" />
+    <Compile Include="GeneralConstants.cs" />
     <Compile Include="GridPosition.cs" />
-    <Compile Include="Hill\HillCipher.cs">
+    <Compile Include="Ciphers\Hill\HillCipher.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Hill\HillCipher.Designer.cs">
+    <Compile Include="Ciphers\Hill\HillCipher.Designer.cs">
       <DependentUpon>HillCipher.cs</DependentUpon>
     </Compile>
     <Compile Include="Incrementor.cs" />
-    <Compile Include="Playfair\Playfair5Crack.cs">
+    <Compile Include="Ciphers\MorseCode.cs" />
+    <Compile Include="OtherStructs.cs" />
+    <Compile Include="Ciphers\Playfair\Playfair5Crack.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Playfair\Playfair5Crack.Designer.cs">
+    <Compile Include="Ciphers\Playfair\Playfair5Crack.Designer.cs">
       <DependentUpon>Playfair5Crack.cs</DependentUpon>
     </Compile>
-    <Compile Include="Playfair\Playfair5Grid.cs">
+    <Compile Include="Ciphers\Playfair\Playfair5Grid.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Playfair\Playfair5Grid.Designer.cs">
+    <Compile Include="Ciphers\Playfair\Playfair5Grid.Designer.cs">
       <DependentUpon>Playfair5Grid.cs</DependentUpon>
     </Compile>
-    <Compile Include="Playfair\Playfair5GridV3.cs">
+    <Compile Include="Ciphers\Playfair\Playfair5GridV3.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Playfair\Playfair5GridV3.Designer.cs">
+    <Compile Include="Ciphers\Playfair\Playfair5GridV3.Designer.cs">
       <DependentUpon>Playfair5GridV3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Playfair\PlayfairGrid.cs" />
-    <Compile Include="Playfair\PlayfairSelection.cs">
+    <Compile Include="Ciphers\Playfair\PlayfairGrid.cs" />
+    <Compile Include="Ciphers\Playfair\PlayfairSelection.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Playfair\PlayfairSelection.Designer.cs">
+    <Compile Include="Ciphers\Playfair\PlayfairSelection.Designer.cs">
       <DependentUpon>PlayfairSelection.cs</DependentUpon>
     </Compile>
-    <Compile Include="Playfair\Playfair5GridV2.cs">
+    <Compile Include="Ciphers\Playfair\Playfair5GridV2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Playfair\Playfair5GridV2.Designer.cs">
+    <Compile Include="Ciphers\Playfair\Playfair5GridV2.Designer.cs">
       <DependentUpon>Playfair5GridV2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Polybius\PolybiusGrid.cs">
+    <Compile Include="Ciphers\Polybius\PolybiusGrid.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Polybius\PolybiusGrid.Designer.cs">
+    <Compile Include="Ciphers\Polybius\PolybiusGrid.Designer.cs">
       <DependentUpon>PolybiusGrid.cs</DependentUpon>
     </Compile>
-    <Compile Include="Quadgrams\DataSet.cs" />
-    <Compile Include="Quadgrams\QuadgramsData.cs" />
-    <Compile Include="Quadgrams\InitQuadgramsFrm.cs">
+    <Compile Include="LetterPatterns\Quadgrams\DataSet.cs" />
+    <Compile Include="LetterPatterns\Quadgrams\QuadgramsData.cs" />
+    <Compile Include="LetterPatterns\Quadgrams\InitQuadgramsFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Quadgrams\InitQuadgramsFrm.Designer.cs">
+    <Compile Include="LetterPatterns\Quadgrams\InitQuadgramsFrm.Designer.cs">
       <DependentUpon>InitQuadgramsFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="RollingTheRick.cs" />
     <Compile Include="SpaceSet.cs" />
-    <Compile Include="Substitution\Brute.cs">
+    <Compile Include="Ciphers\Substitution\Brute.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Substitution\Brute.Designer.cs">
+    <Compile Include="Ciphers\Substitution\Brute.Designer.cs">
       <DependentUpon>Brute.cs</DependentUpon>
     </Compile>
-    <Compile Include="Substitution\ReplacementGrid.cs" />
-    <Compile Include="Substitution\SmartBrute.cs">
+    <Compile Include="Ciphers\Substitution\ReplacementGrid.cs" />
+    <Compile Include="Ciphers\Substitution\SmartBrute.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Substitution\SmartBrute.Designer.cs">
+    <Compile Include="Ciphers\Substitution\SmartBrute.Designer.cs">
       <DependentUpon>SmartBrute.cs</DependentUpon>
     </Compile>
-    <Compile Include="Substitution\SmartReplacementGrid.cs" />
-    <Compile Include="Substitution\WordDictionaryTool.cs">
+    <Compile Include="Ciphers\Substitution\SmartReplacementGrid.cs" />
+    <Compile Include="Ciphers\Substitution\WordDictionaryTool.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Substitution\WordDictionaryTool.Designer.cs">
+    <Compile Include="Ciphers\Substitution\WordDictionaryTool.Designer.cs">
       <DependentUpon>WordDictionaryTool.cs</DependentUpon>
     </Compile>
-    <Compile Include="Substitution\WordFrequencyLibrary.cs" />
-    <Compile Include="Transposition\CrackDoubleTools.cs">
+    <Compile Include="Ciphers\Substitution\WordFrequencyLibrary.cs" />
+    <Compile Include="Ciphers\Transposition\CrackDoubleTools.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Transposition\CrackDoubleTools.Designer.cs">
+    <Compile Include="Ciphers\Transposition\CrackDoubleTools.Designer.cs">
       <DependentUpon>CrackDoubleTools.cs</DependentUpon>
     </Compile>
-    <Compile Include="Transposition\ExpectedWords.cs">
+    <Compile Include="Ciphers\Transposition\ExpectedWords.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Transposition\ExpectedWords.Designer.cs">
+    <Compile Include="Ciphers\Transposition\ExpectedWords.Designer.cs">
       <DependentUpon>ExpectedWords.cs</DependentUpon>
     </Compile>
-    <Compile Include="Transposition\GridOutput.cs">
+    <Compile Include="Ciphers\Transposition\GridOutput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Transposition\GridOutput.Designer.cs">
+    <Compile Include="Ciphers\Transposition\GridOutput.Designer.cs">
       <DependentUpon>GridOutput.cs</DependentUpon>
     </Compile>
-    <Compile Include="Transposition\TranspositionTools.cs">
+    <Compile Include="Ciphers\Transposition\TranspositionTools.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Transposition\TranspositionTools.Designer.cs">
+    <Compile Include="Ciphers\Transposition\TranspositionTools.Designer.cs">
       <DependentUpon>TranspositionTools.cs</DependentUpon>
     </Compile>
-    <Compile Include="TwoSquare\Grid.cs">
+    <Compile Include="Ciphers\TwoSquare\Grid.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TwoSquare\Grid.Designer.cs">
+    <Compile Include="Ciphers\TwoSquare\Grid.Designer.cs">
       <DependentUpon>Grid.cs</DependentUpon>
     </Compile>
-    <Compile Include="TwoSquare\TwoSquareTools.cs">
+    <Compile Include="Ciphers\TwoSquare\TwoSquareTools.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TwoSquare\TwoSquareTools.Designer.cs">
+    <Compile Include="Ciphers\TwoSquare\TwoSquareTools.Designer.cs">
       <DependentUpon>TwoSquareTools.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vigenere\Coincidences.cs">
+    <Compile Include="Ciphers\Vigenere\Coincidences.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vigenere\Coincidences.Designer.cs">
+    <Compile Include="Ciphers\Vigenere\Coincidences.Designer.cs">
       <DependentUpon>Coincidences.cs</DependentUpon>
     </Compile>
-    <Compile Include="Substitution\CrackOptions.cs">
+    <Compile Include="Ciphers\Substitution\CrackOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Substitution\CrackOptions.Designer.cs">
+    <Compile Include="Ciphers\Substitution\CrackOptions.Designer.cs">
       <DependentUpon>CrackOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="MainFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainFrm.Designer.cs">
+      <DependentUpon>MainFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Frequency.cs">
       <SubType>Form</SubType>
@@ -220,17 +236,17 @@
     <Compile Include="Frequency.Designer.cs">
       <DependentUpon>Frequency.cs</DependentUpon>
     </Compile>
-    <Compile Include="Substitution\Options.cs" />
-    <Compile Include="Vigenere\Patterns.cs">
+    <Compile Include="Ciphers\Substitution\Options.cs" />
+    <Compile Include="Ciphers\Vigenere\Patterns.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vigenere\Patterns.Designer.cs">
+    <Compile Include="Ciphers\Vigenere\Patterns.Designer.cs">
       <DependentUpon>Patterns.cs</DependentUpon>
     </Compile>
-    <Compile Include="Polybius\PolybiusTools.cs">
+    <Compile Include="Ciphers\Polybius\PolybiusTools.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Polybius\PolybiusTools.Designer.cs">
+    <Compile Include="Ciphers\Polybius\PolybiusTools.Designer.cs">
       <DependentUpon>PolybiusTools.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -241,28 +257,28 @@
       <DependentUpon>ProgressBarForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Substitution\Replacements.cs">
+    <Compile Include="Ciphers\Substitution\Replacements.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Substitution\Replacements.Designer.cs">
+    <Compile Include="Ciphers\Substitution\Replacements.Designer.cs">
       <DependentUpon>Replacements.cs</DependentUpon>
     </Compile>
-    <Compile Include="Substitution\SubsitutePatterns.cs">
+    <Compile Include="Ciphers\Substitution\SubsitutePatterns.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Substitution\SubsitutePatterns.Designer.cs">
+    <Compile Include="Ciphers\Substitution\SubsitutePatterns.Designer.cs">
       <DependentUpon>SubsitutePatterns.cs</DependentUpon>
     </Compile>
-    <Compile Include="Substitution\SubstitueTool.cs">
+    <Compile Include="Ciphers\Substitution\SubstitueTool.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Substitution\SubstitueTool.Designer.cs">
+    <Compile Include="Ciphers\Substitution\SubstitueTool.Designer.cs">
       <DependentUpon>SubstitueTool.cs</DependentUpon>
     </Compile>
-    <Compile Include="Substitution\SubstitutePatternAnalysis.cs">
+    <Compile Include="Ciphers\Substitution\SubstitutePatternAnalysis.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Substitution\SubstitutePatternAnalysis.Designer.cs">
+    <Compile Include="Ciphers\Substitution\SubstitutePatternAnalysis.Designer.cs">
       <DependentUpon>SubstitutePatternAnalysis.cs</DependentUpon>
     </Compile>
     <Compile Include="TextOutput.cs">
@@ -271,97 +287,130 @@
     <Compile Include="TextOutput.Designer.cs">
       <DependentUpon>TextOutput.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vigenere\VigenereTools.cs">
+    <Compile Include="Ciphers\Vigenere\VigenereTools.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Vigenere\VigenereTools.Designer.cs">
+    <Compile Include="Ciphers\Vigenere\VigenereTools.Designer.cs">
       <DependentUpon>VigenereTools.cs</DependentUpon>
     </Compile>
-    <Compile Include="Substitution\WordFrequency.cs">
+    <Compile Include="Ciphers\Substitution\WordFrequency.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Substitution\WordFrequency.Designer.cs">
+    <Compile Include="Ciphers\Substitution\WordFrequency.Designer.cs">
       <DependentUpon>WordFrequency.cs</DependentUpon>
     </Compile>
-    <Compile Include="WordFreq\DataSet.cs" />
-    <Compile Include="WordFreq\InitWordFreq.cs">
+    <Compile Include="LetterPatterns\WordFreq\DataSet.cs" />
+    <Compile Include="LetterPatterns\WordFreq\InitWordFreq.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="WordFreq\InitWordFreq.Designer.cs">
+    <Compile Include="LetterPatterns\WordFreq\InitWordFreq.Designer.cs">
       <DependentUpon>InitWordFreq.cs</DependentUpon>
     </Compile>
-    <Compile Include="WordFreq\SpellCheckDictionary.cs" />
-    <Compile Include="WordFreq\WordFreqData.cs" />
-    <EmbeddedResource Include="BasicWordLib\InitBasicWord.resx">
+    <Compile Include="LetterPatterns\WordFreq\SpellCheckDictionary.cs" />
+    <Compile Include="LetterPatterns\WordFreq\WordFreqData.cs" />
+    <Compile Include="TextPlayground\EditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextPlayground\EditorForm.Designer.cs">
+      <DependentUpon>EditorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TextPlayground\Errors\Error.cs" />
+    <Compile Include="TextPlayground\Executer.cs" />
+    <Compile Include="TextPlayground\ExecutionMemory.cs" />
+    <Compile Include="TextPlayground\ExecutionOutput.cs" />
+    <Compile Include="TextPlayground\ParseOutput.cs" />
+    <Compile Include="TextPlayground\Parser.cs" />
+    <Compile Include="TextPlayground\StringToParse.cs" />
+    <Compile Include="TextPlayground\Tokens\UndefinedToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\BoolTokens\BoolToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\BoolTokens\PlainBoolToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\IntTokens\IntToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\IntTokens\PlainIntToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\CipherTokens\AffineCipherToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\CipherTokens\CeaserCipherToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\CipherTokens\CipherToken.cs" />
+    <Compile Include="TextPlayground\Tokens\OutputToken.cs" />
+    <Compile Include="TextPlayground\Tokens\Token.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\InputToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\PlainStringToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\StringToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\StringTokens\StringVariableToken.cs" />
+    <Compile Include="TextPlayground\Tokens\ValueTokens\ValueToken.cs" />
+    <Compile Include="TextPlayground\Tokens\VariableTokens\DeclerationToken.cs" />
+    <Compile Include="TextPlayground\Variables\StringVariable.cs" />
+    <EmbeddedResource Include="Ciphers\Substitution\BruteWithoutSpaces.resx">
+      <DependentUpon>BruteWithoutSpaces.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LetterPatterns\BasicWordLib\InitBasicWord.resx">
       <DependentUpon>InitBasicWord.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Bigrams\InitBigramsFrm.resx">
+    <EmbeddedResource Include="LetterPatterns\Bigrams\InitBigramsFrm.resx">
       <DependentUpon>InitBigramsFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Hill\HillCipher.resx">
+    <EmbeddedResource Include="Ciphers\Hill\HillCipher.resx">
       <DependentUpon>HillCipher.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Playfair\Playfair5Grid.resx">
+    <EmbeddedResource Include="Ciphers\Playfair\Playfair5Grid.resx">
       <DependentUpon>Playfair5Grid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Playfair\Playfair5GridV3.resx">
+    <EmbeddedResource Include="Ciphers\Playfair\Playfair5GridV3.resx">
       <DependentUpon>Playfair5GridV3.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Playfair\PlayfairSelection.resx">
+    <EmbeddedResource Include="Ciphers\Playfair\PlayfairSelection.resx">
       <DependentUpon>PlayfairSelection.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Playfair\Playfair5GridV2.resx">
+    <EmbeddedResource Include="Ciphers\Playfair\Playfair5GridV2.resx">
       <DependentUpon>Playfair5GridV2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Polybius\PolybiusGrid.resx">
+    <EmbeddedResource Include="Ciphers\Polybius\PolybiusGrid.resx">
       <DependentUpon>PolybiusGrid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Polybius\PolybiusTools.resx">
+    <EmbeddedResource Include="Ciphers\Polybius\PolybiusTools.resx">
       <DependentUpon>PolybiusTools.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Quadgrams\InitQuadgramsFrm.resx">
+    <EmbeddedResource Include="LetterPatterns\Quadgrams\InitQuadgramsFrm.resx">
       <DependentUpon>InitQuadgramsFrm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Substitution\Brute.resx">
+    <EmbeddedResource Include="Ciphers\Substitution\Brute.resx">
       <DependentUpon>Brute.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Substitution\SmartBrute.resx">
+    <EmbeddedResource Include="Ciphers\Substitution\SmartBrute.resx">
       <DependentUpon>SmartBrute.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Substitution\WordDictionaryTool.resx">
+    <EmbeddedResource Include="Ciphers\Substitution\WordDictionaryTool.resx">
       <DependentUpon>WordDictionaryTool.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Transposition\CrackDoubleTools.resx">
+    <EmbeddedResource Include="Ciphers\Transposition\CrackDoubleTools.resx">
       <DependentUpon>CrackDoubleTools.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Transposition\ExpectedWords.resx">
+    <EmbeddedResource Include="Ciphers\Transposition\ExpectedWords.resx">
       <DependentUpon>ExpectedWords.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Transposition\GridOutput.resx">
+    <EmbeddedResource Include="Ciphers\Transposition\GridOutput.resx">
       <DependentUpon>GridOutput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Transposition\TranspositionTools.resx">
+    <EmbeddedResource Include="Ciphers\Transposition\TranspositionTools.resx">
       <DependentUpon>TranspositionTools.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TwoSquare\Grid.resx">
+    <EmbeddedResource Include="Ciphers\TwoSquare\Grid.resx">
       <DependentUpon>Grid.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TwoSquare\TwoSquareTools.resx">
+    <EmbeddedResource Include="Ciphers\TwoSquare\TwoSquareTools.resx">
       <DependentUpon>TwoSquareTools.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vigenere\Coincidences.resx">
+    <EmbeddedResource Include="Ciphers\Vigenere\Coincidences.resx">
       <DependentUpon>Coincidences.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Substitution\CrackOptions.resx">
+    <EmbeddedResource Include="Ciphers\Substitution\CrackOptions.resx">
       <DependentUpon>CrackOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="MainFrm.resx">
+      <DependentUpon>MainFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frequency.resx">
       <DependentUpon>Frequency.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vigenere\Patterns.resx">
+    <EmbeddedResource Include="Ciphers\Vigenere\Patterns.resx">
       <DependentUpon>Patterns.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProgressBarForm.resx">
@@ -376,29 +425,32 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Substitution\Replacements.resx">
+    <EmbeddedResource Include="Ciphers\Substitution\Replacements.resx">
       <DependentUpon>Replacements.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Substitution\SubsitutePatterns.resx">
+    <EmbeddedResource Include="Ciphers\Substitution\SubsitutePatterns.resx">
       <DependentUpon>SubsitutePatterns.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Substitution\SubstitueTool.resx">
+    <EmbeddedResource Include="Ciphers\Substitution\SubstitueTool.resx">
       <DependentUpon>SubstitueTool.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Substitution\SubstitutePatternAnalysis.resx">
+    <EmbeddedResource Include="Ciphers\Substitution\SubstitutePatternAnalysis.resx">
       <DependentUpon>SubstitutePatternAnalysis.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TextOutput.resx">
       <DependentUpon>TextOutput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Vigenere\VigenereTools.resx">
+    <EmbeddedResource Include="Ciphers\Vigenere\VigenereTools.resx">
       <DependentUpon>VigenereTools.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Substitution\WordFrequency.resx">
+    <EmbeddedResource Include="Ciphers\Substitution\WordFrequency.resx">
       <DependentUpon>WordFrequency.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="WordFreq\InitWordFreq.resx">
+    <EmbeddedResource Include="LetterPatterns\WordFreq\InitWordFreq.resx">
       <DependentUpon>InitWordFreq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextPlayground\EditorForm.resx">
+      <DependentUpon>EditorForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -30,7 +30,15 @@ namespace DumbCodeYe.LetterPatterns.Spaces
                             for (int j = 0; j < newSpaces.Count; j++)
                             {
                                 if (evolved.Score > newSpaces[j].Score)
+                                {
                                     newSpaces.Insert(j, evolved);
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if (!found)
+                            {
+
                             }
                         }
                     }

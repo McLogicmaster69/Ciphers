@@ -144,6 +144,7 @@ namespace DumbCodeYe
             this.initButtons.TabIndex = 27;
             this.initButtons.Text = "INITIALISE";
             this.initButtons.UseVisualStyleBackColor = false;
+            this.initButtons.Click += new System.EventHandler(this.initButtons_Click);
             // 
             // textEditorBtn
             // 

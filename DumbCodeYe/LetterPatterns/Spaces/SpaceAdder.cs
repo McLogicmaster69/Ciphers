@@ -8,6 +8,8 @@ namespace DumbCodeYe.LetterPatterns.Spaces
 {
     public static class SpaceAdder
     {
+        public const int MAX_SIS = 100;
+
         public static string Add(string s)
         {
             List<SpaceInsertedString> currentSpaces = new List<SpaceInsertedString>();
@@ -32,18 +34,25 @@ namespace DumbCodeYe.LetterPatterns.Spaces
                                 if (evolved.Score > newSpaces[j].Score)
                                 {
                                     newSpaces.Insert(j, evolved);
+                                    if (newSpaces.Count > MAX_SIS)
+                                        newSpaces.RemoveAt(MAX_SIS);
                                     found = true;
                                     break;
                                 }
                             }
-                            if (!found)
+                            if (!found && newSpaces.Count < MAX_SIS)
                             {
-
+                                newSpaces.Add(evolved);
                             }
                         }
                     }
                 }
+                currentSpaces = newSpaces;
             }
+
+            SpaceInsertedString final = currentSpaces[0];
+            final.CalculateLastWord();
+            return final.CompileWords();
         }
     }
 }

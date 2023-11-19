@@ -46,6 +46,16 @@ namespace DumbCodeYe.LetterPatterns.Spaces
             Score += ScoreWord(newWord);
         }
 
+        public string CompileWords()
+        {
+            string words = "";
+            foreach(string word in Words)
+            {
+                words += word + " ";
+            }
+            return words;
+        }
+
         private int ScoreWord(string word)
         {
             if (word.Length > 1 && BasicWordData.IsWord(word))

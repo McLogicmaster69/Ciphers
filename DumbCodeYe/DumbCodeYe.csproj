@@ -77,6 +77,12 @@
     <Compile Include="Ciphers\Substitution\BruteWithoutSpaces.Designer.cs">
       <DependentUpon>BruteWithoutSpaces.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ciphers\Transposition\ReworkedTransposition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciphers\Transposition\ReworkedTransposition.Designer.cs">
+      <DependentUpon>ReworkedTransposition.cs</DependentUpon>
+    </Compile>
     <Compile Include="LetterPatterns\BasicWordLib\BasicWordData.cs" />
     <Compile Include="LetterPatterns\BasicWordLib\InitBasicWord.cs">
       <SubType>Form</SubType>
@@ -340,6 +346,9 @@
     <Compile Include="TextPlayground\Variables\StringVariable.cs" />
     <EmbeddedResource Include="Ciphers\Substitution\BruteWithoutSpaces.resx">
       <DependentUpon>BruteWithoutSpaces.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ciphers\Transposition\ReworkedTransposition.resx">
+      <DependentUpon>ReworkedTransposition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LetterPatterns\BasicWordLib\InitBasicWord.resx">
       <DependentUpon>InitBasicWord.cs</DependentUpon>

@@ -875,7 +875,7 @@ namespace DumbCodeYe.Ciphers.Transposition
         {
             char[,] grid = CreateRowColumnar(MainText, (int)maxColumns.Value);
             GridOutput GO = new GridOutput();
-            GO.Setup(grid, MainText.Length / (int)maxColumns.Value, (int)maxColumns.Value, true);
+            GO.Setup(grid, MainText.Length / (int)maxColumns.Value, (int)maxColumns.Value, false);
             GO.Show();
         }
         private char[,] CreateColumnar(string input, int columns)

@@ -185,7 +185,7 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             this.columnsNum.Location = new System.Drawing.Point(12, 65);
             this.columnsNum.Maximum = new decimal(new int[] {
-            50,
+            643,
             0,
             0,
             0});

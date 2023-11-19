@@ -332,5 +332,13 @@ namespace DumbCodeYe
             EditorForm frm = new EditorForm(textInput.Text);
             frm.Show();
         }
+
+        private void initButtons_Click(object sender, EventArgs e)
+        {
+            new InitBasicWord().Show();
+            new InitBigramsFrm().Show();
+            new InitQuadgramsFrm().Show();
+            new InitWordFreq().Show();
+        }
     }
 }

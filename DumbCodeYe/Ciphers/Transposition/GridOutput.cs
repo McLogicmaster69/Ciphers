@@ -32,6 +32,7 @@ namespace DumbCodeYe.Ciphers.Transposition
         {
             InitializeComponent();
         }
+
         public void Setup(char[,] grid, int rows, int columns, bool readColumns = false, bool shiftColumns = false)
         {
             for (int column = 0; column < columns; column++)

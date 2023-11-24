@@ -211,17 +211,24 @@ namespace DumbCodeYe.Ciphers.Transposition
             return grid;
         }
 
+        private string GetStringMod(string text, int mod)
+        {
+            int stringRemainder = text.Length % mod;
+            return text.Substring(0, text.Length - stringRemainder);
+        }
+
         private void basicKeywordBtn_Click(object sender, EventArgs e)
         {
             int columns = (int)columnsNum.Value;
-            int rows = (int)Math.Ceiling((decimal)MainText.Length / columns);
+            string text = GetStringMod(MainText, columns);
+            int rows = (int)Math.Ceiling((decimal)text.Length / columns);
             char[,] grid = new char[rows, columns];
             int index = 0;
             for (int r = 0; r < rows; r++)
             {
                 for (int c = 0; c < columns; c++)
                 {
-                    grid[r, c] = MainText[index];
+                    grid[r, c] = text[index];
                     index++;
                 }
             }

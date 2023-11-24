@@ -35,12 +35,9 @@ namespace DumbCodeYe.Ciphers.Transposition
             this.maxColumns = new System.Windows.Forms.NumericUpDown();
             this.railsNum = new System.Windows.Forms.NumericUpDown();
             this.railfenceBtn = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.basicKeywordBtn = new System.Windows.Forms.Button();
             this.columnsNum = new System.Windows.Forms.NumericUpDown();
             this.factorsBtn = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.scytaleBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.substringLengthNum = new System.Windows.Forms.NumericUpDown();
@@ -61,6 +58,8 @@ namespace DumbCodeYe.Ciphers.Transposition
             this.label1 = new System.Windows.Forms.Label();
             this.crackDoubleToolsBtn = new System.Windows.Forms.Button();
             this.cadneusBtn = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.inputMethodBx = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.maxColumns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.railsNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.columnsNum)).BeginInit();
@@ -71,9 +70,10 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // rowColumnBtn
             // 
-            this.rowColumnBtn.Location = new System.Drawing.Point(9, 144);
+            this.rowColumnBtn.Location = new System.Drawing.Point(79, 118);
+            this.rowColumnBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rowColumnBtn.Name = "rowColumnBtn";
-            this.rowColumnBtn.Size = new System.Drawing.Size(229, 34);
+            this.rowColumnBtn.Size = new System.Drawing.Size(249, 52);
             this.rowColumnBtn.TabIndex = 0;
             this.rowColumnBtn.Text = "ROW COLUMN METHOD";
             this.rowColumnBtn.UseVisualStyleBackColor = true;
@@ -81,9 +81,10 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // rowColumnarBtn
             // 
-            this.rowColumnarBtn.Location = new System.Drawing.Point(9, 223);
+            this.rowColumnarBtn.Location = new System.Drawing.Point(79, 242);
+            this.rowColumnarBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rowColumnarBtn.Name = "rowColumnarBtn";
-            this.rowColumnarBtn.Size = new System.Drawing.Size(229, 34);
+            this.rowColumnarBtn.Size = new System.Drawing.Size(249, 52);
             this.rowColumnarBtn.TabIndex = 2;
             this.rowColumnarBtn.Text = "ROW COLUMNAR METHOD";
             this.rowColumnarBtn.UseVisualStyleBackColor = true;
@@ -91,9 +92,10 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // expectedBtn
             // 
-            this.expectedBtn.Location = new System.Drawing.Point(9, 263);
+            this.expectedBtn.Location = new System.Drawing.Point(505, 403);
+            this.expectedBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.expectedBtn.Name = "expectedBtn";
-            this.expectedBtn.Size = new System.Drawing.Size(229, 34);
+            this.expectedBtn.Size = new System.Drawing.Size(344, 52);
             this.expectedBtn.TabIndex = 3;
             this.expectedBtn.Text = "EDIT EXPECTED WORDS";
             this.expectedBtn.UseVisualStyleBackColor = true;
@@ -101,7 +103,8 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // maxColumns
             // 
-            this.maxColumns.Location = new System.Drawing.Point(9, 197);
+            this.maxColumns.Location = new System.Drawing.Point(505, 301);
+            this.maxColumns.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.maxColumns.Maximum = new decimal(new int[] {
             3000,
             0,
@@ -113,7 +116,7 @@ namespace DumbCodeYe.Ciphers.Transposition
             0,
             0});
             this.maxColumns.Name = "maxColumns";
-            this.maxColumns.Size = new System.Drawing.Size(229, 20);
+            this.maxColumns.Size = new System.Drawing.Size(344, 26);
             this.maxColumns.TabIndex = 4;
             this.maxColumns.Value = new decimal(new int[] {
             10,
@@ -123,7 +126,8 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // railsNum
             // 
-            this.railsNum.Location = new System.Drawing.Point(255, 12);
+            this.railsNum.Location = new System.Drawing.Point(871, 16);
+            this.railsNum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.railsNum.Maximum = new decimal(new int[] {
             30,
             0,
@@ -135,7 +139,7 @@ namespace DumbCodeYe.Ciphers.Transposition
             0,
             0});
             this.railsNum.Name = "railsNum";
-            this.railsNum.Size = new System.Drawing.Size(229, 20);
+            this.railsNum.Size = new System.Drawing.Size(344, 26);
             this.railsNum.TabIndex = 6;
             this.railsNum.Value = new decimal(new int[] {
             10,
@@ -145,37 +149,21 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // railfenceBtn
             // 
-            this.railfenceBtn.Location = new System.Drawing.Point(255, 38);
+            this.railfenceBtn.Location = new System.Drawing.Point(871, 56);
+            this.railfenceBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.railfenceBtn.Name = "railfenceBtn";
-            this.railfenceBtn.Size = new System.Drawing.Size(229, 34);
+            this.railfenceBtn.Size = new System.Drawing.Size(344, 52);
             this.railfenceBtn.TabIndex = 8;
             this.railfenceBtn.Text = "RAIL FENCE METHOD";
             this.railfenceBtn.UseVisualStyleBackColor = true;
             this.railfenceBtn.Click += new System.EventHandler(this.railfenceBtn_Click);
             // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(9, 181);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(229, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "---------------------------------------------------------------------------";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.Location = new System.Drawing.Point(9, 128);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(229, 13);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "---------------------------------------------------------------------------";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // basicKeywordBtn
             // 
-            this.basicKeywordBtn.Location = new System.Drawing.Point(12, 91);
+            this.basicKeywordBtn.Location = new System.Drawing.Point(79, 56);
+            this.basicKeywordBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.basicKeywordBtn.Name = "basicKeywordBtn";
-            this.basicKeywordBtn.Size = new System.Drawing.Size(229, 34);
+            this.basicKeywordBtn.Size = new System.Drawing.Size(249, 52);
             this.basicKeywordBtn.TabIndex = 11;
             this.basicKeywordBtn.Text = "BASIC KEYWORD";
             this.basicKeywordBtn.UseVisualStyleBackColor = true;
@@ -183,7 +171,8 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // columnsNum
             // 
-            this.columnsNum.Location = new System.Drawing.Point(12, 65);
+            this.columnsNum.Location = new System.Drawing.Point(205, 12);
+            this.columnsNum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.columnsNum.Maximum = new decimal(new int[] {
             50,
             0,
@@ -195,7 +184,7 @@ namespace DumbCodeYe.Ciphers.Transposition
             0,
             0});
             this.columnsNum.Name = "columnsNum";
-            this.columnsNum.Size = new System.Drawing.Size(229, 20);
+            this.columnsNum.Size = new System.Drawing.Size(123, 26);
             this.columnsNum.TabIndex = 12;
             this.columnsNum.Value = new decimal(new int[] {
             10,
@@ -205,28 +194,25 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // factorsBtn
             // 
-            this.factorsBtn.Location = new System.Drawing.Point(12, 12);
+            this.factorsBtn.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.factorsBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.factorsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.factorsBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.factorsBtn.Location = new System.Drawing.Point(18, 14);
+            this.factorsBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.factorsBtn.Name = "factorsBtn";
-            this.factorsBtn.Size = new System.Drawing.Size(229, 34);
+            this.factorsBtn.Size = new System.Drawing.Size(40, 787);
             this.factorsBtn.TabIndex = 13;
-            this.factorsBtn.Text = "GET FACTORS";
-            this.factorsBtn.UseVisualStyleBackColor = true;
+            this.factorsBtn.Text = "FACTORS";
+            this.factorsBtn.UseVisualStyleBackColor = false;
             this.factorsBtn.Click += new System.EventHandler(this.factorsBtn_Click);
-            // 
-            // label4
-            // 
-            this.label4.Location = new System.Drawing.Point(12, 49);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(229, 13);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "---------------------------------------------------------------------------";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // scytaleBtn
             // 
-            this.scytaleBtn.Location = new System.Drawing.Point(255, 78);
+            this.scytaleBtn.Location = new System.Drawing.Point(871, 118);
+            this.scytaleBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.scytaleBtn.Name = "scytaleBtn";
-            this.scytaleBtn.Size = new System.Drawing.Size(229, 34);
+            this.scytaleBtn.Size = new System.Drawing.Size(344, 52);
             this.scytaleBtn.TabIndex = 15;
             this.scytaleBtn.Text = "SCYTALE METHOD";
             this.scytaleBtn.UseVisualStyleBackColor = true;
@@ -234,16 +220,18 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(255, 115);
+            this.label5.Location = new System.Drawing.Point(871, 175);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(229, 13);
+            this.label5.Size = new System.Drawing.Size(344, 20);
             this.label5.TabIndex = 16;
             this.label5.Text = "---------------------------------------------------------------------------";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // substringLengthNum
             // 
-            this.substringLengthNum.Location = new System.Drawing.Point(255, 157);
+            this.substringLengthNum.Location = new System.Drawing.Point(871, 240);
+            this.substringLengthNum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.substringLengthNum.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -255,7 +243,7 @@ namespace DumbCodeYe.Ciphers.Transposition
             0,
             0});
             this.substringLengthNum.Name = "substringLengthNum";
-            this.substringLengthNum.Size = new System.Drawing.Size(229, 20);
+            this.substringLengthNum.Size = new System.Drawing.Size(344, 26);
             this.substringLengthNum.TabIndex = 18;
             this.substringLengthNum.Value = new decimal(new int[] {
             10,
@@ -265,9 +253,10 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // getSubstringBtn
             // 
-            this.getSubstringBtn.Location = new System.Drawing.Point(255, 183);
+            this.getSubstringBtn.Location = new System.Drawing.Point(871, 280);
+            this.getSubstringBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.getSubstringBtn.Name = "getSubstringBtn";
-            this.getSubstringBtn.Size = new System.Drawing.Size(229, 34);
+            this.getSubstringBtn.Size = new System.Drawing.Size(344, 52);
             this.getSubstringBtn.TabIndex = 17;
             this.getSubstringBtn.Text = "GET SUBSTRING";
             this.getSubstringBtn.UseVisualStyleBackColor = true;
@@ -275,21 +264,23 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // substringIndexNum
             // 
-            this.substringIndexNum.Location = new System.Drawing.Point(255, 131);
+            this.substringIndexNum.Location = new System.Drawing.Point(871, 200);
+            this.substringIndexNum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.substringIndexNum.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.substringIndexNum.Name = "substringIndexNum";
-            this.substringIndexNum.Size = new System.Drawing.Size(229, 20);
+            this.substringIndexNum.Size = new System.Drawing.Size(344, 26);
             this.substringIndexNum.TabIndex = 19;
             // 
             // applyTranspositionBtn
             // 
-            this.applyTranspositionBtn.Location = new System.Drawing.Point(255, 223);
+            this.applyTranspositionBtn.Location = new System.Drawing.Point(871, 341);
+            this.applyTranspositionBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.applyTranspositionBtn.Name = "applyTranspositionBtn";
-            this.applyTranspositionBtn.Size = new System.Drawing.Size(229, 34);
+            this.applyTranspositionBtn.Size = new System.Drawing.Size(344, 52);
             this.applyTranspositionBtn.TabIndex = 20;
             this.applyTranspositionBtn.Text = "APPLY TRANSPOSITIONS";
             this.applyTranspositionBtn.UseVisualStyleBackColor = true;
@@ -297,18 +288,20 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(255, 420);
+            this.label6.Location = new System.Drawing.Point(871, 644);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(229, 13);
+            this.label6.Size = new System.Drawing.Size(344, 20);
             this.label6.TabIndex = 21;
             this.label6.Text = "---------------------------------------------------------------------------";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // doubleBtn
             // 
-            this.doubleBtn.Location = new System.Drawing.Point(259, 488);
+            this.doubleBtn.Location = new System.Drawing.Point(877, 749);
+            this.doubleBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.doubleBtn.Name = "doubleBtn";
-            this.doubleBtn.Size = new System.Drawing.Size(229, 34);
+            this.doubleBtn.Size = new System.Drawing.Size(344, 52);
             this.doubleBtn.TabIndex = 22;
             this.doubleBtn.Text = "CRACK DOUBLE";
             this.doubleBtn.UseVisualStyleBackColor = true;
@@ -316,9 +309,10 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // reverseBtn
             // 
-            this.reverseBtn.Location = new System.Drawing.Point(9, 436);
+            this.reverseBtn.Location = new System.Drawing.Point(505, 669);
+            this.reverseBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.reverseBtn.Name = "reverseBtn";
-            this.reverseBtn.Size = new System.Drawing.Size(229, 34);
+            this.reverseBtn.Size = new System.Drawing.Size(344, 52);
             this.reverseBtn.TabIndex = 24;
             this.reverseBtn.Text = "REVERSE";
             this.reverseBtn.UseVisualStyleBackColor = true;
@@ -327,17 +321,19 @@ namespace DumbCodeYe.Ciphers.Transposition
             // border
             // 
             this.border.BackColor = System.Drawing.Color.Black;
-            this.border.Location = new System.Drawing.Point(246, 12);
+            this.border.Location = new System.Drawing.Point(860, 16);
+            this.border.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.border.Name = "border";
-            this.border.Size = new System.Drawing.Size(2, 450);
+            this.border.Size = new System.Drawing.Size(3, 692);
             this.border.TabIndex = 25;
             this.border.TabStop = false;
             // 
             // columnarBtn
             // 
-            this.columnarBtn.Location = new System.Drawing.Point(9, 303);
+            this.columnarBtn.Location = new System.Drawing.Point(79, 180);
+            this.columnarBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.columnarBtn.Name = "columnarBtn";
-            this.columnarBtn.Size = new System.Drawing.Size(229, 34);
+            this.columnarBtn.Size = new System.Drawing.Size(249, 52);
             this.columnarBtn.TabIndex = 26;
             this.columnarBtn.Text = "COLUMNAR METHOD";
             this.columnarBtn.UseVisualStyleBackColor = true;
@@ -345,9 +341,10 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // routeBtn
             // 
-            this.routeBtn.Location = new System.Drawing.Point(9, 343);
+            this.routeBtn.Location = new System.Drawing.Point(505, 526);
+            this.routeBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.routeBtn.Name = "routeBtn";
-            this.routeBtn.Size = new System.Drawing.Size(229, 34);
+            this.routeBtn.Size = new System.Drawing.Size(344, 52);
             this.routeBtn.TabIndex = 27;
             this.routeBtn.Text = "ROUTE METHOD";
             this.routeBtn.UseVisualStyleBackColor = true;
@@ -355,9 +352,10 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // xBtn
             // 
-            this.xBtn.Location = new System.Drawing.Point(255, 263);
+            this.xBtn.Location = new System.Drawing.Point(871, 403);
+            this.xBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.xBtn.Name = "xBtn";
-            this.xBtn.Size = new System.Drawing.Size(229, 34);
+            this.xBtn.Size = new System.Drawing.Size(344, 52);
             this.xBtn.TabIndex = 28;
             this.xBtn.Text = "EVERY X";
             this.xBtn.UseVisualStyleBackColor = true;
@@ -365,9 +363,10 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // groupBtn
             // 
-            this.groupBtn.Location = new System.Drawing.Point(255, 303);
+            this.groupBtn.Location = new System.Drawing.Point(871, 464);
+            this.groupBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBtn.Name = "groupBtn";
-            this.groupBtn.Size = new System.Drawing.Size(229, 34);
+            this.groupBtn.Size = new System.Drawing.Size(344, 52);
             this.groupBtn.TabIndex = 29;
             this.groupBtn.Text = "GROUP";
             this.groupBtn.UseVisualStyleBackColor = true;
@@ -375,9 +374,10 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // changeOtherBtn
             // 
-            this.changeOtherBtn.Location = new System.Drawing.Point(255, 343);
+            this.changeOtherBtn.Location = new System.Drawing.Point(871, 526);
+            this.changeOtherBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.changeOtherBtn.Name = "changeOtherBtn";
-            this.changeOtherBtn.Size = new System.Drawing.Size(229, 34);
+            this.changeOtherBtn.Size = new System.Drawing.Size(344, 52);
             this.changeOtherBtn.TabIndex = 30;
             this.changeOtherBtn.Text = "CHANGE EVERY OTHER";
             this.changeOtherBtn.UseVisualStyleBackColor = true;
@@ -385,32 +385,36 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // KnownText
             // 
-            this.KnownText.Location = new System.Drawing.Point(259, 436);
+            this.KnownText.Location = new System.Drawing.Point(877, 669);
+            this.KnownText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.KnownText.Name = "KnownText";
-            this.KnownText.Size = new System.Drawing.Size(229, 20);
+            this.KnownText.Size = new System.Drawing.Size(342, 26);
             this.KnownText.TabIndex = 31;
             // 
             // TestFactors
             // 
-            this.TestFactors.Location = new System.Drawing.Point(259, 462);
+            this.TestFactors.Location = new System.Drawing.Point(877, 709);
+            this.TestFactors.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.TestFactors.Name = "TestFactors";
-            this.TestFactors.Size = new System.Drawing.Size(229, 20);
+            this.TestFactors.Size = new System.Drawing.Size(342, 26);
             this.TestFactors.TabIndex = 32;
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(11, 420);
+            this.label1.Location = new System.Drawing.Point(507, 644);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(229, 13);
+            this.label1.Size = new System.Drawing.Size(344, 20);
             this.label1.TabIndex = 33;
             this.label1.Text = "---------------------------------------------------------------------------";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // crackDoubleToolsBtn
             // 
-            this.crackDoubleToolsBtn.Location = new System.Drawing.Point(9, 476);
+            this.crackDoubleToolsBtn.Location = new System.Drawing.Point(505, 730);
+            this.crackDoubleToolsBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.crackDoubleToolsBtn.Name = "crackDoubleToolsBtn";
-            this.crackDoubleToolsBtn.Size = new System.Drawing.Size(229, 34);
+            this.crackDoubleToolsBtn.Size = new System.Drawing.Size(344, 52);
             this.crackDoubleToolsBtn.TabIndex = 34;
             this.crackDoubleToolsBtn.Text = "CRACK DOUBLE TOOLS";
             this.crackDoubleToolsBtn.UseVisualStyleBackColor = true;
@@ -418,19 +422,42 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             // cadneusBtn
             // 
-            this.cadneusBtn.Location = new System.Drawing.Point(9, 383);
+            this.cadneusBtn.Location = new System.Drawing.Point(505, 587);
+            this.cadneusBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cadneusBtn.Name = "cadneusBtn";
-            this.cadneusBtn.Size = new System.Drawing.Size(229, 34);
+            this.cadneusBtn.Size = new System.Drawing.Size(344, 52);
             this.cadneusBtn.TabIndex = 35;
             this.cadneusBtn.Text = "CADNEUS";
             this.cadneusBtn.UseVisualStyleBackColor = true;
             this.cadneusBtn.Click += new System.EventHandler(this.cadneusBtn_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(75, 14);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(123, 20);
+            this.label7.TabIndex = 36;
+            this.label7.Text = "Keyword Length";
+            // 
+            // inputMethodBx
+            // 
+            this.inputMethodBx.FormattingEnabled = true;
+            this.inputMethodBx.Items.AddRange(new object[] {
+            "Rows",
+            "Columns"});
+            this.inputMethodBx.Location = new System.Drawing.Point(79, 304);
+            this.inputMethodBx.Name = "inputMethodBx";
+            this.inputMethodBx.Size = new System.Drawing.Size(249, 28);
+            this.inputMethodBx.TabIndex = 37;
+            // 
             // TranspositionTools
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 530);
+            this.ClientSize = new System.Drawing.Size(1243, 815);
+            this.Controls.Add(this.inputMethodBx);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.cadneusBtn);
             this.Controls.Add(this.crackDoubleToolsBtn);
             this.Controls.Add(this.label1);
@@ -451,12 +478,9 @@ namespace DumbCodeYe.Ciphers.Transposition
             this.Controls.Add(this.getSubstringBtn);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.scytaleBtn);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.factorsBtn);
             this.Controls.Add(this.columnsNum);
             this.Controls.Add(this.basicKeywordBtn);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.railfenceBtn);
             this.Controls.Add(this.railsNum);
             this.Controls.Add(this.maxColumns);
@@ -464,6 +488,7 @@ namespace DumbCodeYe.Ciphers.Transposition
             this.Controls.Add(this.rowColumnarBtn);
             this.Controls.Add(this.rowColumnBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "TranspositionTools";
             this.Text = "TranspositionTools";
@@ -486,12 +511,9 @@ namespace DumbCodeYe.Ciphers.Transposition
         private System.Windows.Forms.NumericUpDown maxColumns;
         private System.Windows.Forms.NumericUpDown railsNum;
         private System.Windows.Forms.Button railfenceBtn;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button basicKeywordBtn;
         private System.Windows.Forms.NumericUpDown columnsNum;
         private System.Windows.Forms.Button factorsBtn;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button scytaleBtn;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown substringLengthNum;
@@ -512,5 +534,7 @@ namespace DumbCodeYe.Ciphers.Transposition
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button crackDoubleToolsBtn;
         private System.Windows.Forms.Button cadneusBtn;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox inputMethodBx;
     }
 }

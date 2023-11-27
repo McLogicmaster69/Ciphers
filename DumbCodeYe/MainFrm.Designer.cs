@@ -126,7 +126,7 @@ namespace DumbCodeYe
             this.transpositionBtn.Name = "transpositionBtn";
             this.transpositionBtn.Size = new System.Drawing.Size(300, 40);
             this.transpositionBtn.TabIndex = 26;
-            this.transpositionBtn.Text = "TRNASPOSITION";
+            this.transpositionBtn.Text = "TRANSPOSITION";
             this.transpositionBtn.UseVisualStyleBackColor = false;
             this.transpositionBtn.Click += new System.EventHandler(this.transpositionBtn_Click);
             // 

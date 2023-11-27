@@ -138,8 +138,7 @@ namespace DumbCodeYe
 
         private void OpenTransposition()
         {
-            TranspositionTools TT = new TranspositionTools();
-            TT.Setup(textInput.Text);
+            TranspositionTools TT = new TranspositionTools(textInput.Text.ToUpper());
             TT.Show();
         }
 
@@ -278,7 +277,7 @@ namespace DumbCodeYe
             _menuBuilder.OpenDropdown(new ButtonInformation[]
             {
                 new ButtonInformation("TO UPPER", ToUpper),
-                new ButtonInformation("TO LETTERS", JustLetters),
+                new ButtonInformation("JUST LETTERS", JustLetters),
                 new ButtonInformation("ADD SPACES", Spaces)
             }, new Point(300, 0));
         }

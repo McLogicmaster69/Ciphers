@@ -17,7 +17,6 @@ namespace DumbCodeYe.Ciphers.Transposition
         private List<char[]> mainGrid = new List<char[]>();
         private int Rows;
         private int Columns;
-        private bool ReadColumns;
         private bool ShiftColumns;
 
         private TextOutputFrm LikelyPairsOutput = new TextOutputFrm();
@@ -28,11 +27,13 @@ namespace DumbCodeYe.Ciphers.Transposition
         private float totalCalc = 0;
         private int toCalc = 0;
 
-        public GridOutput()
+        public GridOutput(char[,] grid, int rows, int columns, bool shiftColumns = false)
         {
             InitializeComponent();
+            Setup(grid, rows, columns, shiftColumns);
         }
-        public void Setup(char[,] grid, int rows, int columns, bool readColumns = false, bool shiftColumns = false)
+
+        private void Setup(char[,] grid, int rows, int columns, bool shiftColumns)
         {
             for (int column = 0; column < columns; column++)
             {
@@ -47,7 +48,6 @@ namespace DumbCodeYe.Ciphers.Transposition
             swap2.Maximum = columns;
             Rows = rows;
             Columns = columns;
-            ReadColumns = readColumns;
             ShiftColumns = shiftColumns;
             PrintGrid();
             CalculateBestPairs(false);
@@ -60,28 +60,34 @@ namespace DumbCodeYe.Ciphers.Transposition
             }
             else
             {
-                swapBtn.Visible = false;
+                shiftBtn.Visible = false;
                 selectedColumnNum.Visible = false;
                 shiftValueNum.Visible = false;
             }
+
+            columnNumbersTxt.Text = FormatColumnNumbers();
         }
 
+        private string FormatColumnNumbers()
+        {
+            string topRow = "";
+            for (int i = 0; i < Columns; i++)
+            {
+                string number = " " + (i + 1).ToString();
+                topRow += number;
+                for (int j = number.Length; j < 3; j++)
+                {
+                    topRow += " ";
+                }
+            }
+            return topRow;
+        }
         private void PrintGrid()
         {
+            int topIndex = gridList.TopIndex;
             gridList.Items.Clear();
             if (ShiftColumns)
             {
-                string topRow = "  ";
-                for (int i = 0; i < Columns; i++)
-                {
-                    string number = " " + (i + 1).ToString();
-                    topRow += number;
-                    for (int j = number.Length; j < 3; j++)
-                    {
-                        topRow += " ";
-                    }
-                }
-                gridList.Items.Add(topRow);
                 for (int row = 0; row < Rows; row++)
                 {
                     string output = "";
@@ -98,17 +104,6 @@ namespace DumbCodeYe.Ciphers.Transposition
             }
             else
             {
-                string topRow = "";
-                for (int i = 0; i < Columns; i++)
-                {
-                    string number = " " + (i + 1).ToString();
-                    topRow += number;
-                    for (int j = number.Length; j < 3; j++)
-                    {
-                        topRow += " ";
-                    }
-                }
-                gridList.Items.Add(topRow);
                 for (int row = 0; row < Rows; row++)
                 {
                     string output = "";
@@ -119,6 +114,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                     gridList.Items.Add(output);
                 }
             }
+            gridList.TopIndex = topIndex;
         }
         public string GetOutput()
         {
@@ -339,6 +335,10 @@ namespace DumbCodeYe.Ciphers.Transposition
                     output += $"Column {i + 1} has best match of column {BestPair[i] + 1}\r\n";
             }
             output += $"Most likly to be last column: {LowestIndex + 1}";
+
+            if (LikelyPairsOutput.IsDisposed)
+                LikelyPairsOutput = new TextOutputFrm();
+
             LikelyPairsOutput.SetOutput(output);
             LikelyPairsOutput.Show();
         }
@@ -458,7 +458,7 @@ namespace DumbCodeYe.Ciphers.Transposition
         private string GetGridOutput(List<char[]> grid)
         {
             string text = "";
-            if (ReadColumns)
+            if (outputMethodBx.SelectedIndex == 1)
             {
                 for (int column = 0; column < Columns; column++)
                 {
@@ -540,6 +540,11 @@ namespace DumbCodeYe.Ciphers.Transposition
             {
                 grid[column][i] = newColumn[i];
             }
+        }
+
+        private void GridOutput_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            LikelyPairsOutput.Close();
         }
     }
 }

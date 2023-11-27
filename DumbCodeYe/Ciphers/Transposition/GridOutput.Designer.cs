@@ -34,12 +34,13 @@ namespace DumbCodeYe.Ciphers.Transposition
             this.swap2 = new System.Windows.Forms.NumericUpDown();
             this.swapBtn = new System.Windows.Forms.Button();
             this.outputBtn = new System.Windows.Forms.Button();
-            this.bruteBtn = new System.Windows.Forms.Button();
             this.bestPairsBtn = new System.Windows.Forms.Button();
             this.insertBtn = new System.Windows.Forms.Button();
             this.selectedColumnNum = new System.Windows.Forms.NumericUpDown();
             this.shiftValueNum = new System.Windows.Forms.NumericUpDown();
             this.shiftBtn = new System.Windows.Forms.Button();
+            this.outputMethodBx = new System.Windows.Forms.ComboBox();
+            this.columnNumbersTxt = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.swap1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.swap2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedColumnNum)).BeginInit();
@@ -52,9 +53,9 @@ namespace DumbCodeYe.Ciphers.Transposition
             this.gridList.FormattingEnabled = true;
             this.gridList.HorizontalScrollbar = true;
             this.gridList.ItemHeight = 32;
-            this.gridList.Location = new System.Drawing.Point(12, 12);
+            this.gridList.Location = new System.Drawing.Point(12, 44);
             this.gridList.Name = "gridList";
-            this.gridList.Size = new System.Drawing.Size(740, 420);
+            this.gridList.Size = new System.Drawing.Size(740, 388);
             this.gridList.TabIndex = 0;
             // 
             // swap1
@@ -115,21 +116,10 @@ namespace DumbCodeYe.Ciphers.Transposition
             this.outputBtn.UseVisualStyleBackColor = true;
             this.outputBtn.Click += new System.EventHandler(this.outputBtn_Click);
             // 
-            // bruteBtn
-            // 
-            this.bruteBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bruteBtn.Location = new System.Drawing.Point(758, 358);
-            this.bruteBtn.Name = "bruteBtn";
-            this.bruteBtn.Size = new System.Drawing.Size(159, 34);
-            this.bruteBtn.TabIndex = 5;
-            this.bruteBtn.Text = "BRUTE";
-            this.bruteBtn.UseVisualStyleBackColor = true;
-            this.bruteBtn.Click += new System.EventHandler(this.bruteBtn_Click);
-            // 
             // bestPairsBtn
             // 
             this.bestPairsBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bestPairsBtn.Location = new System.Drawing.Point(758, 318);
+            this.bestPairsBtn.Location = new System.Drawing.Point(758, 333);
             this.bestPairsBtn.Name = "bestPairsBtn";
             this.bestPairsBtn.Size = new System.Drawing.Size(159, 34);
             this.bestPairsBtn.TabIndex = 6;
@@ -195,17 +185,40 @@ namespace DumbCodeYe.Ciphers.Transposition
             this.shiftBtn.UseVisualStyleBackColor = true;
             this.shiftBtn.Click += new System.EventHandler(this.shiftBtn_Click);
             // 
+            // outputMethodBx
+            // 
+            this.outputMethodBx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.outputMethodBx.FormattingEnabled = true;
+            this.outputMethodBx.Items.AddRange(new object[] {
+            "Rows",
+            "Columns"});
+            this.outputMethodBx.Location = new System.Drawing.Point(758, 372);
+            this.outputMethodBx.Margin = new System.Windows.Forms.Padding(2);
+            this.outputMethodBx.Name = "outputMethodBx";
+            this.outputMethodBx.Size = new System.Drawing.Size(159, 21);
+            this.outputMethodBx.TabIndex = 38;
+            // 
+            // columnNumbersTxt
+            // 
+            this.columnNumbersTxt.Enabled = false;
+            this.columnNumbersTxt.Font = new System.Drawing.Font("Consolas", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnNumbersTxt.Location = new System.Drawing.Point(12, 12);
+            this.columnNumbersTxt.Name = "columnNumbersTxt";
+            this.columnNumbersTxt.Size = new System.Drawing.Size(740, 39);
+            this.columnNumbersTxt.TabIndex = 39;
+            // 
             // GridOutput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 444);
+            this.Controls.Add(this.columnNumbersTxt);
+            this.Controls.Add(this.outputMethodBx);
             this.Controls.Add(this.shiftBtn);
             this.Controls.Add(this.shiftValueNum);
             this.Controls.Add(this.selectedColumnNum);
             this.Controls.Add(this.insertBtn);
             this.Controls.Add(this.bestPairsBtn);
-            this.Controls.Add(this.bruteBtn);
             this.Controls.Add(this.outputBtn);
             this.Controls.Add(this.swapBtn);
             this.Controls.Add(this.swap2);
@@ -215,11 +228,13 @@ namespace DumbCodeYe.Ciphers.Transposition
             this.MaximizeBox = false;
             this.Name = "GridOutput";
             this.Text = "GridOutput";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GridOutput_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.swap1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.swap2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.selectedColumnNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.shiftValueNum)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -230,11 +245,12 @@ namespace DumbCodeYe.Ciphers.Transposition
         private System.Windows.Forms.NumericUpDown swap2;
         private System.Windows.Forms.Button swapBtn;
         private System.Windows.Forms.Button outputBtn;
-        private System.Windows.Forms.Button bruteBtn;
         private System.Windows.Forms.Button bestPairsBtn;
         private System.Windows.Forms.Button insertBtn;
         private System.Windows.Forms.NumericUpDown selectedColumnNum;
         private System.Windows.Forms.NumericUpDown shiftValueNum;
         private System.Windows.Forms.Button shiftBtn;
+        private System.Windows.Forms.ComboBox outputMethodBx;
+        private System.Windows.Forms.TextBox columnNumbersTxt;
     }
 }

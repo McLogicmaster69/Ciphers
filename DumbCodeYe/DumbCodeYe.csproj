@@ -107,6 +107,8 @@
     </Compile>
     <Compile Include="Incrementor.cs" />
     <Compile Include="Ciphers\MorseCode.cs" />
+    <Compile Include="LetterPatterns\Spaces\SpaceAdder.cs" />
+    <Compile Include="LetterPatterns\Spaces\SpaceInsertedString.cs" />
     <Compile Include="OtherStructs.cs" />
     <Compile Include="Ciphers\Playfair\Playfair5Crack.cs">
       <SubType>Form</SubType>
@@ -466,6 +468,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -22,6 +22,7 @@ using DumbCodeYe.LetterPatterns.BasicWordLib;
 using DumbCodeYe.LetterPatterns.Quadgrams;
 using DumbCodeYe.Ciphers.Vigenere;
 using DumbCodeYe.TextPlayground;
+using DumbCodeYe.LetterPatterns.Spaces;
 
 namespace DumbCodeYe
 {
@@ -137,8 +138,7 @@ namespace DumbCodeYe
 
         private void OpenTransposition()
         {
-            TranspositionTools TT = new TranspositionTools();
-            TT.Setup(textInput.Text);
+            TranspositionTools TT = new TranspositionTools(textInput.Text.ToUpper());
             TT.Show();
         }
 
@@ -185,9 +185,8 @@ namespace DumbCodeYe
 
         private void Spaces()
         {
-            RollingTheRick.Roll();
             TextOutputFrm TOF = new TextOutputFrm();
-            TOF.SetOutput(AddSpaces(textInput.Text.ToUpper()));
+            TOF.SetOutput(SpaceAdder.Add(textInput.Text.ToUpper()));
             TOF.Show();
         }
 
@@ -278,7 +277,8 @@ namespace DumbCodeYe
             _menuBuilder.OpenDropdown(new ButtonInformation[]
             {
                 new ButtonInformation("TO UPPER", ToUpper),
-                new ButtonInformation("TO LETTERS", JustLetters)
+                new ButtonInformation("JUST LETTERS", JustLetters),
+                new ButtonInformation("ADD SPACES", Spaces)
             }, new Point(300, 0));
         }
 
@@ -331,6 +331,14 @@ namespace DumbCodeYe
         {
             EditorForm frm = new EditorForm(textInput.Text);
             frm.Show();
+        }
+
+        private void initButtons_Click(object sender, EventArgs e)
+        {
+            new InitBasicWord().Show();
+            new InitBigramsFrm().Show();
+            new InitQuadgramsFrm().Show();
+            new InitWordFreq().Show();
         }
     }
 }

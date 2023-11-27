@@ -319,8 +319,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                 if (letterIndex >= text.Length)
                     break;
             }
-            GridOutput GO = new GridOutput();
-            GO.Setup(grid, text.Length / columns, columns, true);
+            GridOutput GO = new GridOutput(grid, text.Length / columns, columns);
             return GO.GetOutput();
         }
         private string TopRightRoute(string text, int columns)
@@ -375,8 +374,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                 if (letterIndex >= text.Length)
                     break;
             }
-            GridOutput GO = new GridOutput();
-            GO.Setup(grid, text.Length / columns, columns, true);
+            GridOutput GO = new GridOutput(grid, text.Length / columns, columns);
             return GO.GetOutput();
         }
         private string BottomRightRoute(string text, int columns)
@@ -431,8 +429,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                 if (letterIndex >= text.Length)
                     break;
             }
-            GridOutput GO = new GridOutput();
-            GO.Setup(grid, text.Length / columns, columns, true);
+            GridOutput GO = new GridOutput(grid, text.Length / columns, columns);
             return GO.GetOutput();
         }
         private string BottomLeftRoute(string text, int columns)
@@ -487,8 +484,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                 if (letterIndex >= text.Length)
                     break;
             }
-            GridOutput GO = new GridOutput();
-            GO.Setup(grid, text.Length / columns, columns, true);
+            GridOutput GO = new GridOutput(grid, text.Length / columns, columns);
             return GO.GetOutput();
         }
         private string TopLeftRouteReversed(string text, int columns)
@@ -543,8 +539,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                 if (letterIndex >= text.Length)
                     break;
             }
-            GridOutput GO = new GridOutput();
-            GO.Setup(grid, text.Length / columns, columns, true);
+            GridOutput GO = new GridOutput(grid, text.Length / columns, columns);
             return GO.GetOutput();
         }
         private string TopRightRouteReversed(string text, int columns)
@@ -599,8 +594,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                 if (letterIndex >= text.Length)
                     break;
             }
-            GridOutput GO = new GridOutput();
-            GO.Setup(grid, text.Length / columns, columns, true);
+            GridOutput GO = new GridOutput(grid, text.Length / columns, columns);
             return GO.GetOutput();
         }
         private string BottomRightRouteReversed(string text, int columns)
@@ -655,8 +649,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                 if (letterIndex >= text.Length)
                     break;
             }
-            GridOutput GO = new GridOutput();
-            GO.Setup(grid, text.Length / columns, columns, true);
+            GridOutput GO = new GridOutput(grid, text.Length / columns, columns);
             return GO.GetOutput();
         }
         private string BottomLeftRouteReversed(string text, int columns)
@@ -711,8 +704,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                 if (letterIndex >= text.Length)
                     break;
             }
-            GridOutput GO = new GridOutput();
-            GO.Setup(grid, text.Length / columns, columns, true);
+            GridOutput GO = new GridOutput(grid, text.Length / columns, columns);
             return GO.GetOutput();
         }
 
@@ -862,8 +854,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                     for (int sf = 0; sf < secondaryFactors.Length; sf++)
                     {
                         char[,] sgrid = CreateBasicKeyword(permutations[i], secondaryFactors[sf]);
-                        GridOutput sGO = new GridOutput();
-                        sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
+                        GridOutput sGO = new GridOutput(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
                         if(Mode == "KNOWN START" || Mode == "KNOWN END")
                             GridContainsText(sGO, sgrid, permutations, sf, i, outputMsg, $"BASIC KEYWORD WITH COLUMNS {secondaryFactors[sf]}");
                         else if(Mode == "VALID BIGRAMS")
@@ -883,8 +874,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                     for (int sf = 0; sf < secondaryFactors.Length; sf++)
                     {
                         char[,] sgrid = CreateColumnar(permutations[i], secondaryFactors[sf]);
-                        GridOutput sGO = new GridOutput();
-                        sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
+                        GridOutput sGO = new GridOutput(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
                         if (Mode == "KNOWN START" || Mode == "KNOWN END")
                             GridContainsText(sGO, sgrid, permutations, sf, i, $"{outputMsg} OUTPUT: {permutations[i]}", $"COLUMNAR WITH COLUMNS {secondaryFactors[sf]}");
                         else if (Mode == "VALID BIGRAMS")
@@ -901,8 +891,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                     for (int sf = 0; sf < secondaryFactors.Length; sf++)
                     {
                         char[,] sgrid = CreateRowColumnar(permutations[i], secondaryFactors[sf]);
-                        GridOutput sGO = new GridOutput();
-                        sGO.Setup(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
+                        GridOutput sGO = new GridOutput(sgrid, permutations[i].Length / secondaryFactors[sf], secondaryFactors[sf]);
                         if (Mode == "KNOWN START" || Mode == "KNOWN END")
                             GridContainsText(sGO, sgrid, permutations, sf, i, $"{outputMsg} OUTPUT: {permutations[i]}", $"BASIC KEYWORD WITH COLUMNS {secondaryFactors[sf]}");
                         else if (Mode == "VALID BIGRAMS")
@@ -1015,8 +1004,7 @@ namespace DumbCodeYe.Ciphers.Transposition
             for (int pf = 0; pf < primaryFactors.Length; pf++)
             {
                 char[,] pgrid = CreateBasicKeyword(MainText, primaryFactors[pf]);
-                GridOutput pGO = new GridOutput();
-                pGO.Setup(pgrid, MainText.Length / primaryFactors[pf], primaryFactors[pf]);
+                GridOutput pGO = new GridOutput(pgrid, MainText.Length / primaryFactors[pf], primaryFactors[pf]);
                 List<string> permutations = pGO.GetAllPermutations();
                 SecondaryPermutations(permutations, PBF, currentTask, totalTasks, $"BASIC KEYWORD WITH COLUMNS {primaryFactors[pf]}");
             }
@@ -1034,8 +1022,7 @@ namespace DumbCodeYe.Ciphers.Transposition
             for (int pf = 0; pf < primaryFactors.Length; pf++)
             {
                 char[,] pgrid = CreateRowColumnar(MainText, primaryFactors[pf]);
-                GridOutput pGO = new GridOutput();
-                pGO.Setup(pgrid, MainText.Length / primaryFactors[pf], primaryFactors[pf]);
+                GridOutput pGO = new GridOutput(pgrid, MainText.Length / primaryFactors[pf], primaryFactors[pf]);
                 List<string> permutations = pGO.GetAllPermutations();
                 SecondaryPermutations(permutations, PBF, currentTask, totalTasks, $"COLUMNAR WITH COLUMNS {primaryFactors[pf]}");
             }
@@ -1053,8 +1040,7 @@ namespace DumbCodeYe.Ciphers.Transposition
             for (int pf = 0; pf < primaryFactors.Length; pf++)
             {
                 char[,] pgrid = CreateRowColumnar(MainText, primaryFactors[pf]);
-                GridOutput pGO = new GridOutput();
-                pGO.Setup(pgrid, MainText.Length / primaryFactors[pf], primaryFactors[pf]);
+                GridOutput pGO = new GridOutput(pgrid, MainText.Length / primaryFactors[pf], primaryFactors[pf]);
                 List<string> permutations = pGO.GetAllPermutations();
                 SecondaryPermutations(permutations, PBF, currentTask, totalTasks, $"ROW COLUMNAR WITH COLUMNS {primaryFactors[pf]}");
             }

@@ -22,7 +22,9 @@ namespace DumbCodeYe.Ciphers
                 // If score if low enough, apply ceaser to given offset
                 if (scores[i] < 400)
                 {
-                    Ceaser(text, i);
+                    TextOutputFrm txtOut = new TextOutputFrm();
+                    txtOut.SetOutput(Ceaser(text, i));
+                    txtOut.Show();
                 }
             }
             // Give output
@@ -30,7 +32,7 @@ namespace DumbCodeYe.Ciphers
             frequency.UpdateFreqLabel(freqText);
             frequency.Show();
         }
-        public static void Ceaser(string input, int offset)
+        public static string Ceaser(string input, int offset)
         {
             // Apply ceaser with offset
             string output = "";
@@ -49,9 +51,7 @@ namespace DumbCodeYe.Ciphers
                 }
             }
             // Output
-            TextOutputFrm txtOut = new TextOutputFrm();
-            txtOut.SetOutput(output);
-            txtOut.Show();
+            return output;
         }
 
         public static float CalculateScore(float[] freq, int offset)

@@ -112,10 +112,10 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
             if (BigramsData.CheckDataExists())
                 OpenDataSet(out keys, out vals, worker);
             else
-                SortDataSet(out keys, out vals);
+                SortDataSet(out keys, out vals, worker);
             CompileDataSet(keys, vals);
         }
-        private static void OpenDataSet(out string[] keys, out long[] vals, BackgroundWorker worker = null)
+        private static void OpenDataSet(out string[] keys, out long[] vals, BackgroundWorker worker)
         {
             string[] data = BigramsData.OpenDataFile();
             List<string> identifiers = new List<string>();
@@ -134,7 +134,7 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
             keys = identifiers.ToArray();
             vals = values.ToArray();
         }
-        private static void SortDataSet(out string[] keys, out long[] vals)
+        private static void SortDataSet(out string[] keys, out long[] vals, BackgroundWorker worker)
         {
             string[] data = BigramsData.OpenInfoFile();
             List<string> identifiers = new List<string>();
@@ -147,7 +147,7 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
                 values.Add(long.Parse(splitString[1]));
             }
 
-            string[] sortedIdentifiers = Sort(identifiers, values, out long[] sortedValues);
+            string[] sortedIdentifiers = Sort(identifiers, values, out long[] sortedValues, worker);
             string dataFileText = "";
             for (int i = 0; i < sortedIdentifiers.Length; i++)
             {
@@ -160,7 +160,7 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
             keys = sortedIdentifiers;
             vals = sortedValues;
         }
-        private static string[] Sort(List<string> data, List<long> vals, out long[] newValues, BackgroundWorker worker = null)
+        private static string[] Sort(List<string> data, List<long> vals, out long[] newValues, BackgroundWorker worker)
         {
             //Declare lists
             List<List<string>> lists = new List<List<string>>();

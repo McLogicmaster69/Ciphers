@@ -12,11 +12,13 @@ namespace DumbCodeYe.Ciphers.Vigenere
 {
     public partial class Coincidences : Form
     {
-        public Coincidences()
+        public Coincidences(string[] shifted, int[] coincidences)
         {
             InitializeComponent();
+
+            Setup(shifted, coincidences);
         }
-        public void Setup(string[] shifted, int[] coincidences)
+        private void Setup(string[] shifted, int[] coincidences)
         {
             for (int i = 0; i < shifted.Length; i++)
             {

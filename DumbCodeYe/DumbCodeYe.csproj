@@ -77,6 +77,7 @@
     <Compile Include="Ciphers\Substitution\BruteWithoutSpaces.Designer.cs">
       <DependentUpon>BruteWithoutSpaces.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ciphers\Vigenere\VigenereCipher.cs" />
     <Compile Include="LetterPatterns\BasicWordLib\BasicWordData.cs" />
     <Compile Include="LetterPatterns\BasicWordLib\InitBasicWord.cs">
       <SubType>Form</SubType>

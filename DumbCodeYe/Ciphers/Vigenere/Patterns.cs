@@ -12,11 +12,13 @@ namespace DumbCodeYe.Ciphers.Vigenere
 {
     public partial class Patterns : Form
     {
-        public Patterns()
+        public Patterns(List<string> patterns, List<int> spacing)
         {
             InitializeComponent();
+            SetupPatterns(patterns, spacing);
         }
-        public void SetupPatterns(List<string> patterns, List<int> spacing)
+
+        private void SetupPatterns(List<string> patterns, List<int> spacing)
         {
             for (int i = 0; i < patterns.Count; i++)
             {

@@ -114,8 +114,7 @@ namespace DumbCodeYe
 
         private void Vigenere()
         {
-            VigenereTools vt = new VigenereTools();
-            vt.SetupText(textInput.Text);
+            VigenereTools vt = new VigenereTools(textInput.Text);
             vt.Show();
         }
         private void Polybius()

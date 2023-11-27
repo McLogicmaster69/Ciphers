@@ -33,7 +33,7 @@ namespace DumbCodeYe.Ciphers.Vigenere
             this.patternsBtn = new System.Windows.Forms.Button();
             this.suspectedKeyLength = new System.Windows.Forms.NumericUpDown();
             this.resultsBtn = new System.Windows.Forms.Button();
-            this.bruteBtn = new System.Windows.Forms.Button();
+            this.autoSolveBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.suspectedKeyLength)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,22 +89,22 @@ namespace DumbCodeYe.Ciphers.Vigenere
             this.resultsBtn.UseVisualStyleBackColor = true;
             this.resultsBtn.Click += new System.EventHandler(this.resultsBtn_Click);
             // 
-            // bruteBtn
+            // autoSolveBtn
             // 
-            this.bruteBtn.Location = new System.Drawing.Point(12, 166);
-            this.bruteBtn.Name = "bruteBtn";
-            this.bruteBtn.Size = new System.Drawing.Size(229, 37);
-            this.bruteBtn.TabIndex = 4;
-            this.bruteBtn.Text = "BRUTE RESULTS";
-            this.bruteBtn.UseVisualStyleBackColor = true;
-            this.bruteBtn.Click += new System.EventHandler(this.bruteBtn_Click);
+            this.autoSolveBtn.Location = new System.Drawing.Point(12, 166);
+            this.autoSolveBtn.Name = "autoSolveBtn";
+            this.autoSolveBtn.Size = new System.Drawing.Size(229, 37);
+            this.autoSolveBtn.TabIndex = 4;
+            this.autoSolveBtn.Text = "AUTO SOLVE";
+            this.autoSolveBtn.UseVisualStyleBackColor = true;
+            this.autoSolveBtn.Click += new System.EventHandler(this.autoSolveBtn_Click);
             // 
             // VigenereTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(253, 213);
-            this.Controls.Add(this.bruteBtn);
+            this.ClientSize = new System.Drawing.Size(253, 211);
+            this.Controls.Add(this.autoSolveBtn);
             this.Controls.Add(this.resultsBtn);
             this.Controls.Add(this.suspectedKeyLength);
             this.Controls.Add(this.patternsBtn);
@@ -124,6 +124,6 @@ namespace DumbCodeYe.Ciphers.Vigenere
         private System.Windows.Forms.Button patternsBtn;
         private System.Windows.Forms.NumericUpDown suspectedKeyLength;
         private System.Windows.Forms.Button resultsBtn;
-        private System.Windows.Forms.Button bruteBtn;
+        private System.Windows.Forms.Button autoSolveBtn;
     }
 }

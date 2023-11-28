@@ -546,5 +546,10 @@ namespace DumbCodeYe.Ciphers.Transposition
         {
             LikelyPairsOutput.Close();
         }
+
+        public string AutoSolve()
+        {
+            return "";
+        }
     }
 }

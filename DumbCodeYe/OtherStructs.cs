@@ -10,4 +10,6 @@ namespace DumbCodeYe
     /// Code that is ran when a cipher button is clicked
     /// </summary>
     public delegate void CipherMethod();
+
+    public delegate void OutputMethod(string output);
 }

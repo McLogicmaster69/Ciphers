@@ -59,7 +59,7 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            BigramsData.Initliase(Worker);
+            BigramsData.Initialise(Worker);
         }
 
         private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)

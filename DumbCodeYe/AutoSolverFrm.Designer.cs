@@ -1,7 +1,7 @@
 ﻿
 namespace DumbCodeYe
 {
-    partial class TextOutputFrm
+    partial class AutoSolverFrm
     {
         /// <summary>
         /// Required designer variable.
@@ -44,18 +44,18 @@ namespace DumbCodeYe
             this.textOut.Name = "textOut";
             this.textOut.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textOut.Size = new System.Drawing.Size(833, 426);
-            this.textOut.TabIndex = 0;
+            this.textOut.TabIndex = 1;
             this.textOut.WordWrap = false;
             // 
-            // TextOutputFrm
+            // AutoSolverFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(857, 450);
             this.Controls.Add(this.textOut);
-            this.Name = "TextOutputFrm";
-            this.Text = "TextOutput";
+            this.Name = "AutoSolverFrm";
+            this.Text = "AutoSolverFrm";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ResumeLayout(false);
             this.PerformLayout();
 

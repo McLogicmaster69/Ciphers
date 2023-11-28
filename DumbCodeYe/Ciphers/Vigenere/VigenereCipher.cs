@@ -15,11 +15,18 @@ namespace DumbCodeYe.Ciphers.Vigenere
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static string AutoSolve(string input)
+        public static string AutoSolve(string input, OutputMethod outputMethod = null)
         {
+            outputMethod?.Invoke("Finding most likely shift");
             int shift = GetLikelyShift(input);
             if (shift == -1)
+            {
+                outputMethod?.Invoke("No shift found");
+                outputMethod?.Invoke("Suspected not to be a vigenere cipher");
                 return input;
+            }
+            outputMethod?.Invoke($"Found likely shift of {shift}");
+            outputMethod?.Invoke("Running vigenere cipher");
             return Vigenere(input, shift);
         }
 

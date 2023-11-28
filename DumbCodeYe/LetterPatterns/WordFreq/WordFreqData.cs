@@ -89,6 +89,9 @@ namespace DumbCodeYe.LetterPatterns.WordFreq
 
         public static void Initialise(BackgroundWorker worker = null)
         {
+            if (IsCompiled)
+                return;
+
             string[] keys;
             long[] vals;
             if (WordFreqData.CheckDataExists())

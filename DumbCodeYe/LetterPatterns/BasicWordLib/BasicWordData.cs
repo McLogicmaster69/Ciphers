@@ -99,6 +99,9 @@ namespace DumbCodeYe.LetterPatterns.BasicWordLib
         /// <param name="worker"></param>
         public static void Initialise(BackgroundWorker worker = null)
         {
+            if (IsCompiled)
+                return;
+
             string[] data;
             if (BasicWordData.CheckDataExists())
                 OpenDataSet(out data);

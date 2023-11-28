@@ -69,6 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoSolverFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AutoSolverFrm.Designer.cs">
+      <DependentUpon>AutoSolverFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ciphers\AffineCipher.cs" />
     <Compile Include="Ciphers\BaconCipher.cs" />
     <Compile Include="Ciphers\Substitution\BruteWithoutSpaces.cs">
@@ -341,6 +347,9 @@
     <Compile Include="TextPlayground\Tokens\ValueTokens\ValueToken.cs" />
     <Compile Include="TextPlayground\Tokens\VariableTokens\DeclerationToken.cs" />
     <Compile Include="TextPlayground\Variables\StringVariable.cs" />
+    <EmbeddedResource Include="AutoSolverFrm.resx">
+      <DependentUpon>AutoSolverFrm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ciphers\Substitution\BruteWithoutSpaces.resx">
       <DependentUpon>BruteWithoutSpaces.cs</DependentUpon>
     </EmbeddedResource>

@@ -16,6 +16,8 @@ namespace DumbCodeYe.LetterPatterns.Quadgrams
         public static DataSet DataSet;
         public static long TotalData;
 
+        public const long EXPECTED_ENGLISH_AVERAGE = 600000;
+
         public static bool IsCompiled { get; private set; } = false;
 
         public static bool CheckDataExists()
@@ -98,16 +100,19 @@ namespace DumbCodeYe.LetterPatterns.Quadgrams
                 Initialise();
 
             long totalScore = 0;
-            for (int i = 0; i < text.Length - 1; i++)
+            for (int i = 0; i < text.Length - 3; i++)
             {
-                string bigram = text[i].ToString() + text[i + 1].ToString();
-                totalScore += GetFrequency(bigram);
+                string quadgram = text.Substring(i, 4);
+                totalScore += GetFrequency(quadgram);
             }
-            return totalScore / (text.Length - 1);
+            return totalScore / (text.Length - 3);
         }
 
         public static void Initialise(BackgroundWorker worker = null)
         {
+            if (IsCompiled)
+                return;
+
             string[] keys;
             int[] vals;
             if (QuadgramsData.CheckDataExists())

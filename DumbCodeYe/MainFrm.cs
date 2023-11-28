@@ -67,9 +67,20 @@ namespace DumbCodeYe
             }
             textInput.Text = outputText;
         }
+
         private void ToUpper()
         {
             textInput.Text = textInput.Text.ToUpper();
+        }
+        private string JustLetters(string input)
+        {
+            string outputText = "";
+            foreach (char c in input)
+            {
+                if (GeneralConstants.CAPITALS.Contains(c.ToString().ToUpper()))
+                    outputText += c;
+            }
+            return outputText;
         }
 
         #endregion
@@ -338,6 +349,11 @@ namespace DumbCodeYe
             new InitBigramsFrm().Show();
             new InitQuadgramsFrm().Show();
             new InitWordFreq().Show();
+        }
+
+        private void autoSolveBtn_Click(object sender, EventArgs e)
+        {
+            AutoSolverFrm.Solve(JustLetters(textInput.Text.ToUpper()));
         }
     }
 }

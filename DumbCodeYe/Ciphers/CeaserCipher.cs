@@ -8,6 +8,8 @@ namespace DumbCodeYe.Ciphers
 {
     public static class CeaserCipher
     {
+        public const float EXPECTED_ENGLISH_SCORE = 400f;
+
         public static void TryCeaser(string text)
         {
             // Check frequency analysis for patterns
@@ -20,7 +22,7 @@ namespace DumbCodeYe.Ciphers
                 scores[i] = CalculateScore(freq, i);
                 freqText += $"offset {i} gives score {scores[i]}\n";
                 // If score if low enough, apply ceaser to given offset
-                if (scores[i] < 400)
+                if (scores[i] < EXPECTED_ENGLISH_SCORE)
                 {
                     TextOutputFrm txtOut = new TextOutputFrm();
                     txtOut.SetOutput(Ceaser(text, i));
@@ -31,6 +33,16 @@ namespace DumbCodeYe.Ciphers
             FrequencyFrm frequency = new FrequencyFrm();
             frequency.UpdateFreqLabel(freqText);
             frequency.Show();
+        }
+        public static float[] GetFrequencyShifts(string text)
+        {
+            float[] scores = new float[26];
+            float[] freq = CipherEvaluation.GetFrequencyProfile(text);
+            for (int i = 0; i < 26; i++)
+            {
+                scores[i] = CalculateScore(freq, i);
+            }
+            return scores;
         }
         public static string Ceaser(string input, int offset)
         {

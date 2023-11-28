@@ -1601,5 +1601,10 @@ namespace DumbCodeYe.Ciphers.Transposition
             }
             return new GridOutput(grid, rows, columns);
         }
+
+        public string AutoSolve(string input)
+        {
+            return "";
+        }
     }
 }

@@ -547,9 +547,25 @@ namespace DumbCodeYe.Ciphers.Transposition
             LikelyPairsOutput.Close();
         }
 
-        public string AutoSolve()
+        public bool AutoSolve(out string output)
         {
-            return "";
+            output = "";
+            for (int i = 1; i < Columns; i++)
+            {
+                float score = CalculateColumnsBigramValue(0, i);
+                continue;
+            }
+            return false;
+        }
+
+        private float CalculateColumnsBigramValue(int col1, int col2)
+        {
+            long total = 0;
+            for (int i = 0; i < Rows; i++)
+            {
+                total += BigramsData.GetFrequency(mainGrid[col1][i].ToString() + mainGrid[col2][i].ToString());
+            }
+            return total / (float)Rows;
         }
     }
 }

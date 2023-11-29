@@ -15,6 +15,8 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
         public static DataSet DataSet;
         public static long TotalData;
 
+        public const long EXPECTED_ENGLISH_AVERAGE = 17000;
+
         public static bool IsCompiled { get; private set; } = false;
 
         public static bool CheckDataExists()
@@ -53,7 +55,7 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
                 int mid = (frontPointer + backPointer) / 2;
                 string midstring = DataSet.Keys[mid];
                 if (DataSet.Keys[mid] == bigram)
-                    return DataSet.Values[mid];
+                    return DataSet.Values[mid] / 100000;
                 else
                 {
                     bool inpGreaterThan = false;

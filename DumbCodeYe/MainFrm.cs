@@ -93,7 +93,7 @@ namespace DumbCodeYe
         }
         private void Morse()
         {
-            MorseCode.GetMorseCode(textInput.Text);
+            TextOutputFrm.CreateOutput(MorseCode.GetMorseCode(textInput.Text, ".", "-", '/', ' '));
         }
         private void Binary()
         {
@@ -353,7 +353,8 @@ namespace DumbCodeYe
 
         private void autoSolveBtn_Click(object sender, EventArgs e)
         {
-            AutoSolverFrm.Solve(JustLetters(textInput.Text.ToUpper()));
+            string justLetters = JustLetters(textInput.Text.ToUpper());
+            AutoSolverFrm.Solve(string.IsNullOrEmpty(justLetters) ? textInput.Text : justLetters);
         }
     }
 }

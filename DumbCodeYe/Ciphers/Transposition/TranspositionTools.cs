@@ -208,16 +208,10 @@ namespace DumbCodeYe.Ciphers.Transposition
             return grid;
         }
 
-        private string GetStringMod(string text, int mod)
-        {
-            int stringRemainder = text.Length % mod;
-            return text.Substring(0, text.Length - stringRemainder);
-        }
-
         private void basicKeywordBtn_Click(object sender, EventArgs e)
         {
             int columns = (int)columnsNum.Value;
-            string text = GetStringMod(MainText, columns);
+            string text = TranspositionCipher.GetStringMod(MainText, columns);
             int rows = (int)Math.Ceiling((decimal)text.Length / columns);
             char[,] grid = new char[rows, columns];
             int index = 0;
@@ -1547,64 +1541,8 @@ namespace DumbCodeYe.Ciphers.Transposition
 
         private void CreateGridBtn_Click(object sender, EventArgs e)
         {
-            CreateGrid(inputMethodBx.SelectedIndex == 0, MainText, (int)columnsNum.Value);
-        }
-
-        private void CreateGrid(bool rowsFirst, string input, int columns)
-        {
-            GridOutput grid = rowsFirst ? CreateRowsFirst(input, columns) : CreateColumnsFirst(input, columns);
+            GridOutput grid = TranspositionCipher.CreateGrid(inputMethodBx.SelectedIndex == 0, MainText, (int)columnsNum.Value);
             grid.Show();
-        }
-
-        /// <summary>
-        /// Creates a grid where it inputs text in going horizontally
-        /// </summary>
-        /// <param name="input"></param>
-        /// <param name="columns"></param>
-        /// <returns></returns>
-        private GridOutput CreateRowsFirst(string input, int columns)
-        {
-            string text = GetStringMod(input, columns);
-            int rows = (int)Math.Ceiling((decimal)text.Length / columns);
-            char[,] grid = new char[rows, columns];
-            int index = 0;
-            for (int r = 0; r < rows; r++)
-            {
-                for (int c = 0; c < columns; c++)
-                {
-                    grid[r, c] = text[index];
-                    index++;
-                }
-            }
-            return new GridOutput(grid, rows, columns);
-        }
-
-        /// <summary>
-        /// Creates a grid where it inputs text in going vertically
-        /// </summary>
-        /// <param name="input"></param>
-        /// <param name="columns"></param>
-        /// <returns></returns>
-        private GridOutput CreateColumnsFirst(string input, int columns)
-        {
-            string text = GetStringMod(input, columns);
-            int rows = (int)Math.Ceiling((decimal)text.Length / columns);
-            char[,] grid = new char[rows, columns];
-            int index = 0;
-            for (int c = 0; c < columns; c++)
-            {
-                for (int r = 0; r < rows; r++)
-                {
-                    grid[r, c] = text[index];
-                    index++;
-                }
-            }
-            return new GridOutput(grid, rows, columns);
-        }
-
-        public string AutoSolve(string input)
-        {
-            return "";
         }
     }
 }

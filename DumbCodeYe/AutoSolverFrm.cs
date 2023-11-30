@@ -1,4 +1,5 @@
 ﻿using DumbCodeYe.Ciphers;
+using DumbCodeYe.Ciphers.Substitution;
 using DumbCodeYe.Ciphers.Transposition;
 using DumbCodeYe.Ciphers.Vigenere;
 using DumbCodeYe.LetterPatterns.BasicWordLib;
@@ -177,6 +178,11 @@ namespace DumbCodeYe
 
             if (vigenereOutput != input)
                 return vigenereOutput;
+
+            Output("Trying substitution");
+            _tabIndex++;
+            string substitutionOutput = SubstitutionCipher.AutoSolve(input);
+            _tabIndex--;
 
             Output("Unknown cipher");
             return input;

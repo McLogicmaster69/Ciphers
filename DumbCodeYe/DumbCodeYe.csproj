@@ -85,11 +85,18 @@
       <DependentUpon>InitBigramsFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="GridPosition.cs" />
+    <Compile Include="Hill\Decoder.cs" />
     <Compile Include="Hill\HillCipher.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Hill\HillCipher.Designer.cs">
       <DependentUpon>HillCipher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hill\HillCipherRemastered.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Hill\HillCipherRemastered.Designer.cs">
+      <DependentUpon>HillCipherRemastered.cs</DependentUpon>
     </Compile>
     <Compile Include="Incrementor.cs" />
     <Compile Include="Playfair\Playfair5Crack.cs">
@@ -300,6 +307,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Hill\HillCipher.resx">
       <DependentUpon>HillCipher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hill\HillCipherRemastered.resx">
+      <DependentUpon>HillCipherRemastered.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Playfair\Playfair5Grid.resx">
       <DependentUpon>Playfair5Grid.cs</DependentUpon>

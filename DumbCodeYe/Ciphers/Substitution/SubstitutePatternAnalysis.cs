@@ -19,9 +19,11 @@ namespace DumbCodeYe.Ciphers.Substitution
 
         public void SetupPatterns(List<string> patterns, List<int> repeats)
         {
+            bool ignoreOneRule = patterns[0].Length == 1;
+
             for (int i = 0; i < patterns.Count; i++)
             {
-                if(repeats[i] > 1)
+                if(repeats[i] > 1 || ignoreOneRule)
                 {
                     patternsList.Items.Add($"{patterns[i]} with freq of {repeats[i]}");
                 }

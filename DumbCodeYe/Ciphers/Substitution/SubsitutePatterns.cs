@@ -34,7 +34,7 @@ namespace DumbCodeYe.Ciphers.Substitution
 
             List<string> foundPatterns = new List<string>();
             List<int> patternRepeats = new List<int>();
-            for (int i = 0; i < mainText.Length - (int)patternLength.Value; i++)
+            for (int i = 0; i < mainText.Length - (int)patternLength.Value + 1; i++)
             {
                 string pat = mainText.Substring(i, (int)patternLength.Value);
                 if (foundPatterns.Contains(pat))

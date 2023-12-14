@@ -200,6 +200,34 @@ namespace DumbCodeYe
             TOF.Show();
         }
 
+        private void Modulo()
+        {
+            string[] strs = textInput.Text.Split(' ');
+            string modulo = "";
+            foreach(string s in strs)
+            {
+                if(int.TryParse(s, out int result))
+                {
+                    modulo += (result % 26).ToString() + " ";
+                }
+            }
+            textInput.Text = modulo;
+        }
+
+        private void NumbersToText()
+        {
+            string[] strs = textInput.Text.Split(' ');
+            string output = "";
+            foreach (string s in strs)
+            {
+                if (int.TryParse(s, out int result))
+                {
+                    output += GeneralConstants.CHARACTERS[result];
+                }
+            }
+            textInput.Text = output;
+        }
+
         private string AddSpaces(string s)
         {
             ProgressBarForm pb = new ProgressBarForm();
@@ -288,7 +316,9 @@ namespace DumbCodeYe
             {
                 new ButtonInformation("TO UPPER", ToUpper),
                 new ButtonInformation("JUST LETTERS", JustLetters),
-                new ButtonInformation("ADD SPACES", Spaces)
+                new ButtonInformation("ADD SPACES", Spaces),
+                new ButtonInformation("MODULO NUMBERS", Modulo),
+                new ButtonInformation("NUMBERS TO LETTERS", NumbersToText)
             }, new Point(300, 0));
         }
 

@@ -12,4 +12,11 @@ namespace DumbCodeYe
     public delegate void CipherMethod();
 
     public delegate void OutputMethod(string output);
+
+    public enum ComparisonResult
+    {
+        Greater,
+        Lesser,
+        Equal
+    }
 }

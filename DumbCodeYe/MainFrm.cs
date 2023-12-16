@@ -23,6 +23,8 @@ using DumbCodeYe.LetterPatterns.Quadgrams;
 using DumbCodeYe.Ciphers.Vigenere;
 using DumbCodeYe.TextPlayground;
 using DumbCodeYe.LetterPatterns.Spaces;
+using DumbCodeYe.Ciphers.Bifid;
+using DumbCodeYe.Ciphers.Trifid;
 
 namespace DumbCodeYe
 {
@@ -133,6 +135,17 @@ namespace DumbCodeYe
             PolybiusTools pt = new PolybiusTools();
             pt.SetupText(textInput.Text);
             pt.Show();
+        }
+        private void Bifid()
+        {
+            BifidTools bt = new BifidTools();
+            bt.SetupText(textInput.Text);
+            bt.Show();
+        }
+        private void Trifid()
+        {
+            TrifidTools tt = new TrifidTools(textInput.Text);
+            tt.Show();
         }
         private void Hill()
         {
@@ -348,6 +361,8 @@ namespace DumbCodeYe
             {
                 new ButtonInformation("VIGENERE", Vigenere),
                 new ButtonInformation("POLYBIUS", Polybius),
+                new ButtonInformation("BIFID", Bifid),
+                new ButtonInformation("TRIFID", Trifid),
                 new ButtonInformation("HILL", Hill)
             }, new Point(300, 120));
         }
@@ -385,6 +400,10 @@ namespace DumbCodeYe
         {
             string justLetters = JustLetters(textInput.Text.ToUpper());
             AutoSolverFrm.Solve(string.IsNullOrEmpty(justLetters) ? textInput.Text : justLetters);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
         }
     }
 }

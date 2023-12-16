@@ -77,6 +77,22 @@
     </Compile>
     <Compile Include="Ciphers\AffineCipher.cs" />
     <Compile Include="Ciphers\BaconCipher.cs" />
+    <Compile Include="Ciphers\Bifid\BifidCipher.cs" />
+    <Compile Include="Ciphers\Bifid\BifidGrid.cs" />
+    <Compile Include="Ciphers\Bifid\BifidGridTools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciphers\Bifid\BifidGridTools.Designer.cs">
+      <DependentUpon>BifidGridTools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ciphers\Bifid\BifidText.cs" />
+    <Compile Include="Ciphers\Bifid\BifidTools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciphers\Bifid\BifidTools.Designer.cs">
+      <DependentUpon>BifidTools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ciphers\Bifid\CharacterCollectionFrequency.cs" />
     <Compile Include="Ciphers\Substitution\BruteWithoutSpaces.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +101,14 @@
     </Compile>
     <Compile Include="Ciphers\Substitution\SubstitutionCipher.cs" />
     <Compile Include="Ciphers\Transposition\TranspositionCipher.cs" />
+    <Compile Include="Ciphers\Trifid\MatrixGrid.cs" />
+    <Compile Include="Ciphers\Trifid\TrifidCipher.cs" />
+    <Compile Include="Ciphers\Trifid\TrifidTools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciphers\Trifid\TrifidTools.Designer.cs">
+      <DependentUpon>TrifidTools.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ciphers\Vigenere\VigenereCipher.cs" />
     <Compile Include="LetterPatterns\BasicWordLib\BasicWordData.cs" />
     <Compile Include="LetterPatterns\BasicWordLib\InitBasicWord.cs">
@@ -352,8 +376,17 @@
     <EmbeddedResource Include="AutoSolverFrm.resx">
       <DependentUpon>AutoSolverFrm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Ciphers\Bifid\BifidGridTools.resx">
+      <DependentUpon>BifidGridTools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ciphers\Bifid\BifidTools.resx">
+      <DependentUpon>BifidTools.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ciphers\Substitution\BruteWithoutSpaces.resx">
       <DependentUpon>BruteWithoutSpaces.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ciphers\Trifid\TrifidTools.resx">
+      <DependentUpon>TrifidTools.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LetterPatterns\BasicWordLib\InitBasicWord.resx">
       <DependentUpon>InitBasicWord.cs</DependentUpon>

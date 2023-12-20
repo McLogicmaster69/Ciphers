@@ -129,6 +129,8 @@ namespace DumbCodeYe.Ciphers.FourSquare
         {
             AnalyseBigrams();
             OpenBigramFrequencies();
+            CheckExpectedLetterCount();
+            CheckLetterCount();
         }
 
         private void AnalyseBigrams()
@@ -165,7 +167,7 @@ namespace DumbCodeYe.Ciphers.FourSquare
             }
 
             List<string> sortedFoundPatterns = new List<string>();
-            List<int> sortedPatternRepeats = new List<int>();
+            List<decimal> sortedPatternRepeats = new List<decimal>();
             int lengthOfList = foundPatterns.Count;
             for (int i = 0; i < lengthOfList; i++)
             {
@@ -183,7 +185,7 @@ namespace DumbCodeYe.Ciphers.FourSquare
                     sortedFoundPatterns.Add($"{foundPatterns[highestIndex]}");
                 else
                     sortedFoundPatterns.Add($"{foundPatterns[highestIndex]} | {alternatePatterns[highestIndex]}");
-                sortedPatternRepeats.Add(patternRepeats[highestIndex]);
+                sortedPatternRepeats.Add(patternRepeats[highestIndex] / (_input.Length / 2m));
                 foundPatterns.RemoveAt(highestIndex);
                 alternatePatterns.RemoveAt(highestIndex);
                 patternRepeats.RemoveAt(highestIndex);
@@ -192,7 +194,7 @@ namespace DumbCodeYe.Ciphers.FourSquare
             if (_bigramPatternsFrm.IsDisposed)
                 _bigramPatternsFrm = new SubstitutePatternAnalysis();
 
-            _bigramPatternsFrm.SetupPatterns(sortedFoundPatterns, sortedPatternRepeats);
+            _bigramPatternsFrm.SetupPatterns(sortedFoundPatterns, sortedPatternRepeats, true);
             _bigramPatternsFrm.Show();
         }
 
@@ -278,54 +280,6 @@ namespace DumbCodeYe.Ciphers.FourSquare
             bigram1Txt.Text = pattern[0].ToString().ToLower();
             bigram2Txt.Text = pattern[1].ToString().ToLower();
             HighlightGrid();
-        }
-
-        private void hillClimbBtn_Click(object sender, EventArgs e)
-        {
-            Random rand = new Random();
-            List<char> characters1 = new List<char>("ABCDEFGHIKLMNOPQRSTUVWXYZ");
-            List<char> characters2 = new List<char>("ABCDEFGHIKLMNOPQRSTUVWXYZ");
-            for (int row = 0; row < 5; row++)
-            {
-                for (int column = 0; column < 5; column++)
-                {
-                    if (!string.IsNullOrEmpty(_grid1[row][column].Text))
-                    {
-                        if (GeneralConstants.CAPITALS.Contains(_grid1[row][column].Text[0]))
-                            characters1.Remove(_grid1[row][column].Text[0]);
-                    }
-                    if (!string.IsNullOrEmpty(_grid2[row][column].Text))
-                    {
-                        if (GeneralConstants.CAPITALS.Contains(_grid2[row][column].Text[0]))
-                            characters2.Remove(_grid2[row][column].Text[0]);
-                    }
-                }
-            }
-            for (int row = 0; row < 5; row++)
-            {
-                for (int column = 0; column < 5; column++)
-                {
-                    if (string.IsNullOrEmpty(_grid1[row][column].Text))
-                    {
-                        int randNum = rand.Next(characters1.Count);
-                        _grid1[row][column].Text = characters1[randNum].ToString();
-                        characters1.RemoveAt(randNum);
-                    }
-                    if (string.IsNullOrEmpty(_grid2[row][column].Text))
-                    {
-                        int randNum = rand.Next(characters2.Count);
-                        _grid2[row][column].Text = characters2[randNum].ToString();
-                        characters2.RemoveAt(randNum);
-                    }
-                }
-            }
-
-            for (int i = 0; i < HILL_CLIMB_ATTEMPTS; i++)
-            {
-                attemptsNum.Text = (i + 1).ToString();
-                attemptsNum.Refresh();
-                PureApply();
-            }
         }
 
         private void frequencyBtn_Click(object sender, EventArgs e)
@@ -628,6 +582,476 @@ namespace DumbCodeYe.Ciphers.FourSquare
 
             _bigramPatternsFrm.SetupPatterns(sortedFoundPatterns, sortedPatternRepeats);
             _bigramPatternsFrm.Show();
+        }
+
+        private void CheckExpectedLetterCount()
+        {
+            decimal[] startLetter = new decimal[25];
+            decimal[] endLetter = new decimal[25];
+
+            LetterPatterns.Bigrams.DataSet freq = BigramsData.FrequencyDataSet;
+            for (int i = 0; i < freq.Count; i++)
+            {
+                string bigram = freq.Keys[i].ToUpper();
+
+                if (bigram[0] > 73)
+                    startLetter[bigram[0] - 66] += freq.Values[i] * 1m / freq.GetValueTotal();
+                else
+                    startLetter[bigram[0] - 65] += freq.Values[i] * 1m / freq.GetValueTotal();
+
+                if (bigram[1] > 73)
+                    endLetter[bigram[1] - 66] += freq.Values[i] * 1m / freq.GetValueTotal();
+                else
+                    endLetter[bigram[1] - 65] += freq.Values[i] * 1m / freq.GetValueTotal();
+            }
+
+            List<string> characters = new List<string>();
+            foreach (char c in "ABCDEFGHIKLMNOPQRSTUVWXYZ")
+            {
+                characters.Add(c.ToString());
+            }
+
+            SubstitutePatternAnalysis spaStart = new SubstitutePatternAnalysis();
+            spaStart.SetupPatterns(characters, new List<decimal>(startLetter), true);
+            spaStart.Text = "Expected start";
+            spaStart.Show();
+
+            SubstitutePatternAnalysis spaEnd = new SubstitutePatternAnalysis();
+            spaEnd.SetupPatterns(characters, new List<decimal>(endLetter), true);
+            spaEnd.Text = "Expected end";
+            spaEnd.Show();
+        }
+
+        private void CheckLetterCount()
+        {
+            string mainText = "";
+            for (int i = 0; i < _input.Length; i++)
+            {
+                if (GeneralConstants.CHARACTERS.Contains(_input[i].ToString().ToLower()))
+                    mainText += _input[i];
+            }
+
+            List<string> foundPatterns = new List<string>();
+            List<int> patternRepeats = new List<int>();
+            for (int i = 0; i < mainText.Length - 1; i += 2)
+            {
+                string pat = mainText.Substring(i, 2);
+                if (foundPatterns.Contains(pat))
+                {
+                    int index = foundPatterns.IndexOf(pat);
+                    patternRepeats[index]++;
+                }
+                else
+                {
+                    foundPatterns.Add(pat);
+                    patternRepeats.Add(1);
+                }
+            }
+
+            decimal[] startLetter = new decimal[25];
+            decimal[] endLetter = new decimal[25]; 
+            
+            for (int i = 0; i < foundPatterns.Count; i++)
+            {
+                string bigram = foundPatterns[i].ToUpper();
+
+                if (bigram[0] > 73)
+                    startLetter[bigram[0] - 66] += patternRepeats[i] * 2m / mainText.Length;
+                else
+                    startLetter[bigram[0] - 65] += patternRepeats[i] * 2m / mainText.Length;
+
+                if (bigram[1] > 73)
+                    endLetter[bigram[1] - 66] += patternRepeats[i] * 2m / mainText.Length;
+                else
+                    endLetter[bigram[1] - 65] += patternRepeats[i] * 2m / mainText.Length;
+            }
+
+            List<string> characters = new List<string>();
+            foreach (char c in "ABCDEFGHIKLMNOPQRSTUVWXYZ")
+            {
+                characters.Add(c.ToString());
+            }
+
+            SubstitutePatternAnalysis spaStart = new SubstitutePatternAnalysis();
+            spaStart.SetupPatterns(characters, new List<decimal>(startLetter), true);
+            spaStart.Text = "Actual start";
+            spaStart.Show();
+
+            SubstitutePatternAnalysis spaEnd = new SubstitutePatternAnalysis();
+            spaEnd.SetupPatterns(characters, new List<decimal>(endLetter), true);
+            spaEnd.Text = "Actual end";
+            spaEnd.Show();
+        }
+
+        private decimal[,] GenerateTableLast(int row, int column, out decimal mean, out decimal standardDeviation)
+        {
+            decimal[,] table = new decimal[5, 5];
+            decimal total = 0;
+
+            for (int r = 0; r < 5; r++)
+            {
+                for (int c = 0; c < 5; c++)
+                {
+                    string bigram = FourSquareCipher.CHARACTER_GRID[r][column] + FourSquareCipher.CHARACTER_GRID[row][c];
+                    decimal value = BigramsData.GetFrequency(bigram) * 1m / BigramsData.FrequencyDataSet.GetValueTotal();
+                    total += value;
+                    table[r, c] = value;
+                }
+            }
+
+            mean = total / 25;
+            decimal meanTotal = 0;
+            for (int r = 0; r < 5; r++)
+            {
+                for (int c = 0; c < 5; c++)
+                {
+                    meanTotal += (table[r, c] - mean) * (table[r, c] - mean);
+                }
+            }
+            standardDeviation = (decimal)Math.Sqrt((double)(meanTotal / 25));
+
+            return table;
+        }
+
+        private decimal[,] GenerateTableFirst(int row, int column, out decimal mean, out decimal standardDeviation)
+        {
+            decimal[,] table = new decimal[5, 5];
+            decimal total = 0;
+
+            for (int r = 0; r < 5; r++)
+            {
+                for (int c = 0; c < 5; c++)
+                {
+                    string bigram = FourSquareCipher.CHARACTER_GRID[row][c] + FourSquareCipher.CHARACTER_GRID[r][column];
+                    decimal value = BigramsData.GetFrequency(bigram) * 1m / BigramsData.FrequencyDataSet.GetValueTotal();
+                    total += value;
+                    table[r, c] = value;
+                }
+            }
+
+            mean = total / 25;
+            decimal meanTotal = 0;
+            for (int r = 0; r < 5; r++)
+            {
+                for (int c = 0; c < 5; c++)
+                {
+                    meanTotal += (table[r, c] - mean) * (table[r, c] - mean);
+                }
+            }
+            standardDeviation = (decimal)Math.Sqrt((double)(meanTotal / 25));
+
+            return table;
+        }
+
+        private void expectedTableBtn_Click(object sender, EventArgs e)
+        {
+            for (int r = 0; r < 5; r++)
+            {
+                for (int c = 0; c < 5; c++)
+                {
+                    _grid1[r][c].Text = "";
+                    _grid2[r][c].Text = "";
+                }
+            }
+
+            CalculateTable(_grid1, ListOfBigramsFirst);
+            CalculateTable(_grid2, ListOfBigramsLast);
+        }
+
+        private delegate List<decimal> BigramList(string b, out decimal m, out decimal s);
+
+        private void CalculateTable(TextBox[][] grid, BigramList bigramList)
+        {
+            decimal[][][,] tables = new decimal[5][][,]
+            {
+                new decimal[5][,],
+                new decimal[5][,],
+                new decimal[5][,],
+                new decimal[5][,],
+                new decimal[5][,]
+            };
+            decimal[,] means = new decimal[5, 5];
+            decimal[,] standardDeviations = new decimal[5, 5];
+
+            List<RowColumnScore>[,] sortedTables = new List<RowColumnScore>[5, 5];
+
+            for (int r = 0; r < 5; r++)
+            {
+                for (int c = 0; c < 5; c++)
+                {
+                    tables[r][c] = GenerateTableFirst(r, c, out decimal mean, out decimal standardDeviation);
+                    means[r, c] = mean;
+                    standardDeviations[r, c] = standardDeviation;
+
+                    sortedTables[r, c] = new List<RowColumnScore>();
+
+                    // SORT
+
+                    for (int _r = 0; _r < 5; _r++)
+                    {
+                        for (int _c = 0; _c < 5; _c++)
+                        {
+                            decimal score = tables[r][c][_r, _c];
+
+                            bool sorted = false;
+                            for (int j = 0; j < sortedTables[r, c].Count; j++)
+                            {
+                                if (score > sortedTables[r, c][j].Score)
+                                {
+                                    sortedTables[r, c].Insert(j, new RowColumnScore(_r, _c, score));
+                                    sorted = true;
+                                    break;
+                                }
+                            }
+                            if (!sorted)
+                                sortedTables[r, c].Add(new RowColumnScore(_r, _c, score));
+                        }
+                    }
+
+                }
+            }
+
+            int mostCertainIndex = -1;
+            decimal mostCertainScore = decimal.MaxValue;
+
+            List<RowColumnScore>[] scores = new List<RowColumnScore>[25];
+            string characters = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
+            for (int i = 0; i < 25; i++)
+            {
+                List<decimal> probabilites = bigramList(characters[i].ToString(), out decimal m, out decimal s);
+
+                scores[i] = new List<RowColumnScore>();
+                decimal lowestScore = decimal.MaxValue;
+                for (int r = 0; r < 5; r++)
+                {
+                    for (int c = 0; c < 5; c++)
+                    {
+                        // SCORE
+
+                        decimal meanScore = Math.Abs(means[r, c] - m);
+                        decimal standardScore = Math.Abs(standardDeviations[r, c] - s);
+                        decimal score = meanScore + standardScore;
+
+                        /*
+                        List<RowColumnScore> expectedScores = sortedTables[r, c];
+                        for (int j = 0; j < expectedScores.Count; j++)
+                        {
+                            score += Math.Abs(expectedScores[j].Score - probabilites[j]) * 0.01m;
+                        }
+                        */
+
+                        // SORT
+
+                        bool sorted = false;
+                        for (int j = 0; j < scores[i].Count; j++)
+                        {
+                            if(score < scores[i][j].Score)
+                            {
+                                scores[i].Insert(j, new RowColumnScore(r, c, score));
+                                sorted = true;
+                                break;
+                            }
+                        }
+                        if (!sorted)
+                            scores[i].Add(new RowColumnScore(r, c, score));
+
+                        if(score < lowestScore)
+                        {
+                            lowestScore = score;
+                        }
+                    }
+                }
+
+                if(lowestScore < mostCertainScore)
+                {
+                    mostCertainIndex = i;
+                    mostCertainScore = lowestScore;
+                }
+            }
+
+            List<int> completedIndexes = new List<int>();
+            while(completedIndexes.Count < 25)
+            {
+                completedIndexes.Add(mostCertainIndex);
+                int lowestRow = -1;
+                int lowestColumn = -1;
+                for (int i = 0; i < scores[mostCertainIndex].Count; i++)
+                {
+                    RowColumnScore rcs = scores[mostCertainIndex][i];
+                    if(grid[rcs.Row][rcs.Column].Text == "")
+                    {
+                        lowestRow = rcs.Row;
+                        lowestColumn = rcs.Column;
+                        break;
+                    }
+                }
+
+                if (lowestRow == -1)
+                    break;
+
+                grid[lowestRow][lowestColumn].Text = characters[mostCertainIndex].ToString();
+                grid[lowestRow][lowestColumn].Refresh();
+
+                mostCertainIndex = -1;
+                decimal lowestScore = decimal.MaxValue;
+                for (int i = 0; i < 25; i++)
+                {
+                    if (completedIndexes.Contains(i))
+                        continue;
+                    decimal lowestAvailableScore = decimal.MaxValue;
+                    for (int j = 0; j < scores[i].Count; j++)
+                    {
+                        RowColumnScore rcs = scores[i][j];
+                        if (grid[rcs.Row][rcs.Column].Text == "")
+                        {
+                            lowestAvailableScore = rcs.Score;
+                            break;
+                        }
+                    }
+                    if(lowestAvailableScore < lowestScore)
+                    {
+                        lowestScore = lowestAvailableScore;
+                        mostCertainIndex = i;
+                    }
+                }
+
+                if (mostCertainIndex == -1)
+                    break;
+            }
+
+            return;
+        }
+
+        private List<decimal> ListOfBigramsFirst(string first, out decimal mean, out decimal standardDeviation)
+        {
+            string mainText = "";
+            for (int i = 0; i < _input.Length; i++)
+            {
+                if (GeneralConstants.CHARACTERS.Contains(_input[i].ToString().ToLower()))
+                    mainText += _input[i];
+            }
+
+            List<string> foundPatterns = new List<string>();
+            List<int> patternRepeats = new List<int>();
+            for (int i = 0; i < mainText.Length - 1; i += 2)
+            {
+                string pat = mainText.Substring(i, 2);
+                if (pat[0].ToString().ToUpper() != first.ToUpper())
+                    continue;
+                if (foundPatterns.Contains(pat))
+                {
+                    int index = foundPatterns.IndexOf(pat);
+                    patternRepeats[index]++;
+                }
+                else
+                {
+                    foundPatterns.Add(pat);
+                    patternRepeats.Add(1);
+                }
+            }
+
+            while(patternRepeats.Count < 25)
+            {
+                patternRepeats.Add(0);
+            }
+
+            List<decimal> probabilities = new List<decimal>();
+            decimal total = 0;
+            for (int i = 0; i < patternRepeats.Count; i++)
+            {
+                decimal prob = patternRepeats[i] / (mainText.Length / 2m);
+                total += prob;
+
+                // SORT
+
+                bool sorted = false;
+                for (int j = 0; j < probabilities.Count; j++)
+                {
+                    if (prob > probabilities[j])
+                    {
+                        probabilities.Insert(j, prob);
+                        sorted = true;
+                        break;
+                    }
+                }
+                if (!sorted)
+                    probabilities.Add(prob);
+            }
+            mean = total / patternRepeats.Count;
+
+            decimal meanTotal = 0;
+            for (int i = 0; i < patternRepeats.Count; i++)
+            {
+                meanTotal += (probabilities[i] - mean) * (probabilities[i] - mean);
+            }
+            standardDeviation = (decimal)Math.Sqrt((double)(meanTotal / patternRepeats.Count));
+            return probabilities;
+        }
+
+        private List<decimal> ListOfBigramsLast(string last, out decimal mean, out decimal standardDeviation)
+        {
+            string mainText = "";
+            for (int i = 0; i < _input.Length; i++)
+            {
+                if (GeneralConstants.CHARACTERS.Contains(_input[i].ToString().ToLower()))
+                    mainText += _input[i];
+            }
+
+            List<string> foundPatterns = new List<string>();
+            List<int> patternRepeats = new List<int>();
+            for (int i = 0; i < mainText.Length - 1; i += 2)
+            {
+                string pat = mainText.Substring(i, 2);
+                if (pat[1].ToString().ToUpper() != last.ToUpper())
+                    continue;
+                if (foundPatterns.Contains(pat))
+                {
+                    int index = foundPatterns.IndexOf(pat);
+                    patternRepeats[index]++;
+                }
+                else
+                {
+                    foundPatterns.Add(pat);
+                    patternRepeats.Add(1);
+                }
+            }
+
+            while(patternRepeats.Count < 25)
+            {
+                patternRepeats.Add(0);
+            }
+
+            List<decimal> probabilities = new List<decimal>();
+            decimal total = 0;
+            for (int i = 0; i < 25; i++)
+            {
+                decimal prob = patternRepeats[i] / (mainText.Length / 2m);
+                total += prob;
+
+                // SORT
+
+                bool sorted = false;
+                for (int j = 0; j < probabilities.Count; j++)
+                {
+                    if (prob > probabilities[j])
+                    {
+                        probabilities.Insert(j, prob);
+                        sorted = true;
+                        break;
+                    }
+                }
+                if (!sorted)
+                    probabilities.Add(prob);
+            }
+            mean = total / 25;
+
+            decimal meanTotal = 0;
+            for (int i = 0; i < 25; i++)
+            {
+                meanTotal += (probabilities[i] - mean) * (probabilities[i] - mean);
+            }
+            standardDeviation = (decimal)Math.Sqrt((double)(meanTotal / 25));
+            return probabilities;
         }
     }
 }

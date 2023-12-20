@@ -100,6 +100,7 @@
     <Compile Include="Ciphers\FourSquare\FourSquareTools.Designer.cs">
       <DependentUpon>FourSquareTools.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ciphers\FourSquare\RowColumnScore.cs" />
     <Compile Include="Ciphers\Substitution\BruteWithoutSpaces.cs">
       <SubType>Form</SubType>
     </Compile>

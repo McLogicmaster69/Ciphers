@@ -34,6 +34,9 @@ namespace DumbCodeYe.Ciphers.Substitution
             // 
             // patternsList
             // 
+            this.patternsList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.patternsList.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patternsList.FormattingEnabled = true;
             this.patternsList.ItemHeight = 20;
@@ -50,9 +53,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(387, 608);
             this.Controls.Add(this.patternsList);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MaximizeBox = false;
             this.Name = "SubstitutePatternAnalysis";
             this.Text = "SubstitutePatternAnalysis";
             this.TopMost = true;

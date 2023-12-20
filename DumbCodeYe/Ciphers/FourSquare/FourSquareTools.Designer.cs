@@ -138,10 +138,9 @@ namespace DumbCodeYe.Ciphers.FourSquare
             this.searchBtn = new System.Windows.Forms.Button();
             this.outputLbl = new System.Windows.Forms.Label();
             this.highlightBtn = new System.Windows.Forms.Button();
-            this.attemptsNum = new System.Windows.Forms.TextBox();
-            this.hillClimbBtn = new System.Windows.Forms.Button();
             this.frequencyBtn = new System.Windows.Forms.Button();
             this.textBtn = new System.Windows.Forms.Button();
+            this.expectedTableBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Value155
@@ -1527,7 +1526,8 @@ namespace DumbCodeYe.Ciphers.FourSquare
             // 
             // outputLbl
             // 
-            this.outputLbl.Location = new System.Drawing.Point(9, 778);
+            this.outputLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.outputLbl.Location = new System.Drawing.Point(9, 855);
             this.outputLbl.Name = "outputLbl";
             this.outputLbl.Size = new System.Drawing.Size(380, 24);
             this.outputLbl.TabIndex = 194;
@@ -1543,34 +1543,6 @@ namespace DumbCodeYe.Ciphers.FourSquare
             this.highlightBtn.Text = "HIGHLIGHT";
             this.highlightBtn.UseVisualStyleBackColor = true;
             this.highlightBtn.Click += new System.EventHandler(this.highlightBtn_Click);
-            // 
-            // attemptsNum
-            // 
-            this.attemptsNum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.attemptsNum.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
-            this.attemptsNum.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.attemptsNum.Location = new System.Drawing.Point(13, 807);
-            this.attemptsNum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.attemptsNum.MaxLength = 1;
-            this.attemptsNum.Name = "attemptsNum";
-            this.attemptsNum.ReadOnly = true;
-            this.attemptsNum.Size = new System.Drawing.Size(376, 27);
-            this.attemptsNum.TabIndex = 196;
-            this.attemptsNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.attemptsNum.Visible = false;
-            // 
-            // hillClimbBtn
-            // 
-            this.hillClimbBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.hillClimbBtn.Location = new System.Drawing.Point(13, 844);
-            this.hillClimbBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.hillClimbBtn.Name = "hillClimbBtn";
-            this.hillClimbBtn.Size = new System.Drawing.Size(376, 35);
-            this.hillClimbBtn.TabIndex = 197;
-            this.hillClimbBtn.Text = "HILL CLIMB";
-            this.hillClimbBtn.UseVisualStyleBackColor = true;
-            this.hillClimbBtn.Visible = false;
-            this.hillClimbBtn.Click += new System.EventHandler(this.hillClimbBtn_Click);
             // 
             // frequencyBtn
             // 
@@ -1594,15 +1566,25 @@ namespace DumbCodeYe.Ciphers.FourSquare
             this.textBtn.UseVisualStyleBackColor = true;
             this.textBtn.Click += new System.EventHandler(this.textBtn_Click);
             // 
+            // expectedTableBtn
+            // 
+            this.expectedTableBtn.Location = new System.Drawing.Point(13, 760);
+            this.expectedTableBtn.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.expectedTableBtn.Name = "expectedTableBtn";
+            this.expectedTableBtn.Size = new System.Drawing.Size(376, 35);
+            this.expectedTableBtn.TabIndex = 200;
+            this.expectedTableBtn.Text = "EXPECTED TABLE";
+            this.expectedTableBtn.UseVisualStyleBackColor = true;
+            this.expectedTableBtn.Click += new System.EventHandler(this.expectedTableBtn_Click);
+            // 
             // FourSquareTools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1511, 893);
+            this.Controls.Add(this.expectedTableBtn);
             this.Controls.Add(this.textBtn);
             this.Controls.Add(this.frequencyBtn);
-            this.Controls.Add(this.hillClimbBtn);
-            this.Controls.Add(this.attemptsNum);
             this.Controls.Add(this.highlightBtn);
             this.Controls.Add(this.outputLbl);
             this.Controls.Add(this.searchBtn);
@@ -1830,9 +1812,8 @@ namespace DumbCodeYe.Ciphers.FourSquare
         private System.Windows.Forms.Button searchBtn;
         private System.Windows.Forms.Label outputLbl;
         private System.Windows.Forms.Button highlightBtn;
-        private System.Windows.Forms.TextBox attemptsNum;
-        private System.Windows.Forms.Button hillClimbBtn;
         private System.Windows.Forms.Button frequencyBtn;
         private System.Windows.Forms.Button textBtn;
+        private System.Windows.Forms.Button expectedTableBtn;
     }
 }

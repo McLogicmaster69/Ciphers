@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DumbCodeYe.LetterPatterns.Bigrams;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +27,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             InitializeComponent();
         }
 
-        public void SetupPatterns(List<string> patterns, List<int> repeats)
+        public void SetupPatterns(List<string> patterns, List<int> repeats, bool overrideOneRule = false)
         {
             _patterns = patterns;
             patternsList.Items.Clear();
@@ -36,14 +37,14 @@ namespace DumbCodeYe.Ciphers.Substitution
 
             for (int i = 0; i < patterns.Count; i++)
             {
-                if(repeats[i] > 1 || ignoreOneRule)
+                if(repeats[i] > 1 || ignoreOneRule || overrideOneRule)
                 {
                     patternsList.Items.Add($"{patterns[i]} with freq of {repeats[i]}");
                 }
             }
         }
 
-        public void SetupPatterns(List<string> patterns, List<long> repeats)
+        public void SetupPatterns(List<string> patterns, List<decimal> repeats, bool overrideOneRule = false)
         {
             _patterns = patterns;
             patternsList.Items.Clear();
@@ -53,9 +54,26 @@ namespace DumbCodeYe.Ciphers.Substitution
 
             for (int i = 0; i < patterns.Count; i++)
             {
-                if(repeats[i] > 1 || ignoreOneRule)
+                if(repeats[i] > 1 || ignoreOneRule || overrideOneRule)
                 {
                     patternsList.Items.Add($"{patterns[i]} with freq of {repeats[i]}");
+                }
+            }
+        }
+
+        public void SetupPatterns(List<string> patterns, List<long> repeats, bool overrideOneRule = false)
+        {
+            _patterns = patterns;
+            patternsList.Items.Clear();
+            if (patterns.Count == 0)
+                return;
+            bool ignoreOneRule = patterns[0].Length == 1;
+
+            for (int i = 0; i < patterns.Count; i++)
+            {
+                if(repeats[i] > 1 || ignoreOneRule || overrideOneRule)
+                {
+                    patternsList.Items.Add($"{patterns[i]} with freq of {repeats[i] * 1m / BigramsData.FrequencyDataSet.GetValueTotal()}");
                 }
             }
         }

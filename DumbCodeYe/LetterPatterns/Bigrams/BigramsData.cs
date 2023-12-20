@@ -13,8 +13,14 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
         public static readonly string DataFileName = "BigramsData.txt";
         public static readonly string InfoFileName = "english_bigrams.txt";
         public static DataSet DataSet;
-        public static DataSet FrequencyDataSet;
-        public static long TotalData;
+        private static DataSet _frequencyDataSet;
+        public static DataSet FrequencyDataSet { get
+            {
+                if (!IsFrequencyCompiled)
+                    InitialiseFrequencySet();
+                return _frequencyDataSet;
+            } }
+        public static long TotalData { get; private set; }
 
         public const long EXPECTED_ENGLISH_AVERAGE = 17000;
 
@@ -44,7 +50,7 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
         }
         public static void CompileInfoSet(string[] keys, long[] values)
         {
-            FrequencyDataSet = new DataSet(keys, values);
+            _frequencyDataSet = new DataSet(keys, values);
             IsFrequencyCompiled = true;
         }
         public static long GetFrequency(string inp)
@@ -118,8 +124,8 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
             if (!IsFrequencyCompiled)
                 InitialiseFrequencySet();
 
-            frequency = FrequencyDataSet.Values[index];
-            return FrequencyDataSet.Keys[index];
+            frequency = _frequencyDataSet.Values[index];
+            return _frequencyDataSet.Keys[index];
         }
 
         public static void Initialise(BackgroundWorker worker = null)

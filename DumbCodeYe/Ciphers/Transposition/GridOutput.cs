@@ -201,7 +201,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                                 // Collect bigram
                                 string bigram = mainGrid[currentColumn][(currentRow + currentShift) % Rows].ToString() + mainGrid[testColumn][currentRow].ToString();
                                 // Add score of bigram
-                                columnScores[testColumn, currentShift] += BigramsData.GetFrequency(bigram);
+                                columnScores[testColumn, currentShift] += BigramsData.GetFrequency(bigram) / 100000;
                             }
                         }
                     }
@@ -257,7 +257,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                             // Collect bigram
                             string bigram = mainGrid[currentColumn][currentRow].ToString() + mainGrid[testColumn][currentRow].ToString();
                             // Add score of bigram
-                            columnScores[testColumn] += BigramsData.GetFrequency(bigram);
+                            columnScores[testColumn] += BigramsData.GetFrequency(bigram) / 100000;
                         }
                     }
 
@@ -654,7 +654,7 @@ namespace DumbCodeYe.Ciphers.Transposition
             long total = 0;
             for (int i = 0; i < Rows; i++)
             {
-                total += BigramsData.GetFrequency(mainGrid[col1][i].ToString() + mainGrid[col2][i].ToString());
+                total += BigramsData.GetFrequency(mainGrid[col1][i].ToString() + mainGrid[col2][i].ToString()) / 100000;
             }
             return (int)Math.Floor(total / (double)Rows);
         }

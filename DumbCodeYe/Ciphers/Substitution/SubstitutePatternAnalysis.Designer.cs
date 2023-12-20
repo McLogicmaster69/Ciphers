@@ -36,21 +36,26 @@ namespace DumbCodeYe.Ciphers.Substitution
             // 
             this.patternsList.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.patternsList.FormattingEnabled = true;
-            this.patternsList.Location = new System.Drawing.Point(12, 12);
+            this.patternsList.ItemHeight = 20;
+            this.patternsList.Location = new System.Drawing.Point(18, 18);
+            this.patternsList.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.patternsList.Name = "patternsList";
-            this.patternsList.Size = new System.Drawing.Size(234, 368);
+            this.patternsList.Size = new System.Drawing.Size(349, 564);
             this.patternsList.TabIndex = 0;
+            this.patternsList.DoubleClick += new System.EventHandler(this.patternsList_DoubleClick);
             // 
             // SubstitutePatternAnalysis
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(258, 395);
+            this.ClientSize = new System.Drawing.Size(387, 608);
             this.Controls.Add(this.patternsList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "SubstitutePatternAnalysis";
             this.Text = "SubstitutePatternAnalysis";
+            this.TopMost = true;
             this.ResumeLayout(false);
 
         }

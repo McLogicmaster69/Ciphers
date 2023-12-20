@@ -13,6 +13,8 @@ namespace DumbCodeYe
 
     public delegate void OutputMethod(string output);
 
+    public delegate void PatternClicked(string pattern);
+
     public enum ComparisonResult
     {
         Greater,

@@ -25,6 +25,7 @@ using DumbCodeYe.TextPlayground;
 using DumbCodeYe.LetterPatterns.Spaces;
 using DumbCodeYe.Ciphers.Bifid;
 using DumbCodeYe.Ciphers.Trifid;
+using DumbCodeYe.Ciphers.FourSquare;
 
 namespace DumbCodeYe
 {
@@ -134,6 +135,11 @@ namespace DumbCodeYe
         {
             PolybiusTools pt = new PolybiusTools();
             pt.SetupText(textInput.Text);
+            pt.Show();
+        }
+        private void FourSquare()
+        {
+            FourSquareTools pt = new FourSquareTools(textInput.Text);
             pt.Show();
         }
         private void Bifid()
@@ -361,6 +367,7 @@ namespace DumbCodeYe
             {
                 new ButtonInformation("VIGENERE", Vigenere),
                 new ButtonInformation("POLYBIUS", Polybius),
+                new ButtonInformation("FOUR SQUARE", FourSquare),
                 new ButtonInformation("BIFID", Bifid),
                 new ButtonInformation("TRIFID", Trifid),
                 new ButtonInformation("HILL", Hill)

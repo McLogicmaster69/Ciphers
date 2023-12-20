@@ -93,6 +93,13 @@
       <DependentUpon>BifidTools.cs</DependentUpon>
     </Compile>
     <Compile Include="Ciphers\Bifid\CharacterCollectionFrequency.cs" />
+    <Compile Include="Ciphers\FourSquare\FourSquareCipher.cs" />
+    <Compile Include="Ciphers\FourSquare\FourSquareTools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ciphers\FourSquare\FourSquareTools.Designer.cs">
+      <DependentUpon>FourSquareTools.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ciphers\Substitution\BruteWithoutSpaces.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -382,6 +389,9 @@
     <EmbeddedResource Include="Ciphers\Bifid\BifidTools.resx">
       <DependentUpon>BifidTools.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Ciphers\FourSquare\FourSquareTools.resx">
+      <DependentUpon>FourSquareTools.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ciphers\Substitution\BruteWithoutSpaces.resx">
       <DependentUpon>BruteWithoutSpaces.cs</DependentUpon>
     </EmbeddedResource>
@@ -516,5 +526,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

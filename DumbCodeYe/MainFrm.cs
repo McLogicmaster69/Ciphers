@@ -23,6 +23,9 @@ using DumbCodeYe.LetterPatterns.Quadgrams;
 using DumbCodeYe.Ciphers.Vigenere;
 using DumbCodeYe.TextPlayground;
 using DumbCodeYe.LetterPatterns.Spaces;
+using DumbCodeYe.Ciphers.Bifid;
+using DumbCodeYe.Ciphers.Trifid;
+using DumbCodeYe.Ciphers.FourSquare;
 
 namespace DumbCodeYe
 {
@@ -93,7 +96,7 @@ namespace DumbCodeYe
         }
         private void Morse()
         {
-            MorseCode.GetMorseCode(textInput.Text);
+            TextOutputFrm.CreateOutput(MorseCode.GetMorseCode(textInput.Text, ".", "-", '/', ' '));
         }
         private void Binary()
         {
@@ -133,6 +136,22 @@ namespace DumbCodeYe
             PolybiusTools pt = new PolybiusTools();
             pt.SetupText(textInput.Text);
             pt.Show();
+        }
+        private void FourSquare()
+        {
+            FourSquareTools pt = new FourSquareTools(textInput.Text);
+            pt.Show();
+        }
+        private void Bifid()
+        {
+            BifidTools bt = new BifidTools();
+            bt.SetupText(textInput.Text);
+            bt.Show();
+        }
+        private void Trifid()
+        {
+            TrifidTools tt = new TrifidTools(textInput.Text);
+            tt.Show();
         }
         private void Hill()
         {
@@ -198,6 +217,34 @@ namespace DumbCodeYe
             TextOutputFrm TOF = new TextOutputFrm();
             TOF.SetOutput(SpaceAdder.Add(textInput.Text.ToUpper()));
             TOF.Show();
+        }
+
+        private void Modulo()
+        {
+            string[] strs = textInput.Text.Split(' ');
+            string modulo = "";
+            foreach(string s in strs)
+            {
+                if(int.TryParse(s, out int result))
+                {
+                    modulo += (result % 26).ToString() + " ";
+                }
+            }
+            textInput.Text = modulo;
+        }
+
+        private void NumbersToText()
+        {
+            string[] strs = textInput.Text.Split(' ');
+            string output = "";
+            foreach (string s in strs)
+            {
+                if (int.TryParse(s, out int result))
+                {
+                    output += GeneralConstants.CHARACTERS[result];
+                }
+            }
+            textInput.Text = output;
         }
 
         private string AddSpaces(string s)
@@ -288,7 +335,9 @@ namespace DumbCodeYe
             {
                 new ButtonInformation("TO UPPER", ToUpper),
                 new ButtonInformation("JUST LETTERS", JustLetters),
-                new ButtonInformation("ADD SPACES", Spaces)
+                new ButtonInformation("ADD SPACES", Spaces),
+                new ButtonInformation("MODULO NUMBERS", Modulo),
+                new ButtonInformation("NUMBERS TO LETTERS", NumbersToText)
             }, new Point(300, 0));
         }
 
@@ -318,6 +367,9 @@ namespace DumbCodeYe
             {
                 new ButtonInformation("VIGENERE", Vigenere),
                 new ButtonInformation("POLYBIUS", Polybius),
+                new ButtonInformation("FOUR SQUARE", FourSquare),
+                new ButtonInformation("BIFID", Bifid),
+                new ButtonInformation("TRIFID", Trifid),
                 new ButtonInformation("HILL", Hill)
             }, new Point(300, 120));
         }
@@ -353,7 +405,12 @@ namespace DumbCodeYe
 
         private void autoSolveBtn_Click(object sender, EventArgs e)
         {
-            AutoSolverFrm.Solve(JustLetters(textInput.Text.ToUpper()));
+            string justLetters = JustLetters(textInput.Text.ToUpper());
+            AutoSolverFrm.Solve(string.IsNullOrEmpty(justLetters) ? textInput.Text : justLetters);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
         }
     }
 }

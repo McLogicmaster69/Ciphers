@@ -53,7 +53,7 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
             {
                 total += BigramsData.DataSet.Values[i];
             }
-            BigramsData.TotalData = total;
+            //BigramsData.TotalData = total;
             statusLbl.Text = $"Total: {total}";
         }
 

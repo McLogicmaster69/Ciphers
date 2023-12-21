@@ -13,9 +13,19 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
         public static readonly string DataFileName = "BigramsData.txt";
         public static readonly string InfoFileName = "english_bigrams.txt";
         public static DataSet DataSet;
-        public static long TotalData;
+        private static DataSet _frequencyDataSet;
+        public static DataSet FrequencyDataSet { get
+            {
+                if (!IsFrequencyCompiled)
+                    InitialiseFrequencySet();
+                return _frequencyDataSet;
+            } }
+        public static long TotalData { get; private set; }
+
+        public const long EXPECTED_ENGLISH_AVERAGE = 17000;
 
         public static bool IsCompiled { get; private set; } = false;
+        public static bool IsFrequencyCompiled { get; private set; } = false;
 
         public static bool CheckDataExists()
         {
@@ -37,6 +47,11 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
         {
             DataSet = new DataSet(keys, values);
             IsCompiled = true;
+        }
+        public static void CompileInfoSet(string[] keys, long[] values)
+        {
+            _frequencyDataSet = new DataSet(keys, values);
+            IsFrequencyCompiled = true;
         }
         public static long GetFrequency(string inp)
         {
@@ -78,12 +93,12 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
             }
             return 0;
         }
-        public static double GetLogProbability(string quadgram)
+        public static double GetLogProbability(string bigram)
         {
             if (!IsCompiled)
                 Initialise();
 
-            long total = GetFrequency(quadgram);
+            long total = GetFrequency(bigram) / 100000;
             if (total == -1)
                 return 0;
             if (total == 0)
@@ -100,9 +115,17 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
             for (int i = 0; i < text.Length - 1; i++)
             {
                 string bigram = text[i].ToString() + text[i + 1].ToString();
-                totalScore += GetFrequency(bigram);
+                totalScore += GetFrequency(bigram) / 100000;
             }
             return totalScore / (text.Length - 1);
+        }
+        public static string GetBigramAtFrequency(int index, out long frequency)
+        {
+            if (!IsFrequencyCompiled)
+                InitialiseFrequencySet();
+
+            frequency = _frequencyDataSet.Values[index];
+            return _frequencyDataSet.Keys[index];
         }
 
         public static void Initialise(BackgroundWorker worker = null)
@@ -118,9 +141,38 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
                 SortDataSet(out keys, out vals, worker);
             CompileDataSet(keys, vals);
         }
+        public static void InitialiseFrequencySet(BackgroundWorker worker = null)
+        {
+            if (IsFrequencyCompiled)
+                return;
+
+            string[] keys;
+            long[] vals;
+            OpenInfoSet(out keys, out vals, worker);
+            CompileInfoSet(keys, vals);
+        }
         private static void OpenDataSet(out string[] keys, out long[] vals, BackgroundWorker worker)
         {
-            string[] data = BigramsData.OpenDataFile();
+            string[] data = OpenDataFile();
+            List<string> identifiers = new List<string>();
+            List<long> values = new List<long>();
+
+            decimal index = 0;
+            foreach (string d in data)
+            {
+                string[] splitString = d.Split(' ');
+                identifiers.Add(splitString[0].ToUpper());
+                values.Add(long.Parse(splitString[1]));
+                index++;
+                worker?.ReportProgress((int)Math.Floor(index / data.Length));
+            }
+
+            keys = identifiers.ToArray();
+            vals = values.ToArray();
+        }
+        private static void OpenInfoSet(out string[] keys, out long[] vals, BackgroundWorker worker)
+        {
+            string[] data = OpenInfoFile();
             List<string> identifiers = new List<string>();
             List<long> values = new List<long>();
 
@@ -139,7 +191,7 @@ namespace DumbCodeYe.LetterPatterns.Bigrams
         }
         private static void SortDataSet(out string[] keys, out long[] vals, BackgroundWorker worker)
         {
-            string[] data = BigramsData.OpenInfoFile();
+            string[] data = OpenInfoFile();
             List<string> identifiers = new List<string>();
             List<long> values = new List<long>();
 

@@ -8,7 +8,7 @@ namespace DumbCodeYe.Ciphers.Vigenere
 {
     public static class VigenereCipher
     {
-        public const float MINIMUM_SHIFT_AVERAGE = 90f;
+        public const float MINIMUM_SHIFT_GAP = 20f;
 
         /// <summary>
         /// Attempts to auto solve a vigenere cipher
@@ -18,7 +18,7 @@ namespace DumbCodeYe.Ciphers.Vigenere
         public static string AutoSolve(string input, OutputMethod outputMethod = null)
         {
             outputMethod?.Invoke("Finding most likely shift");
-            int shift = GetLikelyShift(input);
+            int shift = GetLikelyShift(input, outputMethod);
             if (shift == -1)
             {
                 outputMethod?.Invoke("No shift found");
@@ -30,9 +30,12 @@ namespace DumbCodeYe.Ciphers.Vigenere
             return Vigenere(input, shift);
         }
 
-        public static int GetLikelyShift(string input)
+        public static int GetLikelyShift(string input, OutputMethod output)
         {
             int[] coincidences = GetCoincidences(input, 30);
+
+            List<float> scores = new List<float>();
+            List<int> shifts = new List<int>();
 
             for (int i = 2; i < 10; i++)
             {
@@ -43,9 +46,32 @@ namespace DumbCodeYe.Ciphers.Vigenere
                     total += coincidences[j];
                     divider++;
                 }
-                if (total / divider >= MINIMUM_SHIFT_AVERAGE)
-                    return i;
+
+                float score = total / divider;
+                output?.Invoke($"Shift of {i} has a score of {score}");
+                bool inserted = false;
+                for (int j = 0; j < scores.Count; j++)
+                {
+                    if(score > scores[j])
+                    {
+                        inserted = true;
+                        scores.Insert(j, score);
+                        shifts.Insert(j, i);
+                        break;
+                    }
+                }
+                if (!inserted)
+                {
+                    scores.Add(score);
+                    shifts.Add(i);
+                }
             }
+
+            if(scores[0] >= scores[1] + MINIMUM_SHIFT_GAP)
+            {
+                return shifts[0];
+            }
+
             return -1;
         }
 

@@ -113,7 +113,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             if (LockedChars[pos] || Contains(c))
                 return;
             LockedChars[pos] = true;
-            ChangeCharacter(pos, c);
+            SetCharacter(pos, c);
         }
         public void AddLockedCharacter(char lockedChar, char c)
         {
@@ -134,7 +134,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             return new ReplacementGrid(Replacements);
         }
 
-        public override void ChangeCharacter(int index, char c)
+        public override void SetCharacter(int index, char c)
         {
             if (!Contains(c))
             {

@@ -1,4 +1,6 @@
 ﻿using DumbCodeYe.Ciphers;
+using DumbCodeYe.Ciphers.Substitution;
+using DumbCodeYe.Ciphers.Transposition;
 using DumbCodeYe.Ciphers.Vigenere;
 using DumbCodeYe.LetterPatterns.BasicWordLib;
 using DumbCodeYe.LetterPatterns.Bigrams;
@@ -78,7 +80,7 @@ namespace DumbCodeYe
                     Output("Exiting loop");
                     break;
                 }
-                workingCipher = temp;
+                workingCipher = temp.ToUpper();
             }
 
             // Cracking is finished
@@ -135,6 +137,16 @@ namespace DumbCodeYe
 
         private string ApplyCipher(string input)
         {
+            Output("Checking for morse");
+            if (MorseCode.IsMorse(input))
+            {
+                Output("Morse code suspected");
+                _tabIndex++;
+                string output = ApplyMorse(input);
+                _tabIndex--;
+                return output;
+            }
+
             Output("Getting frequency scores");
             float[] freqScores = CeaserCipher.GetFrequencyShifts(input);
 
@@ -167,6 +179,11 @@ namespace DumbCodeYe
             if (vigenereOutput != input)
                 return vigenereOutput;
 
+            Output("Trying substitution");
+            _tabIndex++;
+            string substitutionOutput = SubstitutionCipher.AutoSolve(input);
+            _tabIndex--;
+
             Output("Unknown cipher");
             return input;
         }
@@ -177,10 +194,92 @@ namespace DumbCodeYe
             return CeaserCipher.Ceaser(input, shift);
         }
 
+        private string ApplyMorse(string input)
+        {
+            Output("Applying morse code");
+
+            List<char> characers = new List<char>();
+            List<int> frequency = new List<int>();
+
+            foreach(char c in input)
+            {
+                if (!characers.Contains(c))
+                {
+                    characers.Add(c);
+                    frequency.Add(1);
+                    continue;
+                }
+
+                for (int i = 0; i < characers.Count; i++)
+                {
+                    if(characers[i] == c)
+                    {
+                        frequency[i]++;
+                        break;
+                    }
+                }
+            }
+
+            char firstCommon = characers[0];
+            char secondCommon = characers[1];
+            int firstFreq = frequency[0];
+            int secondFreq = frequency[1];
+
+            for (int i = 2; i < characers.Count; i++)
+            {
+                if (characers[i] == ' ')
+                    continue;
+                if(frequency[i] > firstFreq)
+                {
+                    char tempChar = firstCommon;
+                    int tempFreq = firstFreq;
+                    firstCommon = characers[i];
+                    firstFreq = frequency[i];
+                    if(tempFreq > secondFreq)
+                    {
+                        secondCommon = tempChar;
+                        secondFreq = tempFreq;
+                    }
+                }
+                else if (frequency[i] > secondFreq)
+                {
+                    secondCommon = characers[i];
+                    secondFreq = frequency[i];
+                }
+            }
+
+            Output($"Trying dot as {firstCommon.ToString()} and dash as {secondCommon.ToString()}");
+            string morse1 = MorseCode.GetMorseCode(input, firstCommon.ToString(), secondCommon.ToString(), '/', ' ');
+            Output($"Trying dot as {secondCommon.ToString()} and dash as {firstCommon.ToString()}");
+            string morse2 = MorseCode.GetMorseCode(input, secondCommon.ToString(), firstCommon.ToString(), '/', ' ');
+
+            if(string.IsNullOrEmpty(morse1) && string.IsNullOrEmpty(morse2))
+            {
+                Output("Morse code did not work");
+                return input;
+            }
+            else if(string.IsNullOrEmpty(morse1) == false && string.IsNullOrEmpty(morse2) == false)
+            {
+                Output("Unable to decide what is a dot and what is a dash");
+                return input;
+            }
+            else if (!string.IsNullOrEmpty(morse1))
+            {
+                return morse1;
+            }
+            else
+            {
+                return morse2;
+            }
+        }
+
         private string ApplyTransposition(string input)
         {
             Output("Applying transposition");
-            return input;
+            _tabIndex++;
+            string output = TranspositionCipher.AutoSolve(input, Output);
+            _tabIndex--;
+            return output;
         }
 
         private void Output(string output)

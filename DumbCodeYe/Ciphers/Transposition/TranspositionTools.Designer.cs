@@ -254,7 +254,7 @@ namespace DumbCodeYe.Ciphers.Transposition
             // 
             this.substringIndexNum.Location = new System.Drawing.Point(581, 130);
             this.substringIndexNum.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});

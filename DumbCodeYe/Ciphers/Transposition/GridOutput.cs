@@ -201,7 +201,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                                 // Collect bigram
                                 string bigram = mainGrid[currentColumn][(currentRow + currentShift) % Rows].ToString() + mainGrid[testColumn][currentRow].ToString();
                                 // Add score of bigram
-                                columnScores[testColumn, currentShift] += BigramsData.GetFrequency(bigram);
+                                columnScores[testColumn, currentShift] += BigramsData.GetFrequency(bigram) / 100000;
                             }
                         }
                     }
@@ -257,7 +257,7 @@ namespace DumbCodeYe.Ciphers.Transposition
                             // Collect bigram
                             string bigram = mainGrid[currentColumn][currentRow].ToString() + mainGrid[testColumn][currentRow].ToString();
                             // Add score of bigram
-                            columnScores[testColumn] += BigramsData.GetFrequency(bigram);
+                            columnScores[testColumn] += BigramsData.GetFrequency(bigram) / 100000;
                         }
                     }
 
@@ -547,9 +547,116 @@ namespace DumbCodeYe.Ciphers.Transposition
             LikelyPairsOutput.Close();
         }
 
-        public string AutoSolve()
+        public bool AutoSolve(out string output, OutputMethod outputMessage = null)
         {
-            return "";
+            outputMessage($"Attempting to solve grid with {Rows} rows and {Columns} columns");
+            output = "";
+            int lastColumn = -1;
+            int[] pointers = new int[Columns];
+            for (int i = 0; i < Columns; i++)
+            {
+                pointers[i] = -1;
+            }
+
+            outputMessage("Finding matches for columns");
+            for (int i = 0; i < Columns; i++)
+            {
+                bool found = false;
+                for (int j = 0; j < Columns; j++)
+                {
+                    if (i == j)
+                        continue;
+                    float score = CalculateColumnsBigramValue(i, j);
+                    if(score >= BigramsData.EXPECTED_ENGLISH_AVERAGE)
+                    {
+                        if (found)
+                        {
+                            outputMessage($"Duplicate match found for column {i}");
+                            outputMessage($"Unable to solve");
+                            return false;
+                        }
+                        for (int k = 0; k < Columns; k++)
+                        {
+                            if (pointers[k] == j)
+                            {
+                                outputMessage($"Duplicate match found for column {i} and column {k}");
+                                outputMessage($"Unable to solve");
+                                return false;
+                            }
+                        }
+                        outputMessage($"Found match for column {i}");
+                        pointers[i] = j;
+                        found = true;
+                    }
+                }
+
+                if (!found)
+                {
+                    if (lastColumn != -1)
+                    {
+                        outputMessage($"Unable to find match for column {i}");
+                        outputMessage($"Unable to solve");
+                        return false;
+                    }
+                    outputMessage($"Column {i} is suspected to be the last column");
+                    lastColumn = i;
+                }
+            }
+
+            outputMessage($"All column matches found");
+            outputMessage($"Attempting to order matches");
+
+            int[] orderedColumns = new int[Columns];
+            orderedColumns[Columns - 1] = lastColumn;
+
+            outputMessage($"Putting column {lastColumn} in position {Columns - 1}");
+
+            for (int i = Columns - 2; i >= 0; i--)
+            {
+                for (int j = 0; j < Columns; j++)
+                {
+                    if (orderedColumns[i + 1] == -1)
+                    {
+                        outputMessage($"Unable to find column for position {i + 1}");
+                        return false;
+                    }
+                    if(pointers[j] == orderedColumns[i + 1])
+                    {
+                        outputMessage($"Putting column {j} in position {i}");
+                        orderedColumns[i] = j;
+                        break;
+                    }    
+                }
+            }
+            if (orderedColumns[0] == -1)
+            {
+                outputMessage($"Unable to find column for position 0");
+                return false;
+            }
+
+            outputMessage("Matching columns have been ordered");
+            outputMessage("Compiling message");
+
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Columns; j++)
+                {
+                    output += mainGrid[orderedColumns[j]][i];
+                }
+            }
+
+            outputMessage($"Message compiled");
+            return true;
+        }
+
+        private int CalculateColumnsBigramValue(int col1, int col2)
+        {
+            long total = 0;
+            for (int i = 0; i < Rows; i++)
+            {
+                total += BigramsData.GetFrequency(mainGrid[col1][i].ToString() + mainGrid[col2][i].ToString()) / 100000;
+            }
+            return (int)Math.Floor(total / (double)Rows);
         }
     }
 }

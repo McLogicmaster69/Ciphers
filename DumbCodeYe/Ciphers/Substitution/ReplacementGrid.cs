@@ -23,7 +23,7 @@ namespace DumbCodeYe.Ciphers.Substitution
         }
         public ReplacementGrid(ReplacementGrid grid)
         {
-            Replacements = grid.Replacements;
+            Replacements = (char[])grid.Replacements.Clone();
         }
         public virtual bool Contains(char c)
         {
@@ -34,14 +34,14 @@ namespace DumbCodeYe.Ciphers.Substitution
             }
             return false;
         }
-        public virtual void ChangeCharacter(int index, char c)
+        public virtual void SetCharacter(int index, char c)
         {
             if(!Contains(c))
                 Replacements[index] = c;
         }
         public virtual void ChangeCharacter(char character, char c)
         {
-            ChangeCharacter(GetIndexOfCapital(character), c);
+            SetCharacter(GetIndexOfCapital(character), c);
         }
         public virtual void SwapCharacters(int c1, int c2)
         {

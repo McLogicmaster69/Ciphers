@@ -8,79 +8,93 @@ namespace DumbCodeYe.Ciphers
 {
     public static class MorseCode
     {
-        public static void GetMorseCode(string text)
+        public static string GetMorseCode(string text, string dot, string dash, char space, char newCharacter)
         {
             string finalText = "";
             // Split code into characters
-            foreach (string code in text.Split(' '))
+            foreach (string word in text.Split(space))
             {
-                // Get character for each morse character
-                finalText += GetMorseCharacter(code);
+                foreach(string character in word.Split(newCharacter))
+                {
+                    if (string.IsNullOrEmpty(character))
+                        continue;
+                    // Get character for each morse character
+                    string englishCharacter = GetMorseCharacter(character, dot, dash);
+                    if (string.IsNullOrEmpty(englishCharacter))
+                        return string.Empty;
+                    finalText += englishCharacter;
+                }
             }
-            // Output
-            TextOutputFrm txtOut = new TextOutputFrm();
-            txtOut.SetOutput(finalText);
-            txtOut.Show();
+            return finalText;
         }
-        public static string GetMorseCharacter(string morse) // A = DOT , D = DASH
+        public static string GetMorseCharacter(string morse, string dot, string dash) // A = DOT , D = DASH
         {
             // Check according to A as . and D as -
-            switch (morse)
+            if(morse == $"{dot}{dash}")
+                return "a";
+            if(morse == $"{dash}{dot}{dot}{dot}")
+                return "b";
+            if(morse == $"{dash}{dot}{dash}{dot}")
+                return "c";
+            if(morse == $"{dash}{dot}{dot}")
+                return "d";
+            if(morse == $"{dot}")
+                return "e";
+            if(morse == $"{dot}{dot}{dash}{dot}")
+                return "f";
+            if(morse == $"{dash}{dash}{dot}")
+                return "g";
+            if(morse == $"{dot}{dot}{dot}{dot}")
+                return "h";
+            if(morse == $"{dot}{dot}")
+                return "i";
+            if(morse == $"{dot}{dash}{dash}{dash}")
+                return "j";
+            if(morse == $"{dash}{dot}{dash}")
+                return "k";
+            if(morse == $"{dot}{dash}{dot}{dot}")
+                return "l";
+            if(morse == $"{dash}{dash}")
+                return "m";
+            if(morse == $"{dash}{dot}")
+                return "n";
+            if(morse == $"{dash}{dash}{dash}")
+                return "o";
+            if(morse == $"{dot}{dash}{dash}{dot}")
+                return "p";
+            if(morse == $"{dash}{dash}{dot}{dash}")
+                return "q";
+            if(morse == $"{dot}{dash}{dot}")
+                return "r";
+            if(morse == $"{dot}{dot}{dot}")
+                return "s";
+            if(morse == $"{dash}")
+                return "t";
+            if(morse == $"{dot}{dot}{dash}")
+                return "u";
+            if(morse == $"{dot}{dot}{dot}{dash}")
+                return "v";
+            if(morse == $"{dot}{dash}{dash}")
+                return "w";
+            if(morse == $"{dash}{dot}{dot}{dash}")
+                return "x";
+            if(morse == $"{dash}{dot}{dash}{dash}")
+                return "y";
+            if(morse == $"{dash}{dash}{dot}{dot}")
+                return "z";
+            return string.Empty;
+        }
+        public static bool IsMorse(string input)
+        {
+            List<char> characters = new List<char>();
+            foreach(char c in input)
             {
-                case "AD":
-                    return "a";
-                case "DAAA":
-                    return "b";
-                case "DADA":
-                    return "c";
-                case "DAA":
-                    return "d";
-                case "A":
-                    return "e";
-                case "AADA":
-                    return "f";
-                case "DDA":
-                    return "g";
-                case "AAAA":
-                    return "h";
-                case "AA":
-                    return "i";
-                case "ADDD":
-                    return "j";
-                case "DAD":
-                    return "k";
-                case "ADAA":
-                    return "l";
-                case "DD":
-                    return "m";
-                case "DA":
-                    return "n";
-                case "DDD":
-                    return "o";
-                case "ADDA":
-                    return "p";
-                case "DDAD":
-                    return "q";
-                case "ADA":
-                    return "r";
-                case "AAA":
-                    return "s";
-                case "D":
-                    return "t";
-                case "AAD":
-                    return "u";
-                case "AAAD":
-                    return "v";
-                case "ADD":
-                    return "w";
-                case "DAAD":
-                    return "x";
-                case "DADD":
-                    return "y";
-                case "DDAA":
-                    return "z";
+                if (!characters.Contains(c))
+                    characters.Add(c);
+                if (characters.Count > 4)
+                    return false;
             }
-            return "";
+            return characters.Count > 2;
         }
     }
 }

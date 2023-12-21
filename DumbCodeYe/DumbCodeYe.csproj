@@ -93,6 +93,7 @@
       <DependentUpon>BifidTools.cs</DependentUpon>
     </Compile>
     <Compile Include="Ciphers\Bifid\CharacterCollectionFrequency.cs" />
+    <Compile Include="Ciphers\FourSquare\CharacterScore.cs" />
     <Compile Include="Ciphers\FourSquare\FourSquareCipher.cs" />
     <Compile Include="Ciphers\FourSquare\FourSquareTools.cs">
       <SubType>Form</SubType>
@@ -101,6 +102,7 @@
       <DependentUpon>FourSquareTools.cs</DependentUpon>
     </Compile>
     <Compile Include="Ciphers\FourSquare\RowColumnScore.cs" />
+    <Compile Include="Ciphers\FourSquare\ScorePrediction.cs" />
     <Compile Include="Ciphers\Substitution\BruteWithoutSpaces.cs">
       <SubType>Form</SubType>
     </Compile>

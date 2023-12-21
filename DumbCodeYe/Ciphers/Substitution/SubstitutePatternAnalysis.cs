@@ -73,7 +73,7 @@ namespace DumbCodeYe.Ciphers.Substitution
             {
                 if(repeats[i] > 1 || ignoreOneRule || overrideOneRule)
                 {
-                    patternsList.Items.Add($"{patterns[i]} with freq of {repeats[i] * 1m / BigramsData.FrequencyDataSet.GetValueTotal()}");
+                    patternsList.Items.Add($"{patterns[i]} with freq of {repeats[i]}");
                 }
             }
         }

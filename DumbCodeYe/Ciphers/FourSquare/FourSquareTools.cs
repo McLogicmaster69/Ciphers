@@ -24,6 +24,9 @@ namespace DumbCodeYe.Ciphers.FourSquare
         private SubstitutePatternAnalysis _bigramPatternsFrm = new SubstitutePatternAnalysis();
         private SubstitutePatternAnalysis _frequentBigramsFrm;
 
+        private List<RowColumnScore>[] _firstPredictedLetterSpaces;
+        private List<RowColumnScore>[] _lastPredictedLetterSpaces;
+
         public FourSquareTools(string input)
         {
             InitializeComponent();
@@ -51,6 +54,9 @@ namespace DumbCodeYe.Ciphers.FourSquare
             AnalyseBigrams();
             UnhighlightGrid();
             OpenBigramFrequencies();
+
+            _firstPredictedLetterSpaces = PredictLetters(_grid1, ListOfBigramsFirst, out int _);
+            _lastPredictedLetterSpaces = PredictLetters(_grid2, ListOfBigramsLast, out int _);
         }
 
         private void applyBtn_Click(object sender, EventArgs e)
@@ -129,8 +135,6 @@ namespace DumbCodeYe.Ciphers.FourSquare
         {
             AnalyseBigrams();
             OpenBigramFrequencies();
-            CheckExpectedLetterCount();
-            CheckLetterCount();
         }
 
         private void AnalyseBigrams()
@@ -185,7 +189,7 @@ namespace DumbCodeYe.Ciphers.FourSquare
                     sortedFoundPatterns.Add($"{foundPatterns[highestIndex]}");
                 else
                     sortedFoundPatterns.Add($"{foundPatterns[highestIndex]} | {alternatePatterns[highestIndex]}");
-                sortedPatternRepeats.Add(patternRepeats[highestIndex] / (_input.Length / 2m));
+                sortedPatternRepeats.Add(patternRepeats[highestIndex]);
                 foundPatterns.RemoveAt(highestIndex);
                 alternatePatterns.RemoveAt(highestIndex);
                 patternRepeats.RemoveAt(highestIndex);
@@ -745,6 +749,11 @@ namespace DumbCodeYe.Ciphers.FourSquare
 
         private void expectedTableBtn_Click(object sender, EventArgs e)
         {
+            HighlightGridOnPredicted();
+        }
+
+        private void AttemptCrack()
+        {
             for (int r = 0; r < 5; r++)
             {
                 for (int c = 0; c < 5; c++)
@@ -754,120 +763,157 @@ namespace DumbCodeYe.Ciphers.FourSquare
                 }
             }
 
-            CalculateTable(_grid1, ListOfBigramsFirst);
-            CalculateTable(_grid2, ListOfBigramsLast);
+            CalculateTableAlt(_grid1, ListOfBigramsFirst);
+            CalculateTableAlt(_grid2, ListOfBigramsLast);
+        }
+
+        private void HighlightGridOnPredicted()
+        {
+            bool char1 = !string.IsNullOrEmpty(bigram1Txt.Text);
+            bool char2 = !string.IsNullOrEmpty(bigram2Txt.Text);
+
+            UnhighlightGrid();
+            if (char1)
+            {
+                char character = bigram1Txt.Text.ToUpper()[0];
+                int index = character > 73 ? character - 66 : character - 65;
+                decimal lowestScore = _firstPredictedLetterSpaces[index][0].Score;
+                decimal highestScore = _firstPredictedLetterSpaces[index][24].Score;
+                decimal divider = highestScore - lowestScore;
+                for (int i = 0; i < 25; i++)
+                {
+                    int row = _firstPredictedLetterSpaces[index][i].Row;
+                    int column = _firstPredictedLetterSpaces[index][i].Column;
+                    decimal score = (_firstPredictedLetterSpaces[index][i].Score - lowestScore) / divider;
+
+                    _grid1[row][column].BackColor = Color.FromArgb(255 - (int)Math.Floor((1 - score) * 255), 255, 255 - (int)Math.Floor((1 - score) * 255));
+                }
+            }
+            if (char2)
+            {
+                char character = bigram2Txt.Text.ToUpper()[0];
+                int index = character > 73 ? character - 66 : character - 65;
+                decimal lowestScore = _lastPredictedLetterSpaces[index][0].Score;
+                decimal highestScore = _lastPredictedLetterSpaces[index][24].Score;
+                decimal divider = highestScore - lowestScore;
+                for (int i = 0; i < 25; i++)
+                {
+                    int row = _lastPredictedLetterSpaces[index][i].Row;
+                    int column = _lastPredictedLetterSpaces[index][i].Column;
+                    decimal score = (_lastPredictedLetterSpaces[index][i].Score - lowestScore) / divider;
+
+                    _grid2[row][column].BackColor = Color.FromArgb(255 - (int)Math.Floor((1 - score) * 255), 255, 255 - (int)Math.Floor((1 - score) * 255));
+                }
+            }
         }
 
         private delegate List<decimal> BigramList(string b, out decimal m, out decimal s);
 
-        private void CalculateTable(TextBox[][] grid, BigramList bigramList)
+        private void CalculateTableAlt(TextBox[][] grid, BigramList bigramList)
         {
-            decimal[][][,] tables = new decimal[5][][,]
-            {
-                new decimal[5][,],
-                new decimal[5][,],
-                new decimal[5][,],
-                new decimal[5][,],
-                new decimal[5][,]
-            };
-            decimal[,] means = new decimal[5, 5];
-            decimal[,] standardDeviations = new decimal[5, 5];
+            string characters = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
+            List<RowColumnScore>[] scores = PredictLetters(grid, bigramList, out int mostCertainIndex);
 
-            List<RowColumnScore>[,] sortedTables = new List<RowColumnScore>[5, 5];
+            ScorePrediction[,] gridPredictions = new ScorePrediction[5, 5];
+            for (int r = 0; r < 5; r++)
+            {
+                for (int c = 0; c < 5; c++)
+                {
+                    gridPredictions[r, c] = new ScorePrediction(new List<CharacterScore>());
+                }
+            }
+
+            for (int i = 0; i < scores.Length; i++)
+            {
+                for (int j = 0; j < scores[i].Count; j++)
+                {
+                    ScorePrediction prediction = gridPredictions[scores[i][j].Row, scores[i][j].Column];
+                    decimal score = scores[i][j].Score;
+
+                    bool sorted = false;
+                    for (int k = 0; k < prediction.Scores.Count; k++)
+                    {
+                        if (score < prediction.Scores[k].Score)
+                        {
+                            prediction.Scores.Insert(k, new CharacterScore(i, score));
+                            sorted = true;
+                            break;
+                        }
+                    }
+                    if (!sorted)
+                        prediction.Scores.Add(new CharacterScore(i, score));
+                }
+            }
 
             for (int r = 0; r < 5; r++)
             {
                 for (int c = 0; c < 5; c++)
                 {
-                    tables[r][c] = GenerateTableFirst(r, c, out decimal mean, out decimal standardDeviation);
-                    means[r, c] = mean;
-                    standardDeviations[r, c] = standardDeviation;
-
-                    sortedTables[r, c] = new List<RowColumnScore>();
-
-                    // SORT
-
-                    for (int _r = 0; _r < 5; _r++)
-                    {
-                        for (int _c = 0; _c < 5; _c++)
-                        {
-                            decimal score = tables[r][c][_r, _c];
-
-                            bool sorted = false;
-                            for (int j = 0; j < sortedTables[r, c].Count; j++)
-                            {
-                                if (score > sortedTables[r, c][j].Score)
-                                {
-                                    sortedTables[r, c].Insert(j, new RowColumnScore(_r, _c, score));
-                                    sorted = true;
-                                    break;
-                                }
-                            }
-                            if (!sorted)
-                                sortedTables[r, c].Add(new RowColumnScore(_r, _c, score));
-                        }
-                    }
-
+                    CheckScorePrediction(gridPredictions, gridPredictions[r, c].PredictedCharacter);
                 }
             }
 
-            int mostCertainIndex = -1;
-            decimal mostCertainScore = decimal.MaxValue;
-
-            List<RowColumnScore>[] scores = new List<RowColumnScore>[25];
-            string characters = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
-            for (int i = 0; i < 25; i++)
+            for (int r = 0; r < 5; r++)
             {
-                List<decimal> probabilites = bigramList(characters[i].ToString(), out decimal m, out decimal s);
-
-                scores[i] = new List<RowColumnScore>();
-                decimal lowestScore = decimal.MaxValue;
-                for (int r = 0; r < 5; r++)
+                for (int c = 0; c < 5; c++)
                 {
-                    for (int c = 0; c < 5; c++)
+                    grid[r][c].Text = characters[gridPredictions[r, c].PredictedCharacter].ToString();
+                }
+            }
+        }
+
+        private void CheckScorePrediction(ScorePrediction[,] gridPredictions, int predictedChar)
+        {
+            List<ScorePrediction> predictions = GetDuplicateLetters(gridPredictions, predictedChar);
+            if (predictions.Count > 1)
+            {
+                int greatestIndex = -1;
+                decimal greatestValue = 0m;
+                for (int i = 0; i < predictions.Count; i++)
+                {
+                    if (predictions[i].ScoreJump > greatestValue)
                     {
-                        // SCORE
-
-                        decimal meanScore = Math.Abs(means[r, c] - m);
-                        decimal standardScore = Math.Abs(standardDeviations[r, c] - s);
-                        decimal score = meanScore + standardScore;
-
-                        /*
-                        List<RowColumnScore> expectedScores = sortedTables[r, c];
-                        for (int j = 0; j < expectedScores.Count; j++)
-                        {
-                            score += Math.Abs(expectedScores[j].Score - probabilites[j]) * 0.01m;
-                        }
-                        */
-
-                        // SORT
-
-                        bool sorted = false;
-                        for (int j = 0; j < scores[i].Count; j++)
-                        {
-                            if(score < scores[i][j].Score)
-                            {
-                                scores[i].Insert(j, new RowColumnScore(r, c, score));
-                                sorted = true;
-                                break;
-                            }
-                        }
-                        if (!sorted)
-                            scores[i].Add(new RowColumnScore(r, c, score));
-
-                        if(score < lowestScore)
-                        {
-                            lowestScore = score;
-                        }
+                        greatestIndex = i;
+                        greatestValue = predictions[i].ScoreJump;
                     }
                 }
 
-                if(lowestScore < mostCertainScore)
+                for (int i = 0; i < predictions.Count; i++)
                 {
-                    mostCertainIndex = i;
-                    mostCertainScore = lowestScore;
+                    if(i != greatestIndex)
+                    {
+                        predictions[i].Index++;
+                    }
+                }
+
+                for (int i = 0; i < predictions.Count; i++)
+                {
+                    if(i != greatestIndex)
+                    {
+                        CheckScorePrediction(gridPredictions, predictions[i].PredictedCharacter);
+                    }
                 }
             }
+        }
+
+        private List<ScorePrediction> GetDuplicateLetters(ScorePrediction[,] predictions, int character)
+        {
+            List<ScorePrediction> prediction = new List<ScorePrediction>();
+            for (int r = 0; r < 5; r++)
+            {
+                for (int c = 0; c < 5; c++)
+                {
+                    if (predictions[r, c].PredictedCharacter == character)
+                        prediction.Add(predictions[r, c]);
+                }
+            }
+            return prediction;
+        }
+
+        private void CalculateTable(TextBox[][] grid, BigramList bigramList)
+        {
+            string characters = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
+            List<RowColumnScore>[] scores = PredictLetters(grid, bigramList, out int mostCertainIndex);
 
             List<int> completedIndexes = new List<int>();
             while(completedIndexes.Count < 25)
@@ -920,6 +966,161 @@ namespace DumbCodeYe.Ciphers.FourSquare
             }
 
             return;
+        }
+
+        private List<RowColumnScore>[] PredictLetters(TextBox[][] grid, BigramList bigramList, out int mostCertainIndex)
+        {
+            decimal[][][,] tables = new decimal[5][][,]
+            {
+                new decimal[5][,],
+                new decimal[5][,],
+                new decimal[5][,],
+                new decimal[5][,],
+                new decimal[5][,]
+            };
+            decimal[,] means = new decimal[5, 5];
+            decimal[,] standardDeviations = new decimal[5, 5];
+
+            List<RowColumnScore>[,] sortedTables = new List<RowColumnScore>[5, 5];
+
+            for (int r = 0; r < 5; r++)
+            {
+                for (int c = 0; c < 5; c++)
+                {
+                    tables[r][c] = GenerateTableFirst(r, c, out decimal mean, out decimal standardDeviation);
+                    means[r, c] = mean;
+                    standardDeviations[r, c] = standardDeviation;
+
+                    sortedTables[r, c] = new List<RowColumnScore>();
+
+                    // SORT
+
+                    for (int _r = 0; _r < 5; _r++)
+                    {
+                        for (int _c = 0; _c < 5; _c++)
+                        {
+                            decimal score = tables[r][c][_r, _c];
+
+                            bool sorted = false;
+                            for (int j = 0; j < sortedTables[r, c].Count; j++)
+                            {
+                                if (score > sortedTables[r, c][j].Score)
+                                {
+                                    sortedTables[r, c].Insert(j, new RowColumnScore(_r, _c, score));
+                                    sorted = true;
+                                    break;
+                                }
+                            }
+                            if (!sorted)
+                                sortedTables[r, c].Add(new RowColumnScore(_r, _c, score));
+                        }
+                    }
+
+                }
+            }
+
+            mostCertainIndex = -1;
+            decimal mostCertainScore = decimal.MaxValue;
+
+            List<RowColumnScore>[] scores = new List<RowColumnScore>[25];
+            string characters = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
+            for (int i = 0; i < 25; i++)
+            {
+                List<decimal> probabilites = bigramList(characters[i].ToString(), out decimal m, out decimal s);
+
+                scores[i] = new List<RowColumnScore>();
+                decimal lowestScore = decimal.MaxValue;
+                for (int r = 0; r < 5; r++)
+                {
+                    for (int c = 0; c < 5; c++)
+                    {
+                        decimal score = 0;
+                        //
+                        //
+                        // SCORE
+                        //
+                        //
+
+                        /*
+                        decimal meanScore = Math.Abs(means[r, c] - m);
+                        decimal standardScore = Math.Abs(standardDeviations[r, c] - s);
+                        score = meanScore + standardScore;
+                        */
+
+                        List<RowColumnScore> expectedScores = sortedTables[r, c];
+                        int[] scoreTally = new int[25];
+
+                        for (int j = 0; j < 25; j++)
+                        {
+                            int index = 0;
+                            decimal indexDistance = decimal.MaxValue;
+
+                            for (int k = 0; k < 25; k++)
+                            {
+                                decimal distance = Math.Abs(probabilites[j] - expectedScores[k].Score);
+                                if (distance >= indexDistance)
+                                    break;
+                                indexDistance = distance;
+                                index = k;
+                            }
+
+                            score += indexDistance;
+                            scoreTally[index]++;
+                        }
+
+                        int borrowingIndex = 0;
+                        for (int j = 0; j < 25; j++)
+                        {
+                            if(scoreTally[j] == 0)
+                            {
+                                while(scoreTally[borrowingIndex] <= 1)
+                                {
+                                    borrowingIndex++;
+                                }
+
+                                scoreTally[borrowingIndex]--;
+                                scoreTally[j]++;
+
+                                score += Math.Abs(expectedScores[borrowingIndex].Score - expectedScores[j].Score);
+                            }
+                        }
+
+                        //
+                        //
+                        //
+                        //
+                        //
+
+                        // SORT
+
+                        bool sorted = false;
+                        for (int j = 0; j < scores[i].Count; j++)
+                        {
+                            if (score < scores[i][j].Score)
+                            {
+                                scores[i].Insert(j, new RowColumnScore(r, c, score));
+                                sorted = true;
+                                break;
+                            }
+                        }
+                        if (!sorted)
+                            scores[i].Add(new RowColumnScore(r, c, score));
+
+                        if (score < lowestScore)
+                        {
+                            lowestScore = score;
+                        }
+                    }
+                }
+
+                if (lowestScore < mostCertainScore)
+                {
+                    mostCertainIndex = i;
+                    mostCertainScore = lowestScore;
+                }
+            }
+
+            return scores;
         }
 
         private List<decimal> ListOfBigramsFirst(string first, out decimal mean, out decimal standardDeviation)

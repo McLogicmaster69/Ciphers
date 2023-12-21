@@ -1520,7 +1520,7 @@ namespace DumbCodeYe.Ciphers.FourSquare
             this.searchBtn.Name = "searchBtn";
             this.searchBtn.Size = new System.Drawing.Size(376, 35);
             this.searchBtn.TabIndex = 193;
-            this.searchBtn.Text = "SEARCH";
+            this.searchBtn.Text = "SEARCH IN TEXT";
             this.searchBtn.UseVisualStyleBackColor = true;
             this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             // 
@@ -1540,7 +1540,7 @@ namespace DumbCodeYe.Ciphers.FourSquare
             this.highlightBtn.Name = "highlightBtn";
             this.highlightBtn.Size = new System.Drawing.Size(376, 35);
             this.highlightBtn.TabIndex = 195;
-            this.highlightBtn.Text = "HIGHLIGHT";
+            this.highlightBtn.Text = "HIGHLIGHT ON GRID";
             this.highlightBtn.UseVisualStyleBackColor = true;
             this.highlightBtn.Click += new System.EventHandler(this.highlightBtn_Click);
             // 
@@ -1551,7 +1551,7 @@ namespace DumbCodeYe.Ciphers.FourSquare
             this.frequencyBtn.Name = "frequencyBtn";
             this.frequencyBtn.Size = new System.Drawing.Size(376, 35);
             this.frequencyBtn.TabIndex = 198;
-            this.frequencyBtn.Text = "FREQUENCY";
+            this.frequencyBtn.Text = "BIGRAM FREQUENCY";
             this.frequencyBtn.UseVisualStyleBackColor = true;
             this.frequencyBtn.Click += new System.EventHandler(this.frequencyBtn_Click);
             // 
@@ -1562,7 +1562,7 @@ namespace DumbCodeYe.Ciphers.FourSquare
             this.textBtn.Name = "textBtn";
             this.textBtn.Size = new System.Drawing.Size(376, 35);
             this.textBtn.TabIndex = 199;
-            this.textBtn.Text = "TEXT";
+            this.textBtn.Text = "TEXT BIGRAM FREQUENCY";
             this.textBtn.UseVisualStyleBackColor = true;
             this.textBtn.Click += new System.EventHandler(this.textBtn_Click);
             // 
@@ -1573,7 +1573,7 @@ namespace DumbCodeYe.Ciphers.FourSquare
             this.expectedTableBtn.Name = "expectedTableBtn";
             this.expectedTableBtn.Size = new System.Drawing.Size(376, 35);
             this.expectedTableBtn.TabIndex = 200;
-            this.expectedTableBtn.Text = "EXPECTED TABLE";
+            this.expectedTableBtn.Text = "PREDICTED SPACES ON GRID";
             this.expectedTableBtn.UseVisualStyleBackColor = true;
             this.expectedTableBtn.Click += new System.EventHandler(this.expectedTableBtn_Click);
             // 
